@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "rimraf": "latest",
+    "parcel-bundler": "latest"
+  },
+  "scripts": {
+    "start": "parcel index.html --open",
+    "build": "rimraf dist && parcel build index.html"
+  }
+}
