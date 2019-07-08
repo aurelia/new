@@ -1,0 +1,27 @@
+{
+  "name": "/* @echo name */",
+  "description": "An Aurelia 2 client application.",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "???"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@aurelia/debug": "dev",
+    "@aurelia/jit-html": "dev",
+    "@aurelia/jit-html-browser": "dev",
+    "@aurelia/jit": "dev",
+    "@aurelia/kernel": "dev",
+    "@aurelia/runtime-html": "dev",
+    "@aurelia/runtime-html-browser": "dev",
+    "@aurelia/runtime": "dev"
+  },
+  "devDependencies": {
+    "htmlhint": "latest"
+  },
+  "scripts": {
+    "lint:html": "htmlhint -c .htmlhintrc src",
+    "lint": "npm run lint:js && npm run lint:html"
+  }
+}
