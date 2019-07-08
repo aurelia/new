@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "@types/node": "latest",
+    "typescript": "latest",
+    "tslint": "latest"
+  },
+  "scripts": {
+    "lint:js": "tslint --project tsconfig.json"
+  }
+}

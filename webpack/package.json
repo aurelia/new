@@ -1,0 +1,22 @@
+{
+  "devDependencies": {
+    "rimraf": "latest",
+    "webpack": "latest",
+    "webpack-cli": "latest",
+    "webpack-dev-server": "latest",
+    "html-loader": "latest",
+    "html-webpack-plugin": "latest",
+    "style-loader": "latest",
+    "css-loader": "latest",
+    // @if babel
+    "babel-loader": "latest",
+    // @endif
+    // @if typescript
+    "ts-loader": "latest",
+    // @endif
+  },
+  "scripts": {
+    "start": "webpack-dev-server",
+    "build": "rimraf dist && webpack",
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "devDependencies": {
+    "@babel/core": "latest",
+    "@babel/plugin-proposal-decorators": "latest",
+    "@babel/plugin-proposal-class-properties": "latest",
+    "@babel/preset-env": "latest",
+    "babel-eslint": "latest",
+    "eslint": "latest"
+  },
+  "scripts": {
+    "lint:js": "eslint src"
+  }
+}
