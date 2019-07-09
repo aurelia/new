@@ -1,0 +1,22 @@
+{
+  "name": "aurelia2-new",
+  "private": true,
+  "version": "0.0.1",
+  "description": "This package.json file is not needed by 'makes'. We use package.json to setup our tests and changelog.",
+  "devDependencies": {
+    "ava": "^2.2.0",
+    "standard-changelog": "^2.0.11",
+    "vinyl": "^2.2.0"
+  },
+  "scripts": {
+    "test": "ava",
+    "preversion": "npm test",
+    "version": "standard-changelog && git add CHANGELOG.md",
+    "postversion": "git push && git push --tags"
+  },
+  "ava": {
+    "files": [
+      "__test__/**/*"
+    ]
+  }
+}

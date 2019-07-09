@@ -5,7 +5,7 @@ const PRESETS = {
   'default-typescript': ['webpack', 'typescript'],
 };
 
-module.exports = async function({unattended, prompts, predefinedProperties}) {
+module.exports = async function({unattended, prompts}) {
   // don't ask when running in silent mode.
   if (unattended) return;
 

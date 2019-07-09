@@ -12,7 +12,11 @@ function isAvailable(bin) {
 }
 
 module.exports = async function({
-  unattended, here, prompts, run, properties, features, notDefaultFeatures, ansiColors
+  unattended, here, prompts, run, properties, notDefaultFeatures, ansiColors
+}, {
+  // for testing
+  _isAvailable = isAvailable,
+  _log = console.log
 }) {
   const c = ansiColors;
   let depsInstalled = false;
@@ -23,7 +27,7 @@ module.exports = async function({
       {value: 'npm', title: 'Yes, use npm'}
     ];
 
-    if (isAvailable('yarn')) {
+    if (_isAvailable('yarn')) {
       choices.push({value: 'yarn', title: 'Yes, use yarn'});
     }
 
@@ -40,13 +44,12 @@ module.exports = async function({
       await run(result, ['install']);
       depsInstalled = true;
     }
-
-    console.log(`\nNext time, you can try to create similar project in silent mode:`);
-    console.log(c.inverse(` npx makes aurelia new-project-name${here ? ' --here' : ''} -s ${notDefaultFeatures.length ? (notDefaultFeatures.join(',') + ' ') : ''}`));
   }
 
-  console.log(`\n${c.underline.bold('Get Started')}`);
-  if (!here) console.log('cd ' + properties.name);
-  if (!depsInstalled) console.log('npm install');
-  console.log('npm start\n');
+  _log(`\nNext time, you can try to create similar project in silent mode:`);
+  _log(c.inverse(` npx makes aurelia new-project-name${here ? ' --here' : ''} -s ${notDefaultFeatures.length ? (notDefaultFeatures.join(',') + ' ') : ''}`));
+  _log(`\n${c.underline.bold('Get Started')}`);
+  if (!here) _log('cd ' + properties.name);
+  if (!depsInstalled) _log('npm install');
+  _log('npm start\n');
 };
