@@ -22,9 +22,9 @@ test.cb('ext-transform translates .ext file to .js file when typescript is not s
 
   jsExt.on('end', () => {
     t.is(files.length, 2);
-    t.is(files[0].path, 'test/a.js');
+    t.is(files[0].path.replace(/\\/g, '/'), 'test/a.js');
     t.is(files[0].contents.toString(), 'var a = 1;');
-    t.is(files[1].path, 'test/b.html');
+    t.is(files[1].path.replace(/\\/g, '/'), 'test/b.html');
     t.is(files[1].contents.toString(), '<p></p>');
     t.end();
   })
@@ -54,9 +54,9 @@ test.cb('ext-transform translates .ext file to .ts file when typescript is selec
 
   jsExt.on('end', () => {
     t.is(files.length, 2);
-    t.is(files[0].path, 'test/a.ts');
+    t.is(files[0].path.replace(/\\/g, '/'), 'test/a.ts');
     t.is(files[0].contents.toString(), 'var a = 1;');
-    t.is(files[1].path, 'test/b.html');
+    t.is(files[1].path.replace(/\\/g, '/'), 'test/b.html');
     t.is(files[1].contents.toString(), '<p></p>');
     t.end();
   })
