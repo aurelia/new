@@ -75,9 +75,9 @@ async function takeScreenshot(url, filePath) {
 }
 
 const skeletons = [
-  // 'webpack babel app-min',
-  // 'webpack typescript app-min',
-  // 'parcel babel app-min',
+  'webpack babel app-min',
+  'webpack typescript app-min',
+  'parcel babel app-min',
   'parcel typescript app-min'
 ];
 
