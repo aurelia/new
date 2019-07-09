@@ -17,7 +17,7 @@ module.exports = async function({
   // for testing
   _isAvailable = isAvailable,
   _log = console.log
-}) {
+} = {}) {
   const c = ansiColors;
   let depsInstalled = false;
 

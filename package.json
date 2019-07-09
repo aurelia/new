@@ -5,11 +5,14 @@
   "description": "This package.json file is not needed by 'makes'. We use package.json to setup our tests and changelog.",
   "devDependencies": {
     "ava": "^2.2.0",
+    "cross-spawn": "^6.0.5",
+    "puppeteer": "^1.18.1",
     "standard-changelog": "^2.0.11",
     "vinyl": "^2.2.0"
   },
   "scripts": {
     "test": "ava",
+    "test:e2e": "ava -v e2e-test.js",
     "preversion": "npm test",
     "version": "standard-changelog && git add CHANGELOG.md",
     "postversion": "git push && git push --tags"
