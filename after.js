@@ -31,7 +31,7 @@ module.exports = async function({
       choices.push({value: 'yarn', title: 'Yes, use yarn'});
     }
 
-    // if (isAvailable('pnpm')) {
+    // if (_isAvailable('pnpm')) {
     //   choices.push({value: 'pnpm', title: 'Yes, use pnpm'});
     // }
 
