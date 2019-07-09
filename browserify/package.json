@@ -1,0 +1,21 @@
+{
+  "devDependencies": {
+    "gulp": "latest",
+    "vinyl-source-stream": "latest",
+    "browser-sync": "latest",
+    "connect-history-api-fallback": "latest",
+    "browserify": "latest",
+    "watchify": "latest",
+    // @if typescript
+    "tsify": "latest",
+    // @endif
+    // @if babel
+    "babelify": "latest",
+    // @endif
+    "stringify": "latest",
+  },
+  "scripts": {
+    "start": "gulp",
+    "build": "gulp build"
+  }
+}

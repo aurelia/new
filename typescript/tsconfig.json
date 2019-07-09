@@ -3,7 +3,12 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": ["esnext", "dom"],
+    // @if browserify
+    "module": "commonjs",
+    // @endif
+    // @if !browserify
     "module": "esnext",
+    // @endif
     "moduleResolution": "node",
     "skipLibCheck": true,
     "rootDir": "src",
