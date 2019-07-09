@@ -4,13 +4,13 @@ module.exports = function(env, { mode }) {
   const production = mode === 'production';
   return {
     mode: production ? 'production' : 'development',
+    devtool: production ? 'source-maps' : 'eval',
     // @if babel
     entry: './src/main.js',
     // @endif
     // @if typescript
     entry: './src/main.ts',
     // @endif
-    devtool: false,
     resolve: {
       // @if babel
       extensions: ['.js'],
@@ -23,7 +23,7 @@ module.exports = function(env, { mode }) {
     devServer: {
       port: 9000,
       historyApiFallback: true,
-      open: true,
+      open: !process.env.CI,
       lazy: false
     },
     module: {
