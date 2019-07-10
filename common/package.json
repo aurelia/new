@@ -15,7 +15,8 @@
     "@aurelia/kernel": "dev",
     "@aurelia/runtime-html": "dev",
     "@aurelia/runtime-html-browser": "dev",
-    "@aurelia/runtime": "dev"
+    "@aurelia/runtime": "dev",
+    "promise-polyfill": "latest"
   },
   "devDependencies": {
     "htmlhint": "latest"
