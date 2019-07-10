@@ -1,3 +1,5 @@
+// Promise polyfill for old browsers
+import 'promise-polyfill/src/polyfill';
 import { DebugConfiguration } from '@aurelia/debug';
 import { BasicConfiguration } from '@aurelia/jit-html-browser';
 import { Aurelia } from '@aurelia/runtime';
