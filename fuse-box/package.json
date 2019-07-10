@@ -1,0 +1,13 @@
+{
+  "devDependencies": {
+    "fuse-box": "latest",
+    "terser": "latest",
+    "typescript": "latest",
+    "uglify-js": "latest",
+    "opn": "latest"
+  },
+  "scripts": {
+    "start": "node fuse dev",
+    "build": "node fuse prod"
+  }
+}
