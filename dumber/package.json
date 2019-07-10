@@ -1,0 +1,25 @@
+{
+  "devDependencies": {
+    "gulp": "latest",
+    "gulp-dumber": "latest",
+    // @if babel
+    "gulp-babel": "latest",
+    // @endif
+    // @if typescript
+    "gulp-typescript": "latest",
+    // @endif
+    "gulp-plumber": "latest",
+    "merge2": "latest",
+    "gulp-terser": "latest",
+    "gulp-if": "latest",
+    "del": "latest",
+    "browser-sync": "latest",
+    "connect-history-api-fallback": "latest",
+    "cross-env": "latest"
+  },
+  "scripts": {
+    "start": "gulp",
+    "build": "gulp clean && cross-env NODE_ENV=production gulp build",
+    "clear-cache": "gulp clear-cache"
+  }
+}
