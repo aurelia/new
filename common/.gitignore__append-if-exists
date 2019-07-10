@@ -29,5 +29,10 @@ Thumbs.db
 node_modules
 
 # Compiled files
+// @if fuse-box
+/.fusebox
+// @endif
+// @if parcel
 /.cache
+// @endif
 /dist

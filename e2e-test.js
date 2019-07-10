@@ -75,15 +75,21 @@ async function takeScreenshot(url, filePath) {
 }
 
 const skeletons = [
-  'webpack babel app-min',
-  'webpack typescript app-min',
-  'parcel babel app-min',
-  'parcel typescript app-min'
+  // 'webpack babel app-min',
+  // 'webpack typescript app-min',
+  // 'parcel babel app-min',
+  // 'parcel typescript app-min',
+  // 'browserify babel app-min',
+  // 'browserify typescript app-min',
+  'fuse-box babel app-min',
+  'fuse-box typescript app-min'
 ];
 
 function getServerRegex(features) {
   if (features.includes('webpack')) return /Project is running at (\S+)/;
   if (features.includes('parcel')) return /Server running at (\S+)/;
+  if (features.includes('fuse-box')) return /Development server running (\S+)/;
+  return /Application Available At: (\S+)/;
 }
 
 function getStartCommand(features) {
