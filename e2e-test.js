@@ -75,14 +75,16 @@ async function takeScreenshot(url, filePath) {
 }
 
 const skeletons = [
-  // 'webpack babel app-min',
-  // 'webpack typescript app-min',
-  // 'parcel babel app-min',
-  // 'parcel typescript app-min',
+  'webpack babel app-min',
+  'webpack typescript app-min',
+  'parcel babel app-min',
+  'parcel typescript app-min',
   // 'browserify babel app-min',
   // 'browserify typescript app-min',
   'fuse-box babel app-min',
-  'fuse-box typescript app-min'
+  'fuse-box typescript app-min',
+  'dumber babel app-min',
+  'dumber typescript app-min'
 ];
 
 function getServerRegex(features) {
