@@ -1,18 +1,18 @@
 {
   "devDependencies": {
-    "gulp": "latest",
-    "vinyl-source-stream": "latest",
-    "browser-sync": "latest",
-    "connect-history-api-fallback": "latest",
-    "browserify": "latest",
-    "watchify": "latest",
+    "gulp": "^4.0.0",
+    "vinyl-source-stream": "^2.0.0",
+    "browser-sync": "^2.0.0",
+    "connect-history-api-fallback": "^1.0.0",
+    "browserify": "^16.0.0",
+    "watchify": "^3.0.0",
     // @if typescript
-    "tsify": "latest",
+    "tsify": "^4.0.0",
     // @endif
     // @if babel
-    "babelify": "latest",
+    "babelify": "^10.0.0",
     // @endif
-    "stringify": "latest",
+    "stringify": "^5.0.0",
   },
   "scripts": {
     "start": "gulp",

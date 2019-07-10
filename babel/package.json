@@ -1,17 +1,11 @@
 {
   "devDependencies": {
-    "@babel/plugin-proposal-decorators": "latest",
-    "@babel/plugin-proposal-class-properties": "latest",
-    // @if !parcel
-    "@babel/core": "latest",
-    "@babel/preset-env": "latest",
-    // @endif
-    // @if parcel
+    "@babel/plugin-proposal-decorators": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
-    // @endif
-    "babel-eslint": "latest",
-    "eslint": "latest"
+    "babel-eslint": "^10.0.0",
+    "eslint": "^6.0.0"
   },
   "scripts": {
     "lint:js": "eslint src"
