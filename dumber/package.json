@@ -1,21 +1,21 @@
 {
   "devDependencies": {
-    "gulp": "latest",
-    "gulp-dumber": "latest",
+    "gulp": "^4.0.0",
+    "gulp-dumber": "^0.11.0",
     // @if babel
-    "gulp-babel": "latest",
+    "gulp-babel": "^8.0.0",
     // @endif
     // @if typescript
-    "gulp-typescript": "latest",
+    "gulp-typescript": "^5.0.0",
     // @endif
-    "gulp-plumber": "latest",
-    "merge2": "latest",
-    "gulp-terser": "latest",
-    "gulp-if": "latest",
-    "del": "latest",
-    "browser-sync": "latest",
-    "connect-history-api-fallback": "latest",
-    "cross-env": "latest"
+    "gulp-plumber": "^1.0.0",
+    "merge2": "^1.0.0",
+    "gulp-terser": "^1.0.0",
+    "gulp-if": "^2.0.0",
+    "del": "^5.0.0",
+    "browser-sync": "^2.0.0",
+    "connect-history-api-fallback": "^1.0.0",
+    "cross-env": "^5.0.0"
   },
   "scripts": {
     "start": "gulp",

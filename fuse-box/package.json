@@ -1,10 +1,10 @@
 {
   "devDependencies": {
-    "fuse-box": "latest",
-    "terser": "latest",
-    "typescript": "latest",
-    "uglify-js": "latest",
-    "opn": "latest"
+    "fuse-box": "^3.0.0",
+    "terser": "^4.0.0",
+    "typescript": "^3.0.0",
+    "uglify-js": "^3.0.0",
+    "opn": "^6.0.0"
   },
   "scripts": {
     "start": "node fuse dev",

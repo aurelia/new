@@ -1,8 +1,8 @@
 {
   "devDependencies": {
-    "@types/node": "latest",
-    "typescript": "latest",
-    "tslint": "latest"
+    "@types/node": "^12.0.0",
+    "typescript": "^3.0.0",
+    "tslint": "^5.0.0"
   },
   "scripts": {
     "lint:js": "tslint --project tsconfig.json"
