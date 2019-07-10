@@ -11,7 +11,7 @@ The scaffolding repo for Aurelia 2 used by the [makes](https://makes.js.org) too
 There is zero-installation, just do:
 
 ```bash
-npx makes aureila
+npx makes aurelia
 ```
 
 > Note makes requires Node.js v8.9.0 or above.
