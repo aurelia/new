@@ -36,9 +36,7 @@ test('"after" task only prints summary in unattended mode', async t => {
   });
 
   t.is(printOut,
-    '\nNext time, you can try to create similar project in silent mode:\n' +
-    ' npx makes aurelia new-project-name -s a,b-c \n\n' +
-    'Get Started\n' +
+    '\nGet Started\n' +
     'cd my-app\n' +
     'npm install\n' +
     'npm start\n\n'
@@ -73,9 +71,7 @@ test('"after" task only prints summary in unattended mode and here mode', async 
   });
 
   t.is(printOut,
-    '\nNext time, you can try to create similar project in silent mode:\n' +
-    ' npx makes aurelia new-project-name --here -s a,b-c \n\n' +
-    'Get Started\n' +
+    '\nGet Started\n' +
     'npm install\n' +
     'npm start\n\n'
   );
