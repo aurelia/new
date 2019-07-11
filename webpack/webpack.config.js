@@ -19,6 +19,7 @@ module.exports = function(env, { mode }) {
       extensions: ['.ts', '.js'],
       // @endif
       modules: ['src', 'node_modules'],
+      mainFields: ['module', 'browser', 'main']
     },
     devServer: {
       historyApiFallback: true,
