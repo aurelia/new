@@ -79,8 +79,8 @@ const skeletons = [
   'webpack typescript app-min',
   'parcel babel app-min',
   'parcel typescript app-min',
-  // 'browserify babel app-min',
-  // 'browserify typescript app-min',
+  'browserify babel app-min',
+  'browserify typescript app-min',
   'fuse-box babel app-min',
   'fuse-box typescript app-min',
   'dumber babel app-min',
@@ -132,7 +132,7 @@ skeletons.forEach((_f, i) => {
 
     const distPath = path.join(appFolder, 'dist');
     const compiledFiles = fs.readdirSync(distPath);
-    t.truthy(compiledFiles.length > 1);
+    t.truthy(compiledFiles.length);
 
     console.log('-- ' + startCommand);
     await run(startCommand,

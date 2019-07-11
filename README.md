@@ -20,7 +20,7 @@ npx makes aurelia
 
 - [x] Basic app with webpack
 - [x] Basic app with parcel
-- [x] Basic app with browserify (currently hidden because of https://github.com/aurelia/aurelia/pull/513)
+- [x] Basic app with browserify
 - [x] Basic app with FuseBox
 - [x] Basic app with dumber (successor of CLI built-in bundler. Doc WIP)
 - [ ] Basic unit test setup for jest, jasmine, mocha, tape, ava
