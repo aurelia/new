@@ -24,7 +24,8 @@ npx makes aurelia
 - [x] Basic app with FuseBox
 - [x] Basic app with dumber (successor of CLI built-in bundler. Doc WIP)
 - [ ] Basic unit test setup for jest, jasmine, mocha, tape, ava
-- [ ] Basic e2e test setup for cypress, protractor
+- [x] Basic e2e test setup for cypress
+- [ ] Basic e2e test setup for protractor
 - [ ] Aurelia convention support (boilerplate free like Aurelia v1) at bundler level
 
 ## Development

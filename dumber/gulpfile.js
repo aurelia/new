@@ -149,6 +149,7 @@ const serve = gulp.series(
       ghostMode: false,
       online: false,
       open: !process.env.CI,
+      port: 9000,
       server: {
         baseDir: ['.'],
         middleware: [

@@ -49,7 +49,7 @@ let run = (production) => {
       // @endif
       .hmr()
       .watch();
-    fuse.dev({open: !process.env.CI});
+    fuse.dev({open: !process.env.CI, port: 9000});
   }
 
   return fuse.run();

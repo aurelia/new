@@ -23,6 +23,7 @@ module.exports = function(env, { mode }) {
     devServer: {
       historyApiFallback: true,
       open: !process.env.CI,
+      port: 9000,
       lazy: false
     },
     module: {

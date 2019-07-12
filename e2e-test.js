@@ -75,16 +75,16 @@ async function takeScreenshot(url, filePath) {
 }
 
 const skeletons = [
-  'webpack babel app-min',
-  'webpack typescript app-min',
-  'parcel babel app-min',
-  'parcel typescript app-min',
-  'browserify babel app-min',
-  'browserify typescript app-min',
-  'fuse-box babel app-min',
-  'fuse-box typescript app-min',
-  'dumber babel app-min',
-  'dumber typescript app-min'
+  'webpack babel app-min cypress',
+  'webpack typescript app-min cypress',
+  'parcel babel app-min cypress',
+  'parcel typescript app-min cypress',
+  'browserify babel app-min cypress',
+  'browserify typescript app-min cypress',
+  'fuse-box babel app-min cypress',
+  'fuse-box typescript app-min cypress',
+  'dumber babel app-min cypress',
+  'dumber typescript app-min cypress'
 ];
 
 function getServerRegex(features) {
@@ -96,7 +96,7 @@ function getServerRegex(features) {
 
 function getStartCommand(features) {
   // don't open browser for parcel
-  if (features.includes('parcel')) return 'npx parcel index.html --no-autoinstall';
+  if (features.includes('parcel')) return 'npx parcel index.html -p 9000 --no-autoinstall';
   return 'npm start';
 }
 
@@ -147,6 +147,9 @@ skeletons.forEach((_f, i) => {
         try {
           console.log('-- take screenshot');
           await takeScreenshot(url, path.join(folder, appName + '.png'));
+
+          console.log('-- npm run test:e2e');
+          await run(`npm run test:e2e`);
           kill();
         } catch (e) {
           t.fail(e);

@@ -40,8 +40,8 @@ function startServer(done) {
   browserSync.init({
     ghostMode: false,
     online: false,
-    watch: true, // watch dist/bundle.js
     open: !process.env.CI,
+    port: 9000,
     server: {
       baseDir: ['.'],
       middleware: [
