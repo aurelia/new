@@ -29,10 +29,10 @@ module.exports = function(env, { mode }) {
       rules: [
         { test: /\.css$/i, use: ["style-loader", "css-loader"] },
         // @if babel
-        { test: /\.js$/i, loader: 'babel-loader' },
+        { test: /\.js$/i, loader: 'babel-loader', exclude: /node_modules/ },
         // @endif
         // @if typescript
-        { test: /\.ts$/i, loader: 'ts-loader' },
+        { test: /\.ts$/i, loader: 'ts-loader', exclude: /node_modules/ },
         // @endif
         { test: /\.html$/i, loader: 'html-loader' }
       ]
