@@ -69,7 +69,7 @@ async function takeScreenshot(url, filePath) {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto(url);
-  await new Promise(r => setTimeout(r, 3000));
+  await new Promise(r => setTimeout(r, 6000));
   await page.screenshot({path: filePath});
   await browser.close();
 }
