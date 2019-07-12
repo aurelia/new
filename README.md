@@ -1,6 +1,6 @@
 # Aurelia 2 Scaffolding skeleton
 
-[![Build Status](https://travis-ci.org/aurelia/new.svg?branch=master)](https://travis-ci.org/aurelia/new)
+[![Build Status](https://travis-ci.com/aurelia/new.svg?branch=master)](https://travis-ci.com/aurelia/new)
 
 _Work In Progress_
 
