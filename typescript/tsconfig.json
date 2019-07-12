@@ -12,7 +12,13 @@
     "moduleResolution": "node",
     "skipLibCheck": true,
     "rootDir": "src",
-    "target": "es5"
+    "target": "es5",
+    // @if browserify
+    "esModuleInterop": true,
+    // @endif
+    // @if !browserify
+    "esModuleInterop": false,
+    // @endif
   },
   "include": ["src"]
 }
