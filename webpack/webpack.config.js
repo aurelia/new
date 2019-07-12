@@ -18,8 +18,7 @@ module.exports = function(env, { mode }) {
       // @if typescript
       extensions: ['.ts', '.js'],
       // @endif
-      modules: ['src', 'node_modules'],
-      mainFields: ['module', 'browser', 'main']
+      modules: ['src', 'node_modules']
     },
     devServer: {
       historyApiFallback: true,
