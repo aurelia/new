@@ -11,8 +11,12 @@ import del from 'del';
 import test from 'ava';
 import puppeteer from 'puppeteer';
 
+// Somehow taskkill on windows would not send SIGTERM signal to proc,
+// The proc killed by taskkill got null signal.
+const win32Killed = new Set();
 function killProc(proc) {
   if (process.platform === 'win32') {
+    win32Killed.add(proc.pid);
     spawn.sync('taskkill', ["/pid", proc.pid, '/f', '/t']);
   } else {
     proc.stdin.pause();
@@ -37,8 +41,8 @@ function run(command, dataCB, errorCB) {
     env.NODE_ENV = 'development';
     const proc = spawn(cmd, args, {env});
     proc.on('exit', (code, signal) => {
-      if (code && signal !== 'SIGTERM') {
-        reject(new Error('process exit code: ' + code + ' signal: ' + signal));
+      if (code && signal !== 'SIGTERM' && !win32Killed.has(proc.pid)) {
+        reject(new Error(cmd + ' ' + args.join(' ') + ' process exit code: ' + code + ' signal: ' + signal));
       } else {
         resolve();
       }
