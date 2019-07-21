@@ -4,7 +4,7 @@ module.exports = function(env, { mode }) {
   const production = mode === 'production';
   return {
     mode: production ? 'production' : 'development',
-    devtool: production ? 'source-maps' : 'eval',
+    devtool: production ? 'source-maps' : 'inline-source-map',
     // @if babel
     entry: './src/main.js',
     // @endif
@@ -30,12 +30,12 @@ module.exports = function(env, { mode }) {
       rules: [
         { test: /\.css$/i, use: ["style-loader", "css-loader"] },
         // @if babel
-        { test: /\.js$/i, loader: 'babel-loader', exclude: /node_modules/ },
+        { test: /\.js$/i, use: ['babel-loader', '@aurelia/webpack-loader'], exclude: /node_modules/ },
         // @endif
         // @if typescript
-        { test: /\.ts$/i, loader: 'ts-loader', exclude: /node_modules/ },
+        { test: /\.ts$/i, use: ['ts-loader', '@aurelia/webpack-loader'], exclude: /node_modules/ },
         // @endif
-        { test: /\.html$/i, loader: 'html-loader' }
+        { test: /\.html$/i, use: '@aurelia/webpack-loader', exclude: /node_modules/ }
       ]
     },
     plugins: [new HtmlWebpackPlugin({ template: 'index.ejs' })]
