@@ -7,7 +7,7 @@ module.exports = [
       // {value: 'parcel', title: 'Parcel', hint: 'Blazing fast, zero configuration web application bundler.'},
       // {value: 'browserify', title: 'Browserify', hint: 'The bundler who started the business, a tool for compiling node-flavored commonjs modules for the browser.'},
       // {value: 'fuse-box', title: 'FuseBox', hint: 'A bundler that does it all, and does it right.'},
-      // {value: 'dumber', title: 'Dumber', hint: 'A dumb JavasScript bundler, dumber than you and me. The successor of Aurelia CLI built-in bundler.'}
+      {value: 'dumber', title: 'Dumber', hint: 'A dumb JavasScript bundler, dumber than you and me. The successor of Aurelia CLI built-in bundler.'}
     ]
   },
   {

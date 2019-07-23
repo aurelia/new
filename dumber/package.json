@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@aurelia/plugin-gulp": "dev",
     "gulp": "^4.0.0",
     "gulp-dumber": "^0.11.0",
     // @if babel

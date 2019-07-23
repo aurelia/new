@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const dumber = require('gulp-dumber');
+const au2 = require('@aurelia/plugin-gulp').default;
 const fs = require('fs');
 // @if babel
 const babel = require('gulp-babel');
@@ -99,8 +100,14 @@ function buildJs(src) {
   // @endif
 
   return gulp.src(src, {sourcemaps: !isProduction, since: gulp.lastRun(build)})
-  .pipe(gulpif(!isProduction, plumber()))
-  .pipe(transpile);
+    .pipe(gulpif(!isProduction, plumber()))
+    .pipe(au2()) // inject aurelia conventions
+    .pipe(transpile);
+}
+
+function buildHtml(src) {
+  return gulp.src(src, {since: gulp.lastRun(build)})
+    .pipe(au2()); // inject aurelia conventions
 }
 
 function buildCss(src) {
@@ -114,13 +121,13 @@ function build() {
   // sending to dumber.
   return merge2(
     gulp.src('src/**/*.json', {since: gulp.lastRun(build)}),
-    gulp.src('src/**/*.html', {since: gulp.lastRun(build)}),
     // @if babel
     buildJs('src/**/*.js'),
     // @endif
     // @if typescript
     buildJs(['src/**/*.d.ts', 'src/**/*.ts']),
     // @endif
+    buildHtml('src/**/*.html'),
     buildCss('src/**/*.css')
   )
   // Note we did extra call `dr()` here, this is designed to cater watch mode.
