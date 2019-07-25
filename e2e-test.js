@@ -81,12 +81,12 @@ async function takeScreenshot(url, filePath) {
 const skeletons = [
   'webpack babel app-min cypress',
   'webpack typescript app-min cypress',
-  'parcel babel app-min cypress',
-  'parcel typescript app-min cypress',
-  'browserify babel app-min cypress',
-  'browserify typescript app-min cypress',
-  'fuse-box babel app-min cypress',
-  'fuse-box typescript app-min cypress',
+  // 'parcel babel app-min cypress',
+  // 'parcel typescript app-min cypress',
+  // 'browserify babel app-min cypress',
+  // 'browserify typescript app-min cypress',
+  // 'fuse-box babel app-min cypress',
+  // 'fuse-box typescript app-min cypress',
   'dumber babel app-min cypress',
   'dumber typescript app-min cypress'
 ];
