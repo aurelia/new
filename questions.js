@@ -3,11 +3,21 @@ module.exports = [
     message: 'Which bundler would you like to use?',
     choices: [
       {value: 'webpack', title: 'Webpack', hint: 'A powerful and popular bundler for modern JavaScript apps.'},
-      // Waiting for implementation of conventions plugins for these bundlers.
-      // {value: 'parcel', title: 'Parcel', hint: 'Blazing fast, zero configuration web application bundler.'},
-      // {value: 'browserify', title: 'Browserify', hint: 'The bundler who started the business, a tool for compiling node-flavored commonjs modules for the browser.'},
-      // {value: 'fuse-box', title: 'FuseBox', hint: 'A bundler that does it all, and does it right.'},
       {value: 'dumber', title: 'Dumber', hint: 'A dumb JavasScript bundler, dumber than you and me. The successor of Aurelia CLI built-in bundler.'}
+
+      // Pending implementation of conventions plugins for these bundlers.
+
+      // Parcel can be done. But requires a dedicated repo (out of our mono repo) in order to write in commonjs format that Parcel wants.
+      // https://github.com/parcel-bundler/parcel/issues/3256
+      // Parcel v2 is also very near. Might wait for the new version.
+      // {value: 'parcel', title: 'Parcel', hint: 'Blazing fast, zero configuration web application bundler.'},
+
+      // Browserify has technical obstacle on TypeScript (tsify) https://github.com/TypeStrong/tsify/issues/34#issuecomment-514425682
+      // There is no problem on babelify. But we will hold browserify for now.
+      // {value: 'browserify', title: 'Browserify', hint: 'The bundler who started the business, a tool for compiling node-flavored commonjs modules for the browser.'},
+
+      // FuseBox v4 is coming, and it's a total rewrite. Wait for it before implement.
+      // {value: 'fuse-box', title: 'FuseBox', hint: 'A bundler that does it all, and does it right.'},
     ]
   },
   {
