@@ -5,7 +5,7 @@ import { BasicConfiguration } from '@aurelia/jit-html-browser';
 import { Aurelia } from '@aurelia/runtime';
 import { App } from './app';
 
-global['au'] = new Aurelia()
+new Aurelia()
   .register(BasicConfiguration, DebugConfiguration)
   .app({
     host: document.querySelector('app'),
