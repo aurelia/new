@@ -2,7 +2,7 @@
   "devDependencies": {
     "@aurelia/plugin-gulp": "dev",
     "gulp": "^4.0.0",
-    "gulp-dumber": "^0.11.0",
+    "gulp-dumber": "^0.12.0",
     // @if babel
     "gulp-babel": "^8.0.0",
     // @endif
