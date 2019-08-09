@@ -115,7 +115,7 @@ function buildCss(src) {
 }
 
 function build() {
-  // Merge all js/css/html file streams to feed greedy dumber.
+  // Merge all js/css/html file streams to feed dumber.
   // dumber knows nothing about .ts/.less/.scss/.md files,
   // gulp-* plugins transpiled them into js/css/html before
   // sending to dumber.
@@ -132,7 +132,7 @@ function build() {
   )
   // Note we did extra call `dr()` here, this is designed to cater watch mode.
   // dumber here consumes (swallows) all incoming Vinyl files,
-  // Then generates new Vinyl files for all output bundle files.
+  // then generates new Vinyl files for all output bundle files.
   .pipe(dr())
   // Terser fast minify mode
   // https://github.com/terser-js/terser#terser-fast-minify-mode
