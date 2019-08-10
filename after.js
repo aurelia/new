@@ -4,7 +4,7 @@ const {execSync} = require('child_process');
 
 function isAvailable(bin) {
   try {
-    execSync(bin + ' -v')
+    execSync(bin + ' -v', {stdio: 'ignore'});
     return true;
   } catch (e) {
     return false;
