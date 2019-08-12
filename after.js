@@ -31,9 +31,9 @@ module.exports = async function({
       choices.push({value: 'yarn', title: 'Yes, use yarn'});
     }
 
-    // if (_isAvailable('pnpm')) {
-    //   choices.push({value: 'pnpm', title: 'Yes, use pnpm'});
-    // }
+    if (_isAvailable('pnpm')) {
+      choices.push({value: 'pnpm', title: 'Yes, use pnpm'});
+    }
 
     const result = await prompts.select({
       message: 'Do you want to install npm dependencies now?',
