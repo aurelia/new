@@ -3,5 +3,6 @@ declare module '*.html' {
   export const template: string;
   export default template;
   export const dependencies: string[];
+  export const shadowOptions: { mode: 'open' | 'closed'};
   export function getHTMLOnlyElement();
 }

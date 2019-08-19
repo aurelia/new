@@ -21,6 +21,14 @@ module.exports = [
     ]
   },
   {
+    message: 'Do you want to use ShadowDOM?',
+    choices: [
+      {title: 'No'},
+      {value: 'shadow-dom-open', title: 'ShadowDOM in open mode', hint: 'Open mode means that you can access the shadow DOM using JavaScript written in the main page context.'},
+      {value: 'shadow-dom-closed', title: 'ShadowDOM in closed mode', hint: "Closed mode means that you won't be able to access the shadow DOM from the outside."},
+    ]
+  },
+  {
     message: 'What transpiler would you like to use?',
     choices: [
       {value: 'babel', title: 'Babel', hint: 'An open source, standards-compliant ES2015 and ESNext transpiler.'},
