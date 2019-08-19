@@ -35,7 +35,15 @@ module.exports = function(env, { mode }) {
         // @if typescript
         { test: /\.ts$/i, use: ['ts-loader', '@aurelia/webpack-loader'], exclude: /node_modules/ },
         // @endif
+        // @if shadow-dom-open
+        { test: /\.html$/i, use: { loader: '@aurelia/webpack-loader', options: { defaultShadowOptions: { mode: 'open' } } }, exclude: /node_modules/ }
+        // @endif
+        // @if shadow-dom-closed
+        { test: /\.html$/i, use: { loader: '@aurelia/webpack-loader', options: { defaultShadowOptions: { mode: 'closed' } } }, exclude: /node_modules/ }
+        // @endif
+        // @if !shadow-dom-open && !shadow-dom-closed
         { test: /\.html$/i, use: '@aurelia/webpack-loader', exclude: /node_modules/ }
+        // @endif
       ]
     },
     plugins: [new HtmlWebpackPlugin({ template: 'index.ejs' })]

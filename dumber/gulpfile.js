@@ -107,7 +107,15 @@ function buildJs(src) {
 
 function buildHtml(src) {
   return gulp.src(src, {since: gulp.lastRun(build)})
+    // @if shadow-dom-open
+    .pipe(au2({defaultShadowOptions: {mode: 'open'}}));
+    // @endif
+    // @if shadow-dom-closed
+    .pipe(au2({defaultShadowOptions: {mode: 'closed'}}));
+    // @endif
+    // @if !shadow-dom-open && !shadow-dom-closed
     .pipe(au2()); // inject aurelia conventions
+    // @endif
 }
 
 function buildCss(src) {
