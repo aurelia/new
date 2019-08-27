@@ -9,6 +9,6 @@ new Aurelia()
   .register(BasicConfiguration, DebugConfiguration)
   .app({
     host: document.querySelector('app'),
-    component: new App()
+    component: App
   })
   .start();
