@@ -41,7 +41,10 @@ module.exports = function(env, { mode }) {
         // @if shadow-dom-closed
         { test: /\.html$/i, use: { loader: '@aurelia/webpack-loader', options: { defaultShadowOptions: { mode: 'closed' } } }, exclude: /node_modules/ }
         // @endif
-        // @if !shadow-dom-open && !shadow-dom-closed
+        // @if css-module
+        { test: /\.html$/i, use: { loader: '@aurelia/webpack-loader', options: { useCSSModule: true } }, exclude: /node_modules/ }
+        // @endif
+        // @if !shadow-dom-open && !shadow-dom-closed && !css-module
         { test: /\.html$/i, use: '@aurelia/webpack-loader', exclude: /node_modules/ }
         // @endif
       ]
