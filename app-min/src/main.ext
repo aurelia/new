@@ -2,13 +2,21 @@
 import 'promise-polyfill/lib/polyfill';
 import { DebugConfiguration } from '@aurelia/debug';
 import { BasicConfiguration } from '@aurelia/jit-html-browser';
+// @if shadow-dom-open || shadow-dom-closed || css-module
+import { StyleConfiguration } from '@aurelia/runtime-html';
+// @endif
 import { Aurelia } from '@aurelia/runtime';
-import { App } from './app';
+import { MyApp } from './my-app';
 
 new Aurelia()
-  .register(BasicConfiguration, DebugConfiguration)
+  .register(
+    BasicConfiguration,
+    DebugConfiguration/* @if shadow-dom-open || shadow-dom-closed */,
+    StyleConfiguration.shadowDOM()/* @endif *//* @if css-module */,
+    StyleConfiguration.cssModulesProcessor()/* @endif */
+  )
   .app({
-    host: document.querySelector('app'),
-    component: App
+    host: document.querySelector('my-app'),
+    component: MyApp
   })
   .start();

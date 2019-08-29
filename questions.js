@@ -29,6 +29,14 @@ module.exports = [
     ]
   },
   {
+    if: '!shadow-dom-open && !shadow-dom-closed',
+    message: 'Do you want to use CSS Module?',
+    choices: [
+      {title: 'No'},
+      {value: 'css-module', title: 'CSS Module is an alternative way to locally scope CSS class names. Do not use it together with ShadowDOM.'},
+    ]
+  },
+  {
     message: 'What transpiler would you like to use?',
     choices: [
       {value: 'babel', title: 'Babel', hint: 'An open source, standards-compliant ES2015 and ESNext transpiler.'},

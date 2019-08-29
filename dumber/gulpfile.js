@@ -101,7 +101,7 @@ function buildJs(src) {
 
   return gulp.src(src, {sourcemaps: !isProduction, since: gulp.lastRun(build)})
     .pipe(gulpif(!isProduction, plumber()))
-    .pipe(au2()) // inject aurelia conventions
+    .pipe(au2())
     .pipe(transpile);
 }
 
@@ -113,7 +113,10 @@ function buildHtml(src) {
     // @if shadow-dom-closed
     .pipe(au2({defaultShadowOptions: {mode: 'closed'}}));
     // @endif
-    // @if !shadow-dom-open && !shadow-dom-closed
+    // @if css-module
+    .pipe(au2({useCSSModule: true}));
+    // @endif
+    // @if !shadow-dom-open && !shadow-dom-closed && !css-module
     .pipe(au2()); // inject aurelia conventions
     // @endif
 }
