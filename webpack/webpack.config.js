@@ -32,7 +32,16 @@ module.exports = function(env, { mode }) {
         { test: /\.css$/i, use: ["style-loader", "css-loader"] },
         // @endif
         // @if css-module
-        { test: /\.css$/i, use: ["style-loader", { loader: "css-loader", options: { modules: true } }] },
+        {
+          test: /\.css$/i,
+          use: [
+            "style-loader",
+            {
+              loader: "css-loader",
+              options: { modules: true }
+            }
+          ]
+        },
         // @endif
         // @if babel
         { test: /\.js$/i, use: ['babel-loader', '@aurelia/webpack-loader'], exclude: /node_modules/ },
@@ -41,13 +50,42 @@ module.exports = function(env, { mode }) {
         { test: /\.ts$/i, use: ['ts-loader', '@aurelia/webpack-loader'], exclude: /node_modules/ },
         // @endif
         // @if shadow-dom-open
-        { test: /\.html$/i, use: { loader: '@aurelia/webpack-loader', options: { defaultShadowOptions: { mode: 'open' } } }, exclude: /node_modules/ }
+        {
+          test: /\.html$/i,
+          use: {
+            loader: '@aurelia/webpack-loader',
+            options: {
+              defaultShadowOptions: { mode: 'open' }
+            }
+          },
+          exclude: /node_modules/
+        }
         // @endif
         // @if shadow-dom-closed
-        { test: /\.html$/i, use: { loader: '@aurelia/webpack-loader', options: { defaultShadowOptions: { mode: 'closed' } } }, exclude: /node_modules/ }
+        {
+          test: /\.html$/i,
+          use: {
+            loader: '@aurelia/webpack-loader',
+            options: {
+              defaultShadowOptions: {
+                // Only use 'closed' mode in production build.
+                // 'open' mode is needed for running tests.
+                mode: production ? 'closed' : 'open'
+              }
+            }
+          },
+          exclude: /node_modules/
+        }
         // @endif
         // @if css-module
-        { test: /\.html$/i, use: { loader: '@aurelia/webpack-loader', options: { useCSSModule: true } }, exclude: /node_modules/ }
+        {
+          test: /\.html$/i,
+          use: {
+            loader: '@aurelia/webpack-loader',
+            options: { useCSSModule: true }
+          },
+          exclude: /node_modules/
+        }
         // @endif
         // @if !shadow-dom-open && !shadow-dom-closed && !css-module
         { test: /\.html$/i, use: '@aurelia/webpack-loader', exclude: /node_modules/ }
