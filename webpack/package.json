@@ -20,6 +20,6 @@
   },
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "rimraf dist && webpack",
+    "build": "rimraf dist && webpack --mode=production",
   }
 }

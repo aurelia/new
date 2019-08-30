@@ -116,13 +116,15 @@ function buildHtml(src) {
     .pipe(au2({defaultShadowOptions: {mode: 'open'}}));
     // @endif
     // @if shadow-dom-closed
-    .pipe(au2({defaultShadowOptions: {mode: 'closed'}}));
+    // Only use 'closed' mode in production build.
+    // 'open' mode is needed for running tests.
+    .pipe(au2({defaultShadowOptions: {mode: isProduction ? 'closed' : 'open'}}));
     // @endif
     // @if css-module
     .pipe(au2({useCSSModule: true}));
     // @endif
     // @if !shadow-dom-open && !shadow-dom-closed && !css-module
-    .pipe(au2()); // inject aurelia conventions
+    .pipe(au2());
     // @endif
 }
 
