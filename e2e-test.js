@@ -86,12 +86,14 @@ const skeletons = [
   'webpack typescript app-min cypress',
   'webpack typescript shadow-dom-open app-min cypress',
   'webpack typescript css-module app-min cypress',
+
   // 'parcel babel app-min cypress',
   // 'parcel typescript app-min cypress',
   // 'browserify babel app-min cypress',
   // 'browserify typescript app-min cypress',
   // 'fuse-box babel app-min cypress',
   // 'fuse-box typescript app-min cypress',
+
   'dumber babel app-min cypress',
   'dumber babel shadow-dom-open app-min cypress',
   // 'dumber babel css-module app-min cypress',
