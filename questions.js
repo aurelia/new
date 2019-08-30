@@ -29,7 +29,9 @@ module.exports = [
     ]
   },
   {
-    if: '!shadow-dom-open && !shadow-dom-closed',
+    // Don't allow user to turn on both ShadowDOM and CSS Module.
+    // Turn off css module for dumber for now.
+    if: '!shadow-dom-open && !shadow-dom-closed && !dumber',
     message: 'Do you want to use CSS Module?',
     choices: [
       {title: 'No'},
