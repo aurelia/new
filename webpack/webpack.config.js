@@ -28,7 +28,12 @@ module.exports = function(env, { mode }) {
     },
     module: {
       rules: [
+        // @if !css-module
         { test: /\.css$/i, use: ["style-loader", "css-loader"] },
+        // @endif
+        // @if css-module
+        { test: /\.css$/i, use: ["style-loader", { loader: "css-loader", options: { modules: true } }] },
+        // @endif
         // @if babel
         { test: /\.js$/i, use: ['babel-loader', '@aurelia/webpack-loader'], exclude: /node_modules/ },
         // @endif
