@@ -93,10 +93,10 @@ const skeletons = [
   // 'fuse-box typescript app-min cypress',
   'dumber babel app-min cypress',
   'dumber babel shadow-dom-closed app-min cypress',
-  'dumber babel css-module app-min cypress',
+  // 'dumber babel css-module app-min cypress',
   'dumber typescript app-min cypress',
   'dumber typescript shadow-dom-open app-min cypress',
-  'dumber typescript css-module app-min cypress'
+  // 'dumber typescript css-module app-min cypress'
 ];
 
 function getServerRegex(features) {
