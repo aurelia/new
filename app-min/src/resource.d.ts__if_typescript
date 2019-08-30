@@ -9,3 +9,13 @@ declare module '*.html' {
   export const shadowOptions: { mode: 'open' | 'closed'} | undefined;
   export function getHTMLOnlyElement();
 }
+
+// @if css-module
+declare module '*.css' {
+  const value: Record<string, string>;
+  export default value;
+}
+// @endif
+// @if !css-module
+declare module '*.css'
+// @endif
