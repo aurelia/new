@@ -78,12 +78,13 @@ async function takeScreenshot(url, filePath) {
   await browser.close();
 }
 
+// don't test shadow-dom-closed, it's not testable by cypress.
 const skeletons = [
   'webpack babel app-min cypress',
   'webpack babel shadow-dom-open app-min cypress',
   'webpack babel css-module app-min cypress',
   'webpack typescript app-min cypress',
-  'webpack typescript shadow-dom-closed app-min cypress',
+  'webpack typescript shadow-dom-open app-min cypress',
   'webpack typescript css-module app-min cypress',
   // 'parcel babel app-min cypress',
   // 'parcel typescript app-min cypress',
@@ -92,7 +93,7 @@ const skeletons = [
   // 'fuse-box babel app-min cypress',
   // 'fuse-box typescript app-min cypress',
   'dumber babel app-min cypress',
-  'dumber babel shadow-dom-closed app-min cypress',
+  'dumber babel shadow-dom-open app-min cypress',
   // 'dumber babel css-module app-min cypress',
   'dumber typescript app-min cypress',
   'dumber typescript shadow-dom-open app-min cypress',
