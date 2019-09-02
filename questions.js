@@ -34,7 +34,7 @@ module.exports = [
     message: 'Do you want to use CSS Module?',
     choices: [
       {title: 'No'},
-      {value: 'css-module', title: 'CSS Module is an alternative way to locally scope CSS class names. Do not use it together with ShadowDOM.'},
+      {value: 'css-module', title: 'Yes', hint: 'CSS Module is an alternative way to locally scope CSS class names. Do not use it together with ShadowDOM.'},
     ]
   },
   {
