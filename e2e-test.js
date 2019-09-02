@@ -87,19 +87,19 @@ const skeletons = [
   'webpack typescript shadow-dom-closed app-min cypress',
   'webpack typescript css-module app-min cypress',
 
+  'dumber babel app-min cypress',
+  'dumber babel shadow-dom-closed app-min cypress',
+  'dumber babel css-module app-min cypress',
+  'dumber typescript app-min cypress',
+  'dumber typescript shadow-dom-open app-min cypress',
+  'dumber typescript css-module app-min cypress',
+
   // 'parcel babel app-min cypress',
   // 'parcel typescript app-min cypress',
   // 'browserify babel app-min cypress',
   // 'browserify typescript app-min cypress',
   // 'fuse-box babel app-min cypress',
   // 'fuse-box typescript app-min cypress',
-
-  'dumber babel app-min cypress',
-  'dumber babel shadow-dom-closed app-min cypress',
-  // 'dumber babel css-module app-min cypress',
-  'dumber typescript app-min cypress',
-  'dumber typescript shadow-dom-open app-min cypress',
-  // 'dumber typescript css-module app-min cypress'
 ];
 
 function getServerRegex(features) {
