@@ -16,9 +16,7 @@ const del = require('del');
 const bs = require('browser-sync').create();
 const historyApiFallback = require('connect-history-api-fallback/lib');
 // @if css-module
-const CSSModule = require('css-modules-loader-core');
-const cssModule = new CSSModule();
-const {Transform} = require('stream');
+const cssModule = require('gulp-dumber-css-module');
 // @endif
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -129,25 +127,13 @@ function buildHtml(src) {
 }
 
 function buildCss(src) {
-  return gulp.src(src, {sourcemaps: !isProduction, since: gulp.lastRun(build)})/* @if css-module */
-    // TODO to extract CSS module integration to a npm package
-    // TODO to support @import and :import
-    .pipe(new Transform({
-      objectMode: true,
-      transform(file, enc, cb) {
-        if (file.isBuffer() && file.extname === '.css') {
-          cssModule.load(file.contents.toString(), file.relative).then(
-            (injectableSource, exportTokens) => {
-              file.relative += '.js';
-              file.contents = `module.exports = ${JSON.stringify(exportTokens)};`;
-              cb(null, file);
-            },
-            cb // pass error back
-          )
-        }
-        cb(null, file);
-      }
-    }))/* @endif */;
+  // @if css-module
+  return gulp.src(src, {sourcemaps: !isProduction})
+    .pipe(cssModule());
+  // @endif
+  // @if !css-module
+  return gulp.src(src, {sourcemaps: !isProduction, since: gulp.lastRun(build)});
+  // @endif
 }
 
 function build() {
