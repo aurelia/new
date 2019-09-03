@@ -4,8 +4,11 @@ const {
   UglifyJSPlugin,
   QuantumPlugin,
   WebIndexPlugin,
-  CSSPlugin/* @if babel */,
-  Babel7Plugin/* @endif */ } = require("fuse-box");
+  // @if babel
+  Babel7Plugin,
+  // @endif
+  CSSPlugin
+} = require("fuse-box");
 const { src, task } = require("fuse-box/sparky");
 
 let run = (production) => {

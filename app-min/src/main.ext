@@ -9,7 +9,16 @@ import { Aurelia } from '@aurelia/runtime';
 import { MyApp } from './my-app';
 
 new Aurelia()
-  .register(BasicConfiguration, DebugConfiguration/* @if shadow-dom-open || shadow-dom-closed */, StyleConfiguration.shadowDOM()/* @endif *//* @if css-module */, StyleConfiguration.cssModulesProcessor()/* @endif */)
+  .register(
+    // @if shadow-dom-open || shadow-dom-closed
+    StyleConfiguration.shadowDOM(),
+    // @endif
+    // @if css-module
+    StyleConfiguration.cssModulesProcessor(),
+    // @endif
+    BasicConfiguration,
+    DebugConfiguration
+  )
   .app({
     host: document.querySelector('my-app'),
     component: MyApp
