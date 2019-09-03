@@ -24,7 +24,6 @@ jobs:
     - name: npm install and test:e2e
       run: |
         npm install
-        npm test
         npm run test:e2e
       env:
         CI: true
