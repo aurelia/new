@@ -1,9 +1,9 @@
 name: npm run test:e2e
 
-# on:
-#   push:
-#     branches:
-#     - master
+on:
+  push:
+    branches:
+    - master
 
 jobs:
   build:
