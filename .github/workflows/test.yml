@@ -1,9 +1,6 @@
-name: npm run test:e2e
+name: npm run test
 
-on:
-  push:
-    branches:
-    - master
+on: [push, pull_request]
 
 jobs:
   build:
@@ -21,10 +18,9 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: npm install and test:e2e
+    - name: npm install and test
       run: |
         npm install
         npm test
-        npm run test:e2e
       env:
         CI: true
