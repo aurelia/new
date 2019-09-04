@@ -102,14 +102,14 @@ function buildJs(src) {
   const transpile = ts();
   // @endif
 
-  return gulp.src(src, {sourcemaps: !isProduction, since: gulp.lastRun(build)})
+  return gulp.src(src, {sourcemaps: !isProduction})
     .pipe(gulpif(!isProduction, plumber()))
     .pipe(au2())
     .pipe(transpile);
 }
 
 function buildHtml(src) {
-  return gulp.src(src, {since: gulp.lastRun(build)})
+  return gulp.src(src)
     // @if shadow-dom-open
     .pipe(au2({defaultShadowOptions: {mode: 'open'}}));
     // @endif
@@ -132,7 +132,7 @@ function buildCss(src) {
     .pipe(cssModule());
   // @endif
   // @if !css-module
-  return gulp.src(src, {sourcemaps: !isProduction, since: gulp.lastRun(build)});
+  return gulp.src(src, {sourcemaps: !isProduction});
   // @endif
 }
 
@@ -142,7 +142,7 @@ function build() {
   // gulp-* plugins transpiled them into js/css/html before
   // sending to dumber.
   return merge2(
-    gulp.src('src/**/*.json', {since: gulp.lastRun(build)}),
+    gulp.src('src/**/*.json'),
     // @if babel
     buildJs('src/**/*.js'),
     // @endif
