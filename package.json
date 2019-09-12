@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.1",
   "description": "This package.json file is not needed by 'makes'. We use package.json to setup our tests and changelog.",
+  "license": "MIT",
   "devDependencies": {
     "ava": "^2.3.0",
     "cross-spawn": "^6.0.5",

@@ -47,3 +47,7 @@ npm test
 # test all skeletons, take some time, not turned on in .travis.yml
 npm run test:e2e
 ```
+
+## License
+
+MIT.
