@@ -80,26 +80,26 @@ async function takeScreenshot(url, filePath) {
 
 // don't test shadow-dom-closed, it's not testable by cypress.
 const skeletons = [
-  'webpack babel app-min cypress',
-  'webpack babel shadow-dom-open app-min cypress',
-  'webpack babel css-module app-min cypress',
-  'webpack typescript app-min cypress',
-  'webpack typescript shadow-dom-closed app-min cypress',
-  'webpack typescript css-module app-min cypress',
+  'webpack cypress',
+  'webpack shadow-dom-open cypress',
+  'webpack css-module cypress',
+  'webpack typescript cypress',
+  'webpack typescript shadow-dom-closed cypress',
+  'webpack typescript css-module cypress',
 
-  'dumber babel app-min cypress',
-  'dumber babel shadow-dom-closed app-min cypress',
-  'dumber babel css-module app-min cypress',
-  'dumber typescript app-min cypress',
-  'dumber typescript shadow-dom-open app-min cypress',
-  'dumber typescript css-module app-min cypress',
+  'dumber cypress',
+  'dumber shadow-dom-closed cypress',
+  'dumber css-module cypress',
+  'dumber typescript cypress',
+  'dumber typescript shadow-dom-open cypress',
+  'dumber typescript css-module cypress',
 
-  // 'parcel babel app-min cypress',
-  // 'parcel typescript app-min cypress',
-  // 'browserify babel app-min cypress',
-  // 'browserify typescript app-min cypress',
-  // 'fuse-box babel app-min cypress',
-  // 'fuse-box typescript app-min cypress',
+  // 'parcel cypress',
+  // 'parcel typescript cypress',
+  // 'browserify cypress',
+  // 'browserify typescript cypress',
+  // 'fuse-box cypress',
+  // 'fuse-box typescript cypress',
 ];
 
 function getServerRegex(features) {
