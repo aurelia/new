@@ -1,5 +1,7 @@
+// @if browser-ie11
 // Promise polyfill for old browsers
 import 'promise-polyfill/lib/polyfill';
+// @endif
 import { DebugConfiguration } from '@aurelia/debug';
 import { BasicConfiguration } from '@aurelia/jit-html-browser';
 // @if shadow-dom-open || shadow-dom-closed || css-module

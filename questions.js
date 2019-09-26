@@ -58,5 +58,13 @@ module.exports = [
     choices: [
       {value: 'app-min', title: 'Bare minimum'}
     ]
+  },
+  // Currently this question is not visible to end user because there is only one option.
+  // Will expand the list in future.
+  {
+    message: 'What are your targeted browsers?',
+    choices: [
+      {value: 'browser-evergreen', title: 'All Evergreen browsers', hint: 'Including Chrome, Edge, Firefox, Safari'}
+    ]
   }
 ];

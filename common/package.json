@@ -16,7 +16,9 @@
     "@aurelia/runtime-html": "dev",
     "@aurelia/runtime-html-browser": "dev",
     "@aurelia/runtime": "dev",
+    // @if browser-ie11
     "promise-polyfill": "^8.1.3"
+    // @endif
   },
   "devDependencies": {
     "htmlhint": "^0.11.0"
