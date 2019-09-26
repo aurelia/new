@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "CommonJS",
-    "target": "ES5",
+    "target": "ES2017",
     "baseUrl": ".",
     "importHelpers": true,
     "emitDecoratorMetadata": true,
