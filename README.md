@@ -48,6 +48,15 @@ npm test
 npm run test:e2e
 ```
 
+If you forked this repo, you can run your skeleton with:
+
+```bash
+# test your master branch if your forked name is "new"
+npx makes your_GitHub_name
+# test some branch or commit or tag
+npx makes your_GitHub_name/forked_repo_name#some-branch
+```
+
 ## License
 
 MIT.
