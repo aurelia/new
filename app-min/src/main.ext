@@ -2,27 +2,7 @@
 // Promise polyfill for old browsers
 import 'promise-polyfill/lib/polyfill';
 // @endif
-import { DebugConfiguration } from '@aurelia/debug';
-import { BasicConfiguration } from '@aurelia/jit-html-browser';
-// @if shadow-dom-open || shadow-dom-closed || css-module
-import { StyleConfiguration } from '@aurelia/runtime-html';
-// @endif
-import { Aurelia } from '@aurelia/runtime';
+import Aurelia/* @if shadow-dom-open || shadow-dom-closed || css-module */, { StyleConfiguration }/* @endif */ from 'aurelia';
 import { MyApp } from './my-app';
 
-new Aurelia()
-  .register(
-    // @if shadow-dom-open || shadow-dom-closed
-    StyleConfiguration.shadowDOM(),
-    // @endif
-    // @if css-module
-    StyleConfiguration.cssModulesProcessor(),
-    // @endif
-    BasicConfiguration,
-    DebugConfiguration
-  )
-  .app({
-    host: document.querySelector('my-app'),
-    component: MyApp
-  })
-  .start();
+Aurelia/* @if shadow-dom-open || shadow-dom-closed */.register(StyleConfiguration.shadowDOM())/* @endif *//* @if css-module */.register(StyleConfiguration.cssModulesProcessor())/* @endif */.app(MyApp).start();
