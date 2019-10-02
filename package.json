@@ -1,7 +1,7 @@
 {
   "name": "aurelia2-new",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "This package.json file is not needed by 'makes'. We use package.json to setup our tests and changelog.",
   "license": "MIT",
   "devDependencies": {
