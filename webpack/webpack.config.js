@@ -1,7 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = function(env, { mode }) {
-  const production = mode === 'production';
+module.exports = function(env) {
+  const production = env === 'production' || process.env.NODE_ENV === 'production';
   return {
     mode: production ? 'production' : 'development',
     devtool: production ? 'source-maps' : 'inline-source-map',
