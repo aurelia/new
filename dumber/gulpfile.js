@@ -23,7 +23,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 const isTest = process.env.NODE_ENV === 'test';
 const dist = 'dist';
 
-// Read more in https://dumberjs.github.io
+// Read more in https://dumber.js.org
 const dr = dumber({
   // src folder is by default "src".
   // src: 'src',
