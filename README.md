@@ -14,7 +14,7 @@ First, ensure that you have Node.js v8.9.0 or above installed on your system. Ne
 npx makes aurelia
 ```
 
-This will cause `npx` to download the `makes` tool, along with the `aurelia` scaffold from this repo, which it will use to guide you through the setup process
+This will cause `npx` to download the `makes` tool, along with the `aurelia` scaffold from this repo, which it will use to guide you through creating your project.
 
 ## Status
 
