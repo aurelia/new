@@ -10,14 +10,26 @@
   "dependencies": {
     "aurelia": "dev",
     // @if browser-ie11
-    "promise-polyfill": "^8.1.3"
+    "promise-polyfill": "^8.0.0",
+    // @endif
+    // @if less
+    "lesshint": "^6.0.0",
+    // @endif
+    // @if sass
+    "sass-lint": "^6.0.0",
     // @endif
   },
   "devDependencies": {
     "htmlhint": "^0.11.0"
   },
   "scripts": {
+    // @if sass
+    "lint:css": "sass-lint -c .sass-lint.yml \"src/**/*.scss\"",
+    // @endif
+    // @if less
+    "lint:css": "lesshint \"src/**/*.less\"",
+    // @endif
     "lint:html": "htmlhint -c .htmlhintrc src",
-    "lint": "npm run lint:js && npm run lint:html"
+    "lint": "npm run lint:js && npm run lint:html/* @if !css */ && npm run lint:css/* @endif */",
   }
 }
