@@ -18,6 +18,15 @@ const historyApiFallback = require('connect-history-api-fallback/lib');
 // @if css-module
 const cssModule = require('gulp-dumber-css-module');
 // @endif
+// @if less
+const less = require('gulp-less');
+// @endif
+// @if sass
+const sass = require('gulp-sass');
+// @endif
+const postcss = require('gulp-postcss');
+const autoprefixer = require('autoprefixer');
+const postcssUrl = require('postcss-url');
 
 const isProduction = process.env.NODE_ENV === 'production';
 const isTest = process.env.NODE_ENV === 'test';
@@ -128,13 +137,25 @@ function buildHtml(src) {
 }
 
 function buildCss(src) {
-  // @if css-module
   return gulp.src(src, {sourcemaps: !isProduction})
-    .pipe(cssModule());
-  // @endif
-  // @if !css-module
-  return gulp.src(src, {sourcemaps: !isProduction});
-  // @endif
+    // @if less
+    .pipe(gulpif(!isProduction, plumber()))
+    .pipe(less())
+    // @endif
+    // @if sass
+    .pipe(isProduction ? sass() : sass().on('error', sass.logError))
+    // @endif
+    .pipe(postcss([
+      autoprefixer(),
+      // use postcss-url to inline any image/font/svg.
+      // postcss-url by default use base64 for images, but
+      // encodeURIComponent for svg which does NOT work on
+      // some browsers.
+      // Here we enforce base64 encoding for all assets to
+      // improve compatibility on svg.
+      postcssUrl({url: 'inline', encodeType: 'base64'})
+    ]))/* @if css-module */
+    .pipe(cssModule())/* @endif */;
 }
 
 function build() {
@@ -151,7 +172,15 @@ function build() {
     buildJs(['src/**/*.d.ts', 'src/**/*.ts']),
     // @endif
     buildHtml('src/**/*.html'),
+    // @if css
     buildCss('src/**/*.css')
+    // @endif
+    // @if less
+    buildCss('src/**/*.less')
+    // @endif
+    // @if sass
+    buildCss('src/**/*.scss')
+    // @endif
   )
   // Note we did extra call `dr()` here, this is designed to cater watch mode.
   // dumber here consumes (swallows) all incoming Vinyl files,

@@ -20,6 +20,16 @@
     // @if css-module
     "gulp-dumber-css-module": "^0.1.0",
     // @endif
+    // @if less
+    "gulp-less": "^4.0.0",
+    // @endif
+    // @if sass
+    "gulp-sass": "^4.0.0",
+    "node-sass": "^4.0.0",
+    // @endif
+    "gulp-postcss": "^8.0.0",
+    "autoprefixer": "^9.0.0",
+    "postcss-url": "^8.0.0",
   },
   "scripts": {
     "start": "gulp",

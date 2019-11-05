@@ -8,7 +8,7 @@
     // @if shadow-dom-open || shadow-dom-closed
     "raw-loader": "^3.0.0",
     // @endif
-    "style-loader": "^0.23.0",
+    "style-loader": "^1.0.0",
     "css-loader": "^3.0.0",
     "@aurelia/webpack-loader": "dev",
     // @if babel
@@ -17,6 +17,16 @@
     // @if typescript
     "ts-loader": "^6.0.0",
     // @endif
+    // @if less
+    "less-loader": "^5.0.0",
+    "less": "^3.0.0",
+    // @endif
+    // @if sass
+    "sass-loader": "^8.0.0",
+    "node-sass": "^4.0.0",
+    // @endif
+    "postcss-loader": "^3.0.0",
+    "autoprefixer": "^9.0.0",
   },
   "scripts": {
     "start": "webpack-dev-server",

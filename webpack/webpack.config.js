@@ -1,6 +1,29 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+// @if !css-module
+const cssLoader = "css-loader";
+// @endif
+// @if css-module
+const cssLoader = {
+  loader: "css-loader",
+  options: {
+    modules: true,
+    // https://github.com/webpack-contrib/css-loader#importloaders
+    importLoaders: /* @if css */1/* @endif *//* @if !css */2/* @endif */
+  }
+};
+// @endif
+
+const postcssLoader = {
+  loader: 'postcss-loader',
+  options: {
+    plugins: () => [
+      require('autoprefixer')()
+    ]
+  }
+};
+
 module.exports = function(env) {
   const production = env === 'production' || process.env.NODE_ENV === 'production';
   return {
@@ -29,20 +52,14 @@ module.exports = function(env) {
     },
     module: {
       rules: [
-        // @if !css-module
-        { test: /\.css$/i, use: ["style-loader", "css-loader"] },
+        // @if css
+        { test: /\.css$/i, use: [ "style-loader", cssLoader, postcssLoader ] },
         // @endif
-        // @if css-module
-        {
-          test: /\.css$/i,
-          use: [
-            "style-loader",
-            {
-              loader: "css-loader",
-              options: { modules: true }
-            }
-          ]
-        },
+        // @if less
+        { test: /\.less$/i, use: [ "style-loader", cssLoader, postcssLoader, "less-loader" ] },
+        // @endif
+        // @if sass
+        { test: /\.scss$/i, use: [ "style-loader", cssLoader, postcssLoader, { loader: "sass-loader", options: { includePaths: ["node_modules"] } } ] },
         // @endif
         // @if babel
         { test: /\.js$/i, use: ['babel-loader', '@aurelia/webpack-loader'], exclude: /node_modules/ },
