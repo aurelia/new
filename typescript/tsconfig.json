@@ -20,5 +20,10 @@
     "esModuleInterop": false,
     // @endif
   },
-  "include": ["src"]
+  "include": [
+    // @if jest || jasmine || mocha || tape || ava
+    "test",
+    // @endif
+    "src"
+  ]
 }

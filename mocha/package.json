@@ -1,0 +1,19 @@
+{
+  "devDependencies": {
+    "mocha": "^6.0.0",
+    "chai": "^4.0.0",
+    // @if typescript
+    "@types/mocha": "^5.0.0",
+    // @endif
+  },
+  "scripts": {
+    // @if dumber
+    "test": "browser-do --mocha < dist/entry-bundle.js",
+    "test:chrome": "npm run build:test && browser-do --mocha --browser chrome < dist/entry-bundle.js"
+    // @endif
+    // @if webpack
+    "test": "browser-do --mocha < dist/main.js",
+    "test:chrome": "npm run build:test && browser-do --mocha --browser chrome < dist/main.js"
+    // @endif
+  }
+}

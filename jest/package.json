@@ -1,0 +1,33 @@
+{
+  "devDependencies": {
+    "jest": "^24.0.0",
+    "jest-transform-stub": "^2.0.0",
+    // @if babel
+    "babel-jest": "^24.0.0",
+    // @endif
+    // @if typescript
+    "@types/jest": "^24.0.0",
+    "ts-jest": "^24.0.0",
+    // @endif
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.(css|less|sass|scss|styl|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "jest-transform-stub",
+      // @if babel
+      "^.+\\.js$": "babel-jest",
+      // @endif
+    },
+
+    // @if typescript
+    "preset": 'ts-jest',
+    // @endif
+
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      'src/**/*./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */'
+    ]
+  }
+}

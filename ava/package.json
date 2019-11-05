@@ -1,0 +1,15 @@
+{
+  "devDependencies": {
+    "ava": "^2.0.0",
+    "browser-env": "^3.0.0",
+    // @if babel
+    "@babel/register": "^7.0.0",
+    // @endif
+    // @if typescript
+    "ts-node": "^8.0.0",
+    // @endif
+  },
+  "scripts": {
+    "test": "ava"
+  }
+}

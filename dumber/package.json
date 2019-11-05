@@ -34,6 +34,9 @@
   "scripts": {
     "start": "gulp",
     "build": "gulp clean && cross-env NODE_ENV=production gulp build",
-    "clear-cache": "gulp clear-cache"
+    "clear-cache": "gulp clear-cache",
+    // @if jasmine || tape || mocha
+    "build:test": "gulp clean && cross-env NODE_ENV=test gulp build",
+    // @endif
   }
 }

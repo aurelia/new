@@ -1,0 +1,18 @@
+{
+  "devDependencies": {
+    "jasmine-core": "^3.0.0",
+    // @if typescript
+    "@types/jasmine": "^3.0.0",
+    // @endif
+  },
+  "scripts": {
+    // @if dumber
+    "test": "browser-do --jasmine < dist/entry-bundle.js",
+    "test:chrome": "npm run build:test && browser-do --jasmine --browser chrome < dist/entry-bundle.js"
+    // @endif
+    // @if webpack
+    "test": "browser-do --jasmine < dist/main.js",
+    "test:chrome": "npm run build:test && browser-do --jasmine --browser chrome < dist/main.js"
+    // @endif
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "devDependencies": {
+    "tape": "^4.0.0",
+    // @if typescript
+    "@types/tape": "4.0.0"
+    // @endif
+  },
+  "scripts": {
+    // @if dumber
+    "test": "browser-do --tap < dist/entry-bundle.js",
+    "test:chrome": "npm run build:test && browser-do --tap --browser chrome < dist/entry-bundle.js"
+    // @endif
+    // @if webpack
+    "test": "browser-do --tap < dist/main.js",
+    "test:chrome": "npm run build:test && browser-do --tap --browser chrome < dist/main.js"
+    // @endif
+  }
+}

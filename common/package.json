@@ -18,6 +18,10 @@
     // @if sass
     "sass-lint": "^6.0.0",
     // @endif
+    // @if jasmine || tape || mocha
+    "browser-do": "^0.3.0",
+    "nodemon": "^1.0.0",
+    // @endif
   },
   "devDependencies": {
     "htmlhint": "^0.11.0"
@@ -31,5 +35,12 @@
     // @endif
     "lint:html": "htmlhint -c .htmlhintrc src",
     "lint": "npm run lint:js && npm run lint:html/* @if !css */ && npm run lint:css/* @endif */",
+    // @if jest || ava
+    "pretest": "npm run lint",
+    // @endif
+    // @if jasmine || tape || mocha
+    "pretest": "npm run lint && npm run build:test",
+    "test:watch": "nodemon --watch src --watch test --ext js/* @if typescript */,ts/* @endif */,html,css/* @if sass */,scss/* @endif *//* @if less */,less/* @endif */ --exec \"npm run test\""
+    // @endif
   }
 }

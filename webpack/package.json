@@ -31,5 +31,8 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "rimraf dist && webpack --env production",
+    // @if jasmine || tape || mocha
+    "build:test": "rimraf dist && webpack --env test",
+    // @endif
   }
 }
