@@ -12,6 +12,9 @@
     // @if browser-ie11
     "promise-polyfill": "^8.0.0",
     // @endif
+  },
+  "devDependencies": {
+    "htmlhint": "^0.11.0",
     // @if less
     "lesshint": "^6.0.0",
     // @endif
@@ -21,9 +24,6 @@
     // @if jasmine || tape || mocha
     "browser-do": "^0.3.0",
     // @endif
-  },
-  "devDependencies": {
-    "htmlhint": "^0.11.0"
   },
   "scripts": {
     // @if sass
