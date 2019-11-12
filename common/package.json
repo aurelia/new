@@ -20,7 +20,6 @@
     // @endif
     // @if jasmine || tape || mocha
     "browser-do": "^0.3.0",
-    "nodemon": "^1.0.0",
     // @endif
   },
   "devDependencies": {
@@ -39,8 +38,8 @@
     "pretest": "npm run lint",
     // @endif
     // @if jasmine || tape || mocha
+    "test": "npm run test:headless",
     "pretest": "npm run lint && npm run build:test",
-    "test:watch": "nodemon --watch src --watch test --ext js/* @if typescript */,ts/* @endif */,html,css/* @if sass */,scss/* @endif *//* @if less */,less/* @endif */ --exec \"npm run test\""
     // @endif
   }
 }

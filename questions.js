@@ -60,7 +60,7 @@ module.exports = [
       {value: 'mocha', title: 'Mocha + Chai', hint: 'Runs in browser, a feature-rich JavaScript test framework for node and browsers.'},
       {value: 'tape', title: 'Tape', hint: 'Runs in browser, tap-producing test harness for node and browsers.'},
       {value: 'ava', title: 'Ava + browser-env', hint: 'Runs in Node.js, simulates browser with browser-env (jsdom). A test runner for Node.js with a concise API, detailed error output, embrace of new language features and process isolation that let you write tests more effectively.'},
-      {title: 'None', hint: 'Skip testing. My code is always perfect :-)'}
+      {value: 'no-unit-tests', title: 'None', hint: 'Skip testing. My code is always perfect :-)'}
     ]
   },
   {

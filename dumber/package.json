@@ -30,6 +30,9 @@
     "gulp-postcss": "^8.0.0",
     "autoprefixer": "^9.0.0",
     "postcss-url": "^8.0.0",
+    // @if jasmine || tape || mocha
+    "gulp-run": "^1.0.0",
+    // @endif
   },
   "scripts": {
     "start": "gulp",
@@ -37,6 +40,7 @@
     "clear-cache": "gulp clear-cache",
     // @if jasmine || tape || mocha
     "build:test": "gulp clean && cross-env NODE_ENV=test gulp build",
+    "test:watch": "gulp clean && cross-env NODE_ENV=test gulp watch-test"
     // @endif
   }
 }

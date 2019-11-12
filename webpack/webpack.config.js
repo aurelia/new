@@ -1,5 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+// @if jasmine || tape || mocha
+const WebpackShellPluginNext = require('webpack-shell-plugin-next')
+// @endif
 
 // @if !css-module
 const cssLoader = "css-loader";
@@ -24,24 +27,26 @@ const postcssLoader = {
   }
 };
 
-module.exports = function(env) {
+module.exports = function(env/* @if jasmine || tape || mocha*/, { runTest }/* @endif */) {
   const production = env === 'production' || process.env.NODE_ENV === 'production';
+  // @if jasmine || tape || mocha
+  const test = env === 'test' || process.env.NODE_ENV === 'test';
+  // @endif
   return {
     mode: production ? 'production' : 'development',
     devtool: production ? 'source-maps' : 'inline-source-map',
-    // @if babel
-    entry: './src/main.js',
+    // @if jasmine || tape || mocha
+    entry: test ? './test/all-spec./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */' :  './src/main./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */',
     // @endif
-    // @if typescript
-    entry: './src/main.ts',
+    // @if !jasmine && !tape && !mocha
+    entry: './src/main./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */',
     // @endif
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'entry-bundle.js'
+    },
     resolve: {
-      // @if babel
-      extensions: ['.js'],
-      // @endif
-      // @if typescript
-      extensions: ['.ts', '.js'],
-      // @endif
+      extensions: [/* @if typescript */'.ts', /* @endif */'.js'],
       modules: [path.resolve(__dirname, 'src'), 'node_modules']
     },
     devServer: {
@@ -110,6 +115,9 @@ module.exports = function(env) {
         // @endif
       ]
     },
-    plugins: [new HtmlWebpackPlugin({ template: 'index.ejs' })]
+    plugins: [
+      new HtmlWebpackPlugin({ template: 'index.ejs' })/* @if jasmine || tape || mocha*/,
+      test && runTest && new WebpackShellPluginNext({ onBuildEnd: [ 'npm run test:headless' ]})/* @endif */
+    ]/* @if jasmine || tape || mocha*/.filter(p => p)/* @endif */
   }
 }

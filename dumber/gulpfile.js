@@ -27,6 +27,9 @@ const sass = require('gulp-sass');
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const postcssUrl = require('postcss-url');
+// @if jasmine || tape || mocha
+const run = require('gulp-run');
+// @endif
 
 const isProduction = process.env.NODE_ENV === 'production';
 const isTest = process.env.NODE_ENV === 'test';
@@ -54,6 +57,16 @@ const dr = dumber({
   // prepend before amd loader.
   // dumber-module-loader is injected automatically by dumber bundler after prepends.
   // prepend: [],
+
+  // @if jasmine || tape || mocha
+  // append after amd loader and all module definitions in entry bundle.
+  append: [
+    // Kick off all test files.
+    // Note dumber-module-loader requirejs call accepts regex which loads all matched module ids!
+    // Note all module ids are relative to dumber option "src" (default to 'src') folder.
+    isTest && "requirejs([/^\\.\\.\\/test\\/.+\\.spec$/]);"
+  ],
+  // @endif
 
   // Explicit dependencies, can use either "deps" (short name) or "dependencies" (full name).
   // deps: [],
@@ -246,8 +259,18 @@ function watch() {
 
 const run = gulp.series(clean, serve, watch);
 
+// Watch all files for rebuild and test.
+function watchTest() {
+  return gulp.watch('{src,test}/**/*', gulp.series(build, test));
+}
+
+function test() {
+  return run('npm run test:headless').exec();
+}
+
 exports.build = build;
 exports.clean = clean;
 exports['clear-cache'] = clearCache;
 exports.run = run;
+exports['watch-test'] = watchTest;
 exports.default = run;

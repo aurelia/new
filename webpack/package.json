@@ -27,12 +27,16 @@
     // @endif
     "postcss-loader": "^3.0.0",
     "autoprefixer": "^9.0.0",
+    // @if jasmine || tape || mocha
+    "webpack-shell-plugin-next": "^1.0.0",
+    // @endif
   },
   "scripts": {
     "start": "webpack-dev-server",
     "build": "rimraf dist && webpack --env production",
     // @if jasmine || tape || mocha
     "build:test": "rimraf dist && webpack --env test",
+    "test:watch": "rimraf dist && webpack --env test --watch --runTest"
     // @endif
   }
 }
