@@ -1,9 +1,9 @@
 {
   "devDependencies": {
-    "jest": "^24.0.0",
+    "jest": "^25.0.0",
     "jest-transform-stub": "^2.0.0",
     // @if babel
-    "babel-jest": "^24.0.0",
+    "babel-jest": "^25.0.0",
     // @endif
     // @if typescript
     "@types/jest": "^24.0.0",
