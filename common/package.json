@@ -16,7 +16,7 @@
     "lesshint": "^6.0.0",
     // @endif
     // @if sass
-    "sass-lint": "^6.0.0",
+    "sass-lint": "^1.0.0",
     // @endif
     // @if jasmine || tape || mocha
     "browser-do": "^0.3.0",
