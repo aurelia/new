@@ -115,6 +115,11 @@ module.exports = function(env/* @if jasmine || tape || mocha*/, { runTest }/* @e
         // @endif
       ]
     },
+    // @if tape
+    node: {
+      fs: 'empty',
+    },
+    // @endif
     plugins: [
       new HtmlWebpackPlugin({ template: 'index.ejs' })/* @if jasmine || tape || mocha*/,
       test && runTest && new WebpackShellPluginNext({ onBuildEnd: [ 'npm run test:headless' ]})/* @endif */
