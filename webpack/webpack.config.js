@@ -64,7 +64,7 @@ module.exports = function(env/* @if jasmine || tape || mocha*/, { runTest }/* @e
         { test: /\.less$/i, use: [ "style-loader", cssLoader, postcssLoader, "less-loader" ] },
         // @endif
         // @if sass
-        { test: /\.scss$/i, use: [ "style-loader", cssLoader, postcssLoader, { loader: "sass-loader", options: { includePaths: ["node_modules"] } } ] },
+        { test: /\.scss$/i, use: [ "style-loader", cssLoader, postcssLoader, { loader: "sass-loader", options: { sassOptions: { includePaths: ["node_modules"] } } } ] },
         // @endif
         // @if babel
         { test: /\.js$/i, use: ['babel-loader', '@aurelia/webpack-loader'], exclude: /node_modules/ },
