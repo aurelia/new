@@ -179,10 +179,20 @@ function build() {
   return merge2(
     gulp.src('src/**/*.json'),
     // @if babel
+    // @if !jasmine && !tape && !mocha
     buildJs('src/**/*.js'),
     // @endif
+    // @if jasmine || mocha || tape
+    buildJs(isTest ? '{src,test}/**/*.js' : 'src/**/*.js'),
+    // @endif
+    // @endif
     // @if typescript
-    buildJs(['src/**/*.d.ts', 'src/**/*.ts']),
+    // @if !jasmine && !tape && !mocha
+    buildJs('src/**/*.ts'),
+    // @endif
+    // @if jasmine || mocha || tape
+    buildJs(isTest ? '{src,test}/**/*.ts' : 'src/**/*.ts'),
+    // @endif
     // @endif
     buildHtml('src/**/*.html'),
     // @if css
@@ -264,6 +274,7 @@ function watch() {
 
 const run = gulp.series(clean, serve, watch);
 
+// @if jasmine || tape || mocha
 // Watch all files for rebuild and test.
 function watchTest() {
   return gulp.watch('{src,test}/**/*', gulp.series(build, test));
@@ -273,9 +284,10 @@ function test() {
   return gulpRun('npm run test:headless').exec();
 }
 
+exports['watch-test'] = watchTest;
+// @endif
 exports.build = build;
 exports.clean = clean;
 exports['clear-cache'] = clearCache;
 exports.run = run;
-exports['watch-test'] = watchTest;
 exports.default = run;
