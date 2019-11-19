@@ -58,13 +58,31 @@ module.exports = function(env/* @if jasmine || tape || mocha*/, { runTest }/* @e
     module: {
       rules: [
         // @if css
+        // @if !shadow-dom-open && !shadow-dom-closed
         { test: /\.css$/i, use: [ "style-loader", cssLoader, postcssLoader ] },
         // @endif
+        // @if shadow-dom-open || shadow-dom-closed
+        { test: /\.css$/i, issuer: /\.(js|ts)$/, use: [ "style-loader", cssLoader, postcssLoader ] },
+        { test: /\.css$/i, issuer: /\.html$/, use: [ cssLoader, postcssLoader ] },
+        // @endif
+        // @endif
         // @if less
+        // @if !shadow-dom-open && !shadow-dom-closed
         { test: /\.less$/i, use: [ "style-loader", cssLoader, postcssLoader, "less-loader" ] },
         // @endif
+        // @if shadow-dom-open || shadow-dom-closed
+        { test: /\.less$/i, issuer: /\.(js|ts)$/, use: [ "style-loader", cssLoader, postcssLoader, "less-loader" ] },
+        { test: /\.less$/i, issuer: /\.html$/, use: [ cssLoader, postcssLoader, "less-loader" ] },
+        // @endif
+        // @endif
         // @if sass
+        // @if !shadow-dom-open && !shadow-dom-closed
         { test: /\.scss$/i, use: [ "style-loader", cssLoader, postcssLoader, { loader: "sass-loader", options: { sassOptions: { includePaths: ["node_modules"] } } } ] },
+        // @endif
+        // @if shadow-dom-open || shadow-dom-closed
+        { test: /\.scss$/i, issuer: /\.(js|ts)$/, use: [ "style-loader", cssLoader, postcssLoader, { loader: "sass-loader", options: { sassOptions: { includePaths: ["node_modules"] } } } ] },
+        { test: /\.scss$/i, issuer: /\.html$/, use: [ cssLoader, postcssLoader, { loader: "sass-loader", options: { sassOptions: { includePaths: ["node_modules"] } } } ] },
+        // @endif
         // @endif
         // @if babel
         { test: /\.js$/i, use: ['babel-loader', '@aurelia/webpack-loader'], exclude: /node_modules/ },
