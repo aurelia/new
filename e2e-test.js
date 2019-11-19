@@ -129,8 +129,8 @@ skeletons.forEach((features, i) => {
     await run(makeCmd);
     process.chdir(appFolder);
 
-    console.log('-- pnpm install');
-    await run('pnpm install');
+    console.log('-- yarn install');
+    await run('yarn install');
 
     console.log('-- npm test');
     await run('npm test');
