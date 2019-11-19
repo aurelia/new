@@ -28,7 +28,7 @@ const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const postcssUrl = require('postcss-url');
 // @if jasmine || tape || mocha
-const run = require('gulp-run');
+const gulpRun = require('gulp-run');
 // @endif
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -265,7 +265,7 @@ function watchTest() {
 }
 
 function test() {
-  return run('npm run test:headless').exec();
+  return gulpRun('npm run test:headless').exec();
 }
 
 exports.build = build;
