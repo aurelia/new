@@ -203,7 +203,12 @@ function build() {
   // https://github.com/terser-js/terser#terser-fast-minify-mode
   // It's a good balance on size and speed to turn off compress.
   .pipe(gulpif(isProduction, terser({compress: false})))
+  // @if !jasmine && !mocha && !tape
   .pipe(gulp.dest(dist, {sourcemaps: isProduction ? false : '.'}));
+  // @endif
+  // @if jasmine || mocha || tape
+  .pipe(gulp.dest(dist, {sourcemaps: isProduction ? false : (isTest ? true : '.')}));
+  // @endif
 }
 
 function clean() {
