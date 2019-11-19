@@ -84,7 +84,7 @@ console.log('-- Target bundler: ' + targetBundler);
 const transpilers = ['babel', 'typescript'];
 const cssModes = ['', 'shadow-dom-open', 'shadow-dom-closed', 'css-module'];
 const cssProcessors = ['css', 'sass', 'less'];
-const testFrameworks = ['jasmine', 'tape', 'mocha'];
+const testFrameworks = ['jasmine', 'tape', 'mocha', 'no-unit-tests'];
 const e2eFrameworks = ['cypress'];
 
 function getServerRegex(features) {
@@ -119,6 +119,7 @@ skeletons.forEach((features, i) => {
   const title = `App: ${i + 1}/${skeletons.length} ${appName}`;
   const serverRegex = getServerRegex(features);
   const startCommand = getStartCommand(features);
+  const hasUnitTests = !features.includes('no-unit-tests');
 
   test.serial(title, async t => {
     console.log(title);
@@ -132,8 +133,10 @@ skeletons.forEach((features, i) => {
     console.log('-- yarn install');
     await run('yarn install');
 
-    console.log('-- npm test');
-    await run('npm test');
+    if (hasUnitTests) {
+      console.log('-- npm test');
+      await run('npm test');
+    }
 
     console.log('-- npm run build');
     await run('npm run build', null,
