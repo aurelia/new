@@ -1,0 +1,13 @@
+{
+  "devDependencies": {
+    "mocha": "^6.0.0",
+    "chai": "^4.0.0",
+    // @if typescript
+    "@types/mocha": "^5.0.0",
+    // @endif
+  },
+  "scripts": {
+    "test:headless": "browser-do --mocha < dist/entry-bundle.js",
+    "test:chrome": "browser-do --mocha --browser chrome < dist/entry-bundle.js"
+  }
+}

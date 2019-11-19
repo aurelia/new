@@ -27,6 +27,7 @@ function killProc(proc) {
 const dir = __dirname;
 
 const folder = path.join(dir, 'test-skeletons');
+console.log('-- cleanup ' + folder);
 del.sync(folder);
 fs.mkdirSync(folder);
 
@@ -78,29 +79,13 @@ async function takeScreenshot(url, filePath) {
   await browser.close();
 }
 
-// don't test shadow-dom-closed, it's not testable by cypress.
-const skeletons = [
-  'webpack cypress',
-  'webpack shadow-dom-open cypress',
-  'webpack css-module cypress',
-  'webpack typescript cypress',
-  'webpack typescript shadow-dom-closed cypress',
-  'webpack typescript css-module cypress',
-
-  'dumber cypress',
-  'dumber shadow-dom-closed cypress',
-  'dumber css-module cypress',
-  'dumber typescript cypress',
-  'dumber typescript shadow-dom-open cypress',
-  'dumber typescript css-module cypress',
-
-  // 'parcel cypress',
-  // 'parcel typescript cypress',
-  // 'browserify cypress',
-  // 'browserify typescript cypress',
-  // 'fuse-box cypress',
-  // 'fuse-box typescript cypress',
-];
+const targetBundler = (process.env.TARGET_BUNDLER || 'webpack').toLowerCase();
+console.log('-- Target bundler: ' + targetBundler);
+const transpilers = ['babel', 'typescript'];
+const cssModes = ['', 'shadow-dom-open', 'shadow-dom-closed', 'css-module'];
+const cssProcessors = ['css', 'sass', 'less'];
+const testFrameworks = ['jasmine', 'tape', 'mocha'];
+const e2eFrameworks = ['cypress'];
 
 function getServerRegex(features) {
   if (features.includes('webpack')) return /Project is running at (\S+)/;
@@ -115,8 +100,20 @@ function getStartCommand(features) {
   return 'npm start';
 }
 
-skeletons.forEach((_f, i) => {
-  const features = _f.split(' ');
+const skeletons = [];
+transpilers.forEach(transpiler => {
+  cssModes.forEach(cssMode => {
+    cssProcessors.forEach(cssProcessor => {
+      testFrameworks.forEach(testFramework => {
+        e2eFrameworks.forEach(e2eFramework => {
+          skeletons.push([targetBundler, transpiler, cssMode, cssProcessor, testFramework, e2eFramework].filter(p => p));
+        })
+      });
+    });
+  });
+});
+
+skeletons.forEach((features, i) => {
   const appName = features.join('-');
   const appFolder = path.join(folder, appName);
   const title = `App: ${i + 1}/${skeletons.length} ${appName}`;
@@ -132,11 +129,11 @@ skeletons.forEach((_f, i) => {
     await run(makeCmd);
     process.chdir(appFolder);
 
-    console.log('-- yarn install');
-    await run('yarn install');
+    console.log('-- pnpm install');
+    await run('pnpm install');
 
-    // console.log('-- npm test');
-    // await run('npm test');
+    console.log('-- npm test');
+    await run('npm test');
 
     console.log('-- npm run build');
     await run('npm run build', null,

@@ -6,9 +6,9 @@
     "webpack-dev-server": "^3.0.0",
     "html-webpack-plugin": "^3.0.0",
     // @if shadow-dom-open || shadow-dom-closed
-    "raw-loader": "^3.0.0",
+    "to-string-loader": "^1.0.0",
     // @endif
-    "style-loader": "^0.23.0",
+    "style-loader": "^1.0.0",
     "css-loader": "^3.0.0",
     "@aurelia/webpack-loader": "dev",
     // @if babel
@@ -17,9 +17,26 @@
     // @if typescript
     "ts-loader": "^6.0.0",
     // @endif
+    // @if less
+    "less-loader": "^5.0.0",
+    "less": "^3.0.0",
+    // @endif
+    // @if sass
+    "sass-loader": "^8.0.0",
+    "node-sass": "^4.0.0",
+    // @endif
+    "postcss-loader": "^3.0.0",
+    "autoprefixer": "^9.0.0",
+    // @if jasmine || tape || mocha
+    "webpack-shell-plugin-next": "^1.0.0",
+    // @endif
   },
   "scripts": {
     "start": "webpack-dev-server",
     "build": "rimraf dist && webpack --env production",
+    // @if jasmine || tape || mocha
+    "build:test": "rimraf dist && webpack --env test",
+    "test:watch": "rimraf dist && webpack --env test --watch --runTest"
+    // @endif
   }
 }

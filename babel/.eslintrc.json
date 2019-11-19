@@ -12,6 +12,15 @@
   "env": {
     "es6": true,
     "browser": true,
-    "node": true
+    "node": true,
+    // @if jasmine
+    "jasmine": true,
+    // @endif
+    // @if mocha
+    "mocha": true,
+    // @endif
+    // @if jest
+    "jest": true,
+    // @endif
   }
 }

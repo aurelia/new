@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "jasmine-core": "^3.0.0",
+    // @if typescript
+    "@types/jasmine": "^3.0.0",
+    // @endif
+  },
+  "scripts": {
+    "test:headless": "browser-do --jasmine < dist/entry-bundle.js",
+    "test:chrome": "browser-do --jasmine --browser chrome < dist/entry-bundle.js"
+  }
+}

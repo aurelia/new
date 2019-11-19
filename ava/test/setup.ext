@@ -1,0 +1,11 @@
+import browserEnv from 'browser-env';
+browserEnv();
+
+// ignore css modules
+function skipCSS(module) {
+  module.exports = '';
+}
+
+require.extensions['.css'] = skipCSS;
+require.extensions['.less'] = skipCSS;
+require.extensions['.scss'] = skipCSS;

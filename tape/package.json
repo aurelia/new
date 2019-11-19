@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "tape": "^4.0.0",
+    // @if typescript
+    "@types/tape": "4.0.0"
+    // @endif
+  },
+  "scripts": {
+    "test:headless": "browser-do --tap < dist/entry-bundle.js",
+    "test:chrome": "browser-do --tap --browser chrome < dist/entry-bundle.js"
+  }
+}
