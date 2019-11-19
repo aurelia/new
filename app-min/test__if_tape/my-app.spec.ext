@@ -26,7 +26,7 @@ test('my-app: should render message', async t => {
   const text = node.shadowRoot.querySelector('.message').textContent;
   // @endif
   // @if shadow-dom-closed
-  const text = CustomElement.behaviorFor(node).projector.shadowRoot.querySelector('.message').textContent;
+  const text = CustomElement.for(node).projector.shadowRoot.querySelector('.message').textContent;
   // @endif
   // @if !shadow-dom-open && !shadow-dom-closed
   const text =  node.querySelector('.message').textContent;
