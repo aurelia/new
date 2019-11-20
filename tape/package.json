@@ -2,7 +2,7 @@
   "devDependencies": {
     "tape": "^4.0.0",
     // @if typescript
-    "@types/tape": "4.0.0"
+    "@types/tape": "^4.0.0"
     // @endif
   },
   "scripts": {
