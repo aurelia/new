@@ -50,7 +50,7 @@ const dr = dumber({
   // entryBundle: 'entry-bundle',
 
   // Turn on hash for production build
-  hash: isProduction && !isTest,
+  hash: isProduction,
 
   // Note prepend/append only affects entry bundle.
 
