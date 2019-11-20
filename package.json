@@ -9,16 +9,13 @@
     "cross-env": "^6.0.3",
     "cross-spawn": "^7.0.0",
     "makes": "^0.14.0",
-    "npm-run-all": "^4.1.5",
     "puppeteer": "^1.20.0",
     "standard-changelog": "^2.0.13",
     "vinyl": "^2.2.0"
   },
   "scripts": {
     "test": "ava",
-    "test:e2e:webpack": "ava -v e2e-test.js",
-    "test:e2e:dumber": "cross-env TARGET_BUNDLER=dumber ava -v e2e-test.js",
-    "test:e2e": "run-s test:e2e:webpack test:e2e:dumber",
+    "test:e2e": "ava -v e2e-test.js",
     "preversion": "npm test",
     "version": "standard-changelog && git add CHANGELOG.md",
     "postversion": "git push && git push --tags"

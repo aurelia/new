@@ -79,8 +79,11 @@ async function takeScreenshot(url, filePath) {
   await browser.close();
 }
 
-const targetBundler = (process.env.TARGET_BUNDLER || 'webpack').toLowerCase();
-console.log('-- Target bundler: ' + targetBundler);
+const targetFeatures = (process.env.TARGET_FEATURES || '').toLowerCase().split(',').filter(p => p);
+if (targetFeatures.length) {
+  console.log('Target features: ', targetFeatures);
+}
+const bundlers = ['webpack', 'dumber'];
 const transpilers = ['babel', 'typescript'];
 const cssModes = ['', 'shadow-dom-open', 'shadow-dom-closed', 'css-module'];
 const cssProcessors = ['css', 'sass', 'less'];
@@ -101,17 +104,23 @@ function getStartCommand(features) {
 }
 
 const skeletons = [];
-transpilers.forEach(transpiler => {
-  cssModes.forEach(cssMode => {
-    cssProcessors.forEach(cssProcessor => {
-      testFrameworks.forEach(testFramework => {
-        e2eFrameworks.forEach(e2eFramework => {
-          skeletons.push([targetBundler, transpiler, cssMode, cssProcessor, testFramework, e2eFramework].filter(p => p));
-        })
+bundlers.forEach(bundler => {
+  transpilers.forEach(transpiler => {
+    cssModes.forEach(cssMode => {
+      cssProcessors.forEach(cssProcessor => {
+        testFrameworks.forEach(testFramework => {
+          e2eFrameworks.forEach(e2eFramework => {
+            const features = [bundler, transpiler, cssMode, cssProcessor, testFramework, e2eFramework].filter(p => p);
+            if (targetFeatures.length === 0 || targetFeatures.every(f => features.includes(f))) {
+              skeletons.push(features);
+            }
+          })
+        });
       });
     });
   });
 });
+
 
 skeletons.forEach((features, i) => {
   const appName = features.join('-');

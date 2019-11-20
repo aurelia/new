@@ -23,7 +23,9 @@ function createAu(template: string, ...deps: readonly unknown[]) {
 
 function cleanup() {
   const wrapper = document.querySelector('wrapper');
-  if (wrapper) wrapper.remove();
+  if (wrapper) {
+    wrapper.remove();
+  }
 }
 
 // @if ava || tape
