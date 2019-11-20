@@ -14,7 +14,7 @@ import { MyApp } from '../src/my-app';
 function createAu(template, ...deps) {
 // @endif
 // @if typescript
-function createAu(template: string, ...deps: readonly unknown[]): Aurelia {
+function createAu(template: string, ...deps: readonly unknown[]) {
 // @endif
   const wrapper = CustomElement.define({name: 'wrapper', template});
   document.body.appendChild(document.createElement('wrapper'));
