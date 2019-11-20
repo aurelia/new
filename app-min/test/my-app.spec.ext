@@ -33,11 +33,8 @@ test('my-app: should render message', async t => {
   const au = createAu('<my-app></my-app>', MyApp);
   await au.start().wait();
   const node = document.querySelector('my-app');
-  // @if shadow-dom-open
+  // @if shadow-dom-open || shadow-dom-closed
   const text = node.shadowRoot.textContent;
-  // @endif
-  // @if shadow-dom-closed
-  const text = CustomElement.for(node).projector.shadowRoot.textContent;
   // @endif
   // @if !shadow-dom-open && !shadow-dom-closed
   const text =  node.textContent;
@@ -65,11 +62,8 @@ describe('my-app', () => {
     const au = createAu('<my-app></my-app>', MyApp);
     await au.start().wait();
     const node = document.querySelector('my-app');
-    // @if shadow-dom-open
+    // @if shadow-dom-open || shadow-dom-closed
     const text = node.shadowRoot.textContent;
-    // @endif
-    // @if shadow-dom-closed
-    const text = CustomElement.for(node).projector.shadowRoot.textContent;
     // @endif
     // @if !shadow-dom-open && !shadow-dom-closed
     const text =  node.textContent;
