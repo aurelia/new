@@ -30,7 +30,7 @@ This will cause `npx` to download the `makes` tool, along with the `aurelia` sca
   * There is no problem on babelify. But we will hold browserify for now.
 - [ ] Basic app with FuseBox (On hold)
   * FuseBox v4 is coming, and it's a total rewrite. Wait for it before implement.
-- [ ] Basic unit test setup for jest, jasmine, mocha, tape, ava
+- [x] Basic unit test setup for jasmine, mocha, tape. (jest and ava are on hold, pending implementing transformer.)
 - [x] Basic e2e test setup for cypress
 - [ ] Basic e2e test setup for protractor
 
