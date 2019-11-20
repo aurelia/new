@@ -1,0 +1,85 @@
+// @if ava
+import test from 'ava';
+// @endif
+// @if tape
+import test from 'tape';
+// @endif
+// @if mocha
+import { expect } from 'chai';
+// @endif
+import Aurelia, { /* @if shadow-dom-open || shadow-dom-closed || css-module */StyleConfiguration, /* @endif */CustomElement } from 'aurelia';
+import { MyApp } from '../src/my-app';
+
+// @if babel
+function createAu(template, ...deps) {
+// @endif
+// @if typescript
+function createAu(template: string, ...deps: readonly unknown[]): Aurelia {
+// @endif
+  const wrapper = CustomElement.define({name: 'wrapper', template});
+  document.body.appendChild(document.createElement('wrapper'));
+  return Aurelia/* @if shadow-dom-open || shadow-dom-closed */.register(StyleConfiguration.shadowDOM())/* @endif *//* @if css-module */.register(StyleConfiguration.cssModulesProcessor())/* @endif */.register(deps).app(wrapper);
+}
+
+function cleanup() {
+  const wrapper = document.querySelector('wrapper');
+  if (wrapper) wrapper.remove();
+}
+
+// @if ava || tape
+test('my-app: should render message', async t => {
+  const au = createAu('<my-app></my-app>', MyApp);
+  await au.start().wait();
+  const node = document.querySelector('my-app');
+  // @if shadow-dom-open
+  const text = node.shadowRoot.textContent;
+  // @endif
+  // @if shadow-dom-closed
+  const text = CustomElement.for(node).projector.shadowRoot.textContent;
+  // @endif
+  // @if !shadow-dom-open && !shadow-dom-closed
+  const text =  node.textContent;
+  // @endif
+  // @if ava
+  t.is(text.trim(), 'Hello World!');
+  // @endif
+  // @if tape
+  t.equal(text.trim(), 'Hello World!');
+  // @endif
+  await au.stop().wait();
+  cleanup();
+  // @if tape
+  t.end();
+  // @endif
+});
+// @endif
+// @if jasmine || jest || mocha
+describe('my-app', () => {
+  afterEach(() => {
+    cleanup();
+  });
+
+  it('should render message', async () => {
+    const au = createAu('<my-app></my-app>', MyApp);
+    await au.start().wait();
+    const node = document.querySelector('my-app');
+    // @if shadow-dom-open
+    const text = node.shadowRoot.textContent;
+    // @endif
+    // @if shadow-dom-closed
+    const text = CustomElement.for(node).projector.shadowRoot.textContent;
+    // @endif
+    // @if !shadow-dom-open && !shadow-dom-closed
+    const text =  node.textContent;
+    // @endif
+    // @if jasmine || jest
+    expect(text.trim()).toBe('Hello World!');
+    // @endif
+    // @if mocha
+    expect(text.trim()).to.equal('Hello World!');
+    // @endif
+    await au.stop().wait();
+    cleanup();
+  });
+});
+// @endif
