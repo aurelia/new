@@ -2,7 +2,7 @@
 import test from 'ava';
 // @endif
 // @if tape
-import test from 'tape';
+import /* @if typescript */* as /* @endif */test from 'tape';
 // @endif
 // @if mocha
 import { expect } from 'chai';
