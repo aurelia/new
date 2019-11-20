@@ -48,6 +48,13 @@ npm test
 npm run test:e2e
 ```
 
+To target subset of skeletons, use env variable `TARGET_FEATURES`.
+
+```bash
+# only test skeletons using webpack and typescript features.
+npx cross-env TARGET_FEATURES=webpack,typescript npm run test:e2e
+```
+
 If you forked this repo, you can run your skeleton with:
 
 ```bash
