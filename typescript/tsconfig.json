@@ -13,12 +13,7 @@
     "skipLibCheck": true,
     "rootDir": "src",
     "target": "ES2017",
-    // @if browserify
-    "esModuleInterop": true,
-    // @endif
-    // @if !browserify
-    "esModuleInterop": false,
-    // @endif
+    "esModuleInterop": true
   },
   "include": [
     // @if jest || jasmine || mocha || tape || ava
