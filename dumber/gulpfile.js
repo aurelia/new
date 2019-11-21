@@ -133,18 +133,17 @@ function buildJs(src) {
 
 function buildHtml(src) {
   return gulp.src(src)
-    // @if shadow-dom-open
+    // @if shadow-dom
+    // The other possible Shadow DOM mode is "closed".
+    // If you turn on "closed" mode, there will be difficulty to perform e2e
+    // tests (such as Cypress). Because shadowRoot is not accessible through
+    // standard DOM APIs in "closed" mode.
     .pipe(au2({defaultShadowOptions: {mode: 'open'}}));
-    // @endif
-    // @if shadow-dom-closed
-    // Only use 'closed' mode in production build.
-    // 'open' mode is needed for running tests.
-    .pipe(au2({defaultShadowOptions: {mode: isProduction ? 'closed' : 'open'}}));
     // @endif
     // @if css-module
     .pipe(au2({useCSSModule: true}));
     // @endif
-    // @if !shadow-dom-open && !shadow-dom-closed && !css-module
+    // @if !shadow-dom && !css-module
     .pipe(au2());
     // @endif
 }

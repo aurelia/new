@@ -28,20 +28,19 @@ module.exports = [
     ]
   },
   {
-    message: 'Do you want to use ShadowDOM?',
+    message: 'Do you want to use Shadow DOM?',
     choices: [
       {title: 'No'},
-      {value: 'shadow-dom-open', title: 'ShadowDOM in open mode', hint: 'Open mode means that you can access the shadow DOM using JavaScript written in the main page context.'},
-      {value: 'shadow-dom-closed', title: 'ShadowDOM in closed mode', hint: "Closed mode means that you won't be able to access the shadow DOM from the outside."},
+      {value: 'shadow-dom', title: 'Yes', hint: 'Shadow DOM in open mode, shadowRoot is accessible in DOM.'},
     ]
   },
   {
     // Don't allow user to turn on both ShadowDOM and CSS Module.
-    if: '!shadow-dom-open && !shadow-dom-closed',
+    if: '!shadow-dom',
     message: 'Do you want to use CSS Module?',
     choices: [
       {title: 'No'},
-      {value: 'css-module', title: 'Yes', hint: 'CSS Module is an alternative way to locally scope CSS class names. Do not use it together with ShadowDOM.'},
+      {value: 'css-module', title: 'Yes', hint: 'CSS Module is an alternative way to locally scope CSS class names. Do not use it together with Shadow DOM.'},
     ]
   },
   {

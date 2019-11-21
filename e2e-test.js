@@ -85,7 +85,7 @@ if (targetFeatures.length) {
 }
 const bundlers = ['webpack', 'dumber'];
 const transpilers = ['babel', 'typescript'];
-const cssModes = ['', 'shadow-dom-open', 'shadow-dom-closed', 'css-module'];
+const cssModes = ['', 'shadow-dom', 'css-module'];
 const cssProcessors = ['css', 'sass', 'less'];
 const testFrameworks = ['jasmine', 'tape', 'mocha', 'no-unit-tests'];
 const e2eFrameworks = ['cypress'];

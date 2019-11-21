@@ -58,28 +58,28 @@ module.exports = function(env/* @if jasmine || tape || mocha*/, { runTest }/* @e
     module: {
       rules: [
         // @if css
-        // @if !shadow-dom-open && !shadow-dom-closed
+        // @if !shadow-dom
         { test: /\.css$/i, use: [ "style-loader", cssLoader, postcssLoader ] },
         // @endif
-        // @if shadow-dom-open || shadow-dom-closed
+        // @if shadow-dom
         { test: /\.css$/i, issuer: /\.(js|ts)$/, use: [ "style-loader", cssLoader, postcssLoader ] },
         { test: /\.css$/i, issuer: /\.html$/, use: [ "to-string-loader", cssLoader, postcssLoader ] },
         // @endif
         // @endif
         // @if less
-        // @if !shadow-dom-open && !shadow-dom-closed
+        // @if !shadow-dom
         { test: /\.less$/i, use: [ "style-loader", cssLoader, postcssLoader, "less-loader" ] },
         // @endif
-        // @if shadow-dom-open || shadow-dom-closed
+        // @if shadow-dom
         { test: /\.less$/i, issuer: /\.(js|ts)$/, use: [ "style-loader", cssLoader, postcssLoader, "less-loader" ] },
         { test: /\.less$/i, issuer: /\.html$/, use: [ "to-string-loader", cssLoader, postcssLoader, "less-loader" ] },
         // @endif
         // @endif
         // @if sass
-        // @if !shadow-dom-open && !shadow-dom-closed
+        // @if !shadow-dom
         { test: /\.scss$/i, use: [ "style-loader", cssLoader, postcssLoader, { loader: "sass-loader", options: { sassOptions: { includePaths: ["node_modules"] } } } ] },
         // @endif
-        // @if shadow-dom-open || shadow-dom-closed
+        // @if shadow-dom
         { test: /\.scss$/i, issuer: /\.(js|ts)$/, use: [ "style-loader", cssLoader, postcssLoader, { loader: "sass-loader", options: { sassOptions: { includePaths: ["node_modules"] } } } ] },
         { test: /\.scss$/i, issuer: /\.html$/, use: [ "to-string-loader", cssLoader, postcssLoader, { loader: "sass-loader", options: { sassOptions: { includePaths: ["node_modules"] } } } ] },
         // @endif
@@ -90,29 +90,17 @@ module.exports = function(env/* @if jasmine || tape || mocha*/, { runTest }/* @e
         // @if typescript
         { test: /\.ts$/i, use: ['ts-loader', '@aurelia/webpack-loader'], exclude: /node_modules/ },
         // @endif
-        // @if shadow-dom-open
+        // @if shadow-dom
         {
           test: /\.html$/i,
           use: {
             loader: '@aurelia/webpack-loader',
             options: {
+              // The other possible Shadow DOM mode is "closed".
+              // If you turn on "closed" mode, there will be difficulty to perform e2e
+              // tests (such as Cypress). Because shadowRoot is not accessible through
+              // standard DOM APIs in "closed" mode.
               defaultShadowOptions: { mode: 'open' }
-            }
-          },
-          exclude: /node_modules/
-        }
-        // @endif
-        // @if shadow-dom-closed
-        {
-          test: /\.html$/i,
-          use: {
-            loader: '@aurelia/webpack-loader',
-            options: {
-              defaultShadowOptions: {
-                // Only use 'closed' mode in production build.
-                // 'open' mode is needed for running tests.
-                mode: production ? 'closed' : 'open'
-              }
             }
           },
           exclude: /node_modules/
@@ -128,7 +116,7 @@ module.exports = function(env/* @if jasmine || tape || mocha*/, { runTest }/* @e
           exclude: /node_modules/
         }
         // @endif
-        // @if !shadow-dom-open && !shadow-dom-closed && !css-module
+        // @if !shadow-dom && !css-module
         { test: /\.html$/i, use: '@aurelia/webpack-loader', exclude: /node_modules/ }
         // @endif
       ]

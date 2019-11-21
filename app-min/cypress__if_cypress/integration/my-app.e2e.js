@@ -4,10 +4,10 @@ context('my-app', () => {
   it('shows message', () => {
     cy.visit('/');
     cy.wait(500);
-    // @if shadow-dom-open || shadow-dom-closed
+    // @if shadow-dom
     cy.shadowGet('my-app').shadowFind('div').shadowContains('Hello World!');
     // @endif
-    // @if !shadow-dom-open && !shadow-dom-closed
+    // @if !shadow-dom
     cy.get('my-app>div').contains('Hello World!');
     // @endif
   });

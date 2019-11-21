@@ -7,7 +7,7 @@ import test from 'tape';
 // @if mocha
 import { expect } from 'chai';
 // @endif
-import Aurelia, { /* @if shadow-dom-open || shadow-dom-closed || css-module */StyleConfiguration, /* @endif */CustomElement } from 'aurelia';
+import Aurelia, { /* @if shadow-dom || css-module */StyleConfiguration, /* @endif */CustomElement } from 'aurelia';
 import { MyApp } from '../src/my-app';
 
 // @if babel
@@ -18,7 +18,7 @@ function createAu(template: string, ...deps: readonly unknown[]) {
 // @endif
   const wrapper = CustomElement.define({name: 'wrapper', template});
   document.body.appendChild(document.createElement('wrapper'));
-  return Aurelia/* @if shadow-dom-open || shadow-dom-closed */.register(StyleConfiguration.shadowDOM())/* @endif *//* @if css-module */.register(StyleConfiguration.cssModulesProcessor())/* @endif */.register(deps).app(wrapper);
+  return Aurelia/* @if shadow-dom */.register(StyleConfiguration.shadowDOM())/* @endif *//* @if css-module */.register(StyleConfiguration.cssModulesProcessor())/* @endif */.register(deps).app(wrapper);
 }
 
 function cleanup() {
@@ -33,10 +33,13 @@ test('my-app: should render message', async t => {
   const au = createAu('<my-app></my-app>', MyApp);
   await au.start().wait();
   const node = document.querySelector('my-app');
-  // @if shadow-dom-open || shadow-dom-closed
-  const text = node.shadowRoot.textContent;
+  // @if shadow-dom
+  // In Shadow DOM open mode, shadowRoot is also accessible through DOM API
+  //   node.shadowRoot
+  // But only Aurelia API can access shadowRoot in both open and closed mode.
+  const text = CustomElement.for(node).projector.shadowRoot.textContent;
   // @endif
-  // @if !shadow-dom-open && !shadow-dom-closed
+  // @if !shadow-dom
   const text =  node.textContent;
   // @endif
   // @if ava
@@ -62,10 +65,13 @@ describe('my-app', () => {
     const au = createAu('<my-app></my-app>', MyApp);
     await au.start().wait();
     const node = document.querySelector('my-app');
-    // @if shadow-dom-open || shadow-dom-closed
-    const text = node.shadowRoot.textContent;
+    // @if shadow-dom
+    // In Shadow DOM open mode, shadowRoot is also accessible through DOM API
+    //   node.shadowRoot
+    // But only Aurelia API can access shadowRoot in both open and closed mode.
+    const text = CustomElement.for(node).projector.shadowRoot.textContent;
     // @endif
-    // @if !shadow-dom-open && !shadow-dom-closed
+    // @if !shadow-dom
     const text =  node.textContent;
     // @endif
     // @if jasmine || jest
