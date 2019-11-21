@@ -31,7 +31,7 @@ module.exports = [
     message: 'Do you want to use Shadow DOM?',
     choices: [
       {title: 'No'},
-      {value: 'shadow-dom', title: 'Yes', hint: 'Shadow DOM in open mode, shadowRoot is accessible in DOM.'},
+      {value: 'shadow-dom', title: 'Yes', hint: 'Shadow DOM in open mode, shadowRoot is accessible through DOM API.'},
     ]
   },
   {
@@ -57,7 +57,7 @@ module.exports = [
       // Disable jest and ava for now.
       // TODO: build some custom transformer to apply our conventions when running in nodejs env.
       // Note in test env, probably need to remove "modules": false from babelrc and "module": "esnext" from tsconfig.
-      // {value: 'jest', title: 'Jest', hint: 'Runs in Node.js, simulates browser natively, with a focus on simplicity.'},
+      // {value: 'jest', title: 'Jest', hint: 'Runs in Node.js, simulates browser by default, with a focus on simplicity.'},
       // {value: 'ava', title: 'Ava + browser-env', hint: 'Runs in Node.js, simulates browser with browser-env (jsdom). A test runner for Node.js with a concise API, detailed error output, embrace of new language features and process isolation that let you write tests more effectively.'},
       {value: 'jasmine', title: 'Jasmine', hint: 'Runs in browser, a behavior-driven testing framework.'},
       {value: 'mocha', title: 'Mocha + Chai', hint: 'Runs in browser, a feature-rich JavaScript test framework for node and browsers.'},
