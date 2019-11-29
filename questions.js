@@ -24,7 +24,7 @@ module.exports = [
     message: 'What transpiler would you like to use?',
     choices: [
       {value: 'babel', title: 'Babel', hint: 'An open source, standards-compliant ES2015 and ESNext transpiler.'},
-      {value: 'typescript', message: 'TypeScript', hint: 'An open source, ESNext superset that adds optional strong typing.'}
+      {value: 'typescript', title: 'TypeScript', hint: 'An open source, ESNext superset that adds optional strong typing.'}
     ]
   },
   {
