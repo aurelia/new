@@ -2,7 +2,17 @@
 // Promise polyfill for old browsers
 import 'promise-polyfill/lib/polyfill';
 // @endif
-import Aurelia/* @if shadow-dom || css-module */, { StyleConfiguration }/* @endif */ from 'aurelia';
+import Aurelia/* @if shadow-dom *//*, { StyleConfiguration }*//* @endif */ from 'aurelia';
 import { MyApp } from './my-app';
 
-Aurelia/* @if shadow-dom */.register(StyleConfiguration.shadowDOM())/* @endif *//* @if css-module */.register(StyleConfiguration.cssModulesProcessor())/* @endif */.app(MyApp).start();
+Aurelia
+  /* @if shadow-dom */
+  /*
+  .register(StyleConfiguration.shadowDOM({
+    // optionally add the shared styles for all components
+    sharedStyles: []
+  }))
+  */
+  /* @endif */
+  .app(MyApp)
+  .start();
