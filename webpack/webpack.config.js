@@ -62,7 +62,7 @@ module.exports = function(env/* @if jasmine || tape || mocha*/, { runTest }/* @e
         { test: /\.css$/i, use: [ "style-loader", cssLoader, postcssLoader ] },
         // @endif
         // @if shadow-dom
-        { test: /\.css$/i, issuer: /\.(js|ts)$/, use: [ "style-loader", cssLoader, postcssLoader ] },
+        { test: /\.css$/i, issuer: /\.(js|ts)$/, use: [ "to-string-loader", "style-loader", cssLoader, postcssLoader ] },
         { test: /\.css$/i, issuer: /\.html$/, use: [ "to-string-loader", cssLoader, postcssLoader ] },
         // @endif
         // @endif
@@ -71,7 +71,7 @@ module.exports = function(env/* @if jasmine || tape || mocha*/, { runTest }/* @e
         { test: /\.less$/i, use: [ "style-loader", cssLoader, postcssLoader, "less-loader" ] },
         // @endif
         // @if shadow-dom
-        { test: /\.less$/i, issuer: /\.(js|ts)$/, use: [ "style-loader", cssLoader, postcssLoader, "less-loader" ] },
+        { test: /\.less$/i, issuer: /\.(js|ts)$/, use: [ "to-string-loader", "style-loader", cssLoader, postcssLoader, "less-loader" ] },
         { test: /\.less$/i, issuer: /\.html$/, use: [ "to-string-loader", cssLoader, postcssLoader, "less-loader" ] },
         // @endif
         // @endif
@@ -80,8 +80,8 @@ module.exports = function(env/* @if jasmine || tape || mocha*/, { runTest }/* @e
         { test: /\.scss$/i, use: [ "style-loader", cssLoader, postcssLoader, { loader: "sass-loader", options: { sassOptions: { includePaths: ["node_modules"] } } } ] },
         // @endif
         // @if shadow-dom
-        { test: /\.scss$/i, issuer: /\.(js|ts)$/, use: [ "style-loader", cssLoader, postcssLoader, { loader: "sass-loader", options: { sassOptions: { includePaths: ["node_modules"] } } } ] },
-        { test: /\.scss$/i, issuer: /\.html$/, use: [ "to-string-loader", cssLoader, postcssLoader, { loader: "sass-loader", options: { sassOptions: { includePaths: ["node_modules"] } } } ] },
+        { test: /\.scss$/i, issuer: /\.(js|ts)$/, use: [ "to-string-loader", "style-loader", cssLoader, postcssLoader, { loader: "sass-loader", options: { sassOptions: { includePaths: ["node_modules"] } } } ] },
+        { test: /\.scss$/i, issuer: /\.html$/, use: [ "to-string-loader", "to-string-loader", cssLoader, postcssLoader, { loader: "sass-loader", options: { sassOptions: { includePaths: ["node_modules"] } } } ] },
         // @endif
         // @endif
         // @if babel
