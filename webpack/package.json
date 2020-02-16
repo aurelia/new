@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "rimraf": "^2.0.0",
+    "rimraf": "^3.0.0",
     "webpack": "^4.0.0",
     "webpack-cli": "^3.0.0",
     "webpack-dev-server": "^3.0.0",

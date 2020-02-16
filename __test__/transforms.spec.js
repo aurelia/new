@@ -1,7 +1,7 @@
-import test from 'ava';
-import Vinyl from 'vinyl';
-import {Writable} from 'stream';
-import {append} from '../transforms';
+const test = require('ava');
+const Vinyl = require('vinyl');
+const {Writable} = require('stream');
+const {append} = require('../transforms');
 const extTransform = append;
 
 test('Only one append transform', t => {

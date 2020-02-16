@@ -1,5 +1,5 @@
-import test from 'ava';
-import before from '../before';
+const test = require('ava');
+const before = require('../before');
 
 test('"before" task does nothing in unattended mode', async t => {
   const prompts = {

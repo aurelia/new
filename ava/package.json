@@ -1,11 +1,13 @@
 {
   "devDependencies": {
-    "ava": "^2.0.0",
+    "ava": "^3.0.0",
     "browser-env": "^3.0.0",
     // @if babel
+    "@ava/babel": "^1.0.0",
     "@babel/register": "^7.0.0",
     // @endif
     // @if typescript
+    "@ava/typescript": "^1.0.0",
     "ts-node": "^8.0.0",
     // @endif
   },
