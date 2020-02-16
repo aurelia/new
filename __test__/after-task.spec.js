@@ -1,5 +1,5 @@
-import test from 'ava';
-import after from '../after';
+const test = require('ava');
+const after = require('../after');
 
 const ansiColors = (m) => m;
 ansiColors.inverse = ansiColors;

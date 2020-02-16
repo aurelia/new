@@ -1,5 +1,5 @@
-import test from 'ava';
-import questions from '../questions';
+const test = require('ava');
+const questions = require('../questions');
 
 // This test does nothing but make sure questions.js can be loaded.
 test('questions array can be loaded', t => {

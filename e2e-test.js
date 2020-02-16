@@ -4,12 +4,12 @@
 // it's not automatically triggered by "npm version patch".
 // Have to run "npm run test:e2e" manually before a release.
 
-import spawn from 'cross-spawn';
-import fs from 'fs';
-import path from 'path';
-import del from 'del';
-import test from 'ava';
-import puppeteer from 'puppeteer';
+const spawn = require('cross-spawn');
+const fs = require('fs');
+const path = require('path');
+const del = require('del');
+const test = require('ava');
+const puppeteer = require('puppeteer');
 
 // Somehow taskkill on windows would not send SIGTERM signal to proc,
 // The proc killed by taskkill got null signal.
@@ -121,7 +121,6 @@ bundlers.forEach(bundler => {
   });
 });
 
-
 skeletons.forEach((features, i) => {
   const appName = features.join('-');
   const appFolder = path.join(folder, appName);
@@ -137,14 +136,17 @@ skeletons.forEach((features, i) => {
     const makeCmd = `npx makes ${dir} ${appName} -s ${features.join(',')}`;
     console.log('-- ' + makeCmd);
     await run(makeCmd);
+    t.pass('made skeleton');
     process.chdir(appFolder);
 
     console.log('-- yarn install');
     await run('yarn install');
+    t.pass('installed deps');
 
     if (hasUnitTests) {
       console.log('-- npm test');
       await run('npm test');
+      t.pass('finished unit tests');
     }
 
     console.log('-- npm run build');
@@ -153,6 +155,7 @@ skeletons.forEach((features, i) => {
         t.fail('build failed: ' + data.toString());
       }
     );
+    t.pass('made dev build');
 
     const distPath = path.join(appFolder, 'dist');
     const compiledFiles = fs.readdirSync(distPath);
