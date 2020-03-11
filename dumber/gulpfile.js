@@ -74,10 +74,13 @@ const dr = dumber({
   // Code split is intuitive and flexible.
   // You provide a function to return a bundle name for every single module.
   // The function takes two parameters:
+  //
   // moduleId:
-  //   for local src file "src/foo/bar.js", the module id is "foo/bar"
+  //   for local src file "src/foo/bar.js", the module id is "foo/bar.js"
   //   for local src file "src/foo/bar.css" (or any other non-js file), the module id is "foo/bar.css"
-  //   for npm package file "node_modules/foo/bar.js", the module id is "foo/bar"
+  //   for npm package file "node_modules/foo/bar.js", the module id is "foo/bar.js"
+  //   for npm package file "node_modules/@scoped/foo/bar.js", the module id is "@scoped/foo/bar.js"
+  //
   // packageName:
   //   for any local src file, the package name is undefined
   //   for npm package file "node_modules/foo/bar.js", the package name is "foo"
