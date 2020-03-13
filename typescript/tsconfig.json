@@ -11,7 +11,12 @@
     "moduleResolution": "node",
     "skipLibCheck": true,
     "rootDir": "src",
+    // @if browser-evergreen
     "target": "ES2017",
+    // @endif
+    // @if !browser-evergreen
+    "target": "ES5",
+    // @endif
     "esModuleInterop": true
   },
   "include": [
