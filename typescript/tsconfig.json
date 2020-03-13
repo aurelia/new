@@ -2,7 +2,6 @@
   "compilerOptions": {
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": ["esnext", "dom"],
     // @if browserify
     "module": "commonjs",
     // @endif
