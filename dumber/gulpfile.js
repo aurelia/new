@@ -129,7 +129,7 @@ function buildJs(src) {
   // @endif
 
   return gulp.src(src, {sourcemaps: !isProduction})
-    .pipe(gulpif(!isProduction, plumber()))
+    .pipe(gulpif(!isProduction && !isTest, plumber()))
     .pipe(au2())
     .pipe(transpile);
 }
@@ -154,7 +154,7 @@ function buildHtml(src) {
 function buildCss(src) {
   return gulp.src(src, {sourcemaps: !isProduction})
     // @if less
-    .pipe(gulpif(!isProduction, plumber()))
+    .pipe(gulpif(!isProduction && !isTest, plumber()))
     .pipe(less())
     // @endif
     // @if sass
