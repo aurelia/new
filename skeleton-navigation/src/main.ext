@@ -1,0 +1,8 @@
+// @if browser-ie11
+// Promise polyfill for old browsers
+import 'promise-polyfill/lib/polyfill';
+// @endif
+import Aurelia, { RouterConfiguration/* @if shadow-dom || css-module */, StyleConfiguration }/* @endif */ } from 'aurelia';
+import { MyApp } from './my-app';
+
+Aurelia/* @if shadow-dom */.register(StyleConfiguration.shadowDOM())/* @endif *//* @if css-module */.register(StyleConfiguration.cssModulesProcessor())/* @endif */.register(RouterConfiguration).app(MyApp).start();
