@@ -72,12 +72,11 @@ module.exports = [
       {value: 'cypress', title: 'Yes (Cypress)', hint: 'Cypress offers fast, easy and reliable testing for anything that runs in a browser.'}
     ]
   },
-  // This question is not raised to end user, since there is only one choice, it will be selected automatically.
-  // We will add more sample code in future.
   {
     message: 'What kind of sample code do you want in this project?',
     choices: [
-      {value: 'app-min', title: 'Bare minimum'}
+      {value: 'app-min', title: 'Bare minimum'},
+      {value: 'skeleton-navigation', title: 'Skeleton Navigation', hint: 'Application with Navigation setup using conventional routing'}
     ]
   },
   // Currently this question is not visible to end user because there is only one option.
