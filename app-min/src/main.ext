@@ -6,13 +6,13 @@ import Aurelia/* @if shadow-dom *//*, { StyleConfiguration }*//* @endif */ from 
 import { MyApp } from './my-app';
 
 Aurelia
-  /* @if shadow-dom */
+  // @if shadow-dom
   /*
   .register(StyleConfiguration.shadowDOM({
     // optionally add the shared styles for all components
     sharedStyles: []
   }))
   */
-  /* @endif */
+  // @endif
   .app(MyApp)
   .start();
