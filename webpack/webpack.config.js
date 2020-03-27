@@ -81,7 +81,7 @@ module.exports = function(env/* @if jasmine || tape || mocha*/, { runTest }/* @e
         // @endif
         // @if shadow-dom
         { test: /\.scss$/i, issuer: /\.(js|ts)$/, use: [ "to-string-loader", "style-loader", cssLoader, postcssLoader, { loader: "sass-loader", options: { sassOptions: { includePaths: ["node_modules"] } } } ] },
-        { test: /\.scss$/i, issuer: /\.html$/, use: [ "to-string-loader", "to-string-loader", cssLoader, postcssLoader, { loader: "sass-loader", options: { sassOptions: { includePaths: ["node_modules"] } } } ] },
+        { test: /\.scss$/i, issuer: /\.html$/, use: [ "to-string-loader", cssLoader, postcssLoader, { loader: "sass-loader", options: { sassOptions: { includePaths: ["node_modules"] } } } ] },
         // @endif
         // @endif
         // @if babel
