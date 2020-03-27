@@ -1,9 +1,5 @@
-body {
-  font-family: 'Source Sans Pro', sans-serif;
-}
-
 nav {
-  background: linear-gradient(135deg, #6d50a2 0%, #ed2b88 100%);
+  background: #eee;
   display: flex;
 }
 
@@ -15,33 +11,6 @@ a {
 a:hover {
   background-color: darkgray;
 }
-.login, .user {
-  margin-left: auto;
-}
-
-.footer {
-  background-color: #6d50a2;
-  padding: 10px;
-  color: white;
-  font-size: 10px;
-}
-
-
-.container {
-  display: flex;
-}
-
-
-au-viewport {
-  border: 1px solid lightgray;
-  padding: 10px;
-  flex-grow: 1;
-}
-
-au-viewport:empty {
-  display: none;
-}
-
 
 .goto-active {
   background-color: lightgray;
