@@ -1,0 +1,8 @@
+export class Missing {
+  /* @if typescript */public /* @endif */static parameters = ['id'];
+  /* @if typescript */public /* @endif */missingComponent/* @if typescript */: string /* @endif */;
+
+  /* @if typescript */public /* @endif */enter(parameters) {
+    this.missingComponent = parameters.id;
+  }
+}

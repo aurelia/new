@@ -1,3 +1,0 @@
-export class MyApp {
-  /* @if typescript */public /* @endif */message = 'Hello World!';
-}
