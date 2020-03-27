@@ -11,12 +11,14 @@ a {
   padding: 10px;
   text-decoration: none;
   color: black;
-}
-a:hover {
-  background-color: darkgray;
-}
-a.login, a.user {
-  margin-left: auto;
+
+  &:hover {
+    background-color: darkgray;
+  }
+
+  &.login, &.user {
+    margin-left: auto;
+  }
 }
 
 .footer {
@@ -26,22 +28,19 @@ a.login, a.user {
   font-size: 10px;
 }
 
-
 .container {
   display: flex;
 }
-
 
 au-viewport {
   border: 1px solid lightgray;
   padding: 10px;
   flex-grow: 1;
-}
 
-au-viewport:empty {
-  display: none;
+  &:empty {
+    display: none;
+  }
 }
-
 
 .goto-active {
   background-color: lightgray;

@@ -15,7 +15,7 @@ a {
 a:hover {
   background-color: darkgray;
 }
-a.login, a.user {
+.login, .user {
   margin-left: auto;
 }
 
