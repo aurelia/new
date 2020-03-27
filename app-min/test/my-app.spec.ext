@@ -7,7 +7,7 @@ import test from 'tape';
 // @if mocha
 import { expect } from 'chai';
 // @endif
-import Aurelia, { /* @if shadow-dom || css-module */StyleConfiguration, /* @endif */CustomElement } from 'aurelia';
+import Aurelia, { CustomElement } from 'aurelia';
 import { MyApp } from '../src/my-app';
 
 // @if babel
@@ -18,7 +18,7 @@ function createAu(template: string, ...deps: readonly unknown[]) {
 // @endif
   const wrapper = CustomElement.define({name: 'wrapper', template});
   document.body.appendChild(document.createElement('wrapper'));
-  return Aurelia/* @if shadow-dom */.register(StyleConfiguration.shadowDOM())/* @endif *//* @if css-module */.register(StyleConfiguration.cssModulesProcessor())/* @endif */.register(deps).app(wrapper);
+  return Aurelia.register(deps).app(wrapper);
 }
 
 function cleanup() {
