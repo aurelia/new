@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 // @if jasmine || tape || mocha
 const WebpackShellPluginNext = require('webpack-shell-plugin-next')
 // @endif
@@ -37,7 +38,7 @@ const postcssLoader = {
   }
 };
 
-module.exports = function(env/* @if jasmine || tape || mocha*/, { runTest }/* @endif */) {
+module.exports = function(env/* @if jasmine || tape || mocha*/, { runTest, analyze }/* @endif */) {
   const production = env === 'production' || process.env.NODE_ENV === 'production';
   // @if jasmine || tape || mocha
   const test = env === 'test' || process.env.NODE_ENV === 'test';
@@ -134,7 +135,8 @@ module.exports = function(env/* @if jasmine || tape || mocha*/, { runTest }/* @e
     },
     // @endif
     plugins: [
-      new HtmlWebpackPlugin({ template: 'index.ejs' })/* @if jasmine || tape || mocha*/,
+      new HtmlWebpackPlugin({ template: 'index.ejs' }),
+      analyze && new BundleAnalyzerPlugin()/* @if jasmine || tape || mocha*/,
       test && runTest && new WebpackShellPluginNext({
         dev: false,
         swallowError: true,
@@ -142,6 +144,6 @@ module.exports = function(env/* @if jasmine || tape || mocha*/, { runTest }/* @e
           scripts: [ 'npm run test:headless' ]
         }
       })/* @endif */
-    ]/* @if jasmine || tape || mocha*/.filter(p => p)/* @endif */
+    ].filter(p => p)
   }
 }

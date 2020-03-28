@@ -5,6 +5,7 @@
     "webpack-cli": "^3.0.0",
     "webpack-dev-server": "^3.0.0",
     "html-webpack-plugin": "^3.0.0",
+    "webpack-bundle-analyzer": "^3.0.0",
     // @if shadow-dom
     "to-string-loader": "^1.0.0",
     // @endif
@@ -34,6 +35,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "rimraf dist && webpack --env production",
+    "analyze": "webpack --env production --analyze",
     // @if jasmine || tape || mocha
     "build:test": "rimraf dist && webpack --env test",
     "test:watch": "rimraf dist && webpack --env test --watch --runTest"
