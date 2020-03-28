@@ -16,7 +16,25 @@ declare module '*.css' {
   const value: Record<string, string>;
   export default value;
 }
+// @if less
+declare module '*.less' {
+  const value: Record<string, string>;
+  export default value;
+}
+// @endif
+// @if sass
+declare module '*.scss' {
+  const value: Record<string, string>;
+  export default value;
+}
+// @endif
 // @endif
 // @if !css-module
-declare module '*.css'
+declare module '*.css';
+// @if less
+declare module '*.less';
+// @endif
+// @if sass
+declare module '*.scss';
+// @endif
 // @endif

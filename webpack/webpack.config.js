@@ -91,7 +91,6 @@ module.exports = function(env/* @if jasmine || tape || mocha*/, { runTest }/* @e
           use: [ 'to-string-loader', cssLoader, postcssLoader/* @if less */, 'less-loader'/* @endif *//* @if sass */, sassLoader/* @endif */ ]
         },
         // @endif
-
         // @if babel
         { test: /\.js$/i, use: ['babel-loader', '@aurelia/webpack-loader'], exclude: /node_modules/ },
         // @endif
