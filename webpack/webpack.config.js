@@ -17,6 +17,16 @@ const cssLoader = {
   }
 };
 // @endif
+// @if sass
+const sassLoader = {
+  loader: 'sass-loader',
+  options: {
+    sassOptions: {
+      includePaths: ['node_modules']
+    }
+  }
+};
+// @endif
 
 const postcssLoader = {
   loader: 'postcss-loader',
@@ -57,33 +67,31 @@ module.exports = function(env/* @if jasmine || tape || mocha*/, { runTest }/* @e
     },
     module: {
       rules: [
-        // @if css
         // @if !shadow-dom
-        { test: /\.css$/i, use: [ "style-loader", cssLoader, postcssLoader ] },
+        { test: /\./* @if css */css/* @endif *//* @if less */less/* @endif *//* @if sass */scss/* @endif */$/i, use: [ 'style-loader', cssLoader, postcssLoader/* @if less */, 'less-loader'/* @endif *//* @if sass */, sassLoader/* @endif */ ] },
         // @endif
         // @if shadow-dom
-        { test: /\.css$/i, issuer: /\.(js|ts)$/, use: [ "to-string-loader", "style-loader", cssLoader, postcssLoader ] },
-        { test: /\.css$/i, issuer: /\.html$/, use: [ "to-string-loader", cssLoader, postcssLoader ] },
+        {
+          test: /\./* @if css */css/* @endif *//* @if less */less/* @endif *//* @if sass */scss/* @endif */$/i,
+          // For style loaded in src/main.js, it's not loaded by style-loader.
+          // It's for shared styles for shadow-dom only.
+          issuer: /\/src\/main\.(js|ts)$/,
+          use: [ 'to-string-loader', cssLoader, postcssLoader/* @if less */, 'less-loader'/* @endif *//* @if sass */, sassLoader/* @endif */ ]
+        },
+        {
+          test: /\./* @if css */css/* @endif *//* @if less */less/* @endif *//* @if sass */scss/* @endif */$/i,
+          // For style loaded in other js/ts files, it's loaded by style-loader.
+          // They are directly injected to HTML head.
+          issuer: /(?<!\/src\/main)\.(js|ts)$/,
+          use: [ 'style-loader', cssLoader, postcssLoader/* @if less */, 'less-loader'/* @endif *//* @if sass */, sassLoader/* @endif */ ]
+        },
+        {
+          test: /\./* @if css */css/* @endif *//* @if less */less/* @endif *//* @if sass */scss/* @endif */$/i,
+          issuer: /\.html$/,
+          use: [ 'to-string-loader', cssLoader, postcssLoader/* @if less */, 'less-loader'/* @endif *//* @if sass */, sassLoader/* @endif */ ]
+        },
         // @endif
-        // @endif
-        // @if less
-        // @if !shadow-dom
-        { test: /\.less$/i, use: [ "style-loader", cssLoader, postcssLoader, "less-loader" ] },
-        // @endif
-        // @if shadow-dom
-        { test: /\.less$/i, issuer: /\.(js|ts)$/, use: [ "to-string-loader", "style-loader", cssLoader, postcssLoader, "less-loader" ] },
-        { test: /\.less$/i, issuer: /\.html$/, use: [ "to-string-loader", cssLoader, postcssLoader, "less-loader" ] },
-        // @endif
-        // @endif
-        // @if sass
-        // @if !shadow-dom
-        { test: /\.scss$/i, use: [ "style-loader", cssLoader, postcssLoader, { loader: "sass-loader", options: { sassOptions: { includePaths: ["node_modules"] } } } ] },
-        // @endif
-        // @if shadow-dom
-        { test: /\.scss$/i, issuer: /\.(js|ts)$/, use: [ "to-string-loader", "style-loader", cssLoader, postcssLoader, { loader: "sass-loader", options: { sassOptions: { includePaths: ["node_modules"] } } } ] },
-        { test: /\.scss$/i, issuer: /\.html$/, use: [ "to-string-loader", cssLoader, postcssLoader, { loader: "sass-loader", options: { sassOptions: { includePaths: ["node_modules"] } } } ] },
-        // @endif
-        // @endif
+
         // @if babel
         { test: /\.js$/i, use: ['babel-loader', '@aurelia/webpack-loader'], exclude: /node_modules/ },
         // @endif
@@ -96,7 +104,7 @@ module.exports = function(env/* @if jasmine || tape || mocha*/, { runTest }/* @e
           use: {
             loader: '@aurelia/webpack-loader',
             options: {
-              // The other possible Shadow DOM mode is "closed".
+              // The other possible Shadow DOM mode is 'closed'.
               // If you turn on "closed" mode, there will be difficulty to perform e2e
               // tests (such as Cypress). Because shadowRoot is not accessible through
               // standard DOM APIs in "closed" mode.
