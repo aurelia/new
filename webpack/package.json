@@ -35,7 +35,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "rimraf dist && webpack --env production",
-    "analyze": "webpack --env production --analyze",
+    "analyze": "rimraf dist && webpack --env production --analyze",
     // @if jasmine || tape || mocha
     "build:test": "rimraf dist && webpack --env test",
     "test:watch": "rimraf dist && webpack --env test --watch --runTest"
