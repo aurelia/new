@@ -7,8 +7,8 @@ a {
 	padding: 10px;
 	text-decoration: none;
 	color: black;
-	
-  &:hover {
+
+	&:hover {
 		background-color: darkgray;
 	}
 }
