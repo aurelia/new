@@ -76,7 +76,7 @@ module.exports = [
     message: 'What kind of sample code do you want in this project?',
     choices: [
       {value: 'app-min', title: 'Bare minimum'},
-      {value: 'app-with-router', title: 'App With Router', hint: 'Application with navigation setup using conventional routing'}
+      {value: 'app-with-router', title: 'With conventional router'}
     ]
   },
   // Currently this question is not visible to end user because there is only one option.

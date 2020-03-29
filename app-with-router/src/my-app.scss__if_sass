@@ -11,7 +11,6 @@ a {
   &:hover {
     background-color: darkgray;
   }
-
 }
 
 .goto-active {
