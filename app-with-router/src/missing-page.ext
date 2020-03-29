@@ -1,4 +1,4 @@
-export class Missing {
+export class MissingPage {
   /* @if typescript */public /* @endif */static parameters = ['id'];
   /* @if typescript */public /* @endif */missingComponent/* @if typescript */: string /* @endif */;
 
