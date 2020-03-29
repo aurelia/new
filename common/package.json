@@ -14,6 +14,9 @@
     // @endif
   },
   "devDependencies": {
+    // @if !no-unit-tests
+    "@aurelia/testing": "dev",
+    // @endif
     "htmlhint": "^0.11.0",
     // @if less
     "lesshint": "^6.0.0",

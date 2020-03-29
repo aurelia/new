@@ -1,0 +1,44 @@
+import {
+  HTMLTestContext,
+  TestContext,
+} from '@aurelia/testing';
+import {
+  JitHtmlBrowserConfiguration
+} from '@aurelia/jit-html-browser';
+import {
+  BrowserScheduler
+} from '@aurelia/runtime-html-browser';
+import {
+  Reporter,
+  LogLevel,
+} from '@aurelia/kernel';
+
+Reporter.level = LogLevel.error;
+
+function createBrowserTestContext()/* @if typescript */: HTMLTestContext/* @endif */ {
+  return HTMLTestContext.create(
+    JitHtmlBrowserConfiguration,
+    window,
+    BrowserScheduler,
+    UIEvent,
+    Event,
+    CustomEvent,
+    Node,
+    Element,
+    HTMLElement,
+    HTMLDivElement,
+    Text,
+    Comment,
+    DOMParser,
+    CSSStyleSheet,
+    ShadowRoot
+  );
+}
+
+function initializeBrowserTestContext()/* @if typescript */: void/* @endif */ {
+  TestContext.createHTMLTestContext = createBrowserTestContext;
+  // Just trigger the HTMLDOM to be resolved once so it sets the DOM globals
+  TestContext.createHTMLTestContext().dom.createElement('div');
+}
+
+initializeBrowserTestContext();

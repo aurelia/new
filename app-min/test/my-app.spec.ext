@@ -7,32 +7,23 @@ import test from 'tape';
 // @if mocha
 import { expect } from 'chai';
 // @endif
-import Aurelia, { CustomElement } from 'aurelia';
+import { TestContext, TestConfiguration } from '@aurelia/testing';
+import Aurelia/* @if shadow-dom */, { CustomElement }/* @endif */ from 'aurelia';
 import { MyApp } from '../src/my-app';
-
-// @if babel
-function createAu(template, ...deps) {
-// @endif
-// @if typescript
-function createAu(template: string, ...deps: readonly unknown[]) {
-// @endif
-  const wrapper = CustomElement.define({name: 'wrapper', template});
-  document.body.appendChild(document.createElement('wrapper'));
-  return Aurelia.register(deps).app(wrapper);
-}
-
-function cleanup() {
-  const wrapper = document.querySelector('wrapper');
-  if (wrapper) {
-    wrapper.remove();
-  }
-}
 
 // @if ava || tape
 test('my-app: should render message', async t => {
-  const au = createAu('<my-app></my-app>', MyApp);
+  const ctx = TestContext.createHTMLTestContext();
+  const { container } = ctx;
+  const node = ctx.createElement('my-app');
+
+  const au = new Aurelia(container)
+    .register(TestConfiguration)
+    .app({ host: node, component: MyApp });
+
+  // const component = au.root.controller.bindingContext;
   await au.start().wait();
-  const node = document.querySelector('my-app');
+
   // @if shadow-dom
   // In Shadow DOM open mode, shadowRoot is also accessible through DOM API
   //   node.shadowRoot
@@ -55,7 +46,6 @@ test('my-app: should render message', async t => {
   t.equal(text.trim(), 'Hello World!');
   // @endif
   await au.stop().wait();
-  cleanup();
   // @if tape
   t.end();
   // @endif
@@ -63,14 +53,18 @@ test('my-app: should render message', async t => {
 // @endif
 // @if jasmine || jest || mocha
 describe('my-app', () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it('should render message', async () => {
-    const au = createAu('<my-app></my-app>', MyApp);
+    const ctx = TestContext.createHTMLTestContext();
+    const { container } = ctx;
+    const node = ctx.createElement('my-app');
+
+    const au = new Aurelia(container)
+      .register(TestConfiguration)
+      .app({ host: node, component: MyApp });
+
+    // const component = au.root.controller.bindingContext;
     await au.start().wait();
-    const node = document.querySelector('my-app');
+
     // @if shadow-dom
     // In Shadow DOM open mode, shadowRoot is also accessible through DOM API
     //   node.shadowRoot
@@ -93,7 +87,6 @@ describe('my-app', () => {
     expect(text.trim()).to.equal('Hello World!');
     // @endif
     await au.stop().wait();
-    cleanup();
   });
 });
 // @endif

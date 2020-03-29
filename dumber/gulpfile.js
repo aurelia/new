@@ -64,7 +64,7 @@ const dr = dumber({
     // Kick off all test files.
     // Note dumber-module-loader requirejs call accepts regex which loads all matched module ids!
     // Note all module ids are relative to dumber option "src" (default to 'src') folder.
-    isTest && "requirejs([/^\\.\\.\\/test\\/.+\\.spec$/]);"
+    isTest && "requirejs(['../test/setup', /^\\.\\.\\/test\\/.+\\.spec$/]);"
   ],
   // @endif
 
