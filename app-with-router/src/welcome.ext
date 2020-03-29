@@ -1,0 +1,3 @@
+export class Welcome {
+  /* @if typescript */public /* @endif */message = 'Welcome to the Aurelia 2 app with routing!';
+}
