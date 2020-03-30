@@ -13,6 +13,13 @@ a:hover {
   background-color: darkgray;
 }
 
+// @if css-module
+/* When using css-module, set .goto-active
+as a global class name */
+:global(.goto-active) {
+// @endif
+// @if !css-module
 .goto-active {
+// @endif
   background-color: lightgray;
 }
