@@ -24,7 +24,7 @@
     // @endif
     // @if sass
     "sass-loader": "^8.0.0",
-    "node-sass": "^4.0.0",
+    "sass": "^1.0.0",
     // @endif
     "postcss-loader": "^3.0.0",
     "autoprefixer": "^9.0.0",
