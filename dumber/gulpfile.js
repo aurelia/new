@@ -116,22 +116,19 @@ const dr = dumber({
   }
 });
 
-// @if typescript
-const ts = typescript.createProject('tsconfig.json');
-// @endif
-
 function buildJs(src) {
-  // @if babel
-  const transpile = babel();
-  // @endif
   // @if typescript
-  const transpile = ts();
+  const ts = typescript.createProject('tsconfig.json');
   // @endif
-
   return gulp.src(src, {sourcemaps: !isProduction})
     .pipe(gulpif(!isProduction && !isTest, plumber()))
     .pipe(au2())
-    .pipe(transpile);
+    // @if babel
+    .pipe(babel());
+    // @endif
+    // @if typescript
+    .pipe(ts());
+    // @endif
 }
 
 function buildHtml(src) {
