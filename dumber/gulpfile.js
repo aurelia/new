@@ -22,8 +22,7 @@ const cssModule = require('gulp-dumber-css-module');
 const less = require('gulp-less');
 // @endif
 // @if sass
-const sass = require('gulp-sass');
-sass.compiler = require('sass');
+const sass = require('gulp-dart-sass');
 // @endif
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
