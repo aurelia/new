@@ -155,7 +155,7 @@ function buildCss(src) {
     .pipe(less())
     // @endif
     // @if sass
-    .pipe(isProduction ? sass() : sass().on('error', sass.logError))
+    .pipe(isProduction ? sass.sync() : sass.sync().on('error', sass.logError))
     // @endif
     .pipe(postcss([
       autoprefixer(),
