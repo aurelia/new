@@ -87,7 +87,7 @@ const bundlers = ['webpack', 'dumber'];
 const transpilers = ['babel', 'typescript'];
 const cssModes = ['no-css-mode', 'shadow-dom', 'css-module'];
 const cssProcessors = ['css', 'sass', 'less'];
-const testFrameworks = ['jasmine', 'tape', 'mocha', 'no-unit-tests'];
+const testFrameworks = ['jest', 'jasmine', 'tape', 'mocha', 'no-unit-tests'];
 const e2eFrameworks = ['cypress'];
 
 function getServerRegex(features) {

@@ -1,7 +1,8 @@
 {
   "devDependencies": {
     "ava": "^3.0.0",
-    "browser-env": "^3.0.0",
+    "jsdom": "^16.0.0",
+    "jsdom-global": "^3.0.0",
     // @if babel
     "@ava/babel": "^1.0.0",
     "@babel/register": "^7.0.0",

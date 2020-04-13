@@ -54,11 +54,10 @@ module.exports = [
   {
     message: 'What unit testing framework to use?',
     choices: [
-      // Disable jest and ava for now.
+      {value: 'jest', title: 'Jest', hint: 'Runs in Node.js, simulates browser by default, with a focus on simplicity.'},
+      // Disable ava for now.
       // TODO: build some custom transformer to apply our conventions when running in nodejs env.
-      // Note in test env, probably need to remove "modules": false from babelrc and "module": "esnext" from tsconfig.
-      // {value: 'jest', title: 'Jest', hint: 'Runs in Node.js, simulates browser by default, with a focus on simplicity.'},
-      // {value: 'ava', title: 'Ava + browser-env', hint: 'Runs in Node.js, simulates browser with browser-env (jsdom). A test runner for Node.js with a concise API, detailed error output, embrace of new language features and process isolation that let you write tests more effectively.'},
+      // {value: 'ava', title: 'Ava + jsdom-global', hint: 'Runs in Node.js, simulates browser with jsdom-global. A test runner for Node.js with a concise API, detailed error output, embrace of new language features and process isolation that let you write tests more effectively.'},
       {value: 'jasmine', title: 'Jasmine', hint: 'Runs in browser, a behavior-driven testing framework.'},
       {value: 'mocha', title: 'Mocha + Chai', hint: 'Runs in browser, a feature-rich JavaScript test framework for node and browsers.'},
       {value: 'tape', title: 'Tape', hint: 'Runs in browser, tap-producing test harness for node and browsers.'},

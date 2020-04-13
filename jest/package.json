@@ -3,11 +3,11 @@
     "jest": "^25.0.0",
     "jest-transform-stub": "^2.0.0",
     // @if babel
-    "babel-jest": "^25.0.0",
+    "@aurelia/babel-jest": "dev",
     // @endif
     // @if typescript
     "@types/jest": "^25.0.0",
-    "ts-jest": "^25.0.0",
+    "@aurelia/ts-jest": "dev",
     // @endif
   },
   "scripts": {
@@ -15,19 +15,49 @@
   },
   "jest": {
     "transform": {
-      "^.+\\.(css|less|sass|scss|styl|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "jest-transform-stub",
+      "\\.(css|less|sass|scss|styl|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "jest-transform-stub",
       // @if babel
-      "^.+\\.js$": "babel-jest",
+      // @if shadow-dom
+      "\\.(js|html)$": [ "@aurelia/babel-jest", { defaultShadowOptions: { mode: 'open' } } ]
+      // @endif
+      // @if css-module
+      "\\.(js|html)$": [ "@aurelia/babel-jest", { useCSSModule: true } ]
+      // @endif
+      // @if !shadow-dom && !css-module
+      "\\.(js|html)$": "@aurelia/babel-jest",
+      // @endif
+      // @endif
+      // @if typescript
+      // @if shadow-dom
+      "\\.(ts|html)$": [ "@aurelia/ts-jest", { defaultShadowOptions: { mode: 'open' } } ]
+      // @endif
+      // @if css-module
+      "\\.(ts|html)$": [ "@aurelia/ts-jest", { useCSSModule: true } ]
+      // @endif
+      // @if !shadow-dom && !css-module
+      "\\.(ts|html)$": "@aurelia/ts-jest",
+      // @endif
       // @endif
     },
 
-    // @if typescript
-    "preset": 'ts-jest',
-    // @endif
+    "setupFiles": [
+      // @if babel
+      "<rootDir>/test/setup.js"
+      // @endif
+      // @if typescript
+      "<rootDir>/test/setup.ts"
+      // @endif
+    ],
 
     "collectCoverage": true,
     "collectCoverageFrom": [
-      'src/**/*./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */'
+      // @if babel
+      "src/**/*.js"
+      // @endif
+      // @if typescript
+      "src/**/*.ts",
+      "!src/**/*.d.ts"
+      // @endif
     ]
   }
 }
