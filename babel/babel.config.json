@@ -2,7 +2,9 @@
   "presets": [
     ["@babel/preset-env", {
       "loose": true,
+      // @if !jest && !ava
       "modules": false,
+      // @endif
       "exclude": ["@babel/plugin-proposal-dynamic-import"]
     }]
   ],
