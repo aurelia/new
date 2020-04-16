@@ -72,7 +72,6 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
         { test: /\.woff2(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'url-loader', options: { limit: 10000, mimetype: 'application/font-woff2' } },
         { test: /\.woff(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'url-loader', options: { limit: 10000, mimetype: 'application/font-woff' } },
         { test: /\.(ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'file-loader' },
-
         // @if !shadow-dom
         { test: /\.css$/i, use: [ 'style-loader', cssLoader, postcssLoader ] },
         // @if less
@@ -82,7 +81,6 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
         { test: /\.scss$/i, use: [ 'style-loader', cssLoader, postcssLoader, sassLoader ] },
         // @endif
         // @endif
-
         // @if shadow-dom
         {
           test: /\.css$/i,
@@ -109,7 +107,6 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
           use: [ 'to-string-loader', cssLoader, postcssLoader, sassLoader ]
         },
         // @endif
-
         {
           test: /\.css$/i,
           // For style loaded in other js/ts files, it's loaded by style-loader.
@@ -135,7 +132,6 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
           use: [ 'style-loader', cssLoader, postcssLoader, sassLoader ]
         },
         // @endif
-
         {
           test: /\.css$/i,
           // For style loaded in html files, Aurelia will handle it.
@@ -159,7 +155,6 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
         },
         // @endif
         // @endif
-
         // @if babel
         { test: /\.js$/i, use: ['babel-loader', '@aurelia/webpack-loader'], exclude: /node_modules/ },
         // @endif
