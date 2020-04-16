@@ -6,11 +6,11 @@ const WebpackShellPluginNext = require('webpack-shell-plugin-next')
 // @endif
 
 // @if !css-module
-const cssLoader = "css-loader";
+const cssLoader = 'css-loader';
 // @endif
 // @if css-module
 const cssLoader = {
-  loader: "css-loader",
+  loader: 'css-loader',
   options: {
     modules: true,
     // https://github.com/webpack-contrib/css-loader#importloaders
@@ -68,30 +68,98 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
     },
     module: {
       rules: [
+        { test: /\.(png|gif|jpg|cur)$/i, loader: 'url-loader', options: { limit: 8192 } },
+        { test: /\.woff2(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'url-loader', options: { limit: 10000, mimetype: 'application/font-woff2' } },
+        { test: /\.woff(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'url-loader', options: { limit: 10000, mimetype: 'application/font-woff' } },
+        { test: /\.(ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'file-loader' },
+
         // @if !shadow-dom
-        { test: /\./* @if css */css/* @endif *//* @if less */less/* @endif *//* @if sass */scss/* @endif */$/i, use: [ 'style-loader', cssLoader, postcssLoader/* @if less */, 'less-loader'/* @endif *//* @if sass */, sassLoader/* @endif */ ] },
+        { test: /\.css$/i, use: [ 'style-loader', cssLoader, postcssLoader ] },
+        // @if less
+        { test: /\.less$/i, use: [ 'style-loader', cssLoader, postcssLoader, 'less-loader' ] },
         // @endif
+        // @if sass
+        { test: /\.scss$/i, use: [ 'style-loader', cssLoader, postcssLoader, sassLoader ] },
+        // @endif
+        // @endif
+
         // @if shadow-dom
         {
-          test: /\./* @if css */css/* @endif *//* @if less */less/* @endif *//* @if sass */scss/* @endif */$/i,
+          test: /\.css$/i,
           // For style loaded in src/main.js, it's not loaded by style-loader.
           // It's for shared styles for shadow-dom only.
           issuer: /\/src\/main\.(js|ts)$/,
-          use: [ 'to-string-loader', cssLoader, postcssLoader/* @if less */, 'less-loader'/* @endif *//* @if sass */, sassLoader/* @endif */ ]
+          use: [ 'to-string-loader', cssLoader, postcssLoader ]
         },
+        // @if less
         {
-          test: /\./* @if css */css/* @endif *//* @if less */less/* @endif *//* @if sass */scss/* @endif */$/i,
+          test: /\.less$/i,
+          // For style loaded in src/main.js, it's not loaded by style-loader.
+          // It's for shared styles for shadow-dom only.
+          issuer: /\/src\/main\.(js|ts)$/,
+          use: [ 'to-string-loader', cssLoader, postcssLoader, 'less-loader' ]
+        },
+        // @endif
+        // @if sass
+        {
+          test: /\.scss$/i,
+          // For style loaded in src/main.js, it's not loaded by style-loader.
+          // It's for shared styles for shadow-dom only.
+          issuer: /\/src\/main\.(js|ts)$/,
+          use: [ 'to-string-loader', cssLoader, postcssLoader, sassLoader ]
+        },
+        // @endif
+
+        {
+          test: /\.css$/i,
           // For style loaded in other js/ts files, it's loaded by style-loader.
           // They are directly injected to HTML head.
           issuer: /(?<!\/src\/main)\.(js|ts)$/,
-          use: [ 'style-loader', cssLoader, postcssLoader/* @if less */, 'less-loader'/* @endif *//* @if sass */, sassLoader/* @endif */ ]
+          use: [ 'style-loader', cssLoader, postcssLoader ]
         },
+        // @if less
         {
-          test: /\./* @if css */css/* @endif *//* @if less */less/* @endif *//* @if sass */scss/* @endif */$/i,
-          issuer: /\.html$/,
-          use: [ 'to-string-loader', cssLoader, postcssLoader/* @if less */, 'less-loader'/* @endif *//* @if sass */, sassLoader/* @endif */ ]
+          test: /\.less$/i,
+          // For style loaded in other js/ts files, it's loaded by style-loader.
+          // They are directly injected to HTML head.
+          issuer: /(?<!\/src\/main)\.(js|ts)$/,
+          use: [ 'style-loader', cssLoader, postcssLoader, 'less-loader' ]
         },
         // @endif
+        // @if sass
+        {
+          test: /\.scss$/i,
+          // For style loaded in other js/ts files, it's loaded by style-loader.
+          // They are directly injected to HTML head.
+          issuer: /(?<!\/src\/main)\.(js|ts)$/,
+          use: [ 'style-loader', cssLoader, postcssLoader, sassLoader ]
+        },
+        // @endif
+
+        {
+          test: /\.css$/i,
+          // For style loaded in html files, Aurelia will handle it.
+          issuer: /\.html$/,
+          use: [ 'to-string-loader', cssLoader, postcssLoader ]
+        },
+        // @if less
+        {
+          test: /\.less$/i,
+          // For style loaded in html files, Aurelia will handle it.
+          issuer: /\.html$/,
+          use: [ 'to-string-loader', cssLoader, postcssLoader, 'less-loader' ]
+        },
+        // @endif
+        // @if sass
+        {
+          test: /\.scss$/i,
+          // For style loaded in html files, Aurelia will handle it.
+          issuer: /\.html$/,
+          use: [ 'to-string-loader', cssLoader, postcssLoader, sassLoader ]
+        },
+        // @endif
+        // @endif
+
         // @if babel
         { test: /\.js$/i, use: ['babel-loader', '@aurelia/webpack-loader'], exclude: /node_modules/ },
         // @endif
