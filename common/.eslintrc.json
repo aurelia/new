@@ -1,0 +1,47 @@
+{
+  "root": true,
+
+  // @if babel
+  "extends": "eslint:recommended",
+  "parser": "babel-eslint",
+  // @endif
+
+  // @if typescript
+  "parser": "@typescript-eslint/parser", // Specifies the ESLint parser
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  // @endif
+
+  "parserOptions": {
+    "ecmaVersion": 2019,
+    "sourceType": "module",
+    // @if babel
+    "ecmaFeatures": {
+      "legacyDecorators": true
+    }
+    // @endif
+    // @if typescript
+    "project": "./tsconfig.json",
+    "tsconfigRootDir": '.',
+    // @endif
+  },
+
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true,
+    // @if jasmine
+    "jasmine": true,
+    // @endif
+    // @if mocha
+    "mocha": true,
+    // @endif
+    // @if jest
+    "jest": true,
+    // @endif
+  }
+}
