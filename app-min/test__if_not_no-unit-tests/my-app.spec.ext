@@ -46,9 +46,6 @@ test('my-app: should render message', async t => {
   t.equal(text.trim(), 'Hello World!');
   // @endif
   await au.stop().wait();
-  // @if tape
-  t.end();
-  // @endif
 });
 // @endif
 // @if jasmine || jest || mocha
