@@ -24,10 +24,6 @@
       "legacyDecorators": true
     }
     // @endif
-    // @if typescript
-    "project": "./tsconfig.json",
-    "tsconfigRootDir": '.',
-    // @endif
   },
 
   "env": {
