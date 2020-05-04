@@ -1,6 +1,4 @@
-# Aurelia 2 Scaffolding skeleton
-
-[![Build Status](https://travis-ci.com/aurelia/new.svg?branch=master)](https://travis-ci.com/aurelia/new)
+# Aurelia 2 Scaffolding skeleton ![CI](https://github.com/aurelia/new/workflows/CI/badge.svg)
 
 _Work In Progress_
 
