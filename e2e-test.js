@@ -10,19 +10,7 @@ const path = require('path');
 const del = require('del');
 const test = require('ava');
 const puppeteer = require('puppeteer');
-
-// Somehow taskkill on windows would not send SIGTERM signal to proc,
-// The proc killed by taskkill got null signal.
-const win32Killed = new Set();
-function killProc(proc) {
-  if (process.platform === 'win32') {
-    win32Killed.add(proc.pid);
-    spawn.sync('taskkill', ["/pid", proc.pid, '/f', '/t']);
-  } else {
-    proc.stdin.pause();
-    proc.kill();
-  }
-}
+const kill = require('tree-kill');
 
 const dir = __dirname;
 
@@ -30,6 +18,18 @@ const folder = path.join(dir, 'test-skeletons');
 console.log('-- cleanup ' + folder);
 del.sync(folder);
 fs.mkdirSync(folder);
+
+// Somehow taskkill on windows would not send SIGTERM signal to proc,
+// The proc killed by taskkill got null signal.
+const win32Killed = new Set();
+function killProc(proc) {
+  if (process.platform === 'win32') {
+    win32Killed.add(proc.pid);
+  }
+  proc.stdin.pause();
+  kill(proc.pid);
+}
+
 
 function run(command, dataCB, errorCB) {
   const [cmd, ...args] = command.split(' ');
@@ -50,11 +50,11 @@ function run(command, dataCB, errorCB) {
     });
     proc.on('error', reject);
     proc.stdout.on('data', data => {
-      // console.log('# ' + data.toString());
+      process.stdout.write(data);
       if (dataCB) {
         dataCB(data, () => {
+          console.log(`-- kill "${command}"`);
           killProc(proc);
-          // resolve()
         });
       }
     });
@@ -62,8 +62,9 @@ function run(command, dataCB, errorCB) {
       process.stderr.write(data);
       if (errorCB) {
         errorCB(data, () => {
+          console.log(`-- kill "${command}"`);
+          // process.stderr.write(data);
           killProc(proc);
-          // resolve();
         });
       }
     })
