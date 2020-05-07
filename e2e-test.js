@@ -11,6 +11,9 @@ const del = require('del');
 const test = require('ava');
 const puppeteer = require('puppeteer');
 const kill = require('tree-kill');
+const {possibleFeatureSelections} = require('makes');
+const questions = require('./questions');
+const allSkeletons = possibleFeatureSelections(questions);
 
 const dir = __dirname;
 
@@ -81,15 +84,17 @@ async function takeScreenshot(url, filePath) {
 }
 
 const targetFeatures = (process.env.TARGET_FEATURES || '').toLowerCase().split(',').filter(p => p);
+if (!targetFeatures.includes('cypress')) {
+  targetFeatures.push('cypress');
+}
+if (!targetFeatures.includes('app-min')) {
+  // Skipped app-with-router for now
+  targetFeatures.push('app-min');
+}
+
 if (targetFeatures.length) {
   console.log('Target features: ', targetFeatures);
 }
-const bundlers = ['webpack', 'dumber'];
-const transpilers = ['babel', 'typescript'];
-const cssModes = ['no-css-mode', 'shadow-dom', 'css-module'];
-const cssProcessors = ['css', 'sass', 'less'];
-const testFrameworks = ['jest', 'jasmine', 'tape', 'mocha', 'no-unit-tests'];
-const e2eFrameworks = ['cypress'];
 
 function getServerRegex(features) {
   if (features.includes('webpack')) return /Project is running at (\S+)/;
@@ -104,23 +109,9 @@ function getStartCommand(features) {
   return 'npm start';
 }
 
-const skeletons = [];
-bundlers.forEach(bundler => {
-  transpilers.forEach(transpiler => {
-    cssModes.forEach(cssMode => {
-      cssProcessors.forEach(cssProcessor => {
-        testFrameworks.forEach(testFramework => {
-          e2eFrameworks.forEach(e2eFramework => {
-            const features = [bundler, transpiler, cssMode, cssProcessor, testFramework, e2eFramework].filter(p => p);
-            if (targetFeatures.length === 0 || targetFeatures.every(f => features.includes(f))) {
-              skeletons.push(features);
-            }
-          })
-        });
-      });
-    });
-  });
-});
+const skeletons = allSkeletons.filter(features =>
+  targetFeatures.length === 0 || targetFeatures.every(f => features.includes(f))
+);
 
 skeletons.forEach((features, i) => {
   const appName = features.join('-');
@@ -128,7 +119,6 @@ skeletons.forEach((features, i) => {
   const title = `App: ${i + 1}/${skeletons.length} ${appName}`;
   const serverRegex = getServerRegex(features);
   const startCommand = getStartCommand(features);
-  const hasUnitTests = !features.includes('no-unit-tests');
 
   test.serial(title, async t => {
     console.log(title);
@@ -140,15 +130,13 @@ skeletons.forEach((features, i) => {
     t.pass('made skeleton');
     process.chdir(appFolder);
 
-    console.log('-- yarn install');
-    await run('yarn install');
+    console.log('-- yarn');
+    await run('yarn');
     t.pass('installed deps');
 
-    if (hasUnitTests) {
-      console.log('-- npm test');
-      await run('npm test');
-      t.pass('finished unit tests');
-    }
+    console.log('-- npm test');
+    await run('npm test');
+    t.pass('finished unit tests');
 
     console.log('-- npm run build');
     await run('npm run build', null,
@@ -173,14 +161,18 @@ skeletons.forEach((features, i) => {
         t.pass(message);
 
         try {
-          console.log('-- take screenshot');
-          await takeScreenshot(url, path.join(folder, appName + '.png'));
+          if (!process.env.GITHUB_ACTIONS) {
+            console.log('-- take screenshot');
+            await takeScreenshot(url, path.join(folder, appName + '.png'));
+          }
 
-          console.log('-- npm run test:e2e');
-          await run(`npm run test:e2e`);
+          if (features.includes('cypress')) {
+            console.log('-- npm run test:e2e');
+            await run(`npm run test:e2e`);
+          }
           kill();
         } catch (e) {
-          t.fail(e);
+          t.fail(e.message);
           kill();
         }
       },
@@ -194,8 +186,8 @@ skeletons.forEach((features, i) => {
       }
     );
 
-    // console.log('-- remove folder ' + appName);
-    // process.chdir(folder);
-    // await del(appFolder);
+    console.log('-- remove folder ' + appName);
+    process.chdir(folder);
+    await del(appFolder);
   });
 });
