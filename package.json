@@ -21,7 +21,7 @@
   "scripts": {
     "check-upgrade": "node check-upgrade.js",
     "test": "ava \"__test__/**/*\"",
-    "test:e2e": "ava --timeout 3m -v e2e-test.js",
+    "test:e2e": "ava --fail-fast --timeout 8m -v e2e-test.js",
     "preversion": "npm test",
     "version": "standard-changelog && git add CHANGELOG.md",
     "postversion": "git push && git push --tags"
