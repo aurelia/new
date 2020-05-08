@@ -46,6 +46,12 @@ function run(command, dataCB, errorCB) {
     const proc = spawn(cmd, args, {env});
     proc.on('exit', (code, signal) => {
       if (code && signal !== 'SIGTERM' && !win32Killed.has(proc.pid)) {
+        if (process.platform === 'win32' && args[1] === 'test:e2e' && code === 3221226356) {
+          // There is random cypress ELIFECYCLE (3221226356) issue on Windows.
+          // Probably related to https://github.com/cypress-io/cypress/pull/2011
+          resolve();
+          return;
+        }
         reject(new Error(cmd + ' ' + args.join(' ') + ' process exit code: ' + code + ' signal: ' + signal));
       } else {
         resolve();
