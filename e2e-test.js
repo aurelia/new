@@ -175,14 +175,6 @@ skeletons.forEach((features, i) => {
           t.fail(e.message);
           kill();
         }
-      },
-      (data, kill) => {
-        const str = data.toString();
-        // ignore nodejs v12 [DEP0066] DeprecationWarning: OutgoingMessage.prototype._headers is deprecated
-        if (!str.includes('DeprecationWarning')) {
-          t.fail('npm start failed: ' + data.toString());
-          kill();
-        }
       }
     );
 
