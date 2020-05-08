@@ -20,10 +20,22 @@ jobs:
         os:
           - windows-latest
         target_features:
-          - webpack,babel
-          - webpack,typescript
-          - dumber,babel
-          - dumber,typescript
+          - webpack,babel,jest
+          - webpack,babel,jasmine
+          - webpack,babel,mocha
+          - webpack,babel,tape
+          - webpack,typescript,jest
+          - webpack,typescript,jasmine
+          - webpack,typescript,mocha
+          - webpack,typescript,tape
+          - dumber,babel,jest
+          - dumber,babel,jasmine
+          - dumber,babel,mocha
+          - dumber,babel,tape
+          - dumber,typescript,jest
+          - dumber,typescript,jasmine
+          - dumber,typescript,mocha
+          - dumber,typescript,tape
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node_version }}
