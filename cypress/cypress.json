@@ -7,6 +7,8 @@
   "taskTimeout": 600000,
   "pageLoadTimeout": 600000,
   "requestTimeout": 50000,
-  "responseTimeout": 300000
+  "responseTimeout": 300000,
+  "watchForFileChanges": false,
+  "nodeVersion": "system"
   // @endif
 }
