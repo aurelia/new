@@ -25,5 +25,8 @@
     "test",
     // @endif
     "src"
+  ],
+  "files": [
+    "src/resource.d.ts"
   ]
 }

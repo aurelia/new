@@ -1,4 +1,4 @@
-module.exports = [
+const questions = [
   {
     message: 'Which bundler would you like to use?',
     choices: [
@@ -28,19 +28,11 @@ module.exports = [
     ]
   },
   {
-    message: 'Do you want to use Shadow DOM?',
+    message: 'Do you want to use Shadow DOM or CSS Module?',
     choices: [
       {title: 'No'},
-      {value: 'shadow-dom', title: 'Yes', hint: 'Shadow DOM in open mode, shadowRoot is accessible through DOM API.'},
-    ]
-  },
-  {
-    // Don't allow user to turn on both ShadowDOM and CSS Module.
-    if: '!shadow-dom',
-    message: 'Do you want to use CSS Module?',
-    choices: [
-      {title: 'No'},
-      {value: 'css-module', title: 'Yes', hint: 'CSS Module is an alternative way to locally scope CSS class names. Do not use it together with Shadow DOM.'},
+      {value: 'shadow-dom', title: 'Use Shadow DOM', hint: 'Shadow DOM in open mode, shadowRoot is accessible through DOM API.'},
+      {value: 'css-module', title: 'Use CSS Module', hint: 'CSS Module is an alternative way to locally scope CSS class names.'},
     ]
   },
   {
@@ -60,8 +52,7 @@ module.exports = [
       // {value: 'ava', title: 'Ava + jsdom-global', hint: 'Runs in Node.js, simulates browser with jsdom-global. A test runner for Node.js with a concise API, detailed error output, embrace of new language features and process isolation that let you write tests more effectively.'},
       {value: 'jasmine', title: 'Jasmine', hint: 'Runs in browser, a behavior-driven testing framework.'},
       {value: 'mocha', title: 'Mocha + Chai', hint: 'Runs in browser, a feature-rich JavaScript test framework for node and browsers.'},
-      {value: 'tape', title: 'Tape', hint: 'Runs in browser, tap-producing test harness for node and browsers.'},
-      {value: 'no-unit-tests', title: 'None', hint: 'Skip testing. My code is always perfect :-)'}
+      {value: 'tape', title: 'Tape', hint: 'Runs in browser, tap-producing test harness for node and browsers.'}
     ]
   },
   {
@@ -79,7 +70,7 @@ module.exports = [
     ]
   },
   // Currently this question is not visible to end user because there is only one option.
-  // Will expand the list in future.
+  // Will expand the list in future, after Aurelia 2 offered IE11 compatible dist file.
   {
     message: 'What are your targeted browsers?',
     choices: [
@@ -87,3 +78,15 @@ module.exports = [
     ]
   }
 ];
+
+if (process.env.CI) {
+  // Add feature "ci" when running in CI environment.
+  questions.push({
+    message: '',
+    choices: [
+      {value: 'ci', title: 'Running in CI environment'}
+    ]
+  });
+}
+
+module.exports = questions;

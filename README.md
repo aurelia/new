@@ -1,4 +1,6 @@
-# Aurelia 2 Scaffolding skeleton ![CI](https://github.com/aurelia/new/workflows/CI/badge.svg)
+# Aurelia 2 Scaffolding skeleton
+
+![CI](https://github.com/aurelia/new/workflows/CI/badge.svg) ![E2E-Linux](https://github.com/aurelia/new/workflows/E2E-Linux/badge.svg) ![E2E-Windows](https://github.com/aurelia/new/workflows/E2E-Windows/badge.svg) ![E2E-macOS](https://github.com/aurelia/new/workflows/E2E-macOS/badge.svg)
 
 _Work In Progress_
 
@@ -31,35 +33,47 @@ This will cause `npx` to download the `makes` tool, along with the `aurelia` sca
 - [x] Basic less/scss setup.
 - [x] Basic unit test setup for jest, jasmine, mocha, tape. (ava is on hold, pending implementing transformer.)
 - [x] Basic e2e test setup for cypress
-- [ ] Basic e2e test setup for protractor
 
 ## Development
 
-This scaffolding skeleton is in very early stage, not quite ready for adding features. We want to keep feature set manageable as Aurelia 2 is constantly evolving.
+This scaffolding skeleton is in the early stage, not quite ready for adding features. We want to keep feature set manageable as Aurelia 2 is constantly evolving.
 
 There are some tests for this skeleton, setup in package.json. (totally not required by makes)
 
+## Unit tests
+
+Unit tests for various "makes" files.
+
 ```bash
-npm install
-# test some top level makes hooks
 npm test
-# test all skeletons, take some time, not turned on in .travis.yml
+```
+
+## E2E Test
+
+E2E tests for skeletons.
+
+GitHub Actions runs a subset of them for every PR or push to master.
+
+```bash
+# Do not run following directly. There are too many skeletons.
 npm run test:e2e
 ```
 
-To target subset of skeletons, use env variable `TARGET_FEATURES`.
+Always target a subset of skeletons, use env variable `TARGET_FEATURES`.
 
 ```bash
 # only test skeletons using webpack and typescript features.
 npx cross-env TARGET_FEATURES=webpack,typescript npm run test:e2e
 ```
 
-If you forked this repo, you can run your skeleton with:
+## Local development
+
+If you forked this repo, you can try your skeleton with:
 
 ```bash
-# test your master branch if your forked name is "new"
+# Try your master branch if your forked name is "new"
 npx makes your_GitHub_name
-# test some branch or commit or tag
+# Try some branch or commit or tag
 npx makes your_GitHub_name/forked_repo_name#some-branch
 ```
 

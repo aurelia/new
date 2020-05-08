@@ -10,19 +10,10 @@ const path = require('path');
 const del = require('del');
 const test = require('ava');
 const puppeteer = require('puppeteer');
-
-// Somehow taskkill on windows would not send SIGTERM signal to proc,
-// The proc killed by taskkill got null signal.
-const win32Killed = new Set();
-function killProc(proc) {
-  if (process.platform === 'win32') {
-    win32Killed.add(proc.pid);
-    spawn.sync('taskkill', ["/pid", proc.pid, '/f', '/t']);
-  } else {
-    proc.stdin.pause();
-    proc.kill();
-  }
-}
+const kill = require('tree-kill');
+const {possibleFeatureSelections} = require('makes');
+const questions = require('./questions');
+const allSkeletons = possibleFeatureSelections(questions);
 
 const dir = __dirname;
 
@@ -30,6 +21,18 @@ const folder = path.join(dir, 'test-skeletons');
 console.log('-- cleanup ' + folder);
 del.sync(folder);
 fs.mkdirSync(folder);
+
+// Somehow taskkill on windows would not send SIGTERM signal to proc,
+// The proc killed by taskkill got null signal.
+const win32Killed = new Set();
+function killProc(proc) {
+  if (process.platform === 'win32') {
+    win32Killed.add(proc.pid);
+  }
+  proc.stdin.pause();
+  kill(proc.pid);
+}
+
 
 function run(command, dataCB, errorCB) {
   const [cmd, ...args] = command.split(' ');
@@ -50,11 +53,11 @@ function run(command, dataCB, errorCB) {
     });
     proc.on('error', reject);
     proc.stdout.on('data', data => {
-      // console.log('# ' + data.toString());
+      process.stdout.write(data);
       if (dataCB) {
         dataCB(data, () => {
+          console.log(`-- kill "${command}"`);
           killProc(proc);
-          // resolve()
         });
       }
     });
@@ -62,8 +65,9 @@ function run(command, dataCB, errorCB) {
       process.stderr.write(data);
       if (errorCB) {
         errorCB(data, () => {
+          console.log(`-- kill "${command}"`);
+          // process.stderr.write(data);
           killProc(proc);
-          // resolve();
         });
       }
     })
@@ -80,15 +84,17 @@ async function takeScreenshot(url, filePath) {
 }
 
 const targetFeatures = (process.env.TARGET_FEATURES || '').toLowerCase().split(',').filter(p => p);
+if (!targetFeatures.includes('cypress')) {
+  targetFeatures.push('cypress');
+}
+if (!targetFeatures.includes('app-min')) {
+  // Skipped app-with-router for now
+  targetFeatures.push('app-min');
+}
+
 if (targetFeatures.length) {
   console.log('Target features: ', targetFeatures);
 }
-const bundlers = ['webpack', 'dumber'];
-const transpilers = ['babel', 'typescript'];
-const cssModes = ['no-css-mode', 'shadow-dom', 'css-module'];
-const cssProcessors = ['css', 'sass', 'less'];
-const testFrameworks = ['jest', 'jasmine', 'tape', 'mocha', 'no-unit-tests'];
-const e2eFrameworks = ['cypress'];
 
 function getServerRegex(features) {
   if (features.includes('webpack')) return /Project is running at (\S+)/;
@@ -103,23 +109,9 @@ function getStartCommand(features) {
   return 'npm start';
 }
 
-const skeletons = [];
-bundlers.forEach(bundler => {
-  transpilers.forEach(transpiler => {
-    cssModes.forEach(cssMode => {
-      cssProcessors.forEach(cssProcessor => {
-        testFrameworks.forEach(testFramework => {
-          e2eFrameworks.forEach(e2eFramework => {
-            const features = [bundler, transpiler, cssMode, cssProcessor, testFramework, e2eFramework].filter(p => p);
-            if (targetFeatures.length === 0 || targetFeatures.every(f => features.includes(f))) {
-              skeletons.push(features);
-            }
-          })
-        });
-      });
-    });
-  });
-});
+const skeletons = allSkeletons.filter(features =>
+  targetFeatures.length === 0 || targetFeatures.every(f => features.includes(f))
+);
 
 skeletons.forEach((features, i) => {
   const appName = features.join('-');
@@ -127,7 +119,6 @@ skeletons.forEach((features, i) => {
   const title = `App: ${i + 1}/${skeletons.length} ${appName}`;
   const serverRegex = getServerRegex(features);
   const startCommand = getStartCommand(features);
-  const hasUnitTests = !features.includes('no-unit-tests');
 
   test.serial(title, async t => {
     console.log(title);
@@ -139,15 +130,13 @@ skeletons.forEach((features, i) => {
     t.pass('made skeleton');
     process.chdir(appFolder);
 
-    console.log('-- yarn install');
-    await run('yarn install');
+    console.log('-- yarn');
+    await run('yarn');
     t.pass('installed deps');
 
-    if (hasUnitTests) {
-      console.log('-- npm test');
-      await run('npm test');
-      t.pass('finished unit tests');
-    }
+    console.log('-- npm test');
+    await run('npm test');
+    t.pass('finished unit tests');
 
     console.log('-- npm run build');
     await run('npm run build', null,
@@ -172,29 +161,25 @@ skeletons.forEach((features, i) => {
         t.pass(message);
 
         try {
-          console.log('-- take screenshot');
-          await takeScreenshot(url, path.join(folder, appName + '.png'));
+          if (!process.env.GITHUB_ACTIONS) {
+            console.log('-- take screenshot');
+            await takeScreenshot(url, path.join(folder, appName + '.png'));
+          }
 
-          console.log('-- npm run test:e2e');
-          await run(`npm run test:e2e`);
+          if (features.includes('cypress')) {
+            console.log('-- npm run test:e2e');
+            await run(`npm run test:e2e`);
+          }
           kill();
         } catch (e) {
-          t.fail(e);
-          kill();
-        }
-      },
-      (data, kill) => {
-        const str = data.toString();
-        // ignore nodejs v12 [DEP0066] DeprecationWarning: OutgoingMessage.prototype._headers is deprecated
-        if (!str.includes('DeprecationWarning')) {
-          t.fail('npm start failed: ' + data.toString());
+          t.fail(e.message);
           kill();
         }
       }
     );
 
-    // console.log('-- remove folder ' + appName);
-    // process.chdir(folder);
-    // await del(appFolder);
+    console.log('-- remove folder ' + appName);
+    process.chdir(folder);
+    await del(appFolder);
   });
 });
