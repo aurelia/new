@@ -1,8 +1,5 @@
 {
   "extends": [
     "plugin:cypress/recommended"
-  ],
-  "rules": {
-    "cypress/no-unnecessary-waiting": 0
-  }
+  ]
 }
