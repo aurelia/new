@@ -130,8 +130,8 @@ skeletons.forEach((features, i) => {
     t.pass('made skeleton');
     process.chdir(appFolder);
 
-    console.log('-- npm i');
-    await run('npm i');
+    console.log('-- yarn');
+    await run('yarn');
     t.pass('installed deps');
 
     console.log('-- npm test');
