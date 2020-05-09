@@ -2,10 +2,7 @@
   "compilerOptions": {
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    // @if browserify || jest || ava
-    "module": "commonjs",
-    // @endif
-    // @if !browserify && !jest && !ava
+    // @if !jest && !ava
     "module": "esnext",
     // @endif
     "moduleResolution": "node",

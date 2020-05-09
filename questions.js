@@ -12,10 +12,6 @@ module.exports = [
       // Parcel v2 is also very near. Might wait for the new version.
       // {value: 'parcel', title: 'Parcel', hint: 'Blazing fast, zero configuration web application bundler.'},
 
-      // Browserify has technical obstacle on TypeScript (tsify) https://github.com/TypeStrong/tsify/issues/34#issuecomment-514425682
-      // There is no problem on babelify. But we will hold browserify for now.
-      // {value: 'browserify', title: 'Browserify', hint: 'The bundler who started the business, a tool for compiling node-flavored commonjs modules for the browser.'},
-
       // FuseBox v4 is coming, and it's a total rewrite. Wait for it before implement.
       // {value: 'fuse-box', title: 'FuseBox', hint: 'A bundler that does it all, and does it right.'},
     ]
