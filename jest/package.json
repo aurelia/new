@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "jest": "^25.0.0",
+    "jest": "^26.0.0",
     "jest-transform-stub": "^2.0.0",
     // @if babel
     "@aurelia/babel-jest": "dev",
