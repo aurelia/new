@@ -133,6 +133,7 @@ function buildJs(src) {
 
 function buildHtml(src) {
   return gulp.src(src)
+    .pipe(gulpif(!isProduction && !isTest, plumber()))
     // @if shadow-dom
     // The other possible Shadow DOM mode is "closed".
     // If you turn on "closed" mode, there will be difficulty to perform e2e
@@ -152,10 +153,13 @@ function buildCss(src) {
   return gulp.src(src, {sourcemaps: !isProduction})
     // @if less
     .pipe(gulpif(!isProduction && !isTest, plumber()))
-    .pipe(less())
+    .pipe(gulpif(f => f.extname === '.less', less()))
     // @endif
     // @if sass
-    .pipe(isProduction ? sass.sync() : sass.sync().on('error', sass.logError))
+    .pipe(gulpif(
+      f => f.extname === '.scss',
+      isProduction || isTest ? sass.sync(): sass.sync().on('error', sass.logError)
+    ))
     // @endif
     .pipe(postcss([
       autoprefixer(),
@@ -198,10 +202,10 @@ function build() {
     buildCss('src/**/*.css')
     // @endif
     // @if less
-    buildCss('src/**/*.less')
+    buildCss('src/**/*.{less,css}')
     // @endif
     // @if sass
-    buildCss('src/**/*.scss')
+    buildCss('src/**/*.{scss,css}')
     // @endif
   )
   // Note we did extra call `dr()` here, this is designed to cater watch mode.
