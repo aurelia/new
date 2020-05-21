@@ -106,7 +106,7 @@ function getServerRegex(features) {
   if (features.includes('webpack')) return /Project is running at (\S+)/;
   if (features.includes('parcel')) return /Server running at (\S+)/;
   if (features.includes('fuse-box')) return /Development server running (\S+)/;
-  return /Application Available At: (\S+)/;
+  return /Dev server is started at: (\S+)/;
 }
 
 function getStartCommand(features) {
@@ -162,9 +162,7 @@ skeletons.forEach((features, i) => {
         const m = data.toString().match(serverRegex);
         if (!m) return;
         const url = m[1];
-        const message = 'Dev server is started at ' + url;
-        console.log(message);
-        t.pass(message);
+        t.pass(m[0]);
 
         try {
           if (!process.env.GITHUB_ACTIONS) {
