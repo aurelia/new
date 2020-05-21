@@ -1,37 +1,37 @@
 {
   "devDependencies": {
-    "rimraf": "^3.0.0",
-    "webpack": "^4.0.0",
-    "webpack-cli": "^3.0.0",
-    "webpack-dev-server": "^3.0.0",
-    "html-webpack-plugin": "^4.0.0",
-    "webpack-bundle-analyzer": "^3.0.0",
-    "url-loader": "^4.0.0",
+    "rimraf": "^3.0.2",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0",
+    "html-webpack-plugin": "^4.3.0",
+    "webpack-bundle-analyzer": "^3.8.0",
+    "url-loader": "^4.1.0",
     "file-loader": "^6.0.0",
     // @if shadow-dom
-    "to-string-loader": "^1.0.0",
+    "to-string-loader": "^1.1.6",
     // @endif
-    "style-loader": "^1.0.0",
-    "css-loader": "^3.0.0",
+    "style-loader": "^1.2.1",
+    "css-loader": "^3.5.3",
     "@aurelia/webpack-loader": "dev",
     // @if babel
-    "babel-loader": "^8.0.0",
+    "babel-loader": "^8.1.0",
     // @endif
     // @if typescript
-    "ts-loader": "^7.0.0",
+    "ts-loader": "^7.0.4",
     // @endif
     // @if less
-    "less-loader": "^6.0.0",
-    "less": "^3.0.0",
+    "less-loader": "^6.1.0",
+    "less": "^3.11.1",
     // @endif
     // @if sass
-    "sass-loader": "^8.0.0",
-    "sass": "^1.0.0",
+    "sass-loader": "^8.0.2",
+    "sass": "^1.26.5",
     // @endif
     "postcss-loader": "^3.0.0",
-    "autoprefixer": "^9.0.0",
+    "autoprefixer": "^9.8.0",
     // @if jasmine || tape || mocha
-    "webpack-shell-plugin-next": "^1.0.0",
+    "webpack-shell-plugin-next": "^1.1.9",
     // @endif
   },
   "scripts": {
