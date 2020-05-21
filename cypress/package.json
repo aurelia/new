@@ -5,8 +5,10 @@
     // @if shadow-dom
     "cypress-shadow-dom": "^1.0.0",
     // @endif
+    "start-server-and-test": "^1.11.0"
   },
   "scripts": {
-    "test:e2e": "cypress run"
+    "cypress": "cypress run",
+    "test:e2e": "cross-env CI=1 start-server-and-test start http://localhost:9000 cypress"
   }
 }

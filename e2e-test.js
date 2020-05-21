@@ -15,6 +15,7 @@ const {possibleFeatureSelections} = require('makes');
 const questions = require('./questions');
 const allSkeletons = possibleFeatureSelections(questions);
 
+const isWin32 = process.platform === 'win32';
 const dir = __dirname;
 
 const folder = path.join(dir, 'test-skeletons');
@@ -26,7 +27,7 @@ fs.mkdirSync(folder);
 // The proc killed by taskkill got null signal.
 const win32Killed = new Set();
 function killProc(proc) {
-  if (process.platform === 'win32') {
+  if (isWin32) {
     win32Killed.add(proc.pid);
   }
   proc.stdin.pause();
@@ -46,7 +47,7 @@ function run(command, dataCB, errorCB) {
     const proc = spawn(cmd, args, {env});
     proc.on('exit', (code, signal) => {
       if (code && signal !== 'SIGTERM' && !win32Killed.has(proc.pid)) {
-        if (process.platform === 'win32' && args[1] === 'test:e2e' && code === 3221226356) {
+        if (isWin32 && args[1] === 'test:e2e' && code === 3221226356) {
           // There is random cypress ELIFECYCLE (3221226356) issue on Windows.
           // Probably related to https://github.com/cypress-io/cypress/pull/2011
           resolve();
@@ -170,9 +171,11 @@ skeletons.forEach((features, i) => {
             await takeScreenshot(url, path.join(folder, appName + '.png'));
           }
 
-          if (features.includes('cypress')) {
-            console.log('-- npm run test:e2e');
-            await run(`npm run test:e2e`);
+          if (isWin32 && features.includes('cypress')) {
+            // Have to by pass start-server-and-test on win32
+            // due to cypress issue (3221226356, search above)
+            console.log('-- npm run cypress');
+            await run(`npm run cypress`);
           }
           kill();
         } catch (e) {
@@ -181,6 +184,11 @@ skeletons.forEach((features, i) => {
         }
       }
     );
+
+    if (!isWin32 && features.includes('cypress')) {
+      console.log('-- npm run test:e2e');
+      await run(`npm run test:e2e`);
+    }
 
     console.log('-- remove folder ' + appName);
     process.chdir(folder);

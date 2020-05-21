@@ -1,4 +1,3 @@
-
 ## Clear tracing cache
 
 In rare situation, you might need to run clear-cache after upgrading to new version of dumber bundler.

@@ -29,7 +29,7 @@ const socketIOSnippet = `
 let io;
 
 exports.run = function({
-  port = 3000,
+  port = 9000,
   https = false,
   open = false // automatically open a browser window
 } = {}) {
