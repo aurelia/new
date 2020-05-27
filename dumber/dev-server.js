@@ -63,7 +63,7 @@ exports.run = function({
   io = socketIO(server, {path: socketIOPath});
   server.listen(port);
   const url = `http${https ? 's' : ''}://localhost:${port}`;
-  console.log(`Dev server is started at: ${url}`);
+  console.log(`\x1b[36m\nDev server is started at: ${url}\n\x1b[0m`);
   if (open) _open(url);
 };
 
