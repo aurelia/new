@@ -117,7 +117,7 @@ const dr = dumber({
 
 function buildJs(src) {
   // @if typescript
-  const ts = typescript.createProject('tsconfig.json');
+  const ts = typescript.createProject('tsconfig.json', {noEmitOnError: true});
   // @endif
   return gulp.src(src, {sourcemaps: !isProduction})
     .pipe(gulpif(!isProduction && !isTest, plumber()))
