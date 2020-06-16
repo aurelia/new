@@ -3,14 +3,8 @@ module.exports = [
     message: 'Which bundler would you like to use?',
     choices: [
       {value: 'webpack', title: 'Webpack', hint: 'A powerful and popular bundler for modern JavaScript apps.'},
-      {value: 'dumber', title: 'Dumber', hint: 'A dumb JavasScript bundler, dumber than you and me. The successor of Aurelia CLI built-in bundler.'}
-
-      // Pending implementation of conventions plugins for these bundlers.
-
-      // Parcel can be done. But requires a dedicated repo (out of our mono repo) in order to write in commonjs format that Parcel wants.
-      // https://github.com/parcel-bundler/parcel/issues/3256
-      // Parcel v2 is also very near. Might wait for the new version.
-      // {value: 'parcel', title: 'Parcel', hint: 'Blazing fast, zero configuration web application bundler.'},
+      {value: 'dumber', title: 'Dumber', hint: 'A dumb JavasScript bundler, dumber than you and me. The successor of Aurelia CLI built-in bundler.'},
+      {value: 'parcel', title: 'Parcel v2 (alpha)', hint: 'Blazing fast, zero configuration web application bundler.'},
 
       // FuseBox v4 is coming, and it's a total rewrite. Wait for it before implement.
       // {value: 'fuse-box', title: 'FuseBox', hint: 'A bundler that does it all, and does it right.'},

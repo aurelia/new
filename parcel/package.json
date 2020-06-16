@@ -1,7 +1,7 @@
 {
   "devDependencies": {
     "rimraf": "^3.0.2",
-    "parcel-bundler": "^1.12.4"
+    "parcel": "next"
   },
   "scripts": {
     "start": "parcel index.html -p 9000 --open",
