@@ -13,6 +13,7 @@ jobs:
     name: ${{ matrix.target_features }} with Nodejs v${{ matrix.node_version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         node_version:
           # - 10
