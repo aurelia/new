@@ -1,4 +1,5 @@
 // @if typescript
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 // @endif
 require('./setup');
