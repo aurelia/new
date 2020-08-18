@@ -12,6 +12,7 @@ const cssLoader = 'css-loader';
 const cssLoader = {
   loader: 'css-loader',
   options: {
+    esModule: false,
     modules: true,
     // https://github.com/webpack-contrib/css-loader#importloaders
     importLoaders: /* @if css */1/* @endif *//* @if !css */2/* @endif */

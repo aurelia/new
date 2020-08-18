@@ -10,8 +10,8 @@
     "gulp-typescript": "^5.0.1",
     // @endif
     "gulp-plumber": "^1.2.1",
-    "merge2": "^1.3.0",
-    "gulp-terser": "^1.2.0",
+    "merge2": "^1.4.1",
+    "gulp-terser": "^1.3.2",
     "gulp-if": "^3.0.0",
     "del": "^5.1.0",
 
@@ -20,7 +20,7 @@
     "connect-injector": "^0.4.4",
     "serve-static": "^1.14.1",
     "socket.io": "^2.3.0",
-    "open": "^7.0.4",
+    "open": "^7.1.0",
 
     "cross-env": "^7.0.2",
     // @if css-module
@@ -33,7 +33,7 @@
     "gulp-dart-sass": "^1.0.2",
     // @endif
     "gulp-postcss": "^8.0.0",
-    "autoprefixer": "^9.8.0",
+    "autoprefixer": "^9.8.6",
     "postcss-url": "^8.0.0",
     // @if jasmine || tape || mocha
     "gulp-run": "^1.7.1",

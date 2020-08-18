@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "tape": "^5.0.0",
+    "tape": "^5.0.1",
     // @if typescript
     "@types/tape": "^4.13.0"
     // @endif

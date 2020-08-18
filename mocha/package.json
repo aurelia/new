@@ -1,9 +1,9 @@
 {
   "devDependencies": {
-    "mocha": "^7.1.2",
+    "mocha": "^8.1.1",
     "chai": "^4.2.0",
     // @if typescript
-    "@types/mocha": "^7.0.2",
+    "@types/mocha": "^8.0.3",
     // @endif
   },
   "scripts": {

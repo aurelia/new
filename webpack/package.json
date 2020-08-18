@@ -1,8 +1,8 @@
 {
   "devDependencies": {
     "rimraf": "^3.0.2",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
     "html-webpack-plugin": "^4.3.0",
     "webpack-bundle-analyzer": "^3.8.0",
@@ -12,26 +12,26 @@
     "to-string-loader": "^1.1.6",
     // @endif
     "style-loader": "^1.2.1",
-    "css-loader": "^3.5.3",
+    "css-loader": "^4.2.1",
     "@aurelia/webpack-loader": "dev",
     // @if babel
     "babel-loader": "^8.1.0",
     // @endif
     // @if typescript
-    "ts-loader": "^7.0.4",
+    "ts-loader": "^8.0.2",
     // @endif
     // @if less
-    "less-loader": "^6.1.0",
-    "less": "^3.11.1",
+    "less-loader": "^6.2.0",
+    "less": "^3.12.2",
     // @endif
     // @if sass
-    "sass-loader": "^8.0.2",
-    "sass": "^1.26.5",
+    "sass-loader": "^9.0.3",
+    "sass": "^1.26.10",
     // @endif
     "postcss-loader": "^3.0.0",
-    "autoprefixer": "^9.8.0",
+    "autoprefixer": "^9.8.6",
     // @if jasmine || tape || mocha
-    "webpack-shell-plugin-next": "^1.1.9",
+    "webpack-shell-plugin-next": "^1.2.0",
     // @endif
   },
   "scripts": {
