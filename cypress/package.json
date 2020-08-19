@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "cypress": "^4.12.1",
+    "cypress": "^5.0.0",
     "eslint-plugin-cypress": "^2.11.1",
     // @if shadow-dom
     "cypress-shadow-dom": "^1.4.1",
