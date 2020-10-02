@@ -29,6 +29,7 @@
     "sass": "^1.26.11",
     // @endif
     "postcss-loader": "^4.0.2",
+    "postcss": "^8.1.1",
     "autoprefixer": "^10.0.1",
     // @if jasmine || tape || mocha
     "webpack-shell-plugin-next": "^1.2.0",
