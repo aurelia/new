@@ -14,7 +14,7 @@
     // @endif
   },
   "devDependencies": {
-    "eslint": "^7.7.0",
+    "eslint": "^7.10.0",
     "@aurelia/testing": "dev",
     "htmlhint": "^0.14.1",
     // @if less
@@ -24,7 +24,7 @@
     "sass-lint": "^1.13.1",
     // @endif
     // @if jasmine || tape || mocha
-    "browser-do": "^3.0.0",
+    "browser-do": "^3.0.2",
     // @endif
   },
   "scripts": {
