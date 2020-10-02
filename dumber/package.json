@@ -32,10 +32,9 @@
     // @if sass
     "gulp-dart-sass": "^1.0.2",
     // @endif
-    "gulp-postcss": "^9.0.0",
-    "autoprefixer": "^10.0.1",
+    "gulp-postcss": "^8.0.0",
+    "autoprefixer": "^9.8.6",
     "postcss-url": "^8.0.0",
-    "postcss": "^8.1.1",
     // @if jasmine || tape || mocha
     "gulp-run": "^1.7.1",
     // @endif
