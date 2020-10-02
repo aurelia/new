@@ -1,11 +1,11 @@
 {
   "devDependencies": {
-    "cypress": "^5.0.0",
-    "eslint-plugin-cypress": "^2.11.1",
+    "cypress": "^5.3.0",
+    "eslint-plugin-cypress": "^2.11.2",
     // @if shadow-dom
     "cypress-shadow-dom": "^1.4.1",
     // @endif
-    "start-server-and-test": "^1.11.3"
+    "start-server-and-test": "^1.11.5"
   },
   "scripts": {
     "cypress": "cypress run",
