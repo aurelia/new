@@ -40,15 +40,6 @@
       // @endif
     },
 
-    "setupFiles": [
-      // @if babel
-      "<rootDir>/test/setup.js"
-      // @endif
-      // @if typescript
-      "<rootDir>/test/setup.ts"
-      // @endif
-    ],
-
     "collectCoverage": true,
     "collectCoverageFrom": [
       // @if babel

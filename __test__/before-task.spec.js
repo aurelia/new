@@ -23,7 +23,7 @@ test('"before" task can select default-esnext preset', async t => {
   const result = await before({unattended: false, prompts});
   t.deepEqual(result, {
     silentQuestions: true,
-    preselectedFeatures: ['webpack', 'babel']
+    preselectedFeatures: ['webpack', 'babel', 'jest']
   });
 });
 
@@ -40,7 +40,7 @@ test('"before" task can select default-typescript preset', async t => {
   const result = await before({unattended: false, prompts});
   t.deepEqual(result, {
     silentQuestions: true,
-    preselectedFeatures: ['webpack', 'typescript']
+    preselectedFeatures: ['webpack', 'typescript', 'jest']
   });
 });
 

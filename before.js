@@ -1,8 +1,8 @@
 // Use "before" task to ask user to select a preset (to skip questionnaire).
 
 const PRESETS = {
-  'default-esnext': ['webpack', 'babel'],
-  'default-typescript': ['webpack', 'typescript'],
+  'default-esnext': ['webpack', 'babel', 'jest'],
+  'default-typescript': ['webpack', 'typescript', 'jest'],
 };
 
 module.exports = async function({unattended, prompts}) {

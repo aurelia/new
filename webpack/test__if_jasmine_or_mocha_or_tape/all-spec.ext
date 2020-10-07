@@ -2,7 +2,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 // @endif
-require('./setup');
 function requireAll(requireContext)/* @if typescript */: void/* @endif */ {
   requireContext.keys().map(requireContext);
 }

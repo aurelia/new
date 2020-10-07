@@ -42,6 +42,7 @@ module.exports = [
   {
     message: 'What unit testing framework to use?',
     choices: [
+      {value: 'no-unit-tests', title: 'None', hint: 'No unit testing'},
       {value: 'jest', title: 'Jest', hint: 'Runs in Node.js, simulates browser by default, with a focus on simplicity.'},
       // Disable ava for now.
       // TODO: build some custom transformer to apply our conventions when running in nodejs env.
