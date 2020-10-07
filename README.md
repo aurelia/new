@@ -6,7 +6,7 @@ The scaffolding repo for Aurelia 2 used by the [makes](https://makes.js.org) too
 
 ## Create an Aurelia 2 project
 
-First, ensure that you have Node.js v8.9.0 or above installed on your system. Next, using [npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b), a tool distributed as part of Node.js, we'll create a new Aurelia 2 app. At a command prompt, run the following command:
+First, ensure that you have Node.js v10 or above installed on your system. Next, using [npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b), a tool distributed as part of Node.js, we'll create a new Aurelia 2 app. At a command prompt, run the following command:
 
 ```bash
 npx makes aurelia
