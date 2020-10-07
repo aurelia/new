@@ -141,9 +141,11 @@ skeletons.forEach((features, i) => {
     await run('yarn');
     t.pass('installed deps');
 
-    console.log('-- npm test');
-    await run('npm test');
-    t.pass('finished unit tests');
+    if (!features.includes('no-unit-tests')) {
+      console.log('-- npm test');
+      await run('npm test');
+      t.pass('finished unit tests');
+    }
 
     console.log('-- npm run build');
     await run('npm run build', null,

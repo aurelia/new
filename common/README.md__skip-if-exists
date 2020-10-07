@@ -39,6 +39,7 @@ root_folder/dist/entry-bundle.12345.js
 ```
 // @endif
 
+// @if !no-unit-tests
 ## Unit Tests
 
     npm run test
@@ -59,5 +60,6 @@ Unit tests in watch mode is executed through stand webpack watch mode and the he
 // @endif
 // @if dumber
 Unit tests in watch mode is executed through standard `gulp.watch` with the help of [gulp-run](https://github.com/MrBoolean/gulp-run).
+// @endif
 // @endif
 // @endif
