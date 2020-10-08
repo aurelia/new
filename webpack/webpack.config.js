@@ -1,3 +1,6 @@
+// @if typescript
+/* eslint-disable @typescript-eslint/no-var-requires */
+// @endif
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
@@ -87,7 +90,7 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
           test: /\.css$/i,
           // For style loaded in src/main.js, it's not loaded by style-loader.
           // It's for shared styles for shadow-dom only.
-          issuer: /[\/\\]src[\/\\]main\.(js|ts)$/,
+          issuer: /[/\\]src[/\\]main\.(js|ts)$/,
           use: [ 'to-string-loader', cssLoader, postcssLoader ]
         },
         // @if less
@@ -95,7 +98,7 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
           test: /\.less$/i,
           // For style loaded in src/main.js, it's not loaded by style-loader.
           // It's for shared styles for shadow-dom only.
-          issuer: /[\/\\]src[\/\\]main\.(js|ts)$/,
+          issuer: /[/\\]src[/\\]main\.(js|ts)$/,
           use: [ 'to-string-loader', cssLoader, postcssLoader, 'less-loader' ]
         },
         // @endif
@@ -104,7 +107,7 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
           test: /\.scss$/i,
           // For style loaded in src/main.js, it's not loaded by style-loader.
           // It's for shared styles for shadow-dom only.
-          issuer: /[\/\\]src[\/\\]main\.(js|ts)$/,
+          issuer: /[/\\]src[/\\]main\.(js|ts)$/,
           use: [ 'to-string-loader', cssLoader, postcssLoader, sassLoader ]
         },
         // @endif
@@ -112,7 +115,7 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
           test: /\.css$/i,
           // For style loaded in other js/ts files, it's loaded by style-loader.
           // They are directly injected to HTML head.
-          issuer: /(?<![\/\\]src[\/\\]main)\.(js|ts)$/,
+          issuer: /(?<![/\\]src[/\\]main)\.(js|ts)$/,
           use: [ 'style-loader', cssLoader, postcssLoader ]
         },
         // @if less
@@ -120,7 +123,7 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
           test: /\.less$/i,
           // For style loaded in other js/ts files, it's loaded by style-loader.
           // They are directly injected to HTML head.
-          issuer: /(?<![\/\\]src[\/\\]main)\.(js|ts)$/,
+          issuer: /(?<![/\\]src[/\\]main)\.(js|ts)$/,
           use: [ 'style-loader', cssLoader, postcssLoader, 'less-loader' ]
         },
         // @endif
@@ -129,7 +132,7 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
           test: /\.scss$/i,
           // For style loaded in other js/ts files, it's loaded by style-loader.
           // They are directly injected to HTML head.
-          issuer: /(?<![\/\\]src[\/\\]main)\.(js|ts)$/,
+          issuer: /(?<![/\\]src[/\\]main)\.(js|ts)$/,
           use: [ 'style-loader', cssLoader, postcssLoader, sassLoader ]
         },
         // @endif
