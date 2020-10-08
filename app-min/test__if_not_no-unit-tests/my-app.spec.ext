@@ -42,7 +42,7 @@ test('my-app: should render message', async t => {
 // @if jasmine || jest || mocha
 describe('my-app', () => {
   it('should render message', async () => {
-    const node = (await render('<my-app></my-app>', MyApp)).firstElementChild ;
+    const node = (await render('<my-app></my-app>', MyApp)).firstElementChild;
     // @if shadow-dom
     // In Shadow DOM open mode, shadowRoot is also accessible through DOM API
     //   node.shadowRoot
