@@ -7,6 +7,9 @@ on:
   pull_request:
     branches:
     - master
+  schedule:
+    # runs at 00:00 UTC at Sunday and Wednesday
+    - cron: '0 0 * * 0,3'
 
 jobs:
   test-e2e:
