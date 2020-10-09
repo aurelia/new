@@ -71,6 +71,8 @@ const dr = dumber({
   // deps: [],
 
   // Code split is intuitive and flexible.
+  // https://dumber.js.org/options/code-split
+  //
   // You provide a function to return a bundle name for every single module.
   // The function takes two parameters:
   //
