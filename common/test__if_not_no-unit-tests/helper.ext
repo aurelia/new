@@ -6,6 +6,6 @@ export async function render(template/* @if typescript */: string/* @endif */, .
     host: div,
     component: wrapper
   });
-  await au.start().wait();
+  await au.start();
   return div;
 }
