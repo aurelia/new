@@ -253,7 +253,7 @@ function reload(done) {
 
 // Watch all files for rebuild and reload browserSync.
 function watch() {
-  return gulp.watch('src/**/*', gulp.series(build, reload));
+  gulp.watch('src/**/*', gulp.series(build, reload));
 }
 
 const run = gulp.series(clean, serve, watch);
@@ -261,7 +261,7 @@ const run = gulp.series(clean, serve, watch);
 // @if jasmine || tape || mocha
 // Watch all files for rebuild and test.
 function watchTest() {
-  return gulp.watch('{src,test}/**/*', gulp.series(build, test));
+  gulp.watch('{src,test}/**/*', gulp.series(build, test));
 }
 
 function test() {
