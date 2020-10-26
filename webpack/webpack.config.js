@@ -8,20 +8,19 @@ const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 const WebpackShellPluginNext = require('webpack-shell-plugin-next')
 // @endif
 
-// @if !css-module
-const cssLoader = 'css-loader';
-// @endif
-// @if css-module
 const cssLoader = {
   loader: 'css-loader',
   options: {
-    esModule: false,
+    // @if css-module
     modules: true,
     // https://github.com/webpack-contrib/css-loader#importloaders
-    importLoaders: /* @if css */1/* @endif *//* @if !css */2/* @endif */
+    importLoaders: /* @if css */1/* @endif *//* @if !css */2/* @endif */,
+    // @endif
+    // To be removed after releasing https://github.com/gajus/to-string-loader/pull/20
+    esModule: false
   }
 };
-// @endif
+
 // @if sass
 const sassLoader = {
   loader: 'sass-loader',
