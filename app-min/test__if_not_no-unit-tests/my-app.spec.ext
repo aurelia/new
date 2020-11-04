@@ -20,7 +20,7 @@ test('my-app: should render message', async t => {
   // In Shadow DOM open mode, shadowRoot is also accessible through DOM API
   //   node.shadowRoot
   // But only Aurelia API can access shadowRoot in both open and closed mode.
-  const shadowRoot = CustomElement.for(node).projector.provideEncapsulationSource();
+  const shadowRoot = CustomElement.for(node).shadowRoot;
   // @if babel
   const text = shadowRoot.textContent;
   // @endif
@@ -47,7 +47,7 @@ describe('my-app', () => {
     // In Shadow DOM open mode, shadowRoot is also accessible through DOM API
     //   node.shadowRoot
     // But only Aurelia API can access shadowRoot in both open and closed mode.
-    const shadowRoot = CustomElement.for(node).projector.provideEncapsulationSource();
+    const shadowRoot = CustomElement.for(node).shadowRoot;
     // @if babel
     const text = shadowRoot.textContent;
     // @endif
