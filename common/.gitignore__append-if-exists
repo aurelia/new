@@ -41,7 +41,7 @@ node_modules
 /.cache
 // @endif
 // @if dumber
-index.html
+/index.html
 // @endif
 // @if cypress
 /cypress/videos
