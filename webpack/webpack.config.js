@@ -8,18 +8,19 @@ const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 const WebpackShellPluginNext = require('webpack-shell-plugin-next')
 // @endif
 
+// @if !css-module
+const cssLoader = 'css-loader';
+// @endif
+// @if css-module
 const cssLoader = {
   loader: 'css-loader',
   options: {
-    // @if css-module
     modules: true,
     // https://github.com/webpack-contrib/css-loader#importloaders
-    importLoaders: /* @if css */1/* @endif *//* @if !css */2/* @endif */,
-    // @endif
-    // To be removed after releasing https://github.com/gajus/to-string-loader/pull/20
-    esModule: false
+    importLoaders: /* @if css */1/* @endif *//* @if !css */2/* @endif */
   }
 };
+// @endif
 
 // @if sass
 const sassLoader = {
@@ -90,7 +91,7 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
           // For style loaded in src/main.js, it's not loaded by style-loader.
           // It's for shared styles for shadow-dom only.
           issuer: /[/\\]src[/\\]main\.(js|ts)$/,
-          use: [ 'to-string-loader', cssLoader, postcssLoader ]
+          use: [ cssLoader, postcssLoader ]
         },
         // @if less
         {
@@ -98,7 +99,7 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
           // For style loaded in src/main.js, it's not loaded by style-loader.
           // It's for shared styles for shadow-dom only.
           issuer: /[/\\]src[/\\]main\.(js|ts)$/,
-          use: [ 'to-string-loader', cssLoader, postcssLoader, 'less-loader' ]
+          use: [ cssLoader, postcssLoader, 'less-loader' ]
         },
         // @endif
         // @if sass
@@ -107,7 +108,7 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
           // For style loaded in src/main.js, it's not loaded by style-loader.
           // It's for shared styles for shadow-dom only.
           issuer: /[/\\]src[/\\]main\.(js|ts)$/,
-          use: [ 'to-string-loader', cssLoader, postcssLoader, sassLoader ]
+          use: [ cssLoader, postcssLoader, sassLoader ]
         },
         // @endif
         {
@@ -139,14 +140,14 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
           test: /\.css$/i,
           // For style loaded in html files, Aurelia will handle it.
           issuer: /\.html$/,
-          use: [ 'to-string-loader', cssLoader, postcssLoader ]
+          use: [ cssLoader, postcssLoader ]
         },
         // @if less
         {
           test: /\.less$/i,
           // For style loaded in html files, Aurelia will handle it.
           issuer: /\.html$/,
-          use: [ 'to-string-loader', cssLoader, postcssLoader, 'less-loader' ]
+          use: [ cssLoader, postcssLoader, 'less-loader' ]
         },
         // @endif
         // @if sass
@@ -154,7 +155,7 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
           test: /\.scss$/i,
           // For style loaded in html files, Aurelia will handle it.
           issuer: /\.html$/,
-          use: [ 'to-string-loader', cssLoader, postcssLoader, sassLoader ]
+          use: [ cssLoader, postcssLoader, sassLoader ]
         },
         // @endif
         // @endif
