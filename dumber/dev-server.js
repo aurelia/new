@@ -49,7 +49,7 @@ exports.run = function({
     ))
     // connect-history-api-fallback is a tool to help SPA dev.
     // So in dev mode, http://localhost:port/some/route will get
-    // the same /index.html as content, instead off 404 at /some/route.html
+    // the same /index.html as content, instead of 404 at /some/route.html
     .use(historyApiFallback())
     .use((req, res, next) => {
       res.setHeader('Access-Control-Allow-Origin', '*');
