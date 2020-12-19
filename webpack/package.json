@@ -33,7 +33,7 @@
     // @endif
   },
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack serve",
     "build": "rimraf dist && webpack --env production",
     "analyze": "rimraf dist && webpack --env production --analyze",
     // @if jasmine || tape || mocha
