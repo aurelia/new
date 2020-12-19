@@ -70,6 +70,8 @@ function run(command, dataCB, errorCB) {
     });
     proc.stderr.on('data', data => {
       process.stderr.write(data);
+      // Skip webpack5 deprecation warning.
+      if (data.toString().includes('DeprecationWarning')) return;
       if (errorCB) {
         errorCB(data, () => {
           console.log(`-- kill "${command}"`);
