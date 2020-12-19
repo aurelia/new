@@ -1,15 +1,15 @@
 {
   "devDependencies": {
-    "ava": "^3.13.0",
+    "ava": "^3.14.0",
     "jsdom": "^16.4.0",
     "jsdom-global": "^3.0.2",
     // @if babel
     "@ava/babel": "^1.0.1",
-    "@babel/register": "^7.11.5",
+    "@babel/register": "^7.12.10",
     // @endif
     // @if typescript
     "@ava/typescript": "^1.1.1",
-    "ts-node": "^9.0.0",
+    "ts-node": "^9.1.1",
     // @endif
   },
   "scripts": {

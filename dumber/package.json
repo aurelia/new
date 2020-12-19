@@ -11,7 +11,7 @@
     // @endif
     "gulp-plumber": "^1.2.1",
     "merge2": "^1.4.1",
-    "gulp-terser": "^1.4.0",
+    "gulp-terser": "^2.0.0",
     "gulp-if": "^3.0.0",
     "del": "^6.0.0",
 
@@ -19,10 +19,10 @@
     "connect-history-api-fallback": "^1.6.0",
     "connect-injector": "^0.4.4",
     "serve-static": "^1.14.1",
-    "socket.io": "^2.3.0",
+    "socket.io": "^3.0.4",
     "open": "^7.3.0",
 
-    "cross-env": "^7.0.2",
+    "cross-env": "^7.0.3",
     // @if css-module
     "gulp-dumber-css-module": "^0.1.0",
     // @endif
@@ -32,9 +32,9 @@
     // @if sass
     "gulp-dart-sass": "^1.0.2",
     // @endif
-    "gulp-postcss": "^8.0.0",
-    "autoprefixer": "^9.8.6",
-    "postcss-url": "^8.0.0",
+    "gulp-postcss": "^9.0.0",
+    "autoprefixer": "^10.1.0",
+    "postcss-url": "^10.1.1",
     // @if jasmine || tape || mocha
     "gulp-run": "^1.7.1",
     // @endif
