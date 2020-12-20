@@ -43,9 +43,9 @@ const postcssLoader = {
 };
 
 module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @endif */analyze }) {
-  const production = env === 'production' || process.env.NODE_ENV === 'production';
+  const production = env.production || process.env.NODE_ENV === 'production';
   // @if jasmine || tape || mocha
-  const test = env === 'test' || process.env.NODE_ENV === 'test';
+  const test = env.test || process.env.NODE_ENV === 'test';
   // @endif
   return {
     mode: production ? 'production' : 'development',
