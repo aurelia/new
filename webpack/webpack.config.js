@@ -7,6 +7,9 @@ const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 // @if jasmine || tape || mocha
 const WebpackShellPluginNext = require('webpack-shell-plugin-next')
 // @endif
+// @if tape
+const {ProvidePlugin} = require('webpack');
+// @endif
 
 // @if !css-module
 const cssLoader = 'css-loader';
@@ -61,9 +64,25 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
       filename: 'entry-bundle.js'
     },
     resolve: {
+      // @if tape
+      fallback: {
+        // webpack 5 uses resolve.fallback for nodejs core module stubs.
+        fs: false,
+        path: require.resolve('path-browserify'),
+        stream: require.resolve('stream-browserify'),
+        buffer: require.resolve('buffer')
+      },
+      // @endif
       extensions: [/* @if typescript */'.ts', /* @endif */'.js'],
       modules: [path.resolve(__dirname, 'src'), 'node_modules']
     },
+    // @if tape
+    node: {
+      global: true,
+      __dirname: true,
+      __filename: true
+    },
+    // @endif
     devServer: {
       historyApiFallback: true,
       open: !process.env.CI,
@@ -196,12 +215,12 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
         // @endif
       ]
     },
-    // @if tape
-    node: {
-      fs: 'empty',
-    },
-    // @endif
     plugins: [
+      // @if tape
+      new ProvidePlugin({
+        process: 'process/browser'
+      }),
+      // @endif
       new HtmlWebpackPlugin({ template: 'index.ejs' }),
       analyze && new BundleAnalyzerPlugin()/* @if jasmine || tape || mocha*/,
       test && runTest && new WebpackShellPluginNext({
