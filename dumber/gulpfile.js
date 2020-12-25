@@ -22,6 +22,7 @@ const less = require('gulp-less');
 // @endif
 // @if sass
 const sass = require('gulp-dart-sass');
+const sassPackageImporter = require('node-sass-package-importer');
 // @endif
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
@@ -159,7 +160,11 @@ function buildCss(src) {
     // @if sass
     .pipe(gulpif(
       f => f.extname === '.scss',
-      isProduction || isTest ? sass.sync(): sass.sync().on('error', sass.logError)
+      // sassPackageImporter handles @import "~bootstrap"
+      // https://github.com/maoberlehner/node-sass-magic-importer/tree/master/packages/node-sass-package-importer
+      isProduction || isTest ?
+        sass.sync({importer: sassPackageImporter()}) :
+        sass.sync({importer: sassPackageImporter()}).on('error', sass.logError)
     ))
     // @endif
     .pipe(postcss([
