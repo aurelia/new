@@ -1,63 +1,96 @@
-const {
-  FuseBox,
-  HTMLPlugin,
-  UglifyJSPlugin,
-  QuantumPlugin,
-  WebIndexPlugin,
-  // @if babel
-  Babel7Plugin,
-  // @endif
-  CSSPlugin
-} = require("fuse-box");
-const { src, task } = require("fuse-box/sparky");
+import { fusebox, sparky } from "fuse-box";
+import { wrapContents } from 'fuse-box/plugins/pluginStrings';
+import { parsePluginOptions } from 'fuse-box/plugins/pluginUtils';
+import { preprocess, preprocessOptions } from '@aurelia/plugin-conventions';
 
-let run = (production) => {
-  const fuse = FuseBox.init({
-    target: "browser@es5",
-    homeDir: 'src',
-    output: 'dist/$name.js',
-    runAllMatchedPlugins: true,
-    plugins: [
-      production && UglifyJSPlugin(),
-      production && QuantumPlugin(),
-      // @if babel
-      Babel7Plugin({configFile: '../.babelrc'}),
-      HTMLPlugin({useDefault: false}),
-      // @endif
-      // @if typescript
-      HTMLPlugin(),
-      // @endif
-      WebIndexPlugin({
-        template: './index.html'
-      }),
-      CSSPlugin()
-    ]
+function pluginFoo(a, b) {
+  let [opts, matcher] = parsePluginOptions(a, b, {
+    defaultShadowOptions: null,
+    useCSSModule: false
   });
+  const allOptions = preprocessOptions(opts);
+  return (ctx) => {
+    ctx.ict.on('bundle_resolve_module', (props) => {
+      if (!props.module.captured) {
+        const module = props.module;
 
-  if (production) {
-    fuse.bundle('app')
-      // @if babel
-      .instructions(">main.js");
-      // @endif
-      // @if typescript
-      .instructions(">main.ts");
-      // @endif
-  } else {
-    fuse.bundle("app")
-      // @if babel
-      .instructions(">main.js")
-      // @endif
-      // @if typescript
-      .instructions(">main.ts")
-      // @endif
-      .hmr()
-      .watch();
-    fuse.dev({open: !process.env.CI, port: 9000});
+        if (!matcher.test(module.props.absPath)) {
+          return;
+        }
+        // read the contents
+        module.read();
+
+        const result = preprocess(
+          {
+            path: module.props.absPath,
+            contents: module.contents,
+          },
+          allOptions
+        );
+
+        if (result) {
+          if (allOptions.templateExtensions.includes(file.extname)) {
+            // Rewrite foo.html to foo.html.js, or foo.md to foo.md.js
+            module.props.absPath += '.js';
+          }
+
+          module.contents = result.code;
+          if (module.props.sourceMap) {
+            // ignore existing source map for now
+            module.props.sourceMap = result.map;
+          }
+        }
+      }
+      return props;
+    });
+  };
+}
+
+class Context {
+  runServer;
+  getConfig() {
+    return fusebox({
+      target: "browser",
+      entry: "src/main./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */",
+      webIndex: {
+        template: "index.html"
+      },
+      cache : true,
+      devServer: this.runServer,
+      plugins: [
+        // @if shadow-dom
+        // The other possible Shadow DOM mode is "closed".
+        // If you turn on "closed" mode, there will be difficulty to perform e2e
+        // tests (such as Cypress). Because shadowRoot is not accessible through
+        // standard DOM APIs in "closed" mode.
+        pluginFoo({defaultShadowOptions: {mode: 'open'}})
+        // @endif
+        // @if css-module
+        pluginFoo({useCSSModule: true})
+        // @endif
+        // @if !shadow-dom && !css-module
+        pluginFoo()
+        // @endif
+      ]
+    });
   }
+}
+const { task } = sparky(Context);
 
-  return fuse.run();
-};
+task("default", async ctx => {
+  ctx.runServer = true;
+  const fuse = ctx.getConfig();
+  await fuse.runDev();
+});
 
-task('clean', async () => await src('dist/*').clean('dist').exec());
-task("dev", ['clean'], () => run(false));
-task("prod", ['clean'], () => run(true));
+task("preview", async ctx => {
+  ctx.runServer = true;
+  const fuse = ctx.getConfig();
+  await fuse.runProd({ uglify: false });
+});
+
+task("build", async ctx => {
+  ctx.runServer = false;
+  const fuse = ctx.getConfig();
+  await fuse.runProd({ uglify: false });
+});
