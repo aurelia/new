@@ -5,7 +5,24 @@ const PRESETS = {
   'default-typescript': ['webpack', 'typescript', 'jest'],
 };
 
-module.exports = async function({unattended, prompts}) {
+const REQUIRE_NODEJS_VESION = [14, 15, 0];
+
+function isNodejsOutdated() {
+  const version = process.version.slice(1).split('.');
+  for (let i = 0; i < 3; i++) {
+    const actual = version[i];
+    const required = REQUIRE_NODEJS_VESION[i];
+    if (actual > required) return false;
+    if (actual < required) return true;
+  }
+  return false;
+}
+
+module.exports = async function({unattended, prompts, ansiColors}) {
+  if (isNodejsOutdated()) {
+    throw new Error(ansiColors.red(`Aurelia 2 requires at least Nodejs v${REQUIRE_NODEJS_VESION.join('.')}. Your Nodejs version is ${process.version}. Please install latest version from https://nodejs.org`));
+  }
+
   // don't ask when running in silent mode.
   if (unattended) return;
 
