@@ -18,11 +18,12 @@ function isNodejsOutdated() {
   return false;
 }
 
-module.exports = async function({unattended, prompts, ansiColors}) {
-  if (isNodejsOutdated()) {
-    throw new Error(ansiColors.red(`Aurelia 2 requires at least Nodejs v${REQUIRE_NODEJS_VESION.join('.')}. Your Nodejs version is ${process.version}. Please install latest version from https://nodejs.org`));
-  }
+if (isNodejsOutdated()) {
+  console.error('\x1b[31m' + `Aurelia 2 requires at least Nodejs v${REQUIRE_NODEJS_VESION.join('.')}. Your Nodejs version is ${process.version}. Please install latest version from https://nodejs.org` + '\x1b[0m');
+  process.exit(1);
+}
 
+module.exports = async function({unattended, prompts, ansiColors}) {
   // don't ask when running in silent mode.
   if (unattended) return;
 
