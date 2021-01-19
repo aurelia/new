@@ -6,7 +6,7 @@
     "@aurelia/babel-jest": "dev",
     // @endif
     // @if typescript
-    "@types/jest": "^26.0.19",
+    "@types/jest": "^26.0.20",
     "@aurelia/ts-jest": "dev",
     // @endif
   },

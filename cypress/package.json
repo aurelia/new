@@ -1,12 +1,12 @@
 {
   "devDependencies": {
     "cross-env": "^7.0.3",
-    "cypress": "^6.2.0",
+    "cypress": "^6.2.1",
     "eslint-plugin-cypress": "^2.11.2",
     // @if shadow-dom
     "cypress-shadow-dom": "^1.4.1",
     // @endif
-    "start-server-and-test": "^1.11.6"
+    "start-server-and-test": "^1.11.7"
   },
   "scripts": {
     "cypress": "cypress run",

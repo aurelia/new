@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "tape": "^5.0.1",
+    "tape": "^5.1.1",
     // TODO remove this once es-abstract 1.18 is released
     "es-abstract": "next",
     // @if typescript
