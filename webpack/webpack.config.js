@@ -57,11 +57,13 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
     entry: test ? './test/all-spec./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */' :  './src/main./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */',
     // @endif
     // @if !jasmine && !tape && !mocha
-    entry: './src/main./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */',
+    entry: {
+      entry: './src/main./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */'
+    },
     // @endif
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: 'entry-bundle.js'
+      filename: production ? '[name].[contenthash].bundle.js' : '[name].bundle.js'
     },
     resolve: {
       // @if tape
