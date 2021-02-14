@@ -52,7 +52,7 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
   // @endif
   return {
     mode: production ? 'production' : 'development',
-    devtool: production ? 'source-map' : 'inline-source-map',
+    devtool: production ? undefined : 'inline-source-map',
     // @if jasmine || tape || mocha
     entry: test ? './test/all-spec./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */' :  './src/main./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */',
     // @endif
