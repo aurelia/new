@@ -109,10 +109,10 @@ const dr = dumber({
   // }
   // If you turned on hash, you need this callback to update index.html
   onManifest: isTest ? undefined : function(filenameMap) {
-    // Update index.html entry.bundle.js with entry-bundle.hash...js
-    console.log('Update index.html with ' + filenameMap['entry.bundle.js']);
+    // Update index.html entry-bundle.js with entry-bundle.hash...js
+    console.log('Update index.html with ' + filenameMap['entry-bundle.js']);
     const indexHtml = fs.readFileSync('_index.html').toString()
-      .replace('entry.bundle.js', filenameMap['entry.bundle.js']);
+      .replace('entry-bundle.js', filenameMap['entry-bundle.js']);
 
     fs.writeFileSync('index.html', indexHtml);
   }
