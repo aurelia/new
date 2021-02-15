@@ -54,7 +54,9 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
     mode: production ? 'production' : 'development',
     devtool: production ? 'source-map' : 'inline-source-map',
     // @if jasmine || tape || mocha
-    entry: test ? './test/all-spec./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */' :  './src/main./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */',
+    entry: {
+      entry: test ? './test/all-spec./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */' :  './src/main./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */'
+    },
     // @endif
     // @if !jasmine && !tape && !mocha
     entry: {
