@@ -47,7 +47,7 @@ const dr = dumber({
   // cache: !isProduction,
 
   // entry bundle name, dumber default is "entry-bundle"
-  entryBundle: 'entry.bundle',
+  // entryBundle: 'entry-bundle',
 
   // Turn on hash for production build
   hash: isProduction,
