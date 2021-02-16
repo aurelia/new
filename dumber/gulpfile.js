@@ -46,8 +46,8 @@ const dr = dumber({
   // can turn off cache for production build
   // cache: !isProduction,
 
-  // entry bundle name, dumber default is "entry-bundle"
-  // entryBundle: 'entry-bundle',
+  // entry bundle name, dumber default is "entry.bundle"
+  entryBundle: 'entry.bundle',
 
   // Turn on hash for production build
   hash: isProduction,
@@ -89,7 +89,7 @@ const dr = dumber({
   //   for npm package file "node_modules/@scoped/foo/bar.js", the package name is "@scoped/foo"
 
   // Here we skip code splitting in test mode.
-  codeSplit: isTest ? undefined : function(moduleId, packageName) {
+  codeSplit: isTest ? undefined : function (moduleId, packageName) {
     // Here for any local src, put into app-bundle
     if (!packageName) return 'app-bundle';
     // The codeSplit func does not need to return a valid bundle name.
@@ -108,11 +108,11 @@ const dr = dumber({
   //   "other-bundle.js": "other-bundle.js"
   // }
   // If you turned on hash, you need this callback to update index.html
-  onManifest: isTest ? undefined : function(filenameMap) {
-    // Update index.html entry-bundle.js with entry-bundle.hash...js
-    console.log('Update index.html with ' + filenameMap['entry-bundle.js']);
+  onManifest: isTest ? undefined : function (filenameMap) {
+    // Update index.html entry.bundle.js with entry.bundle.hash...js
+    console.log('Update index.html with ' + filenameMap['entry.bundle.js']);
     const indexHtml = fs.readFileSync('_index.html').toString()
-      .replace('entry-bundle.js', filenameMap['entry-bundle.js']);
+      .replace('entry.bundle.js', filenameMap['entry.bundle.js']);
 
     fs.writeFileSync('index.html', indexHtml);
   }
@@ -120,9 +120,9 @@ const dr = dumber({
 
 function buildJs(src) {
   // @if typescript
-  const ts = typescript.createProject('tsconfig.json', {noEmitOnError: true});
+  const ts = typescript.createProject('tsconfig.json', { noEmitOnError: true });
   // @endif
-  return gulp.src(src, {sourcemaps: !isProduction})
+  return gulp.src(src, { sourcemaps: !isProduction })
     .pipe(gulpif(!isProduction && !isTest, plumber()))
     .pipe(au2())
     // @if babel
@@ -130,7 +130,7 @@ function buildJs(src) {
     // @endif
     // @if typescript
     .pipe(ts());
-    // @endif
+  // @endif
 }
 
 function buildHtml(src) {
@@ -141,18 +141,18 @@ function buildHtml(src) {
     // If you turn on "closed" mode, there will be difficulty to perform e2e
     // tests (such as Cypress). Because shadowRoot is not accessible through
     // standard DOM APIs in "closed" mode.
-    .pipe(au2({defaultShadowOptions: {mode: 'open'}}));
+    .pipe(au2({ defaultShadowOptions: { mode: 'open' } }));
     // @endif
     // @if css-module
-    .pipe(au2({useCSSModule: true}));
+    .pipe(au2({ useCSSModule: true }));
     // @endif
     // @if !shadow-dom && !css-module
     .pipe(au2());
-    // @endif
+  // @endif
 }
 
 function buildCss(src) {
-  return gulp.src(src, {sourcemaps: !isProduction})
+  return gulp.src(src, { sourcemaps: !isProduction })
     // @if less
     .pipe(gulpif(!isProduction && !isTest, plumber()))
     .pipe(gulpif(f => f.extname === '.less', less()))
@@ -163,8 +163,8 @@ function buildCss(src) {
       // sassPackageImporter handles @import "~bootstrap"
       // https://github.com/maoberlehner/node-sass-magic-importer/tree/master/packages/node-sass-package-importer
       isProduction || isTest ?
-        sass.sync({importer: sassPackageImporter()}) :
-        sass.sync({importer: sassPackageImporter()}).on('error', sass.logError)
+        sass.sync({ importer: sassPackageImporter() }) :
+        sass.sync({ importer: sassPackageImporter() }).on('error', sass.logError)
     ))
     // @endif
     .pipe(postcss([
@@ -175,7 +175,7 @@ function buildCss(src) {
       // some browsers.
       // Here we enforce base64 encoding for all assets to
       // improve compatibility on svg.
-      postcssUrl({url: 'inline', encodeType: 'base64'})
+      postcssUrl({ url: 'inline', encodeType: 'base64' })
     ]))/* @if css-module */
     .pipe(cssModule())/* @endif */;
 }
@@ -214,19 +214,19 @@ function build() {
     buildCss('src/**/*.{scss,css}')
     // @endif
   )
-  // Note we did extra call `dr()` here, this is designed to cater watch mode.
-  // dumber here consumes (swallows) all incoming Vinyl files,
-  // then generates new Vinyl files for all output bundle files.
-  .pipe(dr())
-  // Terser fast minify mode
-  // https://github.com/terser-js/terser#terser-fast-minify-mode
-  // It's a good balance on size and speed to turn off compress.
-  .pipe(gulpif(isProduction, terser({compress: false})))
-  // @if !jasmine && !mocha && !tape
-  .pipe(gulp.dest(dist, {sourcemaps: isProduction ? false : '.'}));
+    // Note we did extra call `dr()` here, this is designed to cater watch mode.
+    // dumber here consumes (swallows) all incoming Vinyl files,
+    // then generates new Vinyl files for all output bundle files.
+    .pipe(dr())
+    // Terser fast minify mode
+    // https://github.com/terser-js/terser#terser-fast-minify-mode
+    // It's a good balance on size and speed to turn off compress.
+    .pipe(gulpif(isProduction, terser({ compress: false })))
+    // @if !jasmine && !mocha && !tape
+    .pipe(gulp.dest(dist, { sourcemaps: isProduction ? false : '.' }));
   // @endif
   // @if jasmine || mocha || tape
-  .pipe(gulp.dest(dist, {sourcemaps: isProduction ? false : (isTest ? true : '.')}));
+  .pipe(gulp.dest(dist, { sourcemaps: isProduction ? false : (isTest ? true : '.') }));
   // @endif
 }
 
