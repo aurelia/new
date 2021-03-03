@@ -10,7 +10,7 @@
     "file-loader": "^6.2.0",
     "style-loader": "^2.0.0",
     "css-loader": "^5.0.1",
-    "@aurelia/webpack-loader": "dev",
+    "@aurelia/webpack-loader": /* @if !dev */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
     // @if babel
     "babel-loader": "^8.2.2",
     // @endif

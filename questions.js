@@ -1,5 +1,12 @@
 module.exports = [
   {
+    message: 'What Aurelia 2 release would you like to use?',
+    choices: [
+      {title: 'Latest', hint: 'Target latest v2.x.x release'},
+      {value: 'dev', title: 'Dev (nightly)', hint: 'Target nightly development release'},
+    ]
+  },
+  {
     message: 'Which bundler would you like to use?',
     choices: [
       {value: 'webpack', title: 'Webpack', hint: 'A powerful and popular bundler for modern JavaScript apps.'},
