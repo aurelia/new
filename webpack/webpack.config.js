@@ -90,8 +90,7 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
     devServer: {
       historyApiFallback: true,
       open: !process.env.CI,
-      port: 9000,
-      lazy: false
+      port: 9000
     },
     module: {
       rules: [
