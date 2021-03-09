@@ -3,11 +3,11 @@
     "jest": "^26.6.3",
     "jest-transform-stub": "^2.0.0",
     // @if babel
-    "@aurelia/babel-jest": /* @if !dev */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
+    "@aurelia/babel-jest": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
     // @endif
     // @if typescript
     "@types/jest": "^26.0.20",
-    "@aurelia/ts-jest": /* @if !dev */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
+    "@aurelia/ts-jest": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
     // @endif
   },
   "scripts": {

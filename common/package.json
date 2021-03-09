@@ -8,14 +8,14 @@
   },
   "license": "UNLICENSED",
   "dependencies": {
-    "aurelia": /* @if !dev */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
+    "aurelia": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
     // @if browser-ie11
     "promise-polyfill": "^8.2.0",
     // @endif
   },
   "devDependencies": {
     "eslint": "^7.18.0",
-    "@aurelia/testing": /* @if !dev */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
+    "@aurelia/testing": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
     "htmlhint": "^0.14.2",
     // @if less
     "lesshint": "^6.3.7",

@@ -2,7 +2,7 @@ module.exports = [
   {
     message: 'What Aurelia 2 release would you like to use?',
     choices: [
-      {title: 'Latest', hint: 'Target latest v2.x.x release'},
+      {value: 'latest', title: 'Latest', hint: 'Target latest v2.x.x release'},
       {value: 'dev', title: 'Dev (nightly)', hint: 'Target nightly development release'},
     ]
   },
