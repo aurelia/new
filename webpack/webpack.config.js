@@ -92,6 +92,10 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
       open: !process.env.CI,
       port: 9000
     },
+    watchOptions: {
+      // Remove this option if you need to watch file changes in npm packages.
+      ignored: /node_modules/,
+    },
     module: {
       rules: [
         { test: /\.(png|gif|jpg|cur)$/i, loader: 'url-loader', options: { limit: 8192 } },
