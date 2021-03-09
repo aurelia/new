@@ -72,6 +72,13 @@ function run(command, dataCB, errorCB) {
       process.stderr.write(data);
       // Skip webpack5 deprecation warning.
       if (data.toString().includes('DeprecationWarning')) return;
+      // webpack-dev-server v4 prints <i> [webpack-dev-server] Project is running at http://0.0.0.0:9000/ to stderr instead of stdout
+      if (data.toString().startsWith('<i>') && dataCB) {
+        dataCB(data, () => {
+          console.log(`-- kill "${command}"`);
+          killProc(proc);
+        });
+      }
       if (errorCB) {
         errorCB(data, () => {
           console.log(`-- kill "${command}"`);
