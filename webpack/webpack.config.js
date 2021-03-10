@@ -51,6 +51,7 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
   const test = env.test || process.env.NODE_ENV === 'test';
   // @endif
   return {
+    target: 'web',
     mode: production ? 'production' : 'development',
     devtool: production ? undefined : 'eval-cheap-source-map',
     // @if jasmine || tape || mocha
