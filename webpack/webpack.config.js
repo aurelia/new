@@ -190,7 +190,7 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
         // @endif
         // @if shadow-dom
         {
-          test: /\.html$/i,
+          test: /[/\\]src[/\\].+\.html$/i,
           use: {
             loader: '@aurelia/webpack-loader',
             options: {
@@ -206,7 +206,7 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
         // @endif
         // @if css-module
         {
-          test: /\.html$/i,
+          test: /[/\\]src[/\\].+\.html$/i,
           use: {
             loader: '@aurelia/webpack-loader',
             options: { useCSSModule: true }
@@ -215,7 +215,7 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
         }
         // @endif
         // @if !shadow-dom && !css-module
-        { test: /\.html$/i, use: '@aurelia/webpack-loader', exclude: /node_modules/ }
+        { test: /[/\\]src[/\\].+\.html$/i, use: '@aurelia/webpack-loader', exclude: /node_modules/ }
         // @endif
       ]
     },
