@@ -225,7 +225,7 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
         process: 'process/browser'
       }),
       // @endif
-      new HtmlWebpackPlugin({ template: 'index.ejs' }),
+      new HtmlWebpackPlugin({ template: 'index.html' }),
       analyze && new BundleAnalyzerPlugin()/* @if jasmine || tape || mocha*/,
       test && runTest && new WebpackShellPluginNext({
         dev: false,
