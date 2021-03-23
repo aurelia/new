@@ -1,11 +1,11 @@
 {
   "devDependencies": {
     "ava": "^3.15.0",
-    "jsdom": "^16.4.0",
+    "jsdom": "^16.5.1",
     "jsdom-global": "^3.0.2",
     // @if babel
     "@ava/babel": "^1.0.1",
-    "@babel/register": "^7.12.10",
+    "@babel/register": "^7.13.8",
     // @endif
     // @if typescript
     "@ava/typescript": "^1.1.1",
