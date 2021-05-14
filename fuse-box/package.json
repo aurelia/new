@@ -1,9 +1,9 @@
 {
   "devDependencies": {
     "fuse-box": "^4.0.0",
-    "terser": "^5.6.1",
-    "typescript": "^4.2.3",
-    "uglify-js": "^3.13.2",
+    "terser": "^5.7.0",
+    "typescript": "^4.2.4",
+    "uglify-js": "^3.13.6",
     "opn": "^6.0.0"
   },
   "scripts": {
