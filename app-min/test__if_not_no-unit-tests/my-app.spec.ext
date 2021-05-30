@@ -1,6 +1,3 @@
-// @if ava
-import test from 'ava';
-// @endif
 // @if tape
 import test from 'tape';
 // @endif
@@ -13,7 +10,7 @@ import { CustomElement } from 'aurelia';
 import { render } from './helper';
 import { MyApp } from '../src/my-app';
 
-// @if ava || tape
+// @if tape
 test('my-app: should render message', async t => {
   const node = (await render('<my-app></my-app>', MyApp)).firstElementChild;
   // @if shadow-dom
@@ -31,12 +28,7 @@ test('my-app: should render message', async t => {
   // @if !shadow-dom
   const text =  node.textContent;
   // @endif
-  // @if ava
-  t.is(text.trim(), 'Hello World!');
-  // @endif
-  // @if tape
   t.equal(text.trim(), 'Hello World!');
-  // @endif
 });
 // @endif
 // @if jasmine || jest || mocha
