@@ -51,9 +51,6 @@ module.exports = [
     choices: [
       {value: 'no-unit-tests', title: 'None', hint: 'No unit testing'},
       {value: 'jest', title: 'Jest', hint: 'Runs in Node.js, simulates browser by default, with a focus on simplicity.'},
-      // Disable ava for now.
-      // TODO: build some custom transformer to apply our conventions when running in nodejs env.
-      // {value: 'ava', title: 'Ava + jsdom-global', hint: 'Runs in Node.js, simulates browser with jsdom-global. A test runner for Node.js with a concise API, detailed error output, embrace of new language features and process isolation that let you write tests more effectively.'},
       {value: 'jasmine', title: 'Jasmine', hint: 'Runs in browser, a behavior-driven testing framework.'},
       {value: 'mocha', title: 'Mocha + Chai', hint: 'Runs in browser, a feature-rich JavaScript test framework for node and browsers.'},
       {value: 'tape', title: 'Tape', hint: 'Runs in browser, tap-producing test harness for node and browsers.'}

@@ -1,8 +1,0 @@
-export default {
-  typescript: {
-    extensions: ['ts'],
-    rewritePaths: {'src/': 'build/'}
-  },
-  files: ['test/**/*.spec.ts'],
-  'require': ['ts-node/register', './test/setup.ts']
-}
