@@ -2,7 +2,7 @@
   "devDependencies": {
     "jasmine-core": "^3.7.1",
     // @if typescript
-    "@types/jasmine": "^3.7.4",
+    "@types/jasmine": "^3.7.6",
     // @endif
   },
   "scripts": {
