@@ -7,7 +7,6 @@
     // @endif
     "moduleResolution": "node",
     "skipLibCheck": true,
-    "rootDir": "src",
     // @if browser-evergreen
     "target": "ES2017",
     // @endif
