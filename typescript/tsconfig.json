@@ -2,7 +2,7 @@
   "compilerOptions": {
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    // @if !jest && !ava
+    // @if !jest
     "module": "esnext",
     // @endif
     "moduleResolution": "node",
@@ -17,7 +17,7 @@
     "resolveJsonModule": true
   },
   "include": [
-    // @if jest || jasmine || mocha || tape || ava
+    // @if jest || jasmine || mocha || tape
     "test",
     // @endif
     "src"

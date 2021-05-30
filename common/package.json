@@ -37,7 +37,7 @@
     // @endif
     "lint:html": "htmlhint -c .htmlhintrc src",
     "lint": "npm run lint:js && npm run lint:html/* @if !css */ && npm run lint:css/* @endif */",
-    // @if jest || ava
+    // @if jest
     "pretest": "npm run lint",
     // @endif
     // @if jasmine || tape || mocha
