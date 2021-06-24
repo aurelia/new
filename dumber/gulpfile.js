@@ -249,14 +249,14 @@ const serve = gulp.series(
   }
 )
 
-// Reload browserSync
+// Reload dev server
 function reload(done) {
   console.log('Reloading the browser');
   devServer.reload();
   done();
 }
 
-// Watch all files for rebuild and reload browserSync.
+// Watch all files for rebuild and reload dev server.
 function watch() {
   gulp.watch('src/**/*', gulp.series(build, reload));
 }
