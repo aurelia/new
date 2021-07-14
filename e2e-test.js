@@ -72,6 +72,8 @@ function run(command, dataCB, errorCB) {
       process.stderr.write(data);
       // Skip webpack5 deprecation warning.
       if (data.toString().includes('DeprecationWarning')) return;
+      // Skip BABEL warning (used by dumber bundler) when reading @aurelia/runtime-html
+      if (data.toString().includes('The code generator has deoptimised the styling')) return;
       if (errorCB) {
         errorCB(data, () => {
           console.log(`-- kill "${command}"`);
