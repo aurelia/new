@@ -31,6 +31,9 @@
     // @if jasmine || tape || mocha
     "webpack-shell-plugin-next": "^2.2.2",
     // @endif
+    // @if plugin
+    "webpack-node-externals": "^3.0.0",
+    // @endif
   },
   "scripts": {
     "start": "webpack serve",

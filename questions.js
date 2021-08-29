@@ -1,5 +1,12 @@
 module.exports = [
   {
+    message: 'What kind of Aurelia 2 project?',
+    choices: [
+      { value: 'app', title: 'Application', hint: 'An Aurelia 2 Single-Page-Application' },
+      { value: 'plugin', title: 'Plugin', hint: 'An Aurelia 2 plugin project' },
+    ]
+  },
+  {
     message: 'What Aurelia 2 release would you like to use?',
     choices: [
       {value: 'latest', title: 'Latest', hint: 'Target latest v2.x.x release'},
@@ -10,7 +17,7 @@ module.exports = [
     message: 'Which bundler would you like to use?',
     choices: [
       {value: 'webpack', title: 'Webpack', hint: 'A powerful and popular bundler for modern JavaScript apps.'},
-      {value: 'dumber', title: 'Dumber', hint: 'A dumb JavasScript bundler, dumber than you and me. The successor of Aurelia CLI built-in bundler.'}
+      {if: 'app', value: 'dumber', title: 'Dumber', hint: 'A dumb JavasScript bundler, dumber than you and me. The successor of Aurelia CLI built-in bundler.'}
 
       // Pending implementation of conventions plugins for these bundlers.
 
@@ -60,14 +67,17 @@ module.exports = [
     message: 'Do you want to setup e2e test?',
     choices: [
       {title: 'No'},
-      {value: 'cypress', title: 'Yes (Cypress)', hint: 'Cypress offers fast, easy and reliable testing for anything that runs in a browser.'}
+      // TODO setup e2e for plugin project too.
+      {if: 'app', value: 'cypress', title: 'Yes (Cypress)', hint: 'Cypress offers fast, easy and reliable testing for anything that runs in a browser.'}
     ]
   },
   {
+
     message: 'What kind of sample code do you want in this project?',
     choices: [
-      {value: 'app-min', title: 'Bare minimum'},
-      {value: 'app-with-router', title: 'With direct routing'}
+      {if: 'app', value: 'app-min', title: 'Bare minimum'},
+      {if: 'app', value: 'app-with-router', title: 'With direct routing'},
+      {if: 'plugin', value: 'plugin-min', title: 'Bare minimum'},
     ]
   },
   // Currently this question is not visible to end user because there is only one option.
@@ -75,7 +85,9 @@ module.exports = [
   {
     message: 'What are your targeted browsers?',
     choices: [
-      {value: 'browser-evergreen', title: 'All Evergreen browsers', hint: 'Including Chrome, Edge, Firefox, Safari'}
+      {value: 'browser-evergreen', title: 'All Evergreen browsers', hint: 'Including Chrome, Edge, Firefox, Safari'},
+      // Pending Aurelia 2 to ship IE11 compatible dist.
+      // {if: 'app', value: 'browser-ie11', title: 'IE11 :-('}
     ]
   }
 ];
