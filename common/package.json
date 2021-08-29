@@ -1,6 +1,15 @@
 {
   "name": "/* @echo name */",
+  // @if app
   "description": "An Aurelia 2 client application.",
+  // @endif
+  // @if plugin
+  "description": "An Aurelia 2 plugin.",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  // @endif
   "version": "0.1.0",
   "repository": {
     "type": "git",

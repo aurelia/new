@@ -1,8 +1,10 @@
 // Use "before" task to ask user to select a preset (to skip questionnaire).
 
 const PRESETS = {
-  'default-esnext': ['webpack', 'babel', 'jest'],
-  'default-typescript': ['webpack', 'typescript', 'jest'],
+  'default-esnext': ['app', 'webpack', 'babel', 'jest'],
+  'default-typescript': ['app', 'webpack', 'typescript', 'jest'],
+  'default-esnext-plugin': ['plugin', 'webpack', 'babel', 'jest'],
+  'default-typescript-plugin': ['plugin', 'webpack', 'typescript', 'jest'],
 };
 
 const REQUIRE_NODEJS_VESION = [14, 15, 0];
@@ -33,13 +35,21 @@ module.exports = async function({unattended, prompts, ansiColors}) {
       {
         value: 'default-esnext',
         title: 'Default ESNext Aurelia 2 App',
-        hint: 'A basic Aurelia 2 App with Babel and Webpack'
+        hint: 'A basic Aurelia 2 app with Babel and Webpack'
       }, {
         value: 'default-typescript',
         title: 'Default TypeScript Aurelia 2 App',
-        hint: 'A basic Aurelia 2 App with TypeScript and Webpack'
+        hint: 'A basic Aurelia 2 app with TypeScript and Webpack'
       }, {
-        title: 'Custom Aurelia 2 App',
+        value: 'default-esnext-plugin',
+        title: 'Default ESNext Aurelia 2 Plugin',
+        hint: 'A basic Aurelia 2 plugin project with Babel and Webpack'
+      }, {
+        value: 'default-typescript-plugin',
+        title: 'Default TypeScript Aurelia 2 Plugin',
+        hint: 'A basic Aurelia 2 plugin project with TypeScript and Webpack'
+      }, {
+        title: 'Custom Aurelia 2 Project',
         hint: 'Select bundler, transpiler, and more.'
       }
     ]

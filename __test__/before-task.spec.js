@@ -23,7 +23,7 @@ test('"before" task can select default-esnext preset', async t => {
   const result = await before({unattended: false, prompts});
   t.deepEqual(result, {
     silentQuestions: true,
-    preselectedFeatures: ['webpack', 'babel', 'jest']
+    preselectedFeatures: ['app', 'webpack', 'babel', 'jest']
   });
 });
 
@@ -40,10 +40,41 @@ test('"before" task can select default-typescript preset', async t => {
   const result = await before({unattended: false, prompts});
   t.deepEqual(result, {
     silentQuestions: true,
-    preselectedFeatures: ['webpack', 'typescript', 'jest']
+    preselectedFeatures: ['app', 'webpack', 'typescript', 'jest']
   });
 });
 
+test('"before" task can select default-esnext-plugin preset', async t => {
+  const prompts = {
+    select(opts) {
+      t.truthy(opts.choices.find(c => c.value === 'default-esnext-plugin'));
+      return 'default-esnext-plugin';
+    }
+  };
+
+  const result = await before({ unattended: false, prompts });
+  t.deepEqual(result, {
+    silentQuestions: true,
+    preselectedFeatures: ['plugin', 'webpack', 'babel', 'jest']
+  });
+});
+
+test('"before" task can select default-typescript-plugin preset', async t => {
+  const prompts = {
+    select(opts) {
+      t.truthy(opts.choices.find(c => c.value === 'default-typescript-plugin'));
+      return new Promise(resolve => {
+        setTimeout(() => resolve('default-typescript-plugin'), 10);
+      });
+    }
+  };
+
+  const result = await before({ unattended: false, prompts });
+  t.deepEqual(result, {
+    silentQuestions: true,
+    preselectedFeatures: ['plugin', 'webpack', 'typescript', 'jest']
+  });
+});
 test('"before" task can select no preset', async t => {
   const prompts = {
     select(opts) {
