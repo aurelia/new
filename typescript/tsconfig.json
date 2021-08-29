@@ -14,7 +14,8 @@
     "target": "ES5",
     // @endif
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "sourceMap": true
   },
   "include": [
     // @if jest || jasmine || mocha || tape
