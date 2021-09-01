@@ -3,8 +3,8 @@
 const PRESETS = {
   'default-esnext': ['app', 'webpack', 'babel', 'jest'],
   'default-typescript': ['app', 'webpack', 'typescript', 'jest'],
-  'default-esnext-plugin': ['plugin', 'webpack', 'babel', 'jest'],
-  'default-typescript-plugin': ['plugin', 'webpack', 'typescript', 'jest'],
+  'default-esnext-plugin': ['plugin', 'webpack', 'babel', 'shadow-dom', 'jest'],
+  'default-typescript-plugin': ['plugin', 'webpack', 'typescript', 'shadow-dom', 'jest'],
 };
 
 const REQUIRE_NODEJS_VESION = [14, 15, 0];
@@ -43,11 +43,11 @@ module.exports = async function({unattended, prompts, ansiColors}) {
       }, {
         value: 'default-esnext-plugin',
         title: 'Default ESNext Aurelia 2 Plugin',
-        hint: 'A basic Aurelia 2 plugin project with Babel and Webpack'
+        hint: 'A basic Aurelia 2 plugin project with Babel, Webpack and ShadowDOM'
       }, {
         value: 'default-typescript-plugin',
         title: 'Default TypeScript Aurelia 2 Plugin',
-        hint: 'A basic Aurelia 2 plugin project with TypeScript and Webpack'
+        hint: 'A basic Aurelia 2 plugin project with TypeScript, Webpack and ShadowDOM'
       }, {
         title: 'Custom Aurelia 2 Project',
         hint: 'Select bundler, transpiler, and more.'
