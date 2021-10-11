@@ -5,4 +5,4 @@
 function requireAll(requireContext)/* @if typescript */: void/* @endif */ {
   requireContext.keys().map(requireContext);
 }
-requireAll(require.context('./', true, /spec\.(js|ts)$/));
+requireAll(require.context('./', true, /\.spec\.(js|ts)$/));

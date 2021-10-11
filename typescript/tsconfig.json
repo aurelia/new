@@ -2,12 +2,11 @@
   "compilerOptions": {
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    // @if !jest && !ava
+    // @if !jest
     "module": "esnext",
     // @endif
     "moduleResolution": "node",
     "skipLibCheck": true,
-    "rootDir": "src",
     // @if browser-evergreen
     "target": "ES2017",
     // @endif
@@ -15,10 +14,11 @@
     "target": "ES5",
     // @endif
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "sourceMap": true
   },
   "include": [
-    // @if jest || jasmine || mocha || tape || ava
+    // @if jest || jasmine || mocha || tape
     "test",
     // @endif
     "src"

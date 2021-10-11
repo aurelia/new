@@ -6,7 +6,7 @@ The scaffolding repo for Aurelia 2 used by the [makes](https://makes.js.org) too
 
 ## Create an Aurelia 2 project
 
-First, ensure that you have Node.js v10 or above installed on your system. Next, using [npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b), a tool distributed as part of Node.js, we'll create a new Aurelia 2 app. At a command prompt, run the following command:
+First, ensure that you have Node.js v14 or above installed on your system. Next, using [npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b), a tool distributed as part of Node.js, we'll create a new Aurelia 2 app. At a command prompt, run the following command:
 
 ```bash
 npx makes aurelia
@@ -24,7 +24,7 @@ This will cause `npx` to download the `makes` tool, along with the `aurelia` sca
 - [ ] Basic app with FuseBox (On hold)
   * FuseBox v4 is coming, and it's a total rewrite. Wait for it before implement.
 - [x] Basic less/scss setup.
-- [x] Basic unit test setup for jest, jasmine, mocha, tape. (ava is on hold, pending implementing transformer.)
+- [x] Basic unit test setup for jest, jasmine, mocha, tape.
 - [x] Basic e2e test setup for cypress
 
 ## Development

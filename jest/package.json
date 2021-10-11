@@ -1,19 +1,20 @@
 {
   "devDependencies": {
-    "jest": "^26.4.2",
+    "jest": "^27.0.4",
     "jest-transform-stub": "^2.0.0",
     // @if babel
-    "@aurelia/babel-jest": "dev",
+    "@aurelia/babel-jest": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
     // @endif
     // @if typescript
-    "@types/jest": "^26.0.14",
-    "@aurelia/ts-jest": "dev",
+    "@types/jest": "^26.0.23",
+    "@aurelia/ts-jest": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
     // @endif
   },
   "scripts": {
     "test": "jest"
   },
   "jest": {
+    "testEnvironment": "jsdom",
     "transform": {
       "\\.(css|less|sass|scss|styl|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "jest-transform-stub",
       // @if babel
@@ -49,6 +50,14 @@
       "src/**/*.ts",
       "!src/**/*.d.ts"
       // @endif
-    ]
+    ],
+
+    // @if typescript
+    "globals": {
+      "ts-jest": {
+        "isolatedModules": true
+      }
+    }
+    // @endif
   }
 }

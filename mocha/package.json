@@ -1,13 +1,13 @@
 {
   "devDependencies": {
-    "mocha": "^8.1.3",
-    "chai": "^4.2.0",
+    "mocha": "^9.0.1",
+    "chai": "^4.3.4",
     // @if typescript
-    "@types/mocha": "^8.0.3",
+    "@types/mocha": "^8.2.2",
     // @endif
   },
   "scripts": {
-    "test:headless": "browser-do --mocha < dist/entry-bundle.js",
-    "test:chrome": "browser-do --mocha --browser chrome < dist/entry-bundle.js"
+    "test:headless": "browser-do --mocha < dist/entry.bundle.js",
+    "test:chrome": "browser-do --mocha --browser chrome < dist/entry.bundle.js"
   }
 }

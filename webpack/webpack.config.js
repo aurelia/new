@@ -8,6 +8,12 @@ const Dotenv = require('dotenv-webpack');
 // @if jasmine || tape || mocha
 const WebpackShellPluginNext = require('webpack-shell-plugin-next')
 // @endif
+// @if tape
+const {ProvidePlugin} = require('webpack');
+// @endif
+// @if plugin
+const nodeExternals = require('webpack-node-externals');
+// @endif
 
 // @if !css-module
 const cssLoader = 'css-loader';
@@ -44,32 +50,79 @@ const postcssLoader = {
 };
 
 module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @endif */analyze }) {
-  const production = env === 'production' || process.env.NODE_ENV === 'production';
+  const production = env.production || process.env.NODE_ENV === 'production';
   // @if jasmine || tape || mocha
-  const test = env === 'test' || process.env.NODE_ENV === 'test';
+  const test = env.test || process.env.NODE_ENV === 'test';
   // @endif
   return {
+    // @if app
+    target: 'web',
+    // @endif
+    // @if plugin
+    target: production ? 'node' : 'web',
+    // @endif
     mode: production ? 'production' : 'development',
-    devtool: production ? 'source-maps' : 'inline-source-map',
+    devtool: production ? undefined : 'eval-cheap-source-map',
     // @if jasmine || tape || mocha
-    entry: test ? './test/all-spec./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */' :  './src/main./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */',
+    entry: {
+      entry: test ?
+        './test/all-spec./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */' :
+        // @if app
+        './src/main./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */'
+        // @endif
+        // @if plugin
+          // Build only plugin in production mode,
+          // build dev-app in non-production mode
+          (production ? './src/index./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */' : './dev-app/main./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */')
+        // @endif
+    },
     // @endif
     // @if !jasmine && !tape && !mocha
-    entry: './src/main./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */',
+    entry: {
+      // @if app
+      entry: './src/main./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */'
+      // @endif
+      // @if plugin
+      // Build only plugin in production mode,
+      // build dev-app in non-production mode
+      entry:  production? './src/index./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */' : './dev-app/main./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */'
+      // @endif
+    },
     // @endif
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: 'entry-bundle.js'
+      // @if app
+      filename: production ? '[name].[contenthash].bundle.js' : '[name].bundle.js'
+      // @endif
+      // @if plugin
+      filename: production ? 'index.js' : '[name].bundle.js',
+      library: production ? { type: 'commonjs' } : undefined
+      // @endif
     },
     resolve: {
+      // @if tape
+      fallback: {
+        // webpack 5 uses resolve.fallback for nodejs core module stubs.
+        fs: false,
+        path: require.resolve('path-browserify'),
+        stream: require.resolve('stream-browserify'),
+        buffer: require.resolve('buffer')
+      },
+      // @endif
       extensions: [/* @if typescript */'.ts', /* @endif */'.js'],
-      modules: [path.resolve(__dirname, 'src'), 'node_modules']
+      modules: [path.resolve(__dirname, 'src'),/* @if !production */ path.resolve(__dirname, 'dev-app'),/* @endif */ 'node_modules']
     },
+    // @if tape
+    node: {
+      global: true,
+      __dirname: true,
+      __filename: true
+    },
+    // @endif
     devServer: {
       historyApiFallback: true,
       open: !process.env.CI,
-      port: 9000,
-      lazy: false
+      port: 9000
     },
     module: {
       rules: [
@@ -166,7 +219,12 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
         // @endif
         // @if shadow-dom
         {
-          test: /\.html$/i,
+          // @if app
+          test: /[/\\]src[/\\].+\.html$/i,
+          // @endif
+          // @if plugin
+          test: /[/\\](?:src|dev-app)[/\\].+\.html$/i,
+          // @endif
           use: {
             loader: '@aurelia/webpack-loader',
             options: {
@@ -182,7 +240,12 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
         // @endif
         // @if css-module
         {
-          test: /\.html$/i,
+          // @if app
+          test: /[/\\]src[/\\].+\.html$/i,
+          // @endif
+          // @if plugin
+          test: /[/\\](?:src|dev-app)[/\\].+\.html$/i,
+          // @endif
           use: {
             loader: '@aurelia/webpack-loader',
             options: { useCSSModule: true }
@@ -191,17 +254,33 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
         }
         // @endif
         // @if !shadow-dom && !css-module
-        { test: /\.html$/i, use: '@aurelia/webpack-loader', exclude: /node_modules/ }
+        {
+          // @if app
+          test: /[/\\]src[/\\].+\.html$/i,
+          // @endif
+          // @if plugin
+          test: /[/\\](?:src|dev-app)[/\\].+\.html$/i,
+          // @endif
+          use: '@aurelia/webpack-loader',
+          exclude: /node_modules/
+        }
         // @endif
       ]
     },
-    // @if tape
-    node: {
-      fs: 'empty',
-    },
+    // @if plugin
+    externalsPresets: { node: production },
+    externals: [
+      // Skip npm dependencies in plugin build.
+      production && nodeExternals()
+    ].filter(p => p),
     // @endif
     plugins: [
-      new HtmlWebpackPlugin({ template: 'index.ejs' }),
+      // @if tape
+      new ProvidePlugin({
+        process: 'process/browser'
+      }),
+      // @endif
+      /* @if plugin */!production && /* @endif */new HtmlWebpackPlugin({ template: 'index.html' }),
       analyze && new BundleAnalyzerPlugin()/* @if jasmine || tape || mocha*/,
       test && runTest && new WebpackShellPluginNext({
         dev: false,

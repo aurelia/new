@@ -1,6 +1,15 @@
 {
   "name": "/* @echo name */",
+  // @if app
   "description": "An Aurelia 2 client application.",
+  // @endif
+  // @if plugin
+  "description": "An Aurelia 2 plugin.",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  // @endif
   "version": "0.1.0",
   "repository": {
     "type": "git",
@@ -8,15 +17,15 @@
   },
   "license": "UNLICENSED",
   "dependencies": {
-    "aurelia": "dev",
+    "aurelia": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
     // @if browser-ie11
-    "promise-polyfill": "^8.1.3",
+    "promise-polyfill": "^8.2.0",
     // @endif
   },
   "devDependencies": {
-    "eslint": "^7.10.0",
-    "@aurelia/testing": "dev",
-    "htmlhint": "^0.14.1",
+    "eslint": "^7.29.0",
+    "@aurelia/testing": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
+    "htmlhint": "^0.15.1",
     // @if less
     "lesshint": "^6.3.7",
     // @endif
@@ -37,7 +46,7 @@
     // @endif
     "lint:html": "htmlhint -c .htmlhintrc src",
     "lint": "npm run lint:js && npm run lint:html/* @if !css */ && npm run lint:css/* @endif */",
-    // @if jest || ava
+    // @if jest
     "pretest": "npm run lint",
     // @endif
     // @if jasmine || tape || mocha

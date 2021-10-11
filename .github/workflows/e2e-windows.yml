@@ -16,15 +16,14 @@ jobs:
       fail-fast: false
       matrix:
         node_version:
-          # - 10
-          - 12
+          - 14
         os:
           - windows-latest
         target_features:
-          - webpack,babel
-          - webpack,typescript
-          - dumber,babel
-          - dumber,typescript
+          - latest,webpack,babel
+          - latest,webpack,typescript
+          - latest,dumber,babel
+          - latest,dumber,typescript
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node_version }}
