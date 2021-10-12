@@ -281,6 +281,9 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
       }),
       // @endif
       /* @if plugin */!production && /* @endif */new HtmlWebpackPlugin({ template: 'index.html' }),
+      new Dotenv({
+        path: `./.env${production ? '' :  '.' + process.env.NODE_ENV}`,
+      }),
       analyze && new BundleAnalyzerPlugin()/* @if jasmine || tape || mocha*/,
       test && runTest && new WebpackShellPluginNext({
         dev: false,
@@ -288,10 +291,7 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
         onBuildEnd: {
           scripts: [ 'npm run test:headless' ]
         }
-      }),/* @endif */
-      new Dotenv({
-        path: `./.env${production ? '' :  '.' + process.env.NODE_ENV}`,
-      }),
+      })/* @endif */
     ].filter(p => p)
   }
 }
