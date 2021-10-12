@@ -4,6 +4,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
+const Dotenv = require('dotenv-webpack');
 // @if jasmine || tape || mocha
 const WebpackShellPluginNext = require('webpack-shell-plugin-next')
 // @endif
@@ -125,10 +126,8 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
     },
     module: {
       rules: [
-        { test: /\.(png|gif|jpg|cur)$/i, loader: 'url-loader', options: { limit: 8192 } },
-        { test: /\.woff2(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'url-loader', options: { limit: 10000, mimetype: 'application/font-woff2' } },
-        { test: /\.woff(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'url-loader', options: { limit: 10000, mimetype: 'application/font-woff' } },
-        { test: /\.(ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'file-loader' },
+        { test: /\.(png|svg|jpg|jpeg|gif)$/i, type: 'asset' },
+        { test: /\.(woff|woff2|ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/i,  type: 'asset' },
         // @if !shadow-dom
         { test: /\.css$/i, use: [ 'style-loader', cssLoader, postcssLoader ] },
         // @if less
@@ -282,6 +281,9 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
       }),
       // @endif
       /* @if plugin */!production && /* @endif */new HtmlWebpackPlugin({ template: 'index.html' }),
+      new Dotenv({
+        path: `./.env${production ? '' :  '.' + process.env.NODE_ENV}`,
+      }),
       analyze && new BundleAnalyzerPlugin()/* @if jasmine || tape || mocha*/,
       test && runTest && new WebpackShellPluginNext({
         dev: false,
