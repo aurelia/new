@@ -1,13 +1,13 @@
 /// <reference types="Cypress" />
 
-context('my-app', () => {
+context('app', () => {
   it('shows message', () => {
     cy.visit('/');
     // @if shadow-dom
-    cy.shadowGet('my-app').shadowFind('div').shadowContains('Hello World!');
+    cy.shadowGet('app').shadowFind('div').shadowContains('Hello World!');
     // @endif
     // @if !shadow-dom
-    cy.get('my-app>div').contains('Hello World!');
+    cy.get('app>div').contains('Hello World!');
     // @endif
   });
 });

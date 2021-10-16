@@ -292,6 +292,10 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
       new Dotenv({
         path: `./.env${production ? '' :  '.' + process.env.NODE_ENV}`,
       }),
+      // Makes some environment variables available (overtop the file ones)
+      new webpack.DefinePlugin(env.stringified),
+      // You can remove this if you don't use Moment.js:
+      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     ].filter(p => p)
   }
 }

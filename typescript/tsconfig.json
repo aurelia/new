@@ -1,5 +1,10 @@
 {
   "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     // @if !jest
@@ -15,15 +20,14 @@
     // @endif
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
     // @if jest || jasmine || mocha || tape
     "test",
     // @endif
     "src"
-  ],
-  "files": [
-    "src/resource.d.ts"
   ]
 }

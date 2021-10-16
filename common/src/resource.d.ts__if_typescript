@@ -1,3 +1,5 @@
+/// <reference types="node" />
+
 declare module '*.html' {
   import { IContainer, PartialBindableDefinition } from 'aurelia';
   export const name: string;
@@ -8,6 +10,46 @@ declare module '*.html' {
   export const bindables: Record<string, PartialBindableDefinition>;
   export const shadowOptions: { mode: 'open' | 'closed' } | undefined;
   export function register(container: IContainer);
+}
+
+declare module '*.avif' {
+  const src: string;
+  export default src;
+}
+
+declare module '*.bmp' {
+  const src: string;
+  export default src;
+}
+
+declare module '*.gif' {
+  const src: string;
+  export default src;
+}
+
+declare module '*.jpg' {
+  const src: string;
+  export default src;
+}
+
+declare module '*.jpeg' {
+  const src: string;
+  export default src;
+}
+
+declare module '*.png' {
+  const src: string;
+  export default src;
+}
+
+declare module '*.webp' {
+    const src: string;
+    export default src;
+}
+
+declare module '*.svg' {
+  const src: string;
+  export default src;
 }
 
 // @if css-module
