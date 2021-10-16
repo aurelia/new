@@ -3,13 +3,13 @@
 // @endif
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const Dotenv = require('dotenv-webpack');
 // @if jasmine || tape || mocha
 const WebpackShellPluginNext = require('webpack-shell-plugin-next')
 // @endif
 // @if tape
-const {ProvidePlugin} = require('webpack');
+const { ProvidePlugin } = require('webpack');
 // @endif
 // @if plugin
 const nodeExternals = require('webpack-node-externals');
@@ -49,7 +49,7 @@ const postcssLoader = {
   }
 };
 
-module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @endif */analyze }) {
+module.exports = function (env, { /* @if jasmine || tape || mocha*/runTest, /* @endif */analyze }) {
   const production = env.production || process.env.NODE_ENV === 'production';
   // @if jasmine || tape || mocha
   const test = env.test || process.env.NODE_ENV === 'test';
@@ -69,12 +69,12 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
         './test/all-spec./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */' :
         // @if app
         './src/main./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */'
-        // @endif
-        // @if plugin
+          // @endif
+          // @if plugin
           // Build only plugin in production mode,
           // build dev-app in non-production mode
           (production ? './src/index./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */' : './dev-app/main./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */')
-        // @endif
+      // @endif
     },
     // @endif
     // @if !jasmine && !tape && !mocha
@@ -85,7 +85,7 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
       // @if plugin
       // Build only plugin in production mode,
       // build dev-app in non-production mode
-      entry:  production? './src/index./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */' : './dev-app/main./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */'
+      entry: production ? './src/index./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */' : './dev-app/main./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */'
       // @endif
     },
     // @endif
@@ -127,14 +127,14 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
     module: {
       rules: [
         { test: /\.(png|svg|jpg|jpeg|gif)$/i, type: 'asset' },
-        { test: /\.(woff|woff2|ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/i,  type: 'asset' },
+        { test: /\.(woff|woff2|ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/i, type: 'asset' },
         // @if !shadow-dom
-        { test: /\.css$/i, use: [ 'style-loader', cssLoader, postcssLoader ] },
+        { test: /\.css$/i, use: ['style-loader', cssLoader, postcssLoader] },
         // @if less
-        { test: /\.less$/i, use: [ 'style-loader', cssLoader, postcssLoader, 'less-loader' ] },
+        { test: /\.less$/i, use: ['style-loader', cssLoader, postcssLoader, 'less-loader'] },
         // @endif
         // @if sass
-        { test: /\.scss$/i, use: [ 'style-loader', cssLoader, postcssLoader, sassLoader ] },
+        { test: /\.scss$/i, use: ['style-loader', cssLoader, postcssLoader, sassLoader] },
         // @endif
         // @endif
         // @if shadow-dom
@@ -143,7 +143,7 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
           // For style loaded in src/main.js, it's not loaded by style-loader.
           // It's for shared styles for shadow-dom only.
           issuer: /[/\\]src[/\\]main\.(js|ts)$/,
-          use: [ cssLoader, postcssLoader ]
+          use: [cssLoader, postcssLoader]
         },
         // @if less
         {
@@ -151,7 +151,7 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
           // For style loaded in src/main.js, it's not loaded by style-loader.
           // It's for shared styles for shadow-dom only.
           issuer: /[/\\]src[/\\]main\.(js|ts)$/,
-          use: [ cssLoader, postcssLoader, 'less-loader' ]
+          use: [cssLoader, postcssLoader, 'less-loader']
         },
         // @endif
         // @if sass
@@ -160,7 +160,7 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
           // For style loaded in src/main.js, it's not loaded by style-loader.
           // It's for shared styles for shadow-dom only.
           issuer: /[/\\]src[/\\]main\.(js|ts)$/,
-          use: [ cssLoader, postcssLoader, sassLoader ]
+          use: [cssLoader, postcssLoader, sassLoader]
         },
         // @endif
         {
@@ -168,7 +168,7 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
           // For style loaded in other js/ts files, it's loaded by style-loader.
           // They are directly injected to HTML head.
           issuer: /(?<![/\\]src[/\\]main)\.(js|ts)$/,
-          use: [ 'style-loader', cssLoader, postcssLoader ]
+          use: ['style-loader', cssLoader, postcssLoader]
         },
         // @if less
         {
@@ -176,7 +176,7 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
           // For style loaded in other js/ts files, it's loaded by style-loader.
           // They are directly injected to HTML head.
           issuer: /(?<![/\\]src[/\\]main)\.(js|ts)$/,
-          use: [ 'style-loader', cssLoader, postcssLoader, 'less-loader' ]
+          use: ['style-loader', cssLoader, postcssLoader, 'less-loader']
         },
         // @endif
         // @if sass
@@ -185,21 +185,21 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
           // For style loaded in other js/ts files, it's loaded by style-loader.
           // They are directly injected to HTML head.
           issuer: /(?<![/\\]src[/\\]main)\.(js|ts)$/,
-          use: [ 'style-loader', cssLoader, postcssLoader, sassLoader ]
+          use: ['style-loader', cssLoader, postcssLoader, sassLoader]
         },
         // @endif
         {
           test: /\.css$/i,
           // For style loaded in html files, Aurelia will handle it.
           issuer: /\.html$/,
-          use: [ cssLoader, postcssLoader ]
+          use: [cssLoader, postcssLoader]
         },
         // @if less
         {
           test: /\.less$/i,
           // For style loaded in html files, Aurelia will handle it.
           issuer: /\.html$/,
-          use: [ cssLoader, postcssLoader, 'less-loader' ]
+          use: [cssLoader, postcssLoader, 'less-loader']
         },
         // @endif
         // @if sass
@@ -207,7 +207,7 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
           test: /\.scss$/i,
           // For style loaded in html files, Aurelia will handle it.
           issuer: /\.html$/,
-          use: [ cssLoader, postcssLoader, sassLoader ]
+          use: [cssLoader, postcssLoader, sassLoader]
         },
         // @endif
         // @endif
@@ -281,21 +281,21 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
       }),
       // @endif
       /* @if plugin */!production && /* @endif */new HtmlWebpackPlugin({ template: 'index.html' }),
-      analyze && new BundleAnalyzerPlugin()/* @if jasmine || tape || mocha*/,
-      test && runTest && new WebpackShellPluginNext({
-        dev: false,
-        swallowError: true,
-        onBuildEnd: {
-          scripts: [ 'npm run test:headless' ]
-        }
-      }),/* @endif */
       new Dotenv({
-        path: `./.env${production ? '' :  '.' + process.env.NODE_ENV}`,
+        path: `./.env${production ? '' : '.' + process.env.NODE_ENV}`,
       }),
       // Makes some environment variables available (overtop the file ones)
       new webpack.DefinePlugin(env.stringified),
       // You can remove this if you don't use Moment.js:
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+      analyze && new BundleAnalyzerPlugin()/* @if jasmine || tape || mocha*/,
+      test && runTest && new WebpackShellPluginNext({
+        dev: false,
+        swallowError: true,
+        onBuildEnd: {
+          scripts: ['npm run test:headless']
+        }
+      })/* @endif */
     ].filter(p => p)
   }
 }
