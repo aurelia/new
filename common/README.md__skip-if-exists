@@ -79,7 +79,7 @@ import * as myPlugin from '/* @echo name */';
 Aurelia
   // Load all exports from the plugin
   .register(myPlugin)
-  .app(App)
+  .app(AppRoot)
   .start();
 ```
 // @endif

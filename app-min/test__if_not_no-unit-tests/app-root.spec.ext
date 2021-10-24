@@ -8,11 +8,11 @@ import { expect } from 'chai';
 import { CustomElement } from 'aurelia';
 // @endif
 import { render } from './helper';
-import { App } from '../src/app';
+import { AppRoot } from '../src/app-root';
 
 // @if tape
-test('app: should render message', async t => {
-  const node = (await render('<app></app>', App)).firstElementChild;
+test('app-root: should render message', async t => {
+  const node = (await render('<app-root></app-root>', AppRoot)).firstElementChild;
   // @if shadow-dom
   // In Shadow DOM open mode, shadowRoot is also accessible through DOM API
   //   node.shadowRoot
@@ -32,9 +32,9 @@ test('app: should render message', async t => {
 });
 // @endif
 // @if jasmine || jest || mocha
-describe('app', () => {
+describe('app-root', () => {
   it('should render message', async () => {
-    const node = (await render('<app></app>', App)).firstElementChild;
+    const node = (await render('<app-root></app-root>', AppRoot)).firstElementChild;
     // @if shadow-dom
     // In Shadow DOM open mode, shadowRoot is also accessible through DOM API
     //   node.shadowRoot
