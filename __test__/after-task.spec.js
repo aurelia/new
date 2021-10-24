@@ -25,7 +25,7 @@ test('"after" task only prints summary in unattended mode', async t => {
     here: false,
     prompts,
     run,
-    properties: {name: 'app'},
+    properties: {name: 'app-root'},
     notDefaultFeatures: ['a', 'b-c'],
     ansiColors
   }, {
@@ -60,7 +60,7 @@ test('"after" task only prints summary in unattended mode and here mode', async 
     here: true,
     prompts,
     run,
-    properties: {name: 'app'},
+    properties: {name: 'app-root'},
     notDefaultFeatures: ['a', 'b-c'],
     ansiColors
   }, {
@@ -96,7 +96,7 @@ test('"after" task installs deps, and prints summary', async t => {
     here: false,
     prompts,
     run,
-    properties: {name: 'app'},
+    properties: {name: 'app-root'},
     notDefaultFeatures: ['a', 'b-c'],
     ansiColors
   }, {
@@ -134,7 +134,7 @@ test('"after" task installs deps, and prints summary in here mode', async t => {
     here: true,
     prompts,
     run,
-    properties: {name: 'app'},
+    properties: {name: 'app-root'},
     notDefaultFeatures: ['a', 'b-c'],
     ansiColors
   }, {
