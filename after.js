@@ -1,17 +1,17 @@
 // Use "after" task to ask user to install deps.
 
-const {execSync} = require('child_process');
+const { execSync } = require('child_process');
 
 function isAvailable(bin) {
   try {
-    execSync(bin + ' -v', {stdio: 'ignore'});
+    execSync(bin + ' -v', { stdio: 'ignore' });
     return true;
   } catch (e) {
     return false;
   }
 }
 
-module.exports = async function({
+module.exports = async function ({
   unattended, here, prompts, run, properties, notDefaultFeatures, ansiColors
 }, {
   // for testing
@@ -23,16 +23,16 @@ module.exports = async function({
 
   if (!unattended) {
     const choices = [
-      {title: 'No'},
-      {value: 'npm', title: 'Yes, use npm'}
+      { title: 'No' },
+      { value: 'npm', title: 'Yes, use npm' }
     ];
 
     if (_isAvailable('yarn')) {
-      choices.push({value: 'yarn', title: 'Yes, use yarn'});
+      choices.push({ value: 'yarn', title: 'Yes, use yarn' });
     }
 
     if (_isAvailable('pnpm')) {
-      choices.push({value: 'pnpm', title: 'Yes, use pnpm'});
+      choices.push({ value: 'pnpm', title: 'Yes, use pnpm' });
     }
 
     const result = await prompts.select({
@@ -45,10 +45,21 @@ module.exports = async function({
       depsInstalled = true;
     }
 
-    _log(`\nNext time, you can try to create similar project in silent mode:`);
-    _log(c.inverse(` npx makes aurelia new-project-name${here ? ' --here' : ''} -s ${notDefaultFeatures.length ? (notDefaultFeatures.join(',') + ' ') : ''}`));
+    if (_isAvailable('code')) {
+      const vcodeResult = await prompts.select({
+        message: `Would you like to open your project in vscode?`,
+        choices: [
+          { title: 'No' },
+          { value: true, title: 'Yes' }
+        ]
+      });
+      if (vcodeResult) {
+        await run(code, [here ? '.' : properties.name]);
+      }
+      _log(`\nNext time, you can try to create similar project in silent mode:`);
+      _log(c.inverse(` npx makes aurelia new-project-name${here ? ' --here' : ''} -s ${notDefaultFeatures.length ? (notDefaultFeatures.join(',') + ' ') : ''}`));
+    }
   }
-
   _log(`\n${c.underline.bold('Get Started')}`);
   if (!here) _log('cd ' + properties.name);
   if (!depsInstalled) _log('npm install');
