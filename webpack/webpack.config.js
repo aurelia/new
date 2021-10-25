@@ -286,7 +286,7 @@ module.exports = function (env, { /* @if jasmine || tape || mocha*/runTest, /* @
         path: `./.env${production ? '' : '.' + process.env.NODE_ENV}`,
       }),
       // Makes some environment variables available (overtop the file ones)
-      new webpack.DefinePlugin(env.stringified),
+      new webpack.EnvironmentPlugin(process.env),
       // You can remove this if you don't use Moment.js:
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
       analyze && new BundleAnalyzerPlugin()/* @if jasmine || tape || mocha*/,
