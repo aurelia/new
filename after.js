@@ -56,9 +56,9 @@ module.exports = async function ({
       if (vcodeResult) {
         await run(code, [here ? '.' : properties.name]);
       }
-      _log(`\nNext time, you can try to create similar project in silent mode:`);
-      _log(c.inverse(` npx makes aurelia new-project-name${here ? ' --here' : ''} -s ${notDefaultFeatures.length ? (notDefaultFeatures.join(',') + ' ') : ''}`));
     }
+    _log(`\nNext time, you can try to create similar project in silent mode:`);
+    _log(c.inverse(` npx makes aurelia new-project-name${here ? ' --here' : ''} -s ${notDefaultFeatures.length ? (notDefaultFeatures.join(',') + ' ') : ''}`));
   }
   _log(`\n${c.underline.bold('Get Started')}`);
   if (!here) _log('cd ' + properties.name);
