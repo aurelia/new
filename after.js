@@ -54,7 +54,7 @@ module.exports = async function ({
         ]
       });
       if (vcodeResult) {
-        await run(code, [here ? '.' : properties.name]);
+        await run(`code .`);
       }
     }
     _log(`\nNext time, you can try to create similar project in silent mode:`);
