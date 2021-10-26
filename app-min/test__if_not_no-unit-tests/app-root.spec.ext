@@ -48,7 +48,12 @@ describe('app-root', () => {
     // @endif
     // @endif
     // @if !shadow-dom
-    const text =  node.textContent;
+    // @if babel
+    const text = node.textContent;
+     // @endif
+    // @if typescript
+    const text = node?.textContent ?? '';
+    // @endif
     // @endif
     // @if jasmine || jest
     expect(text.trim()).toBe('Hello World!');
