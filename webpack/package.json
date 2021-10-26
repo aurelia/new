@@ -30,10 +30,10 @@
     // @if jasmine || tape || mocha
     "webpack-shell-plugin-next": "^2.2.2",
     // @endif
-    // @if typescript && mocha
+    // @if mocha
     "chai": "^4.3.4",
     // @endif
-    // @if typescript && tape
+    // @if tape
     "tape": "^5.3.1",
     // @endif
     // @if plugin
