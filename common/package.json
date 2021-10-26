@@ -35,6 +35,16 @@
     // @if jasmine || tape || mocha
     "browser-do": "^3.0.2",
     // @endif
+    // @if mocha
+    "chai": "^4.3.4",
+    "mocha": "^9.1.3",
+    "@types/chai": "^4.2.22",
+    "@types/mocha": "^9.0.0",
+    // @endif
+    // @if tape
+    "tape": "^5.3.1",
+    "@types/tape": "^4.13.2",
+    // @endif
   },
   "scripts": {
     "lint:js": "eslint src test/* @if cypress */ cypress/* @endif *//* @if typescript */ --ext .js,.ts/* @endif */",
