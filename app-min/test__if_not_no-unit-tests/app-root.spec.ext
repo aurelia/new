@@ -44,7 +44,7 @@ describe('app-root', () => {
     const text = shadowRoot.textContent;
     // @endif
     // @if typescript
-    const text = (shadowRoot as Node).textContent;
+    const text = (shadowRoot as Node)?.textContent ?? '';
     // @endif
     // @endif
     // @if !shadow-dom
