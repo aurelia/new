@@ -163,8 +163,8 @@ function buildCss(src) {
       // sassPackageImporter handles @import "~bootstrap"
       // https://github.com/maoberlehner/node-sass-magic-importer/tree/master/packages/node-sass-package-importer
       isProduction || isTest ?
-        sass.sync({ importer: sassPackageImporter() }) :
-        sass.sync({ importer: sassPackageImporter() }).on('error', sass.logError)
+        sass.sync({ quietDeps: true, importer: sassPackageImporter() }) :
+        sass.sync({ quietDeps: true, importer: sassPackageImporter() }).on('error', sass.logError)
     ))
     // @endif
     .pipe(postcss([
