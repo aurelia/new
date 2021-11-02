@@ -37,7 +37,7 @@
     "postcss": "^8.3.11",
     "autoprefixer": "^10.4.0",
     "postcss-url": "^10.1.3",
-    // @if jasmine || tape || mocha
+    // @if jasmine || mocha
     "gulp-run": "^1.7.1",
     // @endif
   },
@@ -45,7 +45,7 @@
     "start": "gulp",
     "build": "gulp clean && cross-env NODE_ENV=production gulp build",
     "clear-cache": "gulp clear-cache",
-    // @if jasmine || tape || mocha
+    // @if jasmine || mocha
     "build:test": "gulp clean && cross-env NODE_ENV=test gulp build",
     "test:watch": "gulp clean && cross-env NODE_ENV=test gulp watch-test"
     // @endif

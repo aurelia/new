@@ -1,6 +1,3 @@
-// @if tape
-import test from 'tape';
-// @endif
 // @if mocha
 import { expect } from 'chai';
 // @endif
@@ -10,28 +7,6 @@ import { CustomElement } from 'aurelia';
 import { render } from './helper';
 import { MyApp } from '../src/my-app';
 
-// @if tape
-test('my-app: should render message', async t => {
-  const node = (await render('<my-app></my-app>', MyApp)).firstElementChild;
-  // @if shadow-dom
-  // In Shadow DOM open mode, shadowRoot is also accessible through DOM API
-  //   node.shadowRoot
-  // But only Aurelia API can access shadowRoot in both open and closed mode.
-  const shadowRoot = CustomElement.for(node).shadowRoot;
-  // @if babel
-  const text = shadowRoot.textContent;
-  // @endif
-  // @if typescript
-  const text = (shadowRoot as Node).textContent;
-  // @endif
-  // @endif
-  // @if !shadow-dom
-  const text =  node.textContent;
-  // @endif
-  t.equal(text.trim(), 'Hello World!');
-});
-// @endif
-// @if jasmine || jest || mocha
 describe('my-app', () => {
   it('should render message', async () => {
     const node = (await render('<my-app></my-app>', MyApp)).firstElementChild;
@@ -58,4 +33,3 @@ describe('my-app', () => {
     // @endif
   });
 });
-// @endif

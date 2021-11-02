@@ -32,7 +32,7 @@
     // @if sass
     "sass-lint": "^1.13.1",
     // @endif
-    // @if jasmine || tape || mocha
+    // @if jasmine || mocha
     "browser-do": "^3.0.2",
     // @endif
   },
@@ -49,7 +49,7 @@
     // @if jest
     "pretest": "npm run lint",
     // @endif
-    // @if jasmine || tape || mocha
+    // @if jasmine || mocha
     "test": "npm run test:headless",
     "pretest": "npm run lint && npm run build:test",
     // @endif

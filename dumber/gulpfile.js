@@ -27,7 +27,7 @@ const sassPackageImporter = require('node-sass-package-importer');
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const postcssUrl = require('postcss-url');
-// @if jasmine || tape || mocha
+// @if jasmine || mocha
 const gulpRun = require('gulp-run');
 // @endif
 
@@ -58,7 +58,7 @@ const dr = dumber({
   // dumber-module-loader is injected automatically by dumber bundler after prepends.
   // prepend: [],
 
-  // @if jasmine || tape || mocha
+  // @if jasmine || mocha
   // append after amd loader and all module definitions in entry bundle.
   append: [
     // Kick off all test files.
@@ -188,18 +188,18 @@ function build() {
   return merge2(
     gulp.src('src/**/*.json'),
     // @if babel
-    // @if !jasmine && !tape && !mocha
+    // @if !jasmine && !mocha
     buildJs('src/**/*.js'),
     // @endif
-    // @if jasmine || mocha || tape
+    // @if jasmine || mocha
     buildJs(isTest ? '{src,test}/**/*.js' : 'src/**/*.js'),
     // @endif
     // @endif
     // @if typescript
-    // @if !jasmine && !tape && !mocha
+    // @if !jasmine && !mocha
     buildJs('src/**/*.ts'),
     // @endif
-    // @if jasmine || mocha || tape
+    // @if jasmine || mocha
     buildJs(isTest ? '{src,test}/**/*.ts' : 'src/**/*.ts'),
     // @endif
     // @endif
@@ -222,12 +222,12 @@ function build() {
     // https://github.com/terser-js/terser#terser-fast-minify-mode
     // It's a good balance on size and speed to turn off compress.
     .pipe(gulpif(isProduction, terser({ compress: false })))
-    // @if !jasmine && !mocha && !tape
+    // @if !jasmine && !mocha
     .pipe(gulp.dest(dist, { sourcemaps: isProduction ? false : '.' }));
-  // @endif
-  // @if jasmine || mocha || tape
-  .pipe(gulp.dest(dist, { sourcemaps: isProduction ? false : (isTest ? true : '.') }));
-  // @endif
+    // @endif
+    // @if jasmine || mocha
+    .pipe(gulp.dest(dist, { sourcemaps: isProduction ? false : (isTest ? true : '.') }));
+    // @endif
 }
 
 function clean() {
@@ -263,7 +263,7 @@ function watch() {
 
 const run = gulp.series(clean, serve, watch);
 
-// @if jasmine || tape || mocha
+// @if jasmine || mocha
 // Watch all files for rebuild and test.
 function watchTest() {
   gulp.watch('{src,test}/**/*', gulp.series(build, test));
