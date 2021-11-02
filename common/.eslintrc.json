@@ -3,7 +3,7 @@
 
   // @if babel
   "extends": "eslint:recommended",
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   // @endif
 
   // @if typescript

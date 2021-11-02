@@ -5,11 +5,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 const Dotenv = require('dotenv-webpack');
-// @if jasmine || tape || mocha
+// @if jasmine || mocha
 const WebpackShellPluginNext = require('webpack-shell-plugin-next')
-// @endif
-// @if tape
-const {ProvidePlugin} = require('webpack');
 // @endif
 // @if plugin
 const nodeExternals = require('webpack-node-externals');
@@ -49,9 +46,9 @@ const postcssLoader = {
   }
 };
 
-module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @endif */analyze }) {
+module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */analyze }) {
   const production = env.production || process.env.NODE_ENV === 'production';
-  // @if jasmine || tape || mocha
+  // @if jasmine || mocha
   const test = env.test || process.env.NODE_ENV === 'test';
   // @endif
   return {
@@ -63,7 +60,7 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
     // @endif
     mode: production ? 'production' : 'development',
     devtool: production ? undefined : 'eval-cheap-source-map',
-    // @if jasmine || tape || mocha
+    // @if jasmine || mocha
     entry: {
       entry: test ?
         './test/all-spec./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */' :
@@ -77,7 +74,7 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
         // @endif
     },
     // @endif
-    // @if !jasmine && !tape && !mocha
+    // @if !jasmine && !mocha
     entry: {
       // @if app
       entry: './src/main./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */'
@@ -100,25 +97,9 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
       // @endif
     },
     resolve: {
-      // @if tape
-      fallback: {
-        // webpack 5 uses resolve.fallback for nodejs core module stubs.
-        fs: false,
-        path: require.resolve('path-browserify'),
-        stream: require.resolve('stream-browserify'),
-        buffer: require.resolve('buffer')
-      },
-      // @endif
       extensions: [/* @if typescript */'.ts', /* @endif */'.js'],
       modules: [path.resolve(__dirname, 'src'),/* @if !production */ path.resolve(__dirname, 'dev-app'),/* @endif */ 'node_modules']
     },
-    // @if tape
-    node: {
-      global: true,
-      __dirname: true,
-      __filename: true
-    },
-    // @endif
     devServer: {
       historyApiFallback: true,
       open: !process.env.CI,
@@ -275,16 +256,11 @@ module.exports = function(env, { /* @if jasmine || tape || mocha*/runTest, /* @e
     ].filter(p => p),
     // @endif
     plugins: [
-      // @if tape
-      new ProvidePlugin({
-        process: 'process/browser'
-      }),
-      // @endif
       /* @if plugin */!production && /* @endif */new HtmlWebpackPlugin({ template: 'index.html' }),
       new Dotenv({
         path: `./.env${production ? '' :  '.' + process.env.NODE_ENV}`,
       }),
-      analyze && new BundleAnalyzerPlugin()/* @if jasmine || tape || mocha*/,
+      analyze && new BundleAnalyzerPlugin()/* @if jasmine || mocha*/,
       test && runTest && new WebpackShellPluginNext({
         dev: false,
         swallowError: true,
