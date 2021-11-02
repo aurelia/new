@@ -108,7 +108,7 @@ if (targetFeatures.length) {
 }
 
 function getServerRegex(features) {
-  if (features.includes('webpack')) return /Project is running at (\S+)/;
+  if (features.includes('webpack')) return /Loopback: (\S+)/;
   if (features.includes('parcel')) return /Server running at (\S+)/;
   if (features.includes('fuse-box')) return /Development server running (\S+)/;
   return /Dev server is started at: (\S+)/;
@@ -141,8 +141,8 @@ skeletons.forEach((features, i) => {
     t.pass('made skeleton');
     process.chdir(appFolder);
 
-    console.log('-- yarn');
-    await run('yarn');
+    console.log('-- npm i');
+    await run('npm i');
     t.pass('installed deps');
 
     if (!features.includes('no-unit-tests')) {

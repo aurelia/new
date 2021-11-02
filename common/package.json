@@ -19,13 +19,13 @@
   "dependencies": {
     "aurelia": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
     // @if browser-ie11
-    "promise-polyfill": "^8.2.0",
+    "promise-polyfill": "^8.2.1",
     // @endif
   },
   "devDependencies": {
-    "eslint": "^7.29.0",
+    "eslint": "^8.1.0",
     "@aurelia/testing": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
-    "htmlhint": "^0.15.1",
+    "htmlhint": "^0.16.0",
     // @if less
     "lesshint": "^6.3.7",
     // @endif
