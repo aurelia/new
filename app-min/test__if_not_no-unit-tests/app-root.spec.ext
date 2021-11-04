@@ -5,11 +5,11 @@ import { expect } from 'chai';
 import { CustomElement } from 'aurelia';
 // @endif
 import { render } from './helper';
-import { MyApp } from '../src/my-app';
+import { AppRoot } from '../src/app-root';
 
 describe('my-app', () => {
   it('should render message', async () => {
-    const node = (await render('<my-app></my-app>', MyApp)).firstElementChild;
+    const node = (await render('<app-root></app-root>', AppRoot)).firstElementChild;
     // @if shadow-dom
     // In Shadow DOM open mode, shadowRoot is also accessible through DOM API
     //   node.shadowRoot
@@ -19,11 +19,16 @@ describe('my-app', () => {
     const text = shadowRoot.textContent;
     // @endif
     // @if typescript
-    const text = (shadowRoot as Node).textContent;
+    const text = (shadowRoot as Node)?.textContent ?? '';
     // @endif
     // @endif
     // @if !shadow-dom
-    const text =  node.textContent;
+    // @if babel
+    const text = node.textContent;
+     // @endif
+    // @if typescript
+    const text = node?.textContent ?? '';
+    // @endif
     // @endif
     // @if jasmine || jest
     expect(text.trim()).toBe('Hello World!');
