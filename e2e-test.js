@@ -108,7 +108,7 @@ if (targetFeatures.length) {
 }
 
 function getServerRegex(features) {
-  if (features.includes('webpack')) return /Project is running at (\S+)/;
+  if (features.includes('webpack')) return /Loopback: (\S+)/;
   if (features.includes('parcel')) return /Server running at (\S+)/;
   if (features.includes('fuse-box')) return /Development server running (\S+)/;
   return /Dev server is started at: (\S+)/;
@@ -141,8 +141,8 @@ skeletons.forEach((features, i) => {
     t.pass('made skeleton');
     process.chdir(appFolder);
 
-    console.log('-- yarn');
-    await run('yarn');
+    console.log('-- npm i');
+    await run('npm i');
     t.pass('installed deps');
 
     if (!features.includes('no-unit-tests')) {
@@ -164,32 +164,33 @@ skeletons.forEach((features, i) => {
     t.truthy(compiledFiles.length);
 
     console.log('-- ' + startCommand);
-    await run(startCommand,
-      async (data, kill) => {
-        const m = data.toString().match(serverRegex);
-        if (!m) return;
-        const url = m[1];
-        t.pass(m[0]);
+    const runE2e = async (data, kill) => {
+      const m = data.toString().match(serverRegex);
+      if (!m) return;
+      const url = m[1];
+      t.pass(m[0]);
 
-        try {
-          if (!process.env.GITHUB_ACTIONS) {
-            console.log('-- take screenshot');
-            await takeScreenshot(url, path.join(folder, appName + '.png'));
-          }
-
-          if (isWin32 && features.includes('cypress')) {
-            // Have to by pass start-server-and-test on win32
-            // due to cypress issue (3221226356, search above)
-            console.log('-- npm run cypress');
-            await run(`npm run cypress`);
-          }
-          kill();
-        } catch (e) {
-          t.fail(e.message);
-          kill();
+      try {
+        if (!process.env.GITHUB_ACTIONS) {
+          console.log('-- take screenshot');
+          await takeScreenshot(url, path.join(folder, appName + '.png'));
         }
+
+        if (isWin32 && features.includes('cypress')) {
+          // Have to by pass start-server-and-test on win32
+          // due to cypress issue (3221226356, search above)
+          console.log('-- npm run cypress');
+          await run(`npm run cypress`);
+        }
+        kill();
+      } catch (e) {
+        t.fail(e.message);
+        kill();
       }
-    );
+    };
+
+    // Webpack5 now prints Loopback: http://localhost:5000 in stderr!
+    await run(startCommand, runE2e, runE2e);
 
     if (!isWin32 && features.includes('cypress')) {
       console.log('-- npm run test:e2e');

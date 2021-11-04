@@ -1,33 +1,33 @@
 {
   "devDependencies": {
     "rimraf": "^3.0.2",
-    "webpack": "^5.39.1",
-    "webpack-cli": "^4.7.2",
-    "webpack-dev-server": "^3.11.2",
-    "html-webpack-plugin": "^5.3.1",
-    "webpack-bundle-analyzer": "^4.4.2",
-    "style-loader": "^2.0.0",
-    "css-loader": "^5.2.6",
+    "webpack": "^5.61.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.4.0",
+    "html-webpack-plugin": "^5.5.0",
+    "webpack-bundle-analyzer": "^4.5.0",
+    "style-loader": "^3.3.1",
+    "css-loader": "^6.5.0",
     "dotenv-webpack": "^7.0.3",
     "@aurelia/webpack-loader": /* @if !dev */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
     // @if babel
-    "babel-loader": "^8.2.2",
+    "babel-loader": "^8.2.3",
     // @endif
     // @if typescript
-    "ts-loader": "^9.2.3",
+    "ts-loader": "^9.2.6",
     // @endif
     // @if less
-    "less-loader": "^10.0.0",
-    "less": "^4.1.1",
+    "less-loader": "^10.2.0",
+    "less": "^4.1.2",
     // @endif
     // @if sass
-    "sass-loader": "^12.1.0",
-    "sass": "^1.35.1",
+    "sass-loader": "^12.3.0",
+    "sass": "^1.43.4",
     // @endif
-    "postcss-loader": "^6.1.0",
-    "postcss": "^8.3.5",
-    "autoprefixer": "^10.2.6",
-    // @if jasmine || tape || mocha
+    "postcss-loader": "^6.2.0",
+    "postcss": "^8.3.11",
+    "autoprefixer": "^10.4.0",
+    // @if jasmine || mocha
     "webpack-shell-plugin-next": "^2.2.2",
     // @endif
     // @if plugin
@@ -38,7 +38,7 @@
     "start": "webpack serve",
     "build": "rimraf dist && webpack --env production",
     "analyze": "rimraf dist && webpack --env production --analyze",
-    // @if jasmine || tape || mocha
+    // @if jasmine || mocha
     "build:test": "rimraf dist && webpack --env test",
     "test:watch": "rimraf dist && webpack --env test --watch --runTest"
     // @endif
