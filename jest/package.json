@@ -6,7 +6,7 @@
     "@aurelia/babel-jest": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
     // @endif
     // @if typescript
-    "@types/jest": "^27.0.2",
+    "@types/jest": "^27.0.3",
     "@aurelia/ts-jest": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
     // @endif
   },
