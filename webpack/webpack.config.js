@@ -258,7 +258,7 @@ module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */a
     plugins: [
       /* @if plugin */!production && /* @endif */new HtmlWebpackPlugin({ template: 'index.html' }),
       new Dotenv({
-        path: `./.env${production ? '' :  '.' + process.env.NODE_ENV}`,
+        path: `./.env${production ? '' :  '.' + (process.env.NODE_ENV || 'development')}`,
       }),
       analyze && new BundleAnalyzerPlugin()/* @if jasmine || mocha*/,
       test && runTest && new WebpackShellPluginNext({
