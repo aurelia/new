@@ -23,9 +23,9 @@
     // @endif
   },
   "devDependencies": {
-    "eslint": "^8.3.0",
+    "eslint": "^8.7.0",
     "@aurelia/testing": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
-    "htmlhint": "^0.16.2",
+    "htmlhint": "^1.1.1",
     // @if less
     "lesshint": "^6.3.7",
     // @endif
@@ -33,7 +33,7 @@
     "sass-lint": "^1.13.1",
     // @endif
     // @if jasmine || mocha
-    "browser-do": "^4.0.0",
+    "browser-do": "^4.1.0",
     // @endif
   },
   "scripts": {
