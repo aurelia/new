@@ -98,7 +98,33 @@ module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */a
     },
     resolve: {
       extensions: [/* @if typescript */'.ts', /* @endif */'.js'],
-      modules: [path.resolve(__dirname, 'src'),/* @if !production */ path.resolve(__dirname, 'dev-app'),/* @endif */ 'node_modules']
+      modules: [path.resolve(__dirname, 'src'),/* @if !production */ path.resolve(__dirname, 'dev-app'),/* @endif */ 'node_modules'],
+      alias: production ? {
+        // add your production aliasing here
+      } : {
+        ...[
+          'fetch-client',
+          'kernel',
+          'metadata',
+          'platform',
+          'platform-browser',
+          'plugin-conventions',
+          'route-recognizer',
+          'router',
+          'router-lite',
+          'runtime',
+          'runtime-html',
+          'testing',
+          'webpack-loader',
+        ].reduce((map, pkg) => {
+          const name = `@aurelia/${pkg}`;
+          map[name] = path.resolve(__dirname, 'node_modules', name, 'dist/esm/index.dev.js');
+          return map;
+        }, {
+          'aurelia': path.resolve(__dirname, 'node_modules/aurelia/dist/esm/index.dev.js'),
+          // add your development aliasing here
+        })
+      }
     },
     devServer: {
       historyApiFallback: true,
