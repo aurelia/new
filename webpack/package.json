@@ -1,32 +1,32 @@
 {
   "devDependencies": {
     "rimraf": "^3.0.2",
-    "webpack": "^5.67.0",
-    "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.7.3",
+    "webpack": "^5.71.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4",
     "html-webpack-plugin": "^5.5.0",
     "webpack-bundle-analyzer": "^4.5.0",
     "style-loader": "^3.3.1",
-    "css-loader": "^6.5.1",
-    "dotenv-webpack": "^7.0.3",
+    "css-loader": "^6.7.1",
+    "dotenv-webpack": "^7.1.0",
     "@aurelia/webpack-loader": /* @if !dev */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
     // @if babel
-    "babel-loader": "^8.2.3",
+    "babel-loader": "^8.2.4",
     // @endif
     // @if typescript
-    "ts-loader": "^9.2.6",
+    "ts-loader": "^9.2.8",
     // @endif
     // @if less
     "less-loader": "^10.2.0",
     "less": "^4.1.2",
     // @endif
     // @if sass
-    "sass-loader": "^12.4.0",
-    "sass": "^1.49.0",
+    "sass-loader": "^12.6.0",
+    "sass": "^1.49.11",
     // @endif
     "postcss-loader": "^6.2.1",
-    "postcss": "^8.4.5",
-    "autoprefixer": "^10.4.2",
+    "postcss": "^8.4.12",
+    "autoprefixer": "^10.4.4",
     // @if jasmine || mocha
     "webpack-shell-plugin-next": "^2.2.2",
     // @endif
