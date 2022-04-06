@@ -1,6 +1,6 @@
 {
   "presets": [
-    ["@babel/preset-env", {
+    [/* @if !parcel */"@babel/preset-env"/* @endif *//* @if parcel */"@parcel/babel-preset-env"/* @endif */, {
       "loose": true,
       // @if !jest
       "modules": false,
