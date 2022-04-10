@@ -5,7 +5,7 @@
     "parcel": "^2.4.1"
   },
   "scripts": {
-    "start": "parcel",
+    "start": "parcel -p 9000",
     "build": "parcel build"
   },
   // @if shadow-dom
