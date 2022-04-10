@@ -7,7 +7,7 @@ declare module '*.html' {
   export const containerless: boolean | undefined;
   export const bindables: Record<string, PartialBindableDefinition>;
   export const shadowOptions: { mode: 'open' | 'closed' } | undefined;
-  export function register(container: IContainer);
+  export function register(container: IContainer): void;
 }
 
 // @if css-module
