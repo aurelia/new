@@ -6,7 +6,13 @@
     // @endif
   },
   "scripts": {
+    // @if !parcel
     "test:headless": "browser-do --jasmine < dist/entry.bundle.js",
     "test:chrome": "browser-do --jasmine --browser chrome < dist/entry.bundle.js"
+    // @endif
+    // @if parcel
+    "test:headless": "browser-do --jasmine < dist/all-spec.js",
+    "test:chrome": "browser-do --jasmine --browser chrome < dist/all-spec.js"
+    // @endif
   }
 }

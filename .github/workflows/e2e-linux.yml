@@ -25,6 +25,8 @@ jobs:
         target_features:
           - latest,webpack,babel
           - latest,webpack,typescript
+          - latest,parcel,babel
+          - latest,parcel,typescript
           - latest,dumber,babel
           - latest,dumber,typescript
     steps:

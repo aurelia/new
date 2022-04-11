@@ -1,12 +1,21 @@
 {
-  "source": "src/index.html",
+  "source": "index.html",
   "devDependencies": {
     "@aurelia/parcel-transformer": /* @if !dev */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
+    // @if jasmine || mocha
+    "@parcel/resolver-glob": "^2.4.1",
+    // @endif
     "parcel": "^2.4.1"
   },
   "scripts": {
     "start": "parcel -p 9000",
-    "build": "parcel build"
+    "build": "parcel build",
+    // @if babel
+    "build:test": "parcel build test/all-spec.js",
+    // @endif
+    // @if typescript
+    "build:test": "parcel build test/all-spec.ts",
+    // @endif
   },
   // @if shadow-dom
   "aurelia": {

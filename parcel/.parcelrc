@@ -3,5 +3,8 @@
 	"transformers": {
 		"*./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */": ["@aurelia/parcel-transformer", "..."],
 		"*.html": ["@aurelia/parcel-transformer", "..."]
-	}
+	},
+	// @if jasmine || mocha
+	"resolvers": ["@parcel/resolver-glob", "..."],
+	// @endif
 }
