@@ -116,7 +116,7 @@ function getServerRegex(features) {
 
 function getStartCommand(features) {
   // don't open browser for parcel
-  if (features.includes('parcel')) return 'npx parcel index.html -p 9000 --no-autoinstall';
+  // if (features.includes('parcel')) return 'npx parcel -p 9000';
   return 'npm start';
 }
 
