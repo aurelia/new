@@ -115,9 +115,15 @@ function getServerRegex(features) {
 }
 
 function getStartCommand(features) {
-  // don't open browser for parcel
-  // if (features.includes('parcel')) return 'npx parcel -p 9000';
+  // hide parcel warning
+  if (features.includes('parcel')) return 'npx parcel -p 9000 --log-level error';
   return 'npm start';
+}
+
+function getBuildCommand(features) {
+  // hide parcel warning
+  if (features.includes('parcel')) return 'npx parcel build --log-level error';
+  return 'npm run build';
 }
 
 const skeletons = allSkeletons.filter(features =>
@@ -130,6 +136,7 @@ skeletons.forEach((features, i) => {
   const title = `App: ${i + 1}/${skeletons.length} ${appName}`;
   const serverRegex = getServerRegex(features);
   const startCommand = getStartCommand(features);
+  const buildCommand = getBuildCommand(features);
 
   test.serial(title, async t => {
     console.log(title);
@@ -151,8 +158,8 @@ skeletons.forEach((features, i) => {
       t.pass('finished unit tests');
     }
 
-    console.log('-- npm run build');
-    await run('npm run build', null,
+    console.log('-- ' + buildCommand);
+    await run(buildCommand, null,
       (data, kill) => {
         t.fail('build failed: ' + data.toString());
       }
