@@ -197,8 +197,8 @@ skeletons.forEach((features, i) => {
       await run(`npm run test:e2e`);
     }
 
-    console.log('-- remove folder ' + appName);
-    process.chdir(folder);
-    await fs.promises.rm(appFolder, {recursive: true});
+    // console.log('-- remove folder ' + appName);
+    // process.chdir(folder);
+    // await fs.promises.rm(appFolder, {recursive: true});
   });
 });
