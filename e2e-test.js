@@ -33,6 +33,11 @@ function killProc(proc) {
   kill(proc.pid);
 }
 
+async function delay(secs) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, secs);
+  });
+}
 
 function run(command, dataCB, errorCB) {
   const [cmd, ...args] = command.split(' ');
@@ -44,7 +49,8 @@ function run(command, dataCB, errorCB) {
     // test is running in NODE_ENV=test which will affect gulp build
     env.NODE_ENV = 'development';
     const proc = spawn(cmd, args, {env});
-    proc.on('exit', (code, signal) => {
+    proc.on('exit', async (code, signal) => {
+      await delay(1);
       if (code && signal !== 'SIGTERM' && !win32Killed.has(proc.pid)) {
         if (isWin32 && args[1] === 'test:e2e' && code === 3221226356) {
           // There is random cypress ELIFECYCLE (3221226356) issue on Windows.
