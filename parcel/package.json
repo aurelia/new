@@ -2,6 +2,12 @@
   "source": "index.html",
   "devDependencies": {
     "@aurelia/parcel-transformer": /* @if !dev */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
+    // @if less
+    "@parcel/transformer-less": "^2.4.1",
+    // @endif
+    // @if sass
+    "@parcel/transformer-sass": "^2.4.1",
+    // @endif
     // @if jasmine || mocha
     "@parcel/resolver-glob": "^2.4.1",
     // @endif

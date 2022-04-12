@@ -5,6 +5,7 @@
 // Have to run "npm run test:e2e" manually before a release.
 
 const spawn = require('cross-spawn');
+const os = require('os');
 const fs = require('fs');
 const path = require('path');
 const del = require('del');
@@ -16,9 +17,8 @@ const questions = require('./questions');
 const allSkeletons = possibleFeatureSelections(questions);
 
 const isWin32 = process.platform === 'win32';
-const dir = __dirname;
 
-const folder = path.join(dir, 'test-skeletons');
+const folder = path.join(os.tmpdir(), 'test-skeletons');
 console.log('-- cleanup ' + folder);
 del.sync(folder);
 fs.mkdirSync(folder);
@@ -114,18 +114,6 @@ function getServerRegex(features) {
   return /Dev server is started at: (\S+)/;
 }
 
-function getStartCommand(features) {
-  // hide parcel warning
-  if (features.includes('parcel')) return 'npx parcel -p 9000 --log-level error';
-  return 'npm start';
-}
-
-function getBuildCommand(features) {
-  // hide parcel warning
-  if (features.includes('parcel')) return 'npx parcel build --log-level error';
-  return 'npm run build';
-}
-
 const skeletons = allSkeletons.filter(features =>
   targetFeatures.length === 0 || targetFeatures.every(f => features.includes(f))
 );
@@ -135,14 +123,12 @@ skeletons.forEach((features, i) => {
   const appFolder = path.join(folder, appName);
   const title = `App: ${i + 1}/${skeletons.length} ${appName}`;
   const serverRegex = getServerRegex(features);
-  const startCommand = getStartCommand(features);
-  const buildCommand = getBuildCommand(features);
 
   test.serial(title, async t => {
     console.log(title);
     process.chdir(folder);
 
-    const makeCmd = `npx makes ${dir} ${appName} -s ${features.join(',')}`;
+    const makeCmd = `npx makes ${__dirname} ${appName} -s ${features.join(',')}`;
     console.log('-- ' + makeCmd);
     await run(makeCmd);
     t.pass('made skeleton');
@@ -158,9 +144,11 @@ skeletons.forEach((features, i) => {
       t.pass('finished unit tests');
     }
 
-    console.log('-- ' + buildCommand);
-    await run(buildCommand, null,
+    console.log('-- npm run build');
+    await run('npm run build', null,
       (data, kill) => {
+        // Skip parcel babel warnings.
+        if (features.includes('parcel') && features.includes('babel')) return;
         t.fail('build failed: ' + data.toString());
       }
     );
@@ -170,7 +158,7 @@ skeletons.forEach((features, i) => {
     const compiledFiles = fs.readdirSync(distPath);
     t.truthy(compiledFiles.length);
 
-    console.log('-- ' + startCommand);
+    console.log('-- npm start');
     const runE2e = async (data, kill) => {
       const m = data.toString().match(serverRegex);
       if (!m) return;
@@ -197,7 +185,7 @@ skeletons.forEach((features, i) => {
     };
 
     // Webpack5 now prints Loopback: http://localhost:5000 in stderr!
-    await run(startCommand, runE2e, runE2e);
+    await run('npm start', runE2e, runE2e);
 
     if (!isWin32 && features.includes('cypress')) {
       console.log('-- npm run test:e2e');
