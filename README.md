@@ -18,11 +18,9 @@ This will cause `npx` to download the `makes` tool, along with the `aurelia` sca
 
 - [x] Aurelia convention support (boilerplate free like Aurelia v1) at bundler level
 - [x] Basic app with webpack
-- [x] Basic app with dumber (successor of CLI built-in bundler. Doc WIP)
-- [ ] Basic app with parcel (On hold)
-  * Parcel v2 is also very near. Might wait for the new version.
+- [x] Basic app with dumber (successor of CLI built-in bundler)
+- [x] Basic app with parcel
 - [ ] Basic app with FuseBox (On hold)
-  * FuseBox v4 is coming, and it's a total rewrite. Wait for it before implement.
 - [x] Basic less/scss setup.
 - [x] Basic unit test setup for jest, jasmine, mocha.
 - [x] Basic e2e test setup for cypress
