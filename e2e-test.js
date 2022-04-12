@@ -5,9 +5,9 @@
 // Have to run "npm run test:e2e" manually before a release.
 
 const spawn = require('cross-spawn');
+const os = require('os');
 const fs = require('fs');
 const path = require('path');
-const del = require('del');
 const test = require('ava');
 const puppeteer = require('puppeteer');
 const kill = require('tree-kill');
@@ -16,11 +16,10 @@ const questions = require('./questions');
 const allSkeletons = possibleFeatureSelections(questions);
 
 const isWin32 = process.platform === 'win32';
-const dir = __dirname;
 
-const folder = path.join(dir, 'test-skeletons');
+const folder = path.join(os.tmpdir(), 'test-skeletons');
 console.log('-- cleanup ' + folder);
-del.sync(folder);
+fs.rmSync(folder, {recursive: true, force: true});
 fs.mkdirSync(folder);
 
 // Somehow taskkill on windows would not send SIGTERM signal to proc,
@@ -34,6 +33,11 @@ function killProc(proc) {
   kill(proc.pid);
 }
 
+async function delay(secs) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, secs);
+  });
+}
 
 function run(command, dataCB, errorCB) {
   const [cmd, ...args] = command.split(' ');
@@ -45,7 +49,8 @@ function run(command, dataCB, errorCB) {
     // test is running in NODE_ENV=test which will affect gulp build
     env.NODE_ENV = 'development';
     const proc = spawn(cmd, args, {env});
-    proc.on('exit', (code, signal) => {
+    proc.on('exit', async (code, signal) => {
+      await delay(1);
       if (code && signal !== 'SIGTERM' && !win32Killed.has(proc.pid)) {
         if (isWin32 && args[1] === 'test:e2e' && code === 3221226356) {
           // There is random cypress ELIFECYCLE (3221226356) issue on Windows.
@@ -114,12 +119,6 @@ function getServerRegex(features) {
   return /Dev server is started at: (\S+)/;
 }
 
-function getStartCommand(features) {
-  // don't open browser for parcel
-  if (features.includes('parcel')) return 'npx parcel index.html -p 9000 --no-autoinstall';
-  return 'npm start';
-}
-
 const skeletons = allSkeletons.filter(features =>
   targetFeatures.length === 0 || targetFeatures.every(f => features.includes(f))
 );
@@ -129,13 +128,12 @@ skeletons.forEach((features, i) => {
   const appFolder = path.join(folder, appName);
   const title = `App: ${i + 1}/${skeletons.length} ${appName}`;
   const serverRegex = getServerRegex(features);
-  const startCommand = getStartCommand(features);
 
   test.serial(title, async t => {
     console.log(title);
     process.chdir(folder);
 
-    const makeCmd = `npx makes ${dir} ${appName} -s ${features.join(',')}`;
+    const makeCmd = `npx makes ${__dirname} ${appName} -s ${features.join(',')}`;
     console.log('-- ' + makeCmd);
     await run(makeCmd);
     t.pass('made skeleton');
@@ -154,6 +152,8 @@ skeletons.forEach((features, i) => {
     console.log('-- npm run build');
     await run('npm run build', null,
       (data, kill) => {
+        // Skip parcel warnings.
+        if (features.includes('parcel')) return;
         t.fail('build failed: ' + data.toString());
       }
     );
@@ -163,7 +163,7 @@ skeletons.forEach((features, i) => {
     const compiledFiles = fs.readdirSync(distPath);
     t.truthy(compiledFiles.length);
 
-    console.log('-- ' + startCommand);
+    console.log('-- npm start');
     const runE2e = async (data, kill) => {
       const m = data.toString().match(serverRegex);
       if (!m) return;
@@ -190,15 +190,15 @@ skeletons.forEach((features, i) => {
     };
 
     // Webpack5 now prints Loopback: http://localhost:5000 in stderr!
-    await run(startCommand, runE2e, runE2e);
+    await run('npm start', runE2e, runE2e);
 
     if (!isWin32 && features.includes('cypress')) {
       console.log('-- npm run test:e2e');
       await run(`npm run test:e2e`);
     }
 
-    console.log('-- remove folder ' + appName);
-    process.chdir(folder);
-    await del(appFolder);
+    // console.log('-- remove folder ' + appName);
+    // process.chdir(folder);
+    // await fs.promises.rm(appFolder, {recursive: true});
   });
 });
