@@ -11,6 +11,7 @@
     // @if jasmine || mocha
     "@parcel/resolver-glob": "^2.4.1",
     // @endif
+    "@parcel/transformer-inline-string": "^2.4.1",
     "parcel": "^2.4.1"
   },
   "scripts": {

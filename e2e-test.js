@@ -8,7 +8,6 @@ const spawn = require('cross-spawn');
 const os = require('os');
 const fs = require('fs');
 const path = require('path');
-const del = require('del');
 const test = require('ava');
 const puppeteer = require('puppeteer');
 const kill = require('tree-kill');
@@ -20,7 +19,7 @@ const isWin32 = process.platform === 'win32';
 
 const folder = path.join(os.tmpdir(), 'test-skeletons');
 console.log('-- cleanup ' + folder);
-del.sync(folder);
+fs.rmSync(folder, {recursive: true});
 fs.mkdirSync(folder);
 
 // Somehow taskkill on windows would not send SIGTERM signal to proc,
@@ -194,6 +193,6 @@ skeletons.forEach((features, i) => {
 
     console.log('-- remove folder ' + appName);
     process.chdir(folder);
-    await del(appFolder);
+    await fs.promises.rm(appFolder, {recursive: true});
   });
 });
