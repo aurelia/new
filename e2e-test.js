@@ -152,8 +152,8 @@ skeletons.forEach((features, i) => {
     console.log('-- npm run build');
     await run('npm run build', null,
       (data, kill) => {
-        // Skip parcel babel warnings.
-        if (features.includes('parcel') && features.includes('babel')) return;
+        // Skip parcel warnings.
+        if (features.includes('parcel')) return;
         t.fail('build failed: ' + data.toString());
       }
     );
