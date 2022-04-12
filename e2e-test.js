@@ -19,7 +19,7 @@ const isWin32 = process.platform === 'win32';
 
 const folder = path.join(os.tmpdir(), 'test-skeletons');
 console.log('-- cleanup ' + folder);
-fs.rmSync(folder, {recursive: true});
+fs.rmSync(folder, {recursive: true, force: true});
 fs.mkdirSync(folder);
 
 // Somehow taskkill on windows would not send SIGTERM signal to proc,
