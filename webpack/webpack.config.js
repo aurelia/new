@@ -118,10 +118,10 @@ module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */a
           'webpack-loader',
         ].reduce((map, pkg) => {
           const name = `@aurelia/${pkg}`;
-          map[name] = path.resolve(__dirname, 'node_modules', name, 'dist/esm/index.dev.js');
+          map[name] = path.resolve(__dirname, 'node_modules', name, 'dist/esm/index.dev.mjs');
           return map;
         }, {
-          'aurelia': path.resolve(__dirname, 'node_modules/aurelia/dist/esm/index.dev.js'),
+          'aurelia': path.resolve(__dirname, 'node_modules/aurelia/dist/esm/index.dev.mjs'),
           // add your development aliasing here
         })
       }
