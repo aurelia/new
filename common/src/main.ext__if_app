@@ -2,7 +2,7 @@
 // Promise polyfill for old browsers
 import 'promise-polyfill/lib/polyfill';
 // @endif
-import Aurelia/* @if shadow-dom */, { StyleConfiguration }/* @endif */ from 'aurelia';
+import Aurelia/* @if shadow-dom *//*, { StyleConfiguration }*//* @endif */ from 'aurelia';
 // @if app-with-router
 import { RouterConfiguration } from '@aurelia/router';
 // @endif
