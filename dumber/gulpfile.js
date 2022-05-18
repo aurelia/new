@@ -33,6 +33,8 @@ const gulpRun = require('gulp-run');
 
 const isProduction = process.env.NODE_ENV === 'production';
 const isTest = process.env.NODE_ENV === 'test';
+const isCI = !!process.env.CI;
+const needsSourceMap = !isProduction && !isCI;
 const dist = 'dist';
 
 // Read more in https://dumber.js.org
@@ -122,7 +124,7 @@ function buildJs(src) {
   // @if typescript
   const ts = typescript.createProject('tsconfig.json', { noEmitOnError: true });
   // @endif
-  return gulp.src(src, { sourcemaps: !isProduction })
+  return gulp.src(src, { sourcemaps: needsSourceMap })
     .pipe(gulpif(!isProduction && !isTest, plumber()))
     .pipe(au2())
     // @if babel
@@ -152,7 +154,7 @@ function buildHtml(src) {
 }
 
 function buildCss(src) {
-  return gulp.src(src, { sourcemaps: !isProduction })
+  return gulp.src(src, { sourcemaps: needsSourceMap })
     // @if less
     .pipe(gulpif(!isProduction && !isTest, plumber()))
     .pipe(gulpif(f => f.extname === '.less', less()))
@@ -223,10 +225,10 @@ function build() {
     // It's a good balance on size and speed to turn off compress.
     .pipe(gulpif(isProduction, terser({ compress: false })))
     // @if !jasmine && !mocha
-    .pipe(gulp.dest(dist, { sourcemaps: isProduction ? false : '.' }));
+    .pipe(gulp.dest(dist, { sourcemaps: needsSourceMap ? '.' : false }));
     // @endif
     // @if jasmine || mocha
-    .pipe(gulp.dest(dist, { sourcemaps: isProduction ? false : (isTest ? true : '.') }));
+    .pipe(gulp.dest(dist, { sourcemaps: needsSourceMap ? (isTest ? true : '.') : false }));
     // @endif
 }
 
@@ -242,7 +244,7 @@ const serve = gulp.series(
   build,
   function startServer(done) {
     devServer.run({
-      open: !process.env.CI,
+      open: !isCI,
       port: 9000
     });
     done();
