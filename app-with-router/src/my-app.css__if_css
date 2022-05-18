@@ -14,12 +14,12 @@ a:hover {
 }
 
 // @if css-module
-/* When using css-module, set .load-active
+/* When using css-module, set .active
 as a global class name */
-:global(.load-active) {
+:global(.active) {
 // @endif
 // @if !css-module
-.load-active {
+.active {
 // @endif
   background-color: lightgray;
 }

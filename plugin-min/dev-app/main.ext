@@ -2,7 +2,7 @@
 // Promise polyfill for old browsers
 import 'promise-polyfill/lib/polyfill';
 // @endif
-import Aurelia/* @if shadow-dom || app-with-router */, { /* @endif *//* @if app-with-router */RouterConfiguration/* @endif *//* @if shadow-dom *//*, StyleConfiguration*//* @endif *//* @if shadow-dom || app-with-router */ }/* @endif */ from 'aurelia';
+import Aurelia/* @if shadow-dom */, { StyleConfiguration }/* @endif */ from 'aurelia';
 import { MyApp } from './my-app';
 // @if shadow-dom
 // @if webpack
@@ -22,12 +22,6 @@ Aurelia
     sharedStyles: [shared]
   }))
   */
-  // @endif
-  // @if app-with-router
-  .register(RouterConfiguration)
-  // To use HTML5 pushState routes, replace previous line with the following
-  // customized router config.
-  // .register(RouterConfiguration.customize({ useUrlFragmentHash: false }))
   // @endif
   // Register all exports of the plugin
   .register(Plugin)
