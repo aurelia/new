@@ -38,7 +38,7 @@ node_modules
 /.fusebox
 // @endif
 // @if parcel
-/.cache
+/.parcel-cache
 // @endif
 // @if dumber
 /index.html

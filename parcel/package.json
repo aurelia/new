@@ -3,19 +3,19 @@
   "devDependencies": {
     "@aurelia/parcel-transformer": /* @if !dev */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
     // @if less
-    "@parcel/transformer-less": "^2.4.1",
+    "@parcel/transformer-less": "^2.5.0",
     // @endif
     // @if sass
-    "@parcel/transformer-sass": "^2.4.1",
+    "@parcel/transformer-sass": "^2.5.0",
     // @endif
     // @if jasmine || mocha
-    "@parcel/resolver-glob": "^2.4.1",
+    "@parcel/resolver-glob": "^2.5.0",
     // @endif
     // @if mocha
     "process": "^0.11.10",
     // @endif
-    "@parcel/transformer-inline-string": "^2.4.1",
-    "parcel": "^2.4.1"
+    "@parcel/transformer-inline-string": "^2.5.0",
+    "parcel": "^2.5.0"
   },
   "scripts": {
     "start": "parcel -p 9000",
