@@ -1,12 +1,12 @@
 {
   "devDependencies": {
-    "jest": "^27.5.1",
+    "jest": "^28.1.0",
     "jest-transform-stub": "^2.0.0",
     // @if babel
     "@aurelia/babel-jest": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
     // @endif
     // @if typescript
-    "@types/jest": "^27.4.1",
+    "@types/jest": "^27.5.1",
     "@aurelia/ts-jest": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
     // @endif
   },
