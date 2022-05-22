@@ -15,6 +15,7 @@
     // @endif
     "esModuleInterop": true,
     "resolveJsonModule": true,
+    "importHelpers": true,
     "sourceMap": true
   },
   "include": [

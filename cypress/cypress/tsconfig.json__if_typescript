@@ -3,6 +3,11 @@
     "strict": true,
     "baseUrl": "../node_modules",
     "target": "es5",
+    "importHelpers": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
     "types": ["cypress"]
   },
   "include": [
