@@ -2,9 +2,7 @@
   "compilerOptions": {
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    // @if !jest
     "module": "esnext",
-    // @endif
     "moduleResolution": "node",
     "skipLibCheck": true,
     // @if browser-evergreen
