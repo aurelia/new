@@ -23,7 +23,7 @@
     // @endif
   },
   "devDependencies": {
-    "eslint": "^8.15.0",
+    "eslint": "^8.17.0",
     "@aurelia/testing": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
     "htmlhint": "^1.1.4",
     // @if less

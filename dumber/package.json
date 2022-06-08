@@ -13,7 +13,7 @@
     "merge2": "^1.4.1",
     "gulp-terser": "^2.1.0",
     "gulp-if": "^3.0.0",
-    "del": "^6.1.0",
+    "del": "^6.1.1",
 
     "connect": "^3.7.0",
     "connect-history-api-fallback": "^1.6.0",
@@ -52,9 +52,9 @@
   },
   // npm v8 feature to bypass outdated gulp deps
   "overrides": {
-    "chokidar": "^3.0.0",
+    "chokidar": "^3.5.3",
     "glob-stream": "^7.0.0",
-    "glob-parent": "^6.0.0",
-    "micromatch": "^4.0.0"
+    "glob-parent": "^6.0.2",
+    "micromatch": "^4.0.5"
   }
 }
