@@ -4,7 +4,7 @@ context('my-app', () => {
   it('shows message', () => {
     cy.visit('/');
     // @if shadow-dom
-    cy.shadowGet('my-app').shadowFind('div').shadowContains('Hello World!');
+    cy.get('my-app').shadow().find('div').contains('Hello World!');
     // @endif
     // @if !shadow-dom
     cy.get('my-app>div').contains('Hello World!');
