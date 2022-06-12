@@ -4,7 +4,5 @@ module.exports = defineConfig({
   e2e: {
     baseUrl: 'http://localhost:9000'
   },
-  videos: {
-    video: false
-  }
+  video: false
 });
