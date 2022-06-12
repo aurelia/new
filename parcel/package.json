@@ -21,10 +21,10 @@
     "start": "parcel -p 9000",
     "build": "parcel build --no-scope-hoist",
     // @if babel
-    "build:test": "parcel build --no-scope-hoist test/all-spec.js",
+    "build:test": "parcel build --no-scope-hoist --no-source-maps test/all-spec.js",
     // @endif
     // @if typescript
-    "build:test": "parcel build --no-scope-hoist test/all-spec.ts",
+    "build:test": "parcel build --no-scope-hoist --no-source-maps test/all-spec.ts",
     // @endif
   },
   // @if shadow-dom
