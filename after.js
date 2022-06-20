@@ -12,7 +12,7 @@ function isAvailable(bin) {
 }
 
 module.exports = async function({
-  unattended, here, prompts, run, properties, notDefaultFeatures, ansiColors
+  unattended, here, prompts, run, properties, features, notDefaultFeatures, ansiColors
 }, {
   // for testing
   _isAvailable = isAvailable,
@@ -42,6 +42,9 @@ module.exports = async function({
 
     if (result) {
       await run(result, ['install']);
+      if (features.includes('playwright')) {
+        await run('npx', ['playwright', 'install', '--with-deps']);
+      }
       depsInstalled = true;
     }
 
@@ -51,6 +54,9 @@ module.exports = async function({
 
   _log(`\n${c.underline.bold('Get Started')}`);
   if (!here) _log('cd ' + properties.name);
-  if (!depsInstalled) _log('npm install');
+  if (!depsInstalled) {
+    _log('npm install');
+    if (features.includes('playwright')) _log('npx playwright install --with-deps');
+  }
   _log('npm start\n');
 };
