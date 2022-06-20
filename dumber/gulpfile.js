@@ -139,7 +139,7 @@ function buildHtml(src) {
     // @if shadow-dom
     // The other possible Shadow DOM mode is "closed".
     // If you turn on "closed" mode, there will be difficulty to perform e2e
-    // tests (such as Cypress). Because shadowRoot is not accessible through
+    // tests (such as Playwright). Because shadowRoot is not accessible through
     // standard DOM APIs in "closed" mode.
     .pipe(au2({ defaultShadowOptions: { mode: 'open' } }));
     // @endif

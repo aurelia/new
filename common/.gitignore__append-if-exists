@@ -43,7 +43,6 @@ node_modules
 // @if dumber
 /index.html
 // @endif
-// @if cypress
-/cypress/videos
-/cypress/screenshots
+// @if playwright
+/test-results
 // @endif

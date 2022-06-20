@@ -37,7 +37,7 @@
     // @endif
   },
   "scripts": {
-    "lint:js": "eslint src test/* @if cypress */ cypress/* @endif *//* @if typescript */ --ext .js,.ts/* @endif */",
+    "lint:js": "eslint src test/* @if playwright */ e2e/* @endif *//* @if typescript */ --ext .js,.ts/* @endif */",
     // @if sass
     "lint:css": "sass-lint -c .sass-lint.yml \"src/**/*.scss\"",
     // @endif

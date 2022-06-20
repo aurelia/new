@@ -237,7 +237,7 @@ module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */a
             options: {
               // The other possible Shadow DOM mode is 'closed'.
               // If you turn on "closed" mode, there will be difficulty to perform e2e
-              // tests (such as Cypress). Because shadowRoot is not accessible through
+              // tests (such as Playwright). Because shadowRoot is not accessible through
               // standard DOM APIs in "closed" mode.
               defaultShadowOptions: { mode: 'open' }
             }
