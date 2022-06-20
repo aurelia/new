@@ -5,6 +5,9 @@
     // @if typescript
     "@types/mocha": "^9.1.1",
     // @endif
+    // @if parcel
+    "buffer": "^6.0.3",
+    // @endif
   },
   "scripts": {
     // @if !parcel
