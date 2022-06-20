@@ -45,4 +45,5 @@ node_modules
 // @endif
 // @if playwright
 /test-results
+/playwright-report
 // @endif
