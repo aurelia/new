@@ -23,7 +23,7 @@ This will cause `npx` to download the `makes` tool, along with the `aurelia` sca
 - [ ] Basic app with FuseBox (On hold)
 - [x] Basic less/scss setup.
 - [x] Basic unit test setup for jest, jasmine, mocha.
-- [x] Basic e2e test setup for cypress
+- [x] Basic e2e test setup for playwright
 
 ## Development
 

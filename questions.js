@@ -61,7 +61,7 @@ module.exports = [
     choices: [
       {title: 'No'},
       // TODO setup e2e for plugin project too.
-      {if: 'app', value: 'cypress', title: 'Yes (Cypress)', hint: 'Cypress offers fast, easy and reliable testing for anything that runs in a browser.'}
+      {if: 'app', value: 'playwright', title: 'Yes (Playwright)', hint: 'Playwright enables reliable end-to-end testing for modern web apps.'}
     ]
   },
   {
