@@ -282,7 +282,7 @@ module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */a
     ].filter(p => p),
     // @endif
     plugins: [
-      /* @if plugin */!production && /* @endif */new HtmlWebpackPlugin({ template: 'index.html' }),
+      /* @if plugin */!production && /* @endif */new HtmlWebpackPlugin({ template: 'index.html', favicon: 'favicon.ico' }),
       new Dotenv({
         path: `./.env${production ? '' :  '.' + (process.env.NODE_ENV || 'development')}`,
       }),
