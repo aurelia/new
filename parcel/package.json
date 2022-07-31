@@ -2,6 +2,9 @@
   "source": "index.html",
   "devDependencies": {
     "@aurelia/parcel-transformer": /* @if !dev */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
+    // @if typescript
+    "@parcel/transformer-typescript-tsc": "^2.6.0",
+    // @endif
     // @if less
     "@parcel/transformer-less": "^2.6.0",
     // @endif
