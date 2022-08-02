@@ -141,13 +141,13 @@ function buildHtml(src) {
     // If you turn on "closed" mode, there will be difficulty to perform e2e
     // tests (such as Playwright). Because shadowRoot is not accessible through
     // standard DOM APIs in "closed" mode.
-    .pipe(au2({ defaultShadowOptions: { mode: 'open' } }));
+    .pipe(au2({ defaultShadowOptions: { mode: 'open' }, hmr: false }));
     // @endif
     // @if css-module
-    .pipe(au2({ useCSSModule: true }));
+    .pipe(au2({ useCSSModule: true, hmr: false }));
     // @endif
     // @if !shadow-dom && !css-module
-    .pipe(au2());
+    .pipe(au2({ hmr: false }));
   // @endif
 }
 
