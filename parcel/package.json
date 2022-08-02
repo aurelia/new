@@ -32,11 +32,20 @@
   },
   // @if shadow-dom
   "aurelia": {
-    "defaultShadowOptions": { "mode": 'open' }
+    "defaultShadowOptions": { "mode": 'open' },
+    "hmr": false
   },
   // @endif
   // @if css-module
-  "aurelia": { "useCSSModule": true },
+  "aurelia": {
+    "useCSSModule": true,
+    "hmr": false
+  },
   "@parcel/transformer-css": { "cssModules": true },
+  // @endif
+  // @if !shadow-dom && !css-module
+  "aurelia": {
+    "hmr": false
+  },
   // @endif
 }
