@@ -14,17 +14,6 @@ npx makes aurelia
 
 This will cause `npx` to download the `makes` tool, along with the `aurelia` scaffold from this repo, which it will use to guide you through creating your project.
 
-## Status
-
-- [x] Aurelia convention support (boilerplate free like Aurelia v1) at bundler level
-- [x] Basic app with webpack
-- [x] Basic app with dumber (successor of CLI built-in bundler)
-- [x] Basic app with parcel
-- [ ] Basic app with FuseBox (On hold)
-- [x] Basic less/scss setup.
-- [x] Basic unit test setup for jest, jasmine, mocha.
-- [x] Basic e2e test setup for playwright
-
 ## Development
 
 This scaffolding skeleton is in the early stage, not quite ready for adding features. We want to keep feature set manageable as Aurelia 2 is constantly evolving.
