@@ -20,6 +20,7 @@ module.exports = async function({
 } = {}) {
   const c = ansiColors;
   let depsInstalled = false;
+  let packageManager = undefined;
 
   if (!unattended) {
     const choices = [
@@ -28,22 +29,27 @@ module.exports = async function({
     ];
 
     if (_isAvailable('yarn')) {
-      choices.push({value: 'yarn', title: 'Yes, use yarn'});
+      choices.push({value: 'yarn', title: 'Yes, use yarn (node-modules)'});
     }
 
     if (_isAvailable('pnpm')) {
       choices.push({value: 'pnpm', title: 'Yes, use pnpm'});
     }
 
-    const result = await prompts.select({
+    packageManager = await prompts.select({
       message: 'Do you want to install npm dependencies now?',
       choices
     });
 
-    if (result) {
-      await run(result, ['install']);
+    if (packageManager) {
+      await run(packageManager, ['install']);
+
       if (features.includes('playwright')) {
-        await run('npx', ['playwright', 'install', '--with-deps']);
+        if (packageManager === 'npm') {
+          await run('npx', ['playwright', 'install', '--with-deps']);
+        } else {
+          await run(packageManager, ['dlx', 'playwright', 'install', '--with-deps']);
+        }
       }
       depsInstalled = true;
     }
@@ -54,9 +60,10 @@ module.exports = async function({
 
   _log(`\n${c.underline.bold('Get Started')}`);
   if (!here) _log('cd ' + properties.name);
+  
   if (!depsInstalled) {
     _log('npm install');
     if (features.includes('playwright')) _log('npx playwright install --with-deps');
   }
-  _log('npm start\n');
+  _log((packageManager ?? 'npm') + ' start\n');
 };
