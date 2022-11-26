@@ -17,6 +17,7 @@
     // @if mocha
     "process": "^0.11.10",
     // @endif
+    "@parcel/core": "^2.6.0",
     "@parcel/transformer-inline-string": "^2.6.0",
     "parcel": "^2.6.0"
   },
