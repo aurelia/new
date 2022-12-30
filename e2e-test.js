@@ -111,7 +111,6 @@ if (targetFeatures.length) {
 function getServerRegex(features) {
   if (features.includes('webpack')) return /Loopback: (\S+)/;
   if (features.includes('parcel')) return /Server running at (\S+)/;
-  if (features.includes('fuse-box')) return /Development server running (\S+)/;
   return /Dev server is started at: (\S+)/;
 }
 

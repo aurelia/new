@@ -1,34 +1,34 @@
 {
   "devDependencies": {
     "rimraf": "^3.0.2",
-    "webpack": "^5.73.0",
-    "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.9.2",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1",
     "html-webpack-plugin": "^5.5.0",
-    "webpack-bundle-analyzer": "^4.5.0",
+    "webpack-bundle-analyzer": "^4.7.0",
     "style-loader": "^3.3.1",
-    "css-loader": "^6.7.1",
-    "dotenv-webpack": "^7.1.0",
+    "css-loader": "^6.7.3",
+    "dotenv-webpack": "^8.0.1",
     "@aurelia/webpack-loader": /* @if !dev */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
     // @if babel
-    "babel-loader": "^8.2.5",
+    "babel-loader": "^9.1.0",
     // @endif
     // @if typescript
-    "ts-loader": "^9.3.0",
+    "ts-loader": "^9.4.2",
     // @endif
     // @if less
-    "less-loader": "^11.0.0",
-    "less": "^4.1.2",
+    "less-loader": "^11.1.0",
+    "less": "^4.1.3",
     // @endif
     // @if sass
-    "sass-loader": "^13.0.0",
-    "sass": "^1.52.2",
+    "sass-loader": "^13.2.0",
+    "sass": "^1.57.1",
     // @endif
-    "postcss-loader": "^7.0.0",
-    "postcss": "^8.4.14",
-    "autoprefixer": "^10.4.7",
+    "postcss-loader": "^7.0.2",
+    "postcss": "^8.4.20",
+    "autoprefixer": "^10.4.13",
     // @if jasmine || mocha
-    "webpack-shell-plugin-next": "^2.2.2",
+    "webpack-shell-plugin-next": "^2.3.1",
     // @endif
     // @if plugin
     "webpack-node-externals": "^3.0.0",

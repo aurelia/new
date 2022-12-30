@@ -9,13 +9,13 @@
     "cross-env": "^7.0.3",
     "cross-spawn": "^7.0.3",
     "glob": "^8.0.3",
-    "makes": "^3.1.2",
-    "npm-check-updates": "^14.0.1",
-    "puppeteer": "^14.4.1",
-    "semver": "^7.3.7",
+    "makes": "^3.1.4",
+    "npm-check-updates": "^16.6.2",
+    "puppeteer": "^19.4.1",
+    "semver": "^7.3.8",
     "standard-changelog": "^2.0.27",
     "tree-kill": "^1.2.2",
-    "vinyl": "^2.2.1"
+    "vinyl": "^3.0.0"
   },
   "scripts": {
     "check-upgrade": "node check-upgrade.js",
