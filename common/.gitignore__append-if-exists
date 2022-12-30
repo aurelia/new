@@ -34,9 +34,6 @@ node_modules
 /dist
 /.nyc_output
 /coverage
-// @if fuse-box
-/.fusebox
-// @endif
 // @if parcel
 /.parcel-cache
 // @endif

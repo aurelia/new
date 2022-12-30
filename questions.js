@@ -19,8 +19,6 @@ module.exports = [
       {value: 'webpack', title: 'Webpack', hint: 'A powerful and popular bundler for modern JavaScript apps.'},
       {if: 'app', value: 'dumber', title: 'Dumber', hint: 'A dumb JavasScript bundler, dumber than you and me. The successor of Aurelia CLI built-in bundler.'},
       {if: 'app', value: 'parcel', title: 'Parcel', hint: 'Blazing fast, zero configuration web application bundler.'},
-      // FuseBox v4 is coming, and it's a total rewrite. Wait for it before implement.
-      // {value: 'fuse-box', title: 'FuseBox', hint: 'A bundler that does it all, and does it right.'},
     ]
   },
   {
