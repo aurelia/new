@@ -18,6 +18,7 @@
   "license": "UNLICENSED",
   "dependencies": {
     "aurelia": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
+    "@aurelia/router": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
     // @if browser-ie11
     "promise-polyfill": "^8.2.3",
     // @endif
