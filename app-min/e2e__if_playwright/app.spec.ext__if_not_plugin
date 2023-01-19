@@ -9,8 +9,8 @@ test.beforeEach(async ({ page }) => {
   await page.goto('http://localhost:9000');
 });
 
-test.describe('MyApp', () => {
+test.describe('App', () => {
   test('shows message', async ({ page }) => {
-    await expect(page.locator('my-app div')).toHaveText('Hello World!');
+    await expect(page.locator('app div')).toHaveText('Hello World!');
   });
 });

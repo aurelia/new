@@ -6,7 +6,7 @@ import Aurelia/* @if shadow-dom *//*, { StyleConfiguration }*//* @endif */ from 
 // @if app-with-router
 import { RouterConfiguration } from '@aurelia/router';
 // @endif
-import { MyApp } from './my-app';
+import { App } from './app';
 // @if shadow-dom
 // @if webpack
 // Css files imported in this main file are NOT processed by style-loader
@@ -31,5 +31,5 @@ Aurelia
   // customized router config.
   // .register(RouterConfiguration.customize({ useUrlFragmentHash: false }))
   // @endif
-  .app(MyApp)
+  .app(App)
   .start();
