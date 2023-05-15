@@ -100,30 +100,10 @@ module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */a
       extensions: [/* @if typescript */'.ts', /* @endif */'.js'],
       modules: [path.resolve(__dirname, 'src'),/* @if !production */ path.resolve(__dirname, 'dev-app'),/* @endif */ 'node_modules'],
       alias: production ? {
-        // add your production aliasing here
+        // add your production aliases here
       } : {
-        ...[
-          'fetch-client',
-          'kernel',
-          'metadata',
-          'platform',
-          'platform-browser',
-          'plugin-conventions',
-          'route-recognizer',
-          'router',
-          'router-lite',
-          'runtime',
-          'runtime-html',
-          'testing',
-          'webpack-loader',
-        ].reduce((map, pkg) => {
-          const name = `@aurelia/${pkg}`;
-          map[name] = path.resolve(__dirname, 'node_modules', name, 'dist/esm/index.dev.mjs');
-          return map;
-        }, {
-          'aurelia': path.resolve(__dirname, 'node_modules/aurelia/dist/esm/index.dev.mjs'),
-          // add your development aliasing here
-        })
+        ...getAureliaDevAliases()
+        // add your development aliases here
       }
     },
     devServer: {
@@ -296,4 +276,30 @@ module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */a
       })/* @endif */
     ].filter(p => p)
   }
+}
+
+function getAureliaDevAliases() {
+  return [
+    'aurelia',
+    'fetch-client',
+    'kernel',
+    'metadata',
+    'platform',
+    'platform-browser',
+    'route-recognizer',
+    'router',
+    'router-lite',
+    'runtime',
+    'runtime-html',
+    'testing',
+    'state',
+    'ui-virtualization'
+  ].reduce((map, pkg) => {
+    const name = pkg === 'aurelia' ? pkg : `@aurelia/${pkg}`;
+    try {
+      const packageLocation = require.resolve(name);
+      map[name] = path.resolve(packageLocation, `../../esm/index.dev.mjs`);
+    } catch {/**/}
+    return map;
+  });
 }
