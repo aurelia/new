@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@aurelia/router": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
+  }
+}
