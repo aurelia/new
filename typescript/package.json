@@ -1,9 +1,9 @@
 {
   "devDependencies": {
     "@types/node": "^18.11.18",
-    "typescript": "^4.9.4",
-    "tslib": "^2.4.1",
-    "@typescript-eslint/eslint-plugin": "^5.47.1",
-    "@typescript-eslint/parser": "^5.47.1"
+    "typescript": "^5.1.6",
+    "tslib": "^2.6.0",
+    "@typescript-eslint/eslint-plugin": "^5.60.1",
+    "@typescript-eslint/parser": "^5.60.1"
   }
 }
