@@ -20,11 +20,11 @@
     "aurelia": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
     "@aurelia/router": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
     // @if browser-ie11
-    "promise-polyfill": "^8.2.3",
+    "promise-polyfill": "^8.3.0",
     // @endif
   },
   "devDependencies": {
-    "eslint": "^8.30.0",
+    "eslint": "^8.43.0",
     "@aurelia/testing": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
     "htmlhint": "^1.1.4",
     // @if less

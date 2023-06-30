@@ -3,22 +3,22 @@
   "devDependencies": {
     "@aurelia/parcel-transformer": /* @if !dev */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
     // @if typescript
-    "@parcel/transformer-typescript-tsc": "^2.8.2",
+    "@parcel/transformer-typescript-tsc": "^2.9.3",
     // @endif
     // @if less
-    "@parcel/transformer-less": "^2.8.2",
+    "@parcel/transformer-less": "^2.9.3",
     // @endif
     // @if sass
-    "@parcel/transformer-sass": "^2.8.2",
+    "@parcel/transformer-sass": "^2.9.3",
     // @endif
     // @if jasmine || mocha
-    "@parcel/resolver-glob": "^2.8.2",
+    "@parcel/resolver-glob": "^2.9.3",
     // @endif
     // @if mocha
     "process": "^0.11.10",
     // @endif
-    "@parcel/transformer-inline-string": "^2.8.2",
-    "parcel": "^2.8.2"
+    "@parcel/transformer-inline-string": "^2.9.3",
+    "parcel": "^2.9.3"
   },
   "scripts": {
     "start": "parcel -p 9000",
