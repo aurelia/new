@@ -1,7 +1,10 @@
 {
   "source": "index.html",
   "devDependencies": {
-    "@aurelia/vite-plugin": /* @if !dev */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
+    "@aurelia/vite-plugin": /* @if !dev */ "latest" /* @endif */ /* @if dev */"dev" /* @endif */,
+  // @if babel
+    "vite-plugin-babel": "latest",
+  // @endif
   },
   "scripts": {
     "dev": "vite dev",
@@ -10,6 +13,9 @@
   },
   // @if shadow-dom
   "aurelia": {
-    "defaultShadowOptions": { "mode": "open" }
+    "defaultShadowOptions": {
+      "mode": "open"
+    }
   },
   // @endif
+}

@@ -1,0 +1,24 @@
+import { defineConfig } from 'vite';
+import aurelia from '@aurelia/vite-plugin';
+// @if babel
+import babel from 'vite-plugin-babel';
+//@endif
+
+export default defineConfig({
+    plugins: [
+        aurelia(),
+        // @if babel
+        babel({
+            babelConfig: {
+                babelrc: false,
+                configFile: false,
+                plugins: [              
+                  ["@babel/plugin-proposal-decorators", { "version": "legacy" }],
+                  ["@babel/plugin-proposal-class-properties", { "loose": true }],
+                   "@babel/plugin-syntax-dynamic-import"
+                ],
+            },
+        }),
+        // @endif
+    ]
+});
