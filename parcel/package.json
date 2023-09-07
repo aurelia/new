@@ -38,7 +38,7 @@
         "inline": true
       }
     }
-  }
+  },
   // @if shadow-dom
   "aurelia": {
     "defaultShadowOptions": { "mode": "open" },
