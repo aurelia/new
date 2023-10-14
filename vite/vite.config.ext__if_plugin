@@ -1,0 +1,58 @@
+import { defineConfig } from 'vite';
+import aurelia from '@aurelia/vite-plugin';
+import path from 'path';
+        // @if typescript
+import typescript from '@rollup/plugin-typescript';
+import { typescriptPaths } from 'rollup-plugin-typescript-paths';
+//@endif
+import * as packageJson from './package.json';
+// @if babel
+import babel from 'vite-plugin-babel';
+//@endif
+
+export default defineConfig({
+     plugins: [
+        aurelia(),
+        // @if babel
+        babel({
+            babelConfig: {
+                babelrc: false,
+                configFile: false,
+                plugins: [              
+                  ["@babel/plugin-proposal-decorators", { "version": "legacy" }],
+                  ["@babel/plugin-proposal-class-properties", { "loose": true }],
+                   "@babel/plugin-syntax-dynamic-import"
+                ],
+            },
+        }),
+        // @endif
+    ]
+  build: {
+    manifest: true,
+    minify: true,
+    reportCompressedSize: true,
+    lib: {
+      entry: path.resolve(__dirname, 'src/index.ts'),
+      name: 'aurelia-ionic',
+      fileName: 'index',
+      formats: ['es', 'cjs'],
+    },
+    rollupOptions: {
+      external: Object.keys(packageJson.peerDependencies),
+              // @if typescript
+      plugins: [
+        typescriptPaths({
+          preserveExtensions: true,
+        }),
+        typescript({
+          sourceMap: false,
+          declaration: true,
+          outDir: 'dist',
+          exclude: ['**/__tests__'],
+          tsconfig: './tsconfig.build.json',
+        }),
+      ],
+      // @endif
+    },
+  },
+});
