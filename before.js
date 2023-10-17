@@ -33,21 +33,21 @@ module.exports = async function({unattended, prompts, ansiColors}) {
     message: 'Would you like to use the default setup or customize your choices?',
     choices: [
       {
-        value: 'default-esnext',
-        title: 'Default ESNext Aurelia 2 App',
-        hint: 'A basic Aurelia 2 app with Babel and Vite'
-      }, {
         value: 'default-typescript',
         title: 'Default TypeScript Aurelia 2 App',
         hint: 'A basic Aurelia 2 app with TypeScript and Vite'
       }, {
-        value: 'default-esnext-plugin',
-        title: 'Default ESNext Aurelia 2 Plugin',
-        hint: 'A basic Aurelia 2 plugin project with Babel, Vite and ShadowDOM'
+        value: 'default-esnext',
+        title: 'Default ESNext Aurelia 2 App',
+        hint: 'A basic Aurelia 2 app with Babel and Vite'
       }, {
         value: 'default-typescript-plugin',
         title: 'Default TypeScript Aurelia 2 Plugin',
         hint: 'A basic Aurelia 2 plugin project with TypeScript, Vite and ShadowDOM'
+      }, {
+        value: 'default-esnext-plugin',
+        title: 'Default ESNext Aurelia 2 Plugin',
+        hint: 'A basic Aurelia 2 plugin project with Babel, Vite and ShadowDOM'
       }, {
         title: 'Custom Aurelia 2 Project',
         hint: 'Select bundler, transpiler, and more.'
