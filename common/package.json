@@ -45,7 +45,7 @@
     // @endif
   },
   "scripts": {
-    "lint:js": "eslint src test/* @if playwright */ e2e/* @endif *//* @if typescript */ --ext .js,.ts/* @endif */",
+    "lint:js": "eslint src/* @if !no-unit-tests */ test/* @endif *//* @if playwright */ e2e/* @endif *//* @if typescript */ --ext .js,.ts/* @endif */",
     // @if css
     "lint:css": "stylelint \"src/**/*.css\"",
     // @endif
