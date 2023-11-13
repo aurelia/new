@@ -27,11 +27,18 @@
     "eslint": "^8.43.0",
     "@aurelia/testing": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
     "htmlhint": "^1.1.4",
+    "stylelint": "^15.11.0",
+    // @if css
+    "stylelint-config-standard": "^34.0.0",
+    // @endif
     // @if less
-    "lesshint": "^6.3.7",
+    "stylelint-config-standard-less": "^2.0.0",
     // @endif
     // @if sass
-    "sass-lint": "^1.13.1",
+    "stylelint-config-standard-scss": "^11.1.0",
+    // @endif
+    // @if css-module
+    "stylelint-config-css-modules": "^4.3.0",
     // @endif
     // @if jasmine || mocha
     "browser-do": "^4.1.0",
@@ -39,14 +46,17 @@
   },
   "scripts": {
     "lint:js": "eslint src test/* @if playwright */ e2e/* @endif *//* @if typescript */ --ext .js,.ts/* @endif */",
+    // @if css
+    "lint:css": "stylelint \"src/**/*.css\"",
+    // @endif
     // @if sass
-    "lint:css": "sass-lint -c .sass-lint.yml \"src/**/*.scss\"",
+    "lint:css": "stylelint \"src/**/*.scss\"",
     // @endif
     // @if less
-    "lint:css": "lesshint \"src/**/*.less\"",
+    "lint:css": "stylelint \"src/**/*.less\"",
     // @endif
     "lint:html": "htmlhint -c .htmlhintrc src",
-    "lint": "npm run lint:js && npm run lint:html/* @if !css */ && npm run lint:css/* @endif */",
+    "lint": "npm run lint:js && npm run lint:html && npm run lint:css",
     // @if jest
     "pretest": "npm run lint",
     // @endif
