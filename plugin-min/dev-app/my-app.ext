@@ -1,2 +1,2 @@
-export class MyApp {
+export class App {
 }
