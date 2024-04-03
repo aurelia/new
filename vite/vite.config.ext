@@ -1,0 +1,58 @@
+import { defineConfig } from 'vite';
+import { nodePolyfills } from 'vite-plugin-node-polyfills'
+import aurelia from '@aurelia/vite-plugin';
+// @if babel
+import babel from 'vite-plugin-babel';
+// @endif
+// @if plugin
+import { resolve } from 'path';
+// @if typescript
+import dts from 'vite-plugin-dts';
+// @endif
+// @endif
+
+export default defineConfig({
+  server: {
+    open: !process.env.CI,
+    port: 9000,
+  },
+  // @if plugin
+  build: {
+    lib: {
+      entry: resolve(__dirname, 'src/index./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */'),
+      // Generate ESM dist file only.
+      formats: ['es'],
+      fileName: 'index',
+    },
+    rollupOptions: {
+      // Add all 3rd party dependencies here to avoid bundling.
+      external: [/@aurelia\/\w+/, 'aurelia'],
+    },
+  },
+  // @endif
+  plugins: [
+    aurelia({
+      useDev: true,
+      // @if plugin
+      include: '{src,dev-app}/**/*.{ts,js,html}',
+      // @endif
+      // @if shadow-dom
+      // The other possible Shadow DOM mode is 'closed'.
+      // If you turn on "closed" mode, there will be difficulty to perform e2e
+      // tests (such as Playwright). Because shadowRoot is not accessible through
+      // standard DOM APIs in "closed" mode.
+      defaultShadowOptions: { mode: 'open' },
+      // @endif
+      // @if css-module
+      useCSSModule: true,
+      // @endif
+    }),
+    // @if babel
+    babel(),
+    // @endif
+    nodePolyfills(),
+    // @if typescript && plugin
+    dts(),
+    // @endif
+  ],
+});

@@ -5,6 +5,7 @@
   // @endif
   // @if plugin
   "description": "An Aurelia 2 plugin.",
+  "type": "module",
   "main": "dist/index.js",
   "files": [
     "dist"
