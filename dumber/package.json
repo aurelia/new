@@ -10,7 +10,6 @@
     "gulp-typescript": "^5.0.1",
     // @endif
     "gulp-plumber": "^1.2.1",
-    "merge2": "^1.4.1",
     "gulp-terser": "^2.1.0",
     "gulp-if": "^3.0.0",
     "del": "^6.1.1",
