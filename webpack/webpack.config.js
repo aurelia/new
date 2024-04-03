@@ -87,6 +87,7 @@ module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */a
     },
     // @endif
     output: {
+      clean: true,
       path: path.resolve(__dirname, 'dist'),
       // @if app
       filename: production ? '[name].[contenthash].bundle.js' : '[name].bundle.js'
