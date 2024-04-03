@@ -9,7 +9,6 @@ const babel = require('gulp-babel');
 const typescript = require('gulp-typescript');
 // @endif
 const plumber = require('gulp-plumber');
-const merge2 = require('merge2');
 const terser = require('gulp-terser');
 const gulpif = require('gulp-if');
 const del = require('del');
@@ -30,6 +29,20 @@ const postcssUrl = require('postcss-url');
 // @if jasmine || mocha
 const gulpRun = require('gulp-run');
 // @endif
+const { PassThrough } = require('stream');
+const mergeStreams = (...streams) => {
+  const pass = new PassThrough({ objectMode: true });
+  const { length } = streams;
+  let ended = 0;
+  for (let stream of streams) {
+    stream.on('end', () => {
+      ended += 1;
+      if (ended === length) pass.end();
+    })
+    stream.pipe(pass, { end: false });
+  }
+  return pass;
+}
 
 const isProduction = process.env.NODE_ENV === 'production';
 const isTest = process.env.NODE_ENV === 'test';
@@ -124,7 +137,7 @@ function buildJs(src) {
   // @endif
   return gulp.src(src, { sourcemaps: !isProduction })
     .pipe(gulpif(!isProduction && !isTest, plumber()))
-    .pipe(au2())
+    .pipe(au2({ hmr: false }))
     // @if babel
     .pipe(babel());
     // @endif
@@ -183,7 +196,7 @@ function build() {
   // dumber knows nothing about .ts/.less/.scss/.md files,
   // gulp-* plugins transpiled them into js/css/html before
   // sending to dumber.
-  return merge2(
+  return mergeStreams(
     gulp.src('src/**/*.json'),
     // @if babel
     // @if !jasmine && !mocha
