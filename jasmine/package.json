@@ -1,8 +1,8 @@
 {
   "devDependencies": {
-    "jasmine-core": "^4.6.0",
+    "jasmine-core": "^5.1.2",
     // @if typescript
-    "@types/jasmine": "^4.3.5",
+    "@types/jasmine": "^5.1.4",
     // @endif
   },
   "scripts": {

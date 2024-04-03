@@ -1,9 +1,9 @@
 {
   "devDependencies": {
-    "mocha": "^10.2.0",
-    "chai": "^4.3.7",
+    "mocha": "^10.4.0",
+    "chai": "^5.1.0",
     // @if typescript
-    "@types/mocha": "^10.0.1",
+    "@types/mocha": "^10.0.6",
     // @endif
     // @if parcel
     "buffer": "^6.0.3",
