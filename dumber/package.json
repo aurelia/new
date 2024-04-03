@@ -1,7 +1,7 @@
 {
   "devDependencies": {
     "@aurelia/plugin-gulp": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
-    "gulp": "^5.0.0",
+    "gulp": "^4.0.2",
     "gulp-dumber": "^2.0.0",
     // @if babel
     "gulp-babel": "^8.0.0",
@@ -50,4 +50,11 @@
     "test:watch": "gulp clean && cross-env NODE_ENV=test gulp watch-test"
     // @endif
   },
+  // npm v8 feature to bypass outdated gulp deps
+  "overrides": {
+    "chokidar": "^3.6.0",
+    "glob-stream": "^7.0.0",
+    "glob-parent": "^6.0.2",
+    "micromatch": "^4.0.5"
+  }
 }
