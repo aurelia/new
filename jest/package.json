@@ -54,14 +54,6 @@
       "src/**/*.ts",
       "!src/**/*.d.ts"
       // @endif
-    ],
-
-    // @if typescript
-    "globals": {
-      "ts-jest": {
-        "isolatedModules": true
-      }
-    }
-    // @endif
+    ]
   }
 }
