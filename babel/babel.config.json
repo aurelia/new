@@ -9,7 +9,7 @@
     }]
   ],
   "plugins": [
-    ["@babel/plugin-proposal-decorators", { "version": "legacy" }],
+    ["@babel/plugin-proposal-decorators"],
     ["@babel/plugin-proposal-class-properties", { "loose": true }],
     "@babel/plugin-syntax-dynamic-import"
   ]
