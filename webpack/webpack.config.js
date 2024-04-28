@@ -5,6 +5,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 const Dotenv = require('dotenv-webpack');
+const TerserPlugin = require('terser-webpack-plugin');
 // @if jasmine || mocha
 const WebpackShellPluginNext = require('webpack-shell-plugin-next')
 // @endif
@@ -60,6 +61,19 @@ module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */a
     // @endif
     mode: production ? 'production' : 'development',
     devtool: production ? undefined : 'eval-cheap-source-map',
+    optimization: {
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            // Terser fast minify mode
+            // https://github.com/terser-js/terser#terser-fast-minify-mode
+            // It's a good balance on size and speed to turn off compress.
+            // Also bypass some terser bug.
+            compress: false
+          },
+        }),
+      ],
+    },
     // @if jasmine || mocha
     entry: {
       entry: test ?
