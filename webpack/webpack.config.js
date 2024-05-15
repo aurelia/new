@@ -60,7 +60,7 @@ module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */a
     target: production ? 'node' : 'web',
     // @endif
     mode: production ? 'production' : 'development',
-    devtool: production ? undefined : 'eval-cheap-source-map',
+    devtool: production ? undefined : 'eval-source-map',
     optimization: {
       minimizer: [
         new TerserPlugin({
