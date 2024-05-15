@@ -18,12 +18,7 @@
 
   "parserOptions": {
     "ecmaVersion": 2019,
-    "sourceType": "module",
-    // @if babel
-    "ecmaFeatures": {
-      "legacyDecorators": true
-    }
-    // @endif
+    "sourceType": "module"
   },
 
   "env": {
