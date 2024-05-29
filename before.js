@@ -7,7 +7,7 @@ const PRESETS = {
   'default-typescript-plugin': ['plugin', 'vite', 'typescript', 'shadow-dom', 'jest'],
 };
 
-const REQUIRE_NODEJS_VESION = [14, 15, 0];
+const REQUIRE_NODEJS_VESION = [14, 17, 0];
 
 function isNodejsOutdated() {
   const version = process.version.slice(1).split('.');
