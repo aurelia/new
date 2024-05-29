@@ -143,10 +143,7 @@ function buildHtml(src) {
     // standard DOM APIs in "closed" mode.
     .pipe(au2({ defaultShadowOptions: { mode: 'open' }, hmr: false }));
     // @endif
-    // @if css-module
-    .pipe(au2({ useCSSModule: true, hmr: false }));
-    // @endif
-    // @if !shadow-dom && !css-module
+    // @if !shadow-dom
     .pipe(au2({ hmr: false }));
   // @endif
 }
@@ -177,7 +174,8 @@ function buildCss(src) {
       // improve compatibility on svg.
       postcssUrl({ url: 'inline', encodeType: 'base64' })
     ]))/* @if css-module */
-    .pipe(cssModule())/* @endif */;
+    // Use .module.css naming convention
+    .pipe(gulpif(f => f.basename.endsWith('.module.css'), cssModule())/* @endif */;
 }
 
 function build() {

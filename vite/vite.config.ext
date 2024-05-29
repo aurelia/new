@@ -43,9 +43,6 @@ export default defineConfig({
       // standard DOM APIs in "closed" mode.
       defaultShadowOptions: { mode: 'open' },
       // @endif
-      // @if css-module
-      useCSSModule: true,
-      // @endif
     }),
     // @if babel
     babel(),

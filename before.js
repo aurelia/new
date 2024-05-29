@@ -3,8 +3,8 @@
 const PRESETS = {
   'default-esnext': ['app', 'vite', 'babel', 'jest'],
   'default-typescript': ['app', 'vite', 'typescript', 'jest'],
-  'default-esnext-plugin': ['plugin', 'webpack', 'babel', 'shadow-dom', 'jest'],
-  'default-typescript-plugin': ['plugin', 'webpack', 'typescript', 'shadow-dom', 'jest'],
+  'default-esnext-plugin': ['plugin', 'vite', 'babel', 'shadow-dom', 'jest'],
+  'default-typescript-plugin': ['plugin', 'vite', 'typescript', 'shadow-dom', 'jest'],
 };
 
 const REQUIRE_NODEJS_VESION = [14, 15, 0];

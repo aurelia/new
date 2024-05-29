@@ -45,14 +45,7 @@
     "hmr": false
   },
   // @endif
-  // @if css-module
-  "aurelia": {
-    "useCSSModule": true,
-    "hmr": false
-  },
-  "@parcel/transformer-css": { "cssModules": true },
-  // @endif
-  // @if !shadow-dom && !css-module
+  // @if !shadow-dom
   "aurelia": {
     "hmr": false
   },
