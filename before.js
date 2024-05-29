@@ -1,10 +1,10 @@
 // Use "before" task to ask user to select a preset (to skip questionnaire).
 
 const PRESETS = {
-  'default-esnext': ['app', 'vite', 'babel', 'jest'],
-  'default-typescript': ['app', 'vite', 'typescript', 'jest'],
-  'default-esnext-plugin': ['plugin', 'vite', 'babel', 'shadow-dom', 'jest'],
-  'default-typescript-plugin': ['plugin', 'vite', 'typescript', 'shadow-dom', 'jest'],
+  'default-esnext': ['app', 'vite', 'babel', 'vitest'],
+  'default-typescript': ['app', 'vite', 'typescript', 'vitest'],
+  'default-esnext-plugin': ['plugin', 'vite', 'babel', 'shadow-dom', 'vitest'],
+  'default-typescript-plugin': ['plugin', 'vite', 'typescript', 'shadow-dom', 'vitest'],
 };
 
 const REQUIRE_NODEJS_VESION = [14, 17, 0];
