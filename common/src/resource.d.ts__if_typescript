@@ -11,18 +11,18 @@ declare module '*.html' {
 }
 
 // @if css-module
-declare module '*.css' {
+declare module '*.module.css' {
   const value: Record<string, string>;
   export default value;
 }
 // @if less
-declare module '*.less' {
+declare module '*.module.less' {
   const value: Record<string, string>;
   export default value;
 }
 // @endif
 // @if sass
-declare module '*.scss' {
+declare module '*.module.scss' {
   const value: Record<string, string>;
   export default value;
 }

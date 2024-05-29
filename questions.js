@@ -35,7 +35,7 @@ module.exports = [
       {title: 'No'},
       {if: 'app', value: 'shadow-dom', title: 'Use Shadow DOM', hint: 'Shadow DOM in open mode, shadowRoot is accessible through DOM API.'},
       {if: 'plugin', value: 'shadow-dom', title: 'Use Shadow DOM (Recommended for plugin project)', hint: 'Shadow DOM in open mode, shadowRoot is accessible through DOM API.'},
-      {value: 'css-module', title: 'Use CSS Module', hint: 'CSS Module is an alternative way to locally scope CSS class names.'},
+      {value: 'css-module', title: 'Use CSS Module', hint: 'CSS Module is an alternative way to locally scope CSS class names. We use .module.css/less/scss file name convention.'},
     ]
   },
   {
