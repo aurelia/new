@@ -3,7 +3,7 @@
 import 'promise-polyfill/lib/polyfill';
 // @endif
 import Aurelia/* @if shadow-dom *//*, { StyleConfiguration }*//* @endif */ from 'aurelia';
-import { MyApp } from './my-app';
+import { App } from './app';
 // @if shadow-dom
 // @if webpack
 // Css files imported in this main file are NOT processed by style-loader
@@ -25,5 +25,5 @@ Aurelia
   // @endif
   // Register all exports of the plugin
   .register(Plugin)
-  .app(MyApp)
+  .app(App)
   .start();
