@@ -1,9 +1,4 @@
-// @if typescript
 import { test, expect } from '@playwright/test';
-// @endif
-// @if babel
-const { test, expect } = require('@playwright/test');
-// @endif
 
 test.beforeEach(async ({ page }) => {
   await page.goto('http://localhost:9000');
