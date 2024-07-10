@@ -16,8 +16,8 @@ module.exports = [
   {
     message: 'Which bundler would you like to use?',
     choices: [
-      {value: 'vite', title: 'Vite', hint: 'Next Generation Frontend Tooling.'},
-      {if: 'app', value: 'webpack', title: 'Webpack', hint: 'A powerful and popular bundler for modern JavaScript apps.'},
+      {if: 'app', value: 'vite', title: 'Vite', hint: 'Next Generation Frontend Tooling.'},
+      {value: 'webpack', title: 'Webpack', hint: 'A powerful and popular bundler for modern JavaScript apps.'},
       {if: 'app', value: 'dumber', title: 'Dumber', hint: 'A dumb JavasScript bundler, dumber than you and me. The successor of Aurelia CLI built-in bundler.'},
       {if: 'app', value: 'parcel', title: 'Parcel', hint: 'Blazing fast, zero configuration web application bundler.'},
     ]

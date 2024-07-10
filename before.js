@@ -3,11 +3,16 @@
 const PRESETS = {
   'default-esnext': ['app', 'vite', 'babel', 'vitest'],
   'default-typescript': ['app', 'vite', 'typescript', 'vitest'],
-  'default-esnext-plugin': ['plugin', 'vite', 'babel', 'shadow-dom', 'vitest'],
-  'default-typescript-plugin': ['plugin', 'vite', 'typescript', 'shadow-dom', 'vitest'],
+  // TODO: move plugin to vite+vitest
+  // FIXME: vite compiles plugin with separate css dist file, and removed
+  // import('./style.css') from js code, need to:
+  //   1. hook up a css loader in runtime for normal css and css-module.
+  //   2. hook up a text loader in runtime for shadow-dom css.
+  'default-esnext-plugin': ['plugin', 'webpack', 'babel', 'shadow-dom', 'jest'],
+  'default-typescript-plugin': ['plugin', 'webpack', 'typescript', 'shadow-dom', 'jest'],
 };
 
-const REQUIRE_NODEJS_VESION = [14, 17, 0];
+const REQUIRE_NODEJS_VESION = [18, 0, 0];
 
 function isNodejsOutdated() {
   const version = process.version.slice(1).split('.');

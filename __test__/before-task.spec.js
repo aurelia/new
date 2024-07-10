@@ -55,7 +55,7 @@ test('"before" task can select default-esnext-plugin preset', async t => {
   const result = await before({ unattended: false, prompts });
   t.deepEqual(result, {
     silentQuestions: true,
-    preselectedFeatures: ['plugin', 'vite', 'babel', 'shadow-dom', 'vitest']
+    preselectedFeatures: ['plugin', 'webpack', 'babel', 'shadow-dom', 'jest']
   });
 });
 
@@ -72,7 +72,7 @@ test('"before" task can select default-typescript-plugin preset', async t => {
   const result = await before({ unattended: false, prompts });
   t.deepEqual(result, {
     silentQuestions: true,
-    preselectedFeatures: ['plugin', 'vite', 'typescript', 'shadow-dom', 'vitest']
+    preselectedFeatures: ['plugin', 'webpack', 'typescript', 'shadow-dom', 'jest']
   });
 });
 test('"before" task can select no preset', async t => {
