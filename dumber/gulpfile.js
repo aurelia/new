@@ -175,7 +175,7 @@ function buildCss(src) {
       postcssUrl({ url: 'inline', encodeType: 'base64' })
     ]))/* @if css-module */
     // Use .module.css naming convention
-    .pipe(gulpif(f => f.basename.endsWith('.module.css'), cssModule())/* @endif */;
+    .pipe(gulpif(f => f.basename.endsWith('.module.css'), cssModule()))/* @endif */;
 }
 
 function build() {
