@@ -29,6 +29,9 @@
     // @if jasmine || mocha
     "webpack-shell-plugin-next": "^2.3.1",
     // @endif
+    // @if plugin
+    "webpack-node-externals": "^3.0.0",
+    // @endif
   },
   "scripts": {
     "start": "webpack serve",

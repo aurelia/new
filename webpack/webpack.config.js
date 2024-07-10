@@ -9,6 +9,9 @@ const TerserPlugin = require('terser-webpack-plugin');
 // @if jasmine || mocha
 const WebpackShellPluginNext = require('webpack-shell-plugin-next')
 // @endif
+// @if plugin
+const nodeExternals = require('webpack-node-externals');
+// @endif
 
 // @if sass
 const sassLoader = {
@@ -36,7 +39,12 @@ module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */a
   const test = env.test || process.env.NODE_ENV === 'test';
   // @endif
   return {
+    // @if app
     target: 'web',
+    // @endif
+    // @if plugin
+    target: production ? 'node' : 'web',
+    // @endif
     mode: production ? 'production' : 'development',
     devtool: production ? undefined : 'eval-source-map',
     optimization: {
@@ -56,22 +64,42 @@ module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */a
     entry: {
       entry: test ?
         './test/all-spec./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */' :
+        // @if app
         './src/main./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */'
+        // @endif
+        // @if plugin
+          // Build only plugin in production mode,
+          // build dev-app in non-production mode
+          (production ? './src/index./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */' : './dev-app/main./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */')
+        // @endif
     },
     // @endif
     // @if !jasmine && !mocha
     entry: {
+      // @if app
       entry: './src/main./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */'
+      // @endif
+      // @if plugin
+      // Build only plugin in production mode,
+      // build dev-app in non-production mode
+      entry:  production? './src/index./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */' : './dev-app/main./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */'
+      // @endif
     },
     // @endif
     output: {
       clean: true,
       path: path.resolve(__dirname, 'dist'),
+      // @if app
       filename: production ? '[name].[contenthash].bundle.js' : '[name].bundle.js'
+      // @endif
+      // @if plugin
+      filename: production ? 'index.js' : '[name].bundle.js',
+      library: production ? { type: 'commonjs' } : undefined
+      // @endif
     },
     resolve: {
       extensions: [/* @if typescript */'.ts', /* @endif */'.js'],
-      modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+      modules: [path.resolve(__dirname, 'src'),/* @if plugin */ path.resolve(__dirname, 'dev-app'),/* @endif */ 'node_modules'],
       alias: production ? {
         // add your production aliases here
       } : {
@@ -178,7 +206,12 @@ module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */a
         { test: /\.ts$/i, use: ['ts-loader', '@aurelia/webpack-loader'], exclude: /node_modules/ },
         // @endif
         {
+          // @if app
           test: /[/\\]src[/\\].+\.html$/i,
+          // @endif
+          // @if plugin
+          test: /[/\\](?:src|dev-app)[/\\].+\.html$/i,
+          // @endif
           // @if shadow-dom
           use: {
             loader: '@aurelia/webpack-loader',
@@ -198,8 +231,15 @@ module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */a
         }
       ]
     },
+    // @if plugin
+    externalsPresets: { node: production },
+    externals: [
+      // Skip npm dependencies in plugin build.
+      production && nodeExternals()
+    ].filter(p => p),
+    // @endif
     plugins: [
-      new HtmlWebpackPlugin({ template: 'index.html', favicon: 'favicon.ico' }),
+      /* @if plugin */!production && /* @endif */new HtmlWebpackPlugin({ template: 'index.html', favicon: 'favicon.ico' }),
       new Dotenv({
         path: `./.env${production ? '' :  '.' + (process.env.NODE_ENV || 'development')}`,
       }),
