@@ -9,7 +9,6 @@ const os = require('os');
 const fs = require('fs');
 const path = require('path');
 const test = require('ava');
-const puppeteer = require('puppeteer');
 const kill = require('tree-kill');
 const {possibleFeatureSelections} = require('makes');
 const questions = require('./questions');
@@ -85,15 +84,6 @@ function run(command, dataCB, errorCB) {
   });
 }
 
-async function takeScreenshot(url, filePath) {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.goto(url);
-  await new Promise(r => setTimeout(r, 6000));
-  await page.screenshot({path: filePath});
-  await browser.close();
-}
-
 const targetFeatures = (process.env.TARGET_FEATURES || '').toLowerCase().split(',').filter(p => p);
 if (!targetFeatures.includes('playwright')) {
   targetFeatures.push('playwright');
@@ -111,7 +101,7 @@ if (targetFeatures.length) {
 function getServerRegex(features) {
   if (features.includes('webpack')) return /Loopback: (\S+)/;
   if (features.includes('parcel')) return /Server running at (\S+)/;
-  if (features.includes('vite')) return /Local:\s+(\S+)/;
+  if (features.includes('vite')) return /(http:\/\/\S+\/)/;
   return /Dev server is started at: (\S+)/;
 }
 
@@ -164,18 +154,7 @@ skeletons.forEach((features, i) => {
       const m = data.toString().match(serverRegex);
       if (!m) return;
       const url = m[1];
-      t.pass(m[0]);
-
-      try {
-        if (!process.env.GITHUB_ACTIONS) {
-          console.log('-- take screenshot');
-          await takeScreenshot(url, path.join(folder, appName + '.png'));
-        }
-        kill();
-      } catch (e) {
-        t.fail(e.message);
-        kill();
-      }
+      t.pass(m[0]);      kill();
     };
 
     // Webpack5 now prints Loopback: http://localhost:5000 in stderr!
