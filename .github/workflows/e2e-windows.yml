@@ -26,8 +26,8 @@ jobs:
           - latest,parcel,typescript
           - latest,dumber,babel
           - latest,dumber,typescript
-          - latest,vite,babel
-          - latest,vite,typescript
+          - dev,vite,babel
+          - dev,vite,typescript
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node_version }}
