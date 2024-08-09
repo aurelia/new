@@ -16,6 +16,7 @@ module.exports = [
   {
     message: 'Which bundler would you like to use?',
     choices: [
+      {if: 'app', value: 'vite', title: 'Vite', hint: 'Next Generation Frontend Tooling.'},
       {value: 'webpack', title: 'Webpack', hint: 'A powerful and popular bundler for modern JavaScript apps.'},
       {if: 'app', value: 'dumber', title: 'Dumber', hint: 'A dumb JavasScript bundler, dumber than you and me. The successor of Aurelia CLI built-in bundler.'},
       {if: 'app', value: 'parcel', title: 'Parcel', hint: 'Blazing fast, zero configuration web application bundler.'},
@@ -34,7 +35,7 @@ module.exports = [
       {title: 'No'},
       {if: 'app', value: 'shadow-dom', title: 'Use Shadow DOM', hint: 'Shadow DOM in open mode, shadowRoot is accessible through DOM API.'},
       {if: 'plugin', value: 'shadow-dom', title: 'Use Shadow DOM (Recommended for plugin project)', hint: 'Shadow DOM in open mode, shadowRoot is accessible through DOM API.'},
-      {value: 'css-module', title: 'Use CSS Module', hint: 'CSS Module is an alternative way to locally scope CSS class names.'},
+      {value: 'css-module', title: 'Use CSS Module', hint: 'CSS Module is an alternative way to locally scope CSS class names. We use .module.css/less/scss file name convention.'},
     ]
   },
   {
@@ -49,9 +50,10 @@ module.exports = [
     message: 'What unit testing framework to use?',
     choices: [
       {value: 'no-unit-tests', title: 'None', hint: 'No unit testing'},
-      {value: 'jest', title: 'Jest', hint: 'Runs in Node.js, simulates browser by default, with a focus on simplicity.'},
-      {value: 'jasmine', title: 'Jasmine', hint: 'Runs in browser, a behavior-driven testing framework.'},
-      {value: 'mocha', title: 'Mocha + Chai', hint: 'Runs in browser, a feature-rich JavaScript test framework for node and browsers.'}
+      {if: '!vite', value: 'jest', title: 'Jest', hint: 'Runs in Node.js, simulates browser by default, with a focus on simplicity.'},
+      {if: '!vite', value: 'jasmine', title: 'Jasmine', hint: 'Runs in browser, a behavior-driven testing framework.'},
+      {if: '!vite', value: 'mocha', title: 'Mocha + Chai', hint: 'Runs in browser, a feature-rich JavaScript test framework for node and browsers.'},
+      {if: 'vite', value: 'vitest', title:'Vitest', hint: 'A Vite-native testing framework.'}
     ]
   },
   {

@@ -1,0 +1,31 @@
+{
+  "type": "module",
+  "devDependencies": {
+    "@aurelia/vite-plugin": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
+    "vite": "^5.2.12",
+    "vite-plugin-node-polyfills": "^0.22.0",
+    // @if babel
+    "vite-plugin-babel": "^1.2.0",
+    // @endif
+    // @if typescript && plugin
+    "vite-plugin-dts": "^3.9.1",
+    // @endif
+    // @if vitest
+    "vitest": "^1.6.0",
+    "jsdom": "^24.1.0",
+    // @endif
+    // @if less
+    "less": "^4.2.0",
+    // @endif
+    // @if sass
+    "sass": "^1.77.3",
+    // @endif
+  },
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    // @if vitest
+    "test": "vitest",
+    // @endif
+  }
+}

@@ -13,20 +13,6 @@ const WebpackShellPluginNext = require('webpack-shell-plugin-next')
 const nodeExternals = require('webpack-node-externals');
 // @endif
 
-// @if !css-module
-const cssLoader = 'css-loader';
-// @endif
-// @if css-module
-const cssLoader = {
-  loader: 'css-loader',
-  options: {
-    modules: true,
-    // https://github.com/webpack-contrib/css-loader#importloaders
-    importLoaders: /* @if css */1/* @endif *//* @if !css */2/* @endif */
-  }
-};
-// @endif
-
 // @if sass
 const sassLoader = {
   loader: 'sass-loader',
@@ -113,7 +99,7 @@ module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */a
     },
     resolve: {
       extensions: [/* @if typescript */'.ts', /* @endif */'.js'],
-      modules: [path.resolve(__dirname, 'src'),/* @if !production */ path.resolve(__dirname, 'dev-app'),/* @endif */ 'node_modules'],
+      modules: [path.resolve(__dirname, 'src'),/* @if plugin */ path.resolve(__dirname, 'dev-app'),/* @endif */ 'node_modules'],
       alias: production ? {
         // add your production aliases here
       } : {
@@ -131,12 +117,12 @@ module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */a
         { test: /\.(png|svg|jpg|jpeg|gif)$/i, type: 'asset' },
         { test: /\.(woff|woff2|ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/i,  type: 'asset' },
         // @if !shadow-dom
-        { test: /\.css$/i, use: [ 'style-loader', cssLoader, postcssLoader ] },
+        { test: /\.css$/i, use: [ 'style-loader', 'css-loader', postcssLoader ] },
         // @if less
-        { test: /\.less$/i, use: [ 'style-loader', cssLoader, postcssLoader, 'less-loader' ] },
+        { test: /\.less$/i, use: [ 'style-loader', 'css-loader', postcssLoader, 'less-loader' ] },
         // @endif
         // @if sass
-        { test: /\.scss$/i, use: [ 'style-loader', cssLoader, postcssLoader, sassLoader ] },
+        { test: /\.scss$/i, use: [ 'style-loader', 'css-loader', postcssLoader, sassLoader ] },
         // @endif
         // @endif
         // @if shadow-dom
@@ -145,7 +131,7 @@ module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */a
           // For style loaded in src/main.js, it's not loaded by style-loader.
           // It's for shared styles for shadow-dom only.
           issuer: /[/\\]src[/\\]main\.(js|ts)$/,
-          use: [ cssLoader, postcssLoader ]
+          use: [ 'css-loader', postcssLoader ]
         },
         // @if less
         {
@@ -153,7 +139,7 @@ module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */a
           // For style loaded in src/main.js, it's not loaded by style-loader.
           // It's for shared styles for shadow-dom only.
           issuer: /[/\\]src[/\\]main\.(js|ts)$/,
-          use: [ cssLoader, postcssLoader, 'less-loader' ]
+          use: [ 'css-loader', postcssLoader, 'less-loader' ]
         },
         // @endif
         // @if sass
@@ -162,7 +148,7 @@ module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */a
           // For style loaded in src/main.js, it's not loaded by style-loader.
           // It's for shared styles for shadow-dom only.
           issuer: /[/\\]src[/\\]main\.(js|ts)$/,
-          use: [ cssLoader, postcssLoader, sassLoader ]
+          use: [ 'css-loader', postcssLoader, sassLoader ]
         },
         // @endif
         {
@@ -170,7 +156,7 @@ module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */a
           // For style loaded in other js/ts files, it's loaded by style-loader.
           // They are directly injected to HTML head.
           issuer: /(?<![/\\]src[/\\]main)\.(js|ts)$/,
-          use: [ 'style-loader', cssLoader, postcssLoader ]
+          use: [ 'style-loader', 'css-loader', postcssLoader ]
         },
         // @if less
         {
@@ -178,7 +164,7 @@ module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */a
           // For style loaded in other js/ts files, it's loaded by style-loader.
           // They are directly injected to HTML head.
           issuer: /(?<![/\\]src[/\\]main)\.(js|ts)$/,
-          use: [ 'style-loader', cssLoader, postcssLoader, 'less-loader' ]
+          use: [ 'style-loader', 'css-loader', postcssLoader, 'less-loader' ]
         },
         // @endif
         // @if sass
@@ -187,21 +173,21 @@ module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */a
           // For style loaded in other js/ts files, it's loaded by style-loader.
           // They are directly injected to HTML head.
           issuer: /(?<![/\\]src[/\\]main)\.(js|ts)$/,
-          use: [ 'style-loader', cssLoader, postcssLoader, sassLoader ]
+          use: [ 'style-loader', 'css-loader', postcssLoader, sassLoader ]
         },
         // @endif
         {
           test: /\.css$/i,
           // For style loaded in html files, Aurelia will handle it.
           issuer: /\.html$/,
-          use: [ cssLoader, postcssLoader ]
+          use: [ 'css-loader', postcssLoader ]
         },
         // @if less
         {
           test: /\.less$/i,
           // For style loaded in html files, Aurelia will handle it.
           issuer: /\.html$/,
-          use: [ cssLoader, postcssLoader, 'less-loader' ]
+          use: [ 'css-loader', postcssLoader, 'less-loader' ]
         },
         // @endif
         // @if sass
@@ -209,7 +195,7 @@ module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */a
           test: /\.scss$/i,
           // For style loaded in html files, Aurelia will handle it.
           issuer: /\.html$/,
-          use: [ cssLoader, postcssLoader, sassLoader ]
+          use: [ 'css-loader', postcssLoader, sassLoader ]
         },
         // @endif
         // @endif
@@ -219,7 +205,6 @@ module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */a
         // @if typescript
         { test: /\.ts$/i, use: ['ts-loader', '@aurelia/webpack-loader'], exclude: /node_modules/ },
         // @endif
-        // @if shadow-dom
         {
           // @if app
           test: /[/\\]src[/\\].+\.html$/i,
@@ -227,6 +212,7 @@ module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */a
           // @if plugin
           test: /[/\\](?:src|dev-app)[/\\].+\.html$/i,
           // @endif
+          // @if shadow-dom
           use: {
             loader: '@aurelia/webpack-loader',
             options: {
@@ -237,36 +223,12 @@ module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */a
               defaultShadowOptions: { mode: 'open' }
             }
           },
-          exclude: /node_modules/
-        }
-        // @endif
-        // @if css-module
-        {
-          // @if app
-          test: /[/\\]src[/\\].+\.html$/i,
           // @endif
-          // @if plugin
-          test: /[/\\](?:src|dev-app)[/\\].+\.html$/i,
-          // @endif
-          use: {
-            loader: '@aurelia/webpack-loader',
-            options: { useCSSModule: true }
-          },
-          exclude: /node_modules/
-        }
-        // @endif
-        // @if !shadow-dom && !css-module
-        {
-          // @if app
-          test: /[/\\]src[/\\].+\.html$/i,
-          // @endif
-          // @if plugin
-          test: /[/\\](?:src|dev-app)[/\\].+\.html$/i,
-          // @endif
+          // @if !shadow-dom
           use: '@aurelia/webpack-loader',
+          // @endif
           exclude: /node_modules/
         }
-        // @endif
       ]
     },
     // @if plugin

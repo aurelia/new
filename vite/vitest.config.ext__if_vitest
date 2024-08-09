@@ -1,0 +1,17 @@
+import { fileURLToPath } from "node:url";
+import { mergeConfig, defineConfig/* @if playwright */, configDefaults/* @endif */ } from "vitest/config";
+import viteConfig from "./vite.config";
+
+export default mergeConfig(
+  viteConfig,
+  defineConfig({
+    test: {
+      environment: "jsdom",
+      watch: false,
+      // @if playwright
+      exclude: [...configDefaults.exclude, "e2e/*"],
+      // @endif
+      root: fileURLToPath(new URL("./", import.meta.url)),
+    },
+  }),
+);

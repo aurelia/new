@@ -25,10 +25,7 @@
       // @if shadow-dom
       "\\.(js|html)$": [ "@aurelia/babel-jest", { defaultShadowOptions: { mode: 'open' } } ]
       // @endif
-      // @if css-module
-      "\\.(js|html)$": [ "@aurelia/babel-jest", { useCSSModule: true } ]
-      // @endif
-      // @if !shadow-dom && !css-module
+      // @if !shadow-dom
       "\\.(js|html)$": "@aurelia/babel-jest",
       // @endif
       // @endif
@@ -36,10 +33,7 @@
       // @if shadow-dom
       "\\.(ts|html)$": [ "@aurelia/ts-jest", { defaultShadowOptions: { mode: 'open' } } ]
       // @endif
-      // @if css-module
-      "\\.(ts|html)$": [ "@aurelia/ts-jest", { useCSSModule: true } ]
-      // @endif
-      // @if !shadow-dom && !css-module
+      // @if !shadow-dom
       "\\.(ts|html)$": "@aurelia/ts-jest",
       // @endif
       // @endif

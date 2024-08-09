@@ -71,3 +71,67 @@ test.cb('ext-transform translates .ext file to .ts file when typescript is selec
     contents: Buffer.from('<p></p>')
   }));
 });
+
+test.cb('ext-transform translates css files to .module.css files when css-module is selected', t => {
+  const jsExt = extTransform({}, ['css-module']);
+  const files = [];
+
+  jsExt.pipe(new Writable({
+    objectMode: true,
+    write(file, enc, cb) {
+      files.push(file);
+      cb();
+    }
+  }));
+
+  jsExt.on('end', () => {
+    t.is(files.length, 2);
+    t.is(files[0].path.replace(/\\/g, '/'), 'test/a.module.css');
+    t.is(files[0].contents.toString(), '.p { color: green; }');
+    t.is(files[1].path.replace(/\\/g, '/'), 'test/b.module.scss');
+    t.is(files[1].contents.toString(), '.p { color: red; }');
+    t.end();
+  })
+
+  jsExt.write(new Vinyl({
+    path: 'test/a.css',
+    contents: Buffer.from('.p { color: green; }')
+  }));
+
+  jsExt.end(new Vinyl({
+    path: 'test/b.scss',
+    contents: Buffer.from('.p { color: red; }')
+  }));
+});
+
+test.cb('ext-transform leaves css files untouched files when css-module is not selected', t => {
+  const jsExt = extTransform({}, ['']);
+  const files = [];
+
+  jsExt.pipe(new Writable({
+    objectMode: true,
+    write(file, enc, cb) {
+      files.push(file);
+      cb();
+    }
+  }));
+
+  jsExt.on('end', () => {
+    t.is(files.length, 2);
+    t.is(files[0].path.replace(/\\/g, '/'), 'test/a.css');
+    t.is(files[0].contents.toString(), '.p { color: green; }');
+    t.is(files[1].path.replace(/\\/g, '/'), 'test/b.scss');
+    t.is(files[1].contents.toString(), '.p { color: red; }');
+    t.end();
+  })
+
+  jsExt.write(new Vinyl({
+    path: 'test/a.css',
+    contents: Buffer.from('.p { color: green; }')
+  }));
+
+  jsExt.end(new Vinyl({
+    path: 'test/b.scss',
+    contents: Buffer.from('.p { color: red; }')
+  }));
+});

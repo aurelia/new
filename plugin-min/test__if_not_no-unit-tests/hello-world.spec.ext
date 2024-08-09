@@ -1,6 +1,9 @@
 // @if mocha
 import { expect } from 'chai';
 // @endif
+// @if vitest
+import { describe, it, expect } from 'vitest';
+// @endif
 // @if shadow-dom
 import { CustomElement } from 'aurelia';
 // @endif
@@ -25,7 +28,7 @@ describe('hello-world', () => {
     // @if !shadow-dom
     const text =  node.textContent;
     // @endif
-    // @if jasmine || jest
+    // @if jasmine || jest || vitest
     expect(text.trim()).toBe('Hello World! foo');
     // @endif
     // @if mocha

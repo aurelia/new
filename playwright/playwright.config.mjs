@@ -1,11 +1,4 @@
-// @if typescript
-import type { PlaywrightTestConfig } from '@playwright/test';
-import { devices } from '@playwright/test';
-// @endif
-// @if babel
-// @ts-check
-const { devices } = require('@playwright/test');
-// @endif
+import { defineConfig, devices } from '@playwright/test';
 
 /**
  * Read environment variables from file.
@@ -16,7 +9,7 @@ const { devices } = require('@playwright/test');
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-const config/* @if typescript */: PlaywrightTestConfig/* @endif */ = {
+export default defineConfig({
   testDir: './e2e',
   /* Maximum time one test can run for. */
   timeout: 30 * 1000,
@@ -108,11 +101,4 @@ const config/* @if typescript */: PlaywrightTestConfig/* @endif */ = {
     command: 'npm start',
     port: 9000,
   },
-};
-
-// @if typescript
-export default config;
-// @endif
-// @if babel
-module.exports = config;
-// @endif
+});
