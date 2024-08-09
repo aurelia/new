@@ -39,7 +39,7 @@ function killProc(proc) {
   kill(proc.pid);
 }
 
-function run(command, dataCB, errorCB) {
+function run(command, cwd, dataCB, errorCB) {
   const [cmd, ...args] = command.split(' ');
   return new Promise((resolve, reject) => {
     const env = Object.create(process.env);
@@ -48,7 +48,7 @@ function run(command, dataCB, errorCB) {
     // need to reset NODE_ENV back to development because this whole
     // test is running in NODE_ENV=test which will affect gulp build
     env.NODE_ENV = 'development';
-    const proc = spawn(cmd, args, {env});
+    const proc = spawn(cmd, args, {env, cwd});
     proc.on('exit', async (code, signal) => {
       await delay(1);
       if (code && signal !== 'SIGTERM' && !win32Killed.has(proc.pid)) {
@@ -117,26 +117,24 @@ skeletons.forEach((features, i) => {
 
   test.serial(title, async t => {
     console.log(title);
-    process.chdir(folder);
 
     const makeCmd = `npx makes ${__dirname} ${appName} -s ${features.join(',')}`;
     console.log('-- ' + makeCmd);
-    await run(makeCmd);
+    await run(makeCmd, folder);
     t.pass('made skeleton');
-    process.chdir(appFolder);
 
     console.log('-- npm i');
-    await run('npm i');
+    await run('npm i', appFolder);
     t.pass('installed deps');
 
     if (!features.includes('no-unit-tests')) {
       console.log('-- npm test');
-      await run('npm test');
+      await run('npm test', appFolder);
       t.pass('finished unit tests');
     }
 
     console.log('-- npm run build');
-    await run('npm run build', null,
+    await run('npm run build', appFolder, null,
       (data, kill) => {
         // Skip parcel warnings.
         if (features.includes('parcel')) return;
@@ -154,22 +152,22 @@ skeletons.forEach((features, i) => {
       const m = data.toString().match(serverRegex);
       if (!m) return;
       const url = m[1];
-      t.pass(m[0]);      kill();
+      t.pass(m[0]);
+      kill();
     };
 
     // Webpack5 now prints Loopback: http://localhost:5000 in stderr!
-    await run('npm start', runE2e, runE2e);
+    await run('npm start', appFolder, runE2e, runE2e);
 
     if (features.includes('playwright')) {
       console.log('-- npx playwright test --project chromium');
-      await run('npx playwright install --with-deps');
-      await run('npx playwright test --project chromium');
+      await run('npx playwright install --with-deps', appFolder);
+      await run('npx playwright test --project chromium', appFolder);
     }
 
     await delay(1);
 
     console.log('-- remove folder ' + appName);
-    process.chdir(folder);
     await fs.promises.rm(appFolder, {recursive: true});
   });
 });
