@@ -5,7 +5,6 @@
 // Have to run "npm run test:e2e" manually before a release.
 
 const spawn = require('cross-spawn');
-const os = require('os');
 const fs = require('fs');
 const path = require('path');
 const test = require('ava');
@@ -23,7 +22,7 @@ const allSkeletons = possibleFeatureSelections(questions);
 
 const isWin32 = process.platform === 'win32';
 
-const folder = path.join(os.tmpdir(), 'test-skeletons');
+const folder = path.join(__dirname, 'test-skeletons');
 console.log('-- cleanup ' + folder);
 fs.rmSync(folder, {recursive: true, force: true});
 fs.mkdirSync(folder);
