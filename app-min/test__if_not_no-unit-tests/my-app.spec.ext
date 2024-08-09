@@ -8,11 +8,11 @@ import { describe, it, expect } from 'vitest';
 import { CustomElement } from 'aurelia';
 // @endif
 import { render } from './helper';
-import { MyApp } from '../src/my-app';
+import { App } from '../src/app';
 
-describe('my-app', () => {
+describe('app', () => {
   it('should render message', async () => {
-    const node = (await render('<my-app></my-app>', MyApp)).firstElementChild;
+    const node = (await render('<app></app>', App)).firstElementChild;
     // @if shadow-dom
     // In Shadow DOM open mode, shadowRoot is also accessible through DOM API
     //   node.shadowRoot

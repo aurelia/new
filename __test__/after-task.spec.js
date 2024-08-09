@@ -25,7 +25,7 @@ test('"after" task only prints summary in unattended mode', async t => {
     here: false,
     prompts,
     run,
-    properties: {name: 'my-app'},
+    properties: {name: 'app'},
     features: ['a', 'b'],
     notDefaultFeatures: ['a', 'b-c'],
     ansiColors
@@ -38,7 +38,7 @@ test('"after" task only prints summary in unattended mode', async t => {
 
   t.is(printOut,
     '\nGet Started\n' +
-    'cd my-app\n' +
+    'cd app\n' +
     'npm install\n' +
     'npm start\n\n'
   );
@@ -61,7 +61,7 @@ test('"after" task only prints summary in unattended mode and here mode', async 
     here: true,
     prompts,
     run,
-    properties: {name: 'my-app'},
+    properties: {name: 'app'},
     features: ['a', 'b'],
     notDefaultFeatures: ['a', 'b-c'],
     ansiColors
@@ -98,7 +98,7 @@ test('"after" task installs deps with npm, and prints summary', async t => {
     here: false,
     prompts,
     run,
-    properties: {name: 'my-app'},
+    properties: {name: 'app'},
     features: ['a', 'b'],
     notDefaultFeatures: ['a', 'b-c'],
     ansiColors
@@ -113,7 +113,7 @@ test('"after" task installs deps with npm, and prints summary', async t => {
     '\nNext time, you can try to create similar project in silent mode:\n' +
     ' npx makes aurelia new-project-name -s a,b-c \n\n' +
     'Get Started\n' +
-    'cd my-app\n' +
+    'cd app\n' +
     'npm start\n\n'
   );
 });
@@ -137,7 +137,7 @@ test('"after" task installs deps with yarn, and prints summary', async t => {
     here: false,
     prompts,
     run,
-    properties: {name: 'my-app'},
+    properties: {name: 'app'},
     features: ['a', 'b'],
     notDefaultFeatures: ['a', 'b-c'],
     ansiColors
@@ -152,7 +152,7 @@ test('"after" task installs deps with yarn, and prints summary', async t => {
     '\nNext time, you can try to create similar project in silent mode:\n' +
     ' npx makes aurelia new-project-name -s a,b-c \n\n' +
     'Get Started\n' +
-    'cd my-app\n' +
+    'cd app\n' +
     'yarn start\n\n'
   );
 });
@@ -176,7 +176,7 @@ test('"after" task installs deps with pnpm, and prints summary', async t => {
     here: false,
     prompts,
     run,
-    properties: {name: 'my-app'},
+    properties: {name: 'app'},
     features: ['a', 'b'],
     notDefaultFeatures: ['a', 'b-c'],
     ansiColors
@@ -191,7 +191,7 @@ test('"after" task installs deps with pnpm, and prints summary', async t => {
     '\nNext time, you can try to create similar project in silent mode:\n' +
     ' npx makes aurelia new-project-name -s a,b-c \n\n' +
     'Get Started\n' +
-    'cd my-app\n' +
+    'cd app\n' +
     'pnpm start\n\n'
   );
 });
@@ -215,7 +215,7 @@ test('"after" task installs deps, and prints summary in here mode', async t => {
     here: true,
     prompts,
     run,
-    properties: {name: 'my-app'},
+    properties: {name: 'app'},
     features: ['a', 'b'],
     notDefaultFeatures: ['a', 'b-c'],
     ansiColors
