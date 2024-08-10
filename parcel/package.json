@@ -5,17 +5,8 @@
     // @if typescript
     "@parcel/transformer-typescript-tsc": "^2.12.0",
     // @endif
-    // @if less
-    "@parcel/transformer-less": "^2.12.0",
-    // @endif
     // @if sass
     "@parcel/transformer-sass": "^2.12.0",
-    // @endif
-    // @if jasmine || mocha
-    "@parcel/resolver-glob": "^2.12.0",
-    // @endif
-    // @if mocha
-    "process": "^0.11.10",
     // @endif
     "@parcel/transformer-inline-string": "^2.12.0",
     "parcel": "^2.12.0"
@@ -23,14 +14,6 @@
   "scripts": {
     "start": "parcel -p 9000",
     "build": "parcel build --no-scope-hoist --no-source-maps",
-    // @if jasmine || mocha
-    // @if babel
-    "build:test": "parcel build --no-scope-hoist test/all-spec.js",
-    // @endif
-    // @if typescript
-    "build:test": "parcel build --no-scope-hoist test/all-spec.ts",
-    // @endif
-    // @endif
   },
   "targets": {
     "default": {

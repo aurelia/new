@@ -22,15 +22,9 @@
   },
 
   "env": {
-    "es6": true,
+    "es2024": true,
     "browser": true,
     "node": true,
-    // @if jasmine
-    "jasmine": true,
-    // @endif
-    // @if mocha
-    "mocha": true,
-    // @endif
     // @if jest
     "jest": true,
     // @endif

@@ -1,38 +1,17 @@
-// @if mocha
-import { expect } from 'chai';
-// @endif
 // @if vitest
-import { describe, it, expect } from 'vitest';
+import { describe, it } from 'vitest';
 // @endif
-// @if shadow-dom
-import { CustomElement } from 'aurelia';
-// @endif
-import { render } from './helper';
 import { HelloWorld } from '../src/hello-world';
+import { createFixture } from '@aurelia/testing';
 
-describe('hello-world', () => {
+describe('my-app', () => {
   it('should render message', async () => {
-    const node = (await render('<hello-world message="foo"></hello-world>', HelloWorld)).firstElementChild;
-    // @if shadow-dom
-    // In Shadow DOM open mode, shadowRoot is also accessible through DOM API
-    //   node.shadowRoot
-    // But only Aurelia API can access shadowRoot in both open and closed mode.
-    const shadowRoot = CustomElement.for(node).shadowRoot;
-    // @if babel
-    const text = shadowRoot.textContent;
-    // @endif
-    // @if typescript
-    const text = (shadowRoot as Node).textContent;
-    // @endif
-    // @endif
-    // @if !shadow-dom
-    const text =  node.textContent;
-    // @endif
-    // @if jasmine || jest || vitest
-    expect(text.trim()).toBe('Hello World! foo');
-    // @endif
-    // @if mocha
-    expect(text.trim()).to.equal('Hello World! foo');
-    // @endif
+    const { assertText } = await createFixture(
+      '<hello-world message="message"></hello-world>',
+      { message: "foo" },
+      [HelloWorld],
+    ).started;
+
+    assertText('Hello World! foo', { compact: true });
   });
 });

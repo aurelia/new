@@ -15,12 +15,6 @@ declare module '*.module.css' {
   const value: Record<string, string>;
   export default value;
 }
-// @if less
-declare module '*.module.less' {
-  const value: Record<string, string>;
-  export default value;
-}
-// @endif
 // @if sass
 declare module '*.module.scss' {
   const value: Record<string, string>;
@@ -30,9 +24,6 @@ declare module '*.module.scss' {
 // @endif
 // @if !css-module
 declare module '*.css';
-// @if less
-declare module '*.less';
-// @endif
 // @if sass
 declare module '*.scss';
 // @endif

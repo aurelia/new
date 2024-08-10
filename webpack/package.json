@@ -15,10 +15,6 @@
     // @if typescript
     "ts-loader": "^9.5.1",
     // @endif
-    // @if less
-    "less-loader": "^12.2.0",
-    "less": "^4.2.0",
-    // @endif
     // @if sass
     "sass-loader": "^14.1.1",
     "sass": "^1.72.0",
@@ -26,9 +22,6 @@
     "postcss-loader": "^8.1.1",
     "postcss": "^8.4.38",
     "autoprefixer": "^10.4.19",
-    // @if jasmine || mocha
-    "webpack-shell-plugin-next": "^2.3.1",
-    // @endif
     // @if plugin
     "webpack-node-externals": "^3.0.0",
     // @endif
@@ -37,9 +30,5 @@
     "start": "webpack serve",
     "build": "webpack --env production",
     "analyze": "webpack --env production --analyze",
-    // @if jasmine || mocha
-    "build:test": "webpack --env test",
-    "test:watch": "webpack --env test --watch --runTest"
-    // @endif
   }
 }

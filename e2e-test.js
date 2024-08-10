@@ -160,7 +160,7 @@ skeletons.forEach((features, i) => {
 
     if (features.includes('playwright')) {
       console.log('-- npx playwright test --project chromium');
-      await run('npx playwright install --with-deps', appFolder);
+      await run('npx playwright install chromium --with-deps', appFolder);
       await run('npx playwright test --project chromium', appFolder);
     }
 

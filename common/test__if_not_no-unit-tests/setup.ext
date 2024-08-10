@@ -1,0 +1,31 @@
+import { BrowserPlatform } from '@aurelia/platform-browser';
+import { setPlatform, onFixtureCreated/* @if typescript */, type IFixture/* @endif */ } from '@aurelia/testing';
+// @if vitest
+import { beforeAll, afterEach } from 'vitest';
+// @endif
+
+// Sets up the Aurelia environment for testing
+function bootstrapTextEnv() {
+  const platform = new BrowserPlatform(window);
+  setPlatform(platform);
+  BrowserPlatform.set(globalThis, platform);
+}
+
+const fixtures/* @if typescript */: IFixture<object>[]/* @endif */ = [];
+beforeAll(() => {
+  bootstrapTextEnv();
+  onFixtureCreated(fixture => {
+    fixtures.push(fixture);
+  });
+});
+
+afterEach(() => {
+  fixtures.forEach(async f => {
+    try {
+      await f.stop(true);
+    } catch {
+      // ignore
+    }
+  });
+  fixtures.length = 0;
+});

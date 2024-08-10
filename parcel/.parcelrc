@@ -8,8 +8,5 @@
     "*.ts": ["@aurelia/parcel-transformer", "@parcel/transformer-typescript-tsc"],
     // @endif
     "*.html": ["@aurelia/parcel-transformer", "..."]
-  },
-  // @if jasmine || mocha
-  "resolvers": ["@parcel/resolver-glob", "..."],
-  // @endif
+  }
 }

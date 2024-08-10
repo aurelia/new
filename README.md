@@ -16,8 +16,6 @@ This will cause `npx` to download the `makes` tool, along with the `aurelia` sca
 
 ## Development
 
-This scaffolding skeleton is in the early stage, not quite ready for adding features. We want to keep feature set manageable as Aurelia 2 is constantly evolving.
-
 There are some tests for this skeleton, setup in package.json. (totally not required by makes)
 
 ## Unit tests
