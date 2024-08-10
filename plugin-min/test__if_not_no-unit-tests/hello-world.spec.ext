@@ -3,25 +3,17 @@ import { describe, it } from 'vitest';
 // @endif
 import { HelloWorld } from '../src/hello-world';
 import { createFixture } from '@aurelia/testing';
-// @if jest
-import { bootstrapTestEnvironment } from './setup';
-
-beforeAll(bootstrapTestEnvironment);
-// @endif
+import './setup';
 
 describe('my-app', () => {
   it('should render message', async () => {
-    const { assertText, startPromise, stop } = createFixture(
+    const { assertText, startPromise } = createFixture(
       '<hello-world message="message"></hello-world>',
       { message: "foo" },
       [HelloWorld],
     );
 
-    try {
-      await startPromise;
-      assertText('Hello World! foo', { compact: true });
-    } finally {
-      await stop(true);
-    }
+    await startPromise;
+    assertText('Hello World! foo', { compact: true });
   });
 });
