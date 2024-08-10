@@ -1,5 +1,0 @@
-// @if typescript
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-// @endif
-import './**/*.spec./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */';

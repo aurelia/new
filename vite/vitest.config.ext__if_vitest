@@ -12,6 +12,7 @@ export default mergeConfig(
       exclude: [...configDefaults.exclude, "e2e/*"],
       // @endif
       root: fileURLToPath(new URL("./", import.meta.url)),
+      setupFiles: ["./test/setup./* @if babel */js/* @endif *//* @if typescript */ts/* @endif */"]
     },
   }),
 );

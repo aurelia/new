@@ -20,6 +20,12 @@ beforeAll(() => {
 });
 
 afterEach(() => {
-  fixtures.forEach(f => f.stop(true));
+  fixtures.forEach(async f => {
+    try {
+      await f.stop(true);
+    } catch {
+      // ignore
+    }
+  });
   fixtures.length = 0;
 });

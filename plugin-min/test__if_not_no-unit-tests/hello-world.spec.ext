@@ -3,17 +3,15 @@ import { describe, it } from 'vitest';
 // @endif
 import { HelloWorld } from '../src/hello-world';
 import { createFixture } from '@aurelia/testing';
-import './setup';
 
 describe('my-app', () => {
   it('should render message', async () => {
-    const { assertText, startPromise } = createFixture(
+    const { assertText } = await createFixture(
       '<hello-world message="message"></hello-world>',
       { message: "foo" },
       [HelloWorld],
-    );
+    ).started;
 
-    await startPromise;
     assertText('Hello World! foo', { compact: true });
   });
 });
