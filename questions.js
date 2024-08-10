@@ -35,14 +35,13 @@ module.exports = [
       {title: 'No'},
       {if: 'app', value: 'shadow-dom', title: 'Use Shadow DOM', hint: 'Shadow DOM in open mode, shadowRoot is accessible through DOM API.'},
       {if: 'plugin', value: 'shadow-dom', title: 'Use Shadow DOM (Recommended for plugin project)', hint: 'Shadow DOM in open mode, shadowRoot is accessible through DOM API.'},
-      {value: 'css-module', title: 'Use CSS Module', hint: 'CSS Module is an alternative way to locally scope CSS class names. We use .module.css/less/scss file name convention.'},
+      {value: 'css-module', title: 'Use CSS Module', hint: 'CSS Module is an alternative way to locally scope CSS class names. We use .module.css/scss file name convention.'},
     ]
   },
   {
     message: 'What CSS preprocessor to use?',
     choices: [
       {value: 'css', title: 'Plain CSS'},
-      {value: 'less', title: 'Less (.less)'},
       {value: 'sass', title: 'Sass (.scss)'}
     ]
   },
@@ -51,8 +50,6 @@ module.exports = [
     choices: [
       {value: 'no-unit-tests', title: 'None', hint: 'No unit testing'},
       {if: '!vite', value: 'jest', title: 'Jest', hint: 'Runs in Node.js, simulates browser by default, with a focus on simplicity.'},
-      {if: '!vite', value: 'jasmine', title: 'Jasmine', hint: 'Runs in browser, a behavior-driven testing framework.'},
-      {if: '!vite', value: 'mocha', title: 'Mocha + Chai', hint: 'Runs in browser, a feature-rich JavaScript test framework for node and browsers.'},
       {if: 'vite', value: 'vitest', title:'Vitest', hint: 'A Vite-native testing framework.'}
     ]
   },

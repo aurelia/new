@@ -17,9 +17,6 @@ const devServer = require('./dev-server');
 // @if css-module
 const cssModule = require('gulp-dumber-css-module');
 // @endif
-// @if less
-const less = require('gulp-less');
-// @endif
 // @if sass
 const sass = require('gulp-dart-sass');
 const sassPackageImporter = require('node-sass-package-importer');
@@ -27,12 +24,8 @@ const sassPackageImporter = require('node-sass-package-importer');
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const postcssUrl = require('postcss-url');
-// @if jasmine || mocha
-const gulpRun = require('gulp-run');
-// @endif
 
 const isProduction = process.env.NODE_ENV === 'production';
-const isTest = process.env.NODE_ENV === 'test';
 const dist = 'dist';
 
 // Read more in https://dumber.js.org
@@ -58,16 +51,6 @@ const dr = dumber({
   // dumber-module-loader is injected automatically by dumber bundler after prepends.
   // prepend: [],
 
-  // @if jasmine || mocha
-  // append after amd loader and all module definitions in entry bundle.
-  append: [
-    // Kick off all test files.
-    // Note dumber-module-loader requirejs call accepts regex which loads all matched module ids!
-    // Note all module ids are relative to dumber option "src" (default to 'src') folder.
-    isTest && "requirejs([/^\\.\\.\\/test\\/.+\\.spec$/]);"
-  ],
-  // @endif
-
   // Explicit dependencies, can use either "deps" (short name) or "dependencies" (full name).
   // deps: [],
 
@@ -88,8 +71,7 @@ const dr = dumber({
   //   for npm package file "node_modules/foo/bar.js", the package name is "foo"
   //   for npm package file "node_modules/@scoped/foo/bar.js", the package name is "@scoped/foo"
 
-  // Here we skip code splitting in test mode.
-  codeSplit: isTest ? undefined : function (moduleId, packageName) {
+  codeSplit: function (moduleId, packageName) {
     // Here for any local src, put into app-bundle
     if (!packageName) return 'app-bundle';
     // The codeSplit func does not need to return a valid bundle name.
@@ -108,7 +90,7 @@ const dr = dumber({
   //   "other-bundle.js": "other-bundle.js"
   // }
   // If you turned on hash, you need this callback to update index.html
-  onManifest: isTest ? undefined : function (filenameMap) {
+  onManifest: function (filenameMap) {
     // Update index.html entry.bundle.js with entry.bundle.hash...js
     console.log('Update index.html with ' + filenameMap['entry.bundle.js']);
     const indexHtml = fs.readFileSync('_index.html').toString()
@@ -123,7 +105,7 @@ function buildJs(src) {
   const ts = typescript.createProject('tsconfig.json', { noEmitOnError: true });
   // @endif
   return gulp.src(src, { sourcemaps: !isProduction })
-    .pipe(gulpif(!isProduction && !isTest, plumber()))
+    .pipe(gulpif(!isProduction, plumber()))
     .pipe(au2())
     // @if babel
     .pipe(babel());
@@ -135,7 +117,7 @@ function buildJs(src) {
 
 function buildHtml(src) {
   return gulp.src(src)
-    .pipe(gulpif(!isProduction && !isTest, plumber()))
+    .pipe(gulpif(!isProduction, plumber()))
     // @if shadow-dom
     // The other possible Shadow DOM mode is "closed".
     // If you turn on "closed" mode, there will be difficulty to perform e2e
@@ -150,16 +132,12 @@ function buildHtml(src) {
 
 function buildCss(src) {
   return gulp.src(src, { sourcemaps: !isProduction })
-    // @if less
-    .pipe(gulpif(!isProduction && !isTest, plumber()))
-    .pipe(gulpif(f => f.extname === '.less', less()))
-    // @endif
     // @if sass
     .pipe(gulpif(
       f => f.extname === '.scss',
       // sassPackageImporter handles @import "~bootstrap"
       // https://github.com/maoberlehner/node-sass-magic-importer/tree/master/packages/node-sass-package-importer
-      isProduction || isTest ?
+      isProduction ?
         sass.sync({ quietDeps: true, importer: sassPackageImporter() }) :
         sass.sync({ quietDeps: true, importer: sassPackageImporter() }).on('error', sass.logError)
     ))
@@ -180,33 +158,20 @@ function buildCss(src) {
 
 function build() {
   // Merge all js/css/html file streams to feed dumber.
-  // dumber knows nothing about .ts/.less/.scss/.md files,
+  // dumber knows nothing about .ts/.scss/.md files,
   // gulp-* plugins transpiled them into js/css/html before
   // sending to dumber.
   return merge2(
     gulp.src('src/**/*.json'),
     // @if babel
-    // @if !jasmine && !mocha
     buildJs('src/**/*.js'),
     // @endif
-    // @if jasmine || mocha
-    buildJs(isTest ? '{src,test}/**/*.js' : 'src/**/*.js'),
-    // @endif
-    // @endif
     // @if typescript
-    // @if !jasmine && !mocha
     buildJs('src/**/*.ts'),
-    // @endif
-    // @if jasmine || mocha
-    buildJs(isTest ? '{src,test}/**/*.ts' : 'src/**/*.ts'),
-    // @endif
     // @endif
     buildHtml('src/**/*.html'),
     // @if css
     buildCss('src/**/*.css')
-    // @endif
-    // @if less
-    buildCss('src/**/*.{less,css}')
     // @endif
     // @if sass
     buildCss('src/**/*.{scss,css}')
@@ -220,12 +185,7 @@ function build() {
     // https://github.com/terser-js/terser#terser-fast-minify-mode
     // It's a good balance on size and speed to turn off compress.
     .pipe(gulpif(isProduction, terser({ compress: false })))
-    // @if !jasmine && !mocha
     .pipe(gulp.dest(dist, { sourcemaps: isProduction ? false : '.' }));
-    // @endif
-    // @if jasmine || mocha
-    .pipe(gulp.dest(dist, { sourcemaps: isProduction ? false : (isTest ? true : '.') }));
-    // @endif
 }
 
 function clean() {
@@ -261,18 +221,6 @@ function watch() {
 
 const run = gulp.series(clean, serve, watch);
 
-// @if jasmine || mocha
-// Watch all files for rebuild and test.
-function watchTest() {
-  gulp.watch('{src,test}/**/*', gulp.series(build, test));
-}
-
-function test() {
-  return gulpRun('npm run test:headless').exec();
-}
-
-exports['watch-test'] = watchTest;
-// @endif
 exports.build = build;
 exports.clean = clean;
 exports['clear-cache'] = clearCache;

@@ -6,9 +6,6 @@
     // @if sass
     "stylelint-config-standard-scss",
     // @endif
-    // @if less
-    "stylelint-config-standard-less",
-    // @endif
     // @if css-module
     "stylelint-config-css-modules"
     // @endif

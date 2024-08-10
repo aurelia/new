@@ -15,9 +15,6 @@
     "sourceMap": true
   },
   "include": [
-    // @if jest || jasmine || mocha
-    "test",
-    // @endif
     "src"
   ],
   "files": [
