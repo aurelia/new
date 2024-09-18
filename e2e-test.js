@@ -69,7 +69,7 @@ function run(command, cwd, dataCB, errorCB) {
     proc.stderr.on('data', data => {
       process.stderr.write(data);
       // Skip webpack5 deprecation warning.
-      if (data.toString().includes('DeprecationWarning')) return;
+      if (data.toString().toLowerCase().includes('deprecation')) return;
       // Skip BABEL warning (used by dumber bundler) when reading @aurelia/runtime-html
       if (data.toString().includes('The code generator has deoptimised the styling')) return;
       if (errorCB) {
