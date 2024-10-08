@@ -62,7 +62,7 @@ function run(command, cwd, dataCB, errorCB) {
       if (dataCB) {
         dataCB(data, () => {
           console.log(`-- kill "${command}"`);
-          killProc(proc);
+          setTimeout(() => killProc(proc), 500);
         });
       }
     });
@@ -76,7 +76,7 @@ function run(command, cwd, dataCB, errorCB) {
         errorCB(data, () => {
           console.log(`-- kill "${command}"`);
           // process.stderr.write(data);
-          killProc(proc);
+          setTimeout(() => killProc(proc), 500);
         });
       }
     })

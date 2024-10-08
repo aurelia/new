@@ -21,6 +21,18 @@ const sassLoader = {
 };
 // @endif
 
+const cssLoader = {
+  loader: 'css-loader',
+  options: {
+    modules: {
+      // css-loader v7 changed namedExport to follow esModule (true).
+      // But we need to set it to false in order to have consistent
+      // behaviour for vite/parcel/webpack skeletons.
+      namedExport: false
+    }
+  }
+};
+
 const postcssLoader = {
   loader: 'postcss-loader',
   options: {
@@ -95,9 +107,9 @@ module.exports = function(env, { analyze }) {
         { test: /\.(png|svg|jpg|jpeg|gif)$/i, type: 'asset' },
         { test: /\.(woff|woff2|ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/i,  type: 'asset' },
         // @if !shadow-dom
-        { test: /\.css$/i, use: [ 'style-loader', 'css-loader', postcssLoader ] },
+        { test: /\.css$/i, use: [ 'style-loader', cssLoader, postcssLoader ] },
         // @if sass
-        { test: /\.scss$/i, use: [ 'style-loader', 'css-loader', postcssLoader, sassLoader ] },
+        { test: /\.scss$/i, use: [ 'style-loader', cssLoader, postcssLoader, sassLoader ] },
         // @endif
         // @endif
         // @if shadow-dom
@@ -106,7 +118,7 @@ module.exports = function(env, { analyze }) {
           // For style loaded in src/main.js, it's not loaded by style-loader.
           // It's for shared styles for shadow-dom only.
           issuer: /[/\\]src[/\\]main\.(js|ts)$/,
-          use: [ 'css-loader', postcssLoader ]
+          use: [ cssLoader, postcssLoader ]
         },
         // @if sass
         {
@@ -114,7 +126,7 @@ module.exports = function(env, { analyze }) {
           // For style loaded in src/main.js, it's not loaded by style-loader.
           // It's for shared styles for shadow-dom only.
           issuer: /[/\\]src[/\\]main\.(js|ts)$/,
-          use: [ 'css-loader', postcssLoader, sassLoader ]
+          use: [ cssLoader, postcssLoader, sassLoader ]
         },
         // @endif
         {
@@ -122,7 +134,7 @@ module.exports = function(env, { analyze }) {
           // For style loaded in other js/ts files, it's loaded by style-loader.
           // They are directly injected to HTML head.
           issuer: /(?<![/\\]src[/\\]main)\.(js|ts)$/,
-          use: [ 'style-loader', 'css-loader', postcssLoader ]
+          use: [ 'style-loader', cssLoader, postcssLoader ]
         },
         // @if sass
         {
@@ -130,21 +142,21 @@ module.exports = function(env, { analyze }) {
           // For style loaded in other js/ts files, it's loaded by style-loader.
           // They are directly injected to HTML head.
           issuer: /(?<![/\\]src[/\\]main)\.(js|ts)$/,
-          use: [ 'style-loader', 'css-loader', postcssLoader, sassLoader ]
+          use: [ 'style-loader', cssLoader, postcssLoader, sassLoader ]
         },
         // @endif
         {
           test: /\.css$/i,
           // For style loaded in html files, Aurelia will handle it.
           issuer: /\.html$/,
-          use: [ 'css-loader', postcssLoader ]
+          use: [ cssLoader, postcssLoader ]
         },
         // @if sass
         {
           test: /\.scss$/i,
           // For style loaded in html files, Aurelia will handle it.
           issuer: /\.html$/,
-          use: [ 'css-loader', postcssLoader, sassLoader ]
+          use: [ cssLoader, postcssLoader, sassLoader ]
         },
         // @endif
         // @endif

@@ -2,7 +2,7 @@
   "devDependencies": {
     "@aurelia/plugin-gulp": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
     "gulp": "^4.0.2",
-    "gulp-dumber": "^2.0.0",
+    "gulp-dumber": "^3.0.0",
     // @if babel
     "gulp-babel": "^8.0.0",
     // @endif
@@ -18,8 +18,8 @@
     "connect": "^3.7.0",
     "connect-history-api-fallback": "^2.0.0",
     "connect-injector": "^0.4.4",
-    "serve-static": "^1.15.0",
-    "socket.io": "^4.7.5",
+    "serve-static": "^1.16.2",
+    "socket.io": "^4.8.0",
     "open": "^8.4.2",
 
     "cross-env": "^7.0.3",
@@ -31,8 +31,8 @@
     "node-sass-package-importer": "^5.3.3",
     // @endif
     "gulp-postcss": "^10.0.0",
-    "postcss": "^8.4.38",
-    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.47",
+    "autoprefixer": "^10.4.20",
     "postcss-url": "^10.1.3",
   },
   "scripts": {
@@ -45,6 +45,6 @@
     "chokidar": "^3.6.0",
     "glob-stream": "^7.0.0",
     "glob-parent": "^6.0.2",
-    "micromatch": "^4.0.5"
+    "micromatch": "^4.0.8"
   }
 }
