@@ -2,20 +2,20 @@
   "type": "module",
   "devDependencies": {
     "@aurelia/vite-plugin": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
-    "vite": "^5.2.12",
+    "vite": "^5.4.8",
     "vite-plugin-node-polyfills": "^0.22.0",
     // @if babel
     "vite-plugin-babel": "^1.2.0",
     // @endif
     // @if typescript && plugin
-    "vite-plugin-dts": "^3.9.1",
+    "vite-plugin-dts": "^4.2.3",
     // @endif
     // @if vitest
-    "vitest": "^1.6.0",
-    "jsdom": "^24.1.0",
+    "vitest": "^2.1.2",
+    "jsdom": "^25.0.1",
     // @endif
     // @if sass
-    "sass": "^1.77.3",
+    "sass": "^1.79.4",
     // @endif
   },
   "scripts": {

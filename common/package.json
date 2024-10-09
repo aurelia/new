@@ -26,11 +26,12 @@
     // @endif
   },
   "devDependencies": {
-    "eslint": "^8.57.0",
+    "eslint": "^9.12.0",
+    "globals": "^15.10.0",
     "@aurelia/testing": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
-    "stylelint": "^16.3.1",
+    "stylelint": "^16.9.0",
     // @if css
-    "stylelint-config-standard": "^36.0.0",
+    "stylelint-config-standard": "^36.0.1",
     // @endif
     // @if sass
     "stylelint-config-standard-scss": "^13.1.0",
@@ -40,7 +41,7 @@
     // @endif
   },
   "scripts": {
-    "lint:js": "eslint src/* @if !no-unit-tests */ test/* @endif *//* @if playwright */ e2e/* @endif *//* @if typescript */ --ext .js,.ts/* @endif */",
+    "lint:js": "eslint src/* @if !no-unit-tests */ test/* @endif *//* @if playwright */ e2e/* @endif */",
     // @if css
     "lint:css": "stylelint \"src/**/*.css\"",
     // @endif
