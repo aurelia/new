@@ -12,7 +12,6 @@ const plumber = require('gulp-plumber');
 const merge2 = require('merge2');
 const terser = require('gulp-terser');
 const gulpif = require('gulp-if');
-const del = require('del');
 const devServer = require('./dev-server');
 // @if css-module
 const cssModule = require('gulp-dumber-css-module');
@@ -189,7 +188,7 @@ function build() {
 }
 
 function clean() {
-  return del(dist);
+  return fs.promises.rm(dist, { recursive: true, force: true });
 }
 
 function clearCache() {
