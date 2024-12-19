@@ -3,13 +3,13 @@
   "devDependencies": {
     "@aurelia/parcel-transformer": /* @if !dev */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
     // @if typescript
-    "@parcel/transformer-typescript-tsc": "^2.12.0",
+    "@parcel/transformer-typescript-tsc": "^2.13.3",
     // @endif
     // @if sass
-    "@parcel/transformer-sass": "^2.12.0",
+    "@parcel/transformer-sass": "^2.13.3",
     // @endif
-    "@parcel/transformer-inline-string": "^2.12.0",
-    "parcel": "^2.12.0"
+    "@parcel/transformer-inline-string": "^2.13.3",
+    "parcel": "^2.13.3"
   },
   "scripts": {
     "start": "parcel -p 9000",

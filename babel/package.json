@@ -1,14 +1,14 @@
 {
   "devDependencies": {
-    "@babel/plugin-proposal-decorators": "^7.25.7",
+    "@babel/plugin-proposal-decorators": "^7.25.9",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/core": "^7.25.7",
+    "@babel/core": "^7.26.0",
     // @if !parcel
-    "@babel/preset-env": "^7.25.7",
+    "@babel/preset-env": "^7.26.0",
     // @endif
     // @if parcel
-    "@parcel/babel-preset-env": "^2.12.0",
+    "@parcel/babel-preset-env": "^2.13.3",
     // @endif
-    "@babel/eslint-parser": "^7.25.7"
+    "@babel/eslint-parser": "^7.25.9"
   }
 }

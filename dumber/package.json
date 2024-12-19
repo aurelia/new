@@ -18,7 +18,7 @@
     "connect-history-api-fallback": "^2.0.0",
     "connect-injector": "^0.4.4",
     "serve-static": "^1.16.2",
-    "socket.io": "^4.8.0",
+    "socket.io": "^4.8.1",
     "open": "^8.4.2",
 
     "cross-env": "^7.0.3",
@@ -30,7 +30,7 @@
     "node-sass-package-importer": "^5.3.3",
     // @endif
     "gulp-postcss": "^10.0.0",
-    "postcss": "^8.4.47",
+    "postcss": "^8.4.49",
     "autoprefixer": "^10.4.20",
     "postcss-url": "^10.1.3",
   },
