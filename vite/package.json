@@ -24,5 +24,10 @@
     // @if vitest
     "test": "vitest",
     // @endif
+  },
+  "overrides": {
+    "vite-plugin-node-polyfills": {
+      "vite": "^6.0.0"
+    }
   }
 }
