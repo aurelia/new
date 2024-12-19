@@ -13,7 +13,6 @@
     "merge2": "^1.4.1",
     "gulp-terser": "^2.1.0",
     "gulp-if": "^3.0.0",
-    "del": "^6.1.1",
 
     "connect": "^3.7.0",
     "connect-history-api-fallback": "^2.0.0",
