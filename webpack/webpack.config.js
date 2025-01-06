@@ -22,7 +22,7 @@ const sassLoader = {
 // @endif
 
 const cssLoader = {
-  loader: 'css-loader',
+  loader: 'css-loader'/* @if css-module */,
   options: {
     modules: {
       // css-loader v7 changed namedExport to follow esModule (true).
@@ -30,7 +30,7 @@ const cssLoader = {
       // behaviour for vite/parcel/webpack skeletons.
       namedExport: false
     }
-  }
+  }/* @endif */
 };
 
 const postcssLoader = {
