@@ -3,9 +3,6 @@
     // @if css
     "stylelint-config-standard",
     // @endif
-    // @if sass
-    "stylelint-config-standard-scss",
-    // @endif
     // @if css-module
     "stylelint-config-css-modules"
     // @endif

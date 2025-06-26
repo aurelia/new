@@ -14,6 +14,10 @@ npx makes aurelia
 
 This will cause `npx` to download the `makes` tool, along with the `aurelia` scaffold from this repo, which it will use to guide you through creating your project.
 
+## CSS Preprocessors
+
+The Aurelia CLI scaffolding defaults to plain CSS. If you want to use CSS preprocessors like SCSS/Sass, Less, or others, you'll need to configure them in your chosen bundler. Refer to your bundler's documentation for specific configuration details on setting up preprocessors.
+
 ## Development
 
 There are some tests for this skeleton, setup in package.json. (totally not required by makes)

@@ -10,17 +10,6 @@ const TerserPlugin = require('terser-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 // @endif
 
-// @if sass
-const sassLoader = {
-  loader: 'sass-loader',
-  options: {
-    sassOptions: {
-      includePaths: ['node_modules']
-    }
-  }
-};
-// @endif
-
 const cssLoader = {
   loader: 'css-loader'/* @if css-module */,
   options: {
@@ -108,9 +97,6 @@ module.exports = function(env, { analyze }) {
         { test: /\.(woff|woff2|ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/i,  type: 'asset' },
         // @if !shadow-dom
         { test: /\.css$/i, use: [ 'style-loader', cssLoader, postcssLoader ] },
-        // @if sass
-        { test: /\.scss$/i, use: [ 'style-loader', cssLoader, postcssLoader, sassLoader ] },
-        // @endif
         // @endif
         // @if shadow-dom
         {
@@ -120,15 +106,6 @@ module.exports = function(env, { analyze }) {
           issuer: /[/\\]src[/\\]main\.(js|ts)$/,
           use: [ cssLoader, postcssLoader ]
         },
-        // @if sass
-        {
-          test: /\.scss$/i,
-          // For style loaded in src/main.js, it's not loaded by style-loader.
-          // It's for shared styles for shadow-dom only.
-          issuer: /[/\\]src[/\\]main\.(js|ts)$/,
-          use: [ cssLoader, postcssLoader, sassLoader ]
-        },
-        // @endif
         {
           test: /\.css$/i,
           // For style loaded in other js/ts files, it's loaded by style-loader.
@@ -136,29 +113,12 @@ module.exports = function(env, { analyze }) {
           issuer: /(?<![/\\]src[/\\]main)\.(js|ts)$/,
           use: [ 'style-loader', cssLoader, postcssLoader ]
         },
-        // @if sass
-        {
-          test: /\.scss$/i,
-          // For style loaded in other js/ts files, it's loaded by style-loader.
-          // They are directly injected to HTML head.
-          issuer: /(?<![/\\]src[/\\]main)\.(js|ts)$/,
-          use: [ 'style-loader', cssLoader, postcssLoader, sassLoader ]
-        },
-        // @endif
         {
           test: /\.css$/i,
           // For style loaded in html files, Aurelia will handle it.
           issuer: /\.html$/,
           use: [ cssLoader, postcssLoader ]
         },
-        // @if sass
-        {
-          test: /\.scss$/i,
-          // For style loaded in html files, Aurelia will handle it.
-          issuer: /\.html$/,
-          use: [ cssLoader, postcssLoader, sassLoader ]
-        },
-        // @endif
         // @endif
         // @if babel
         { test: /\.js$/i, use: ['babel-loader', '@aurelia/webpack-loader'], exclude: /node_modules/ },

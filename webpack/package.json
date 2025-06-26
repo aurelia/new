@@ -15,20 +15,16 @@
     // @if typescript
     "ts-loader": "^9.5.1",
     // @endif
-    // @if sass
-    "sass-loader": "^16.0.4",
-    "sass": "^1.83.0",
-    // @endif
     "postcss-loader": "^8.1.1",
     "postcss": "^8.4.49",
     "autoprefixer": "^10.4.20",
     // @if plugin
-    "webpack-node-externals": "^3.0.0",
+    "webpack-node-externals": "^3.0.0"
     // @endif
   },
   "scripts": {
     "start": "webpack serve",
     "build": "webpack --env production",
-    "analyze": "webpack --env production --analyze",
+    "analyze": "webpack --env production --analyze"
   }
 }

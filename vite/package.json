@@ -12,17 +12,14 @@
     // @endif
     // @if vitest
     "vitest": "^2.1.8",
-    "jsdom": "^25.0.1",
-    // @endif
-    // @if sass
-    "sass": "^1.83.0",
+    "jsdom": "^25.0.1"
     // @endif
   },
   "scripts": {
     "start": "vite",
     "build": "vite build",
     // @if vitest
-    "test": "vitest",
+    "test": "vitest"
     // @endif
   },
   "overrides": {

@@ -5,15 +5,12 @@
     // @if typescript
     "@parcel/transformer-typescript-tsc": "^2.13.3",
     // @endif
-    // @if sass
-    "@parcel/transformer-sass": "^2.13.3",
-    // @endif
     "@parcel/transformer-inline-string": "^2.13.3",
     "parcel": "^2.13.3"
   },
   "scripts": {
     "start": "parcel -p 9000",
-    "build": "parcel build --no-scope-hoist --no-source-maps",
+    "build": "parcel build --no-scope-hoist --no-source-maps"
   },
   "targets": {
     "default": {
@@ -31,6 +28,6 @@
   // @if !shadow-dom
   "aurelia": {
     "hmr": false
-  },
+  }
   // @endif
 }

@@ -33,9 +33,6 @@
     // @if css
     "stylelint-config-standard": "^36.0.1",
     // @endif
-    // @if sass
-    "stylelint-config-standard-scss": "^14.0.0",
-    // @endif
     // @if css-module
     "stylelint-config-css-modules": "^4.4.0",
     // @endif
@@ -44,9 +41,6 @@
     "lint:js": "eslint src/* @if !no-unit-tests */ test/* @endif *//* @if playwright */ e2e/* @endif */",
     // @if css
     "lint:css": "stylelint \"src/**/*.css\"",
-    // @endif
-    // @if sass
-    "lint:css": "stylelint \"src/**/*.scss\"",
     // @endif
     "lint": "npm run lint:js && npm run lint:css",
     "pretest": "npm run lint",
