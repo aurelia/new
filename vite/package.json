@@ -17,6 +17,10 @@
     // @if sass
     "sass": "^1.83.0",
     // @endif
+    // @if tailwindcss
+    "tailwindcss": "^4.1.10",
+    "@tailwindcss/vite": "^4.1.10",
+    // @endif
   },
   "scripts": {
     "start": "vite",

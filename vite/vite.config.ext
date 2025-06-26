@@ -4,6 +4,9 @@ import aurelia from '@aurelia/vite-plugin';
 // @if babel
 import babel from 'vite-plugin-babel';
 // @endif
+// @if tailwindcss
+import tailwindcss from '@tailwindcss/vite';
+// @endif
 // @if plugin
 import { resolve } from 'path';
 // @if typescript
@@ -49,6 +52,9 @@ export default defineConfig({
     }),
     // @if babel
     babel(),
+    // @endif
+    // @if tailwindcss
+    tailwindcss(),
     // @endif
     nodePolyfills(),
     // @if typescript && plugin

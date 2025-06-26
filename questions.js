@@ -46,6 +46,13 @@ module.exports = [
     ]
   },
   {
+    message: 'Do you want to use TailwindCSS?',
+    choices: [
+      {title: 'No'},
+      {value: 'tailwindcss', title: 'Yes', hint: 'A utility-first CSS framework for rapidly building custom designs.'}
+    ]
+  },
+  {
     message: 'What unit testing framework to use?',
     choices: [
       {value: 'no-unit-tests', title: 'None', hint: 'No unit testing'},
