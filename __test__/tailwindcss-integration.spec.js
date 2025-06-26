@@ -57,20 +57,21 @@ test('TailwindCSS templates use modern utility classes', t => {
   t.true(minAppContent.includes('bg-blue-'), 'Should use blue color scale');
 });
 
-test('TailwindCSS works with all CSS preprocessor combinations', t => {
-  // TailwindCSS should work regardless of CSS preprocessor choice
+test('TailwindCSS works independently of other styling features', t => {
+  // TailwindCSS should work regardless of Shadow DOM or CSS Module choice
   const questions = require('../questions');
   
   const tailwindQuestion = questions.find(q => q.message && q.message.includes('TailwindCSS'));
-  const cssQuestion = questions.find(q => q.message && q.message.includes('CSS preprocessor'));
+  const shadowDomQuestion = questions.find(q => q.message && q.message.includes('Shadow DOM or CSS Module'));
   
   t.truthy(tailwindQuestion, 'TailwindCSS question should exist');
-  t.truthy(cssQuestion, 'CSS preprocessor question should exist');
+  t.truthy(shadowDomQuestion, 'Shadow DOM/CSS Module question should exist');
   
-  // TailwindCSS should be independent of CSS preprocessor choice
+  // TailwindCSS should be independent of Shadow DOM/CSS Module choice
   t.is(tailwindQuestion.choices.length, 2, 'TailwindCSS should have yes/no options');
-  t.true(cssQuestion.choices.some(choice => choice.value === 'css'), 'Should support plain CSS');
-  t.true(cssQuestion.choices.some(choice => choice.value === 'sass'), 'Should support Sass');
+  t.true(shadowDomQuestion.choices.some(choice => choice.title === 'No'), 'Should support no styling framework');
+  t.true(shadowDomQuestion.choices.some(choice => choice.value === 'shadow-dom'), 'Should support Shadow DOM');
+  t.true(shadowDomQuestion.choices.some(choice => choice.value === 'css-module'), 'Should support CSS Module');
 });
 
 test('TailwindCSS documentation is comprehensive', t => {
