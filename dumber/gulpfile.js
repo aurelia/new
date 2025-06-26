@@ -103,11 +103,12 @@ function buildJs(src) {
     .pipe(gulpif(!isProduction, plumber()))
     .pipe(au2())
     // @if babel
-    .pipe(babel());
+    .pipe(babel())
     // @endif
     // @if typescript
-    .pipe(ts());
-  // @endif
+    .pipe(ts())
+    // @endif
+    ;
 }
 
 function buildHtml(src) {
@@ -118,11 +119,12 @@ function buildHtml(src) {
     // If you turn on "closed" mode, there will be difficulty to perform e2e
     // tests (such as Playwright). Because shadowRoot is not accessible through
     // standard DOM APIs in "closed" mode.
-    .pipe(au2({ defaultShadowOptions: { mode: 'open' }, hmr: false }));
+    .pipe(au2({ defaultShadowOptions: { mode: 'open' }, hmr: false }))
     // @endif
     // @if !shadow-dom
-    .pipe(au2({ hmr: false }));
-  // @endif
+    .pipe(au2({ hmr: false }))
+    // @endif
+    ;
 }
 
 function buildCss(src) {
@@ -158,9 +160,7 @@ function build() {
     buildJs('src/**/*.ts'),
     // @endif
     buildHtml('src/**/*.html'),
-    // @if css
     buildCss('src/**/*.css')
-    // @endif
   )
     // Note we did extra call `dr()` here, this is designed to cater watch mode.
     // dumber here consumes (swallows) all incoming Vinyl files,

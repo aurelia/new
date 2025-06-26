@@ -1,8 +1,6 @@
 {
   "extends": [
-    // @if css
     "stylelint-config-standard",
-    // @endif
     // @if css-module
     "stylelint-config-css-modules"
     // @endif
