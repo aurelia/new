@@ -50,7 +50,10 @@ function run(command, cwd, dataCB, errorCB) {
     const proc = spawn(cmd, args, {env, cwd});
     proc.on('exit', async (code, signal) => {
       await delay(1);
-      if (code && signal !== 'SIGTERM' && !win32Killed.has(proc.pid)) {
+      // Exit code 143 typically means the process was terminated by SIGTERM (128 + 15)
+      // Don't treat this as an error if the process was intentionally killed
+      const wasKilled = signal === 'SIGTERM' || win32Killed.has(proc.pid) || code === 143;
+      if (code && !wasKilled) {
         reject(new Error(cmd + ' ' + args.join(' ') + ' process exit code: ' + code + ' signal: ' + signal));
       } else {
         resolve();
