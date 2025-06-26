@@ -37,7 +37,12 @@ const postcssLoader = {
   loader: 'postcss-loader',
   options: {
     postcssOptions: {
-      plugins: ['autoprefixer']
+      plugins: [
+        // @if tailwindcss
+        '@tailwindcss/postcss',
+        // @endif
+        'autoprefixer'
+      ]
     }
   }
 };

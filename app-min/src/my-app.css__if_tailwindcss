@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+.message {
+  background-color: lightblue;
+} 

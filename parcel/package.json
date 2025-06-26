@@ -2,6 +2,12 @@
   "source": "index.html",
   "devDependencies": {
     "@aurelia/parcel-transformer": /* @if !dev */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
+    // @if tailwindcss
+    "tailwindcss": "^4.1.10",
+    "@tailwindcss/postcss": "^4.1.10",
+    "postcss": "^8.4.49",
+    "autoprefixer": "^10.4.20",
+    // @endif
     // @if typescript
     "@parcel/transformer-typescript-tsc": "^2.13.3",
     // @endif

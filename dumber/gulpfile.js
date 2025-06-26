@@ -142,6 +142,9 @@ function buildCss(src) {
     ))
     // @endif
     .pipe(postcss([
+      // @if tailwindcss
+      require('@tailwindcss/postcss'),
+      // @endif
       autoprefixer(),
       // use postcss-url to inline any image/font/svg.
       // postcss-url by default use base64 for images, but
