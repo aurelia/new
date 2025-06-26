@@ -1,11 +1,32 @@
 // @if vitest
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 // @endif
 import { MyApp } from '../src/my-app';
 import { createFixture } from '@aurelia/testing';
 
 describe('my-app', () => {
   it('should render message', async () => {
+    // @if tailwindcss
+    const fixture = await createFixture(
+      '<my-app></my-app>',
+      {},
+      [MyApp],
+    ).started;
+
+    const textContent = fixture.startPromise.host.textContent.trim();
+    // @if vitest
+    expect(textContent).toContain('Hello World!');
+    // @endif
+    // @if jasmine
+    expect(textContent).toContain('Hello World!');
+    // @endif
+    // @if tape
+    if (!textContent.includes('Hello World!')) {
+      throw new Error(`Expected text to contain 'Hello World!', but got: ${textContent}`);
+    }
+    // @endif
+    // @endif
+    // @if !tailwindcss
     const { assertText } = await createFixture(
       '<my-app></my-app>',
       {},
@@ -13,5 +34,6 @@ describe('my-app', () => {
     ).started;
 
     assertText('Hello World!', { compact: true });
+    // @endif
   });
 });
