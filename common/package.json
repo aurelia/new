@@ -42,7 +42,9 @@
     // @if css
     "lint:css": "stylelint \"src/**/*.css\"",
     // @endif
+    // Fallback for when css is not present
+    "lint:css": "echo \"No CSS linting required\"",
     "lint": "npm run lint:js && npm run lint:css",
-    "pretest": "npm run lint",
+    "pretest": "npm run lint"
   }
 }
