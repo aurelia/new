@@ -6,5 +6,9 @@
     // @if css-module
     "stylelint-config-css-modules"
     // @endif
-  ]
+  ]// @if tailwindcss
+  ,
+  "rules": {
+    "import-notation": null
+  }// @endif
 }

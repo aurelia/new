@@ -14,6 +14,10 @@
     "vitest": "^2.1.8",
     "jsdom": "^25.0.1"
     // @endif
+    // @if tailwindcss
+    "tailwindcss": "^4.1.10",
+    "@tailwindcss/vite": "^4.1.10",
+    // @endif
   },
   "scripts": {
     "start": "vite",

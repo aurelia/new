@@ -18,6 +18,10 @@
     "postcss-loader": "^8.1.1",
     "postcss": "^8.4.49",
     "autoprefixer": "^10.4.20",
+    // @if tailwindcss
+    "tailwindcss": "^4.1.10",
+    "@tailwindcss/postcss": "^4.1.10",
+    // @endif
     // @if plugin
     "webpack-node-externals": "^3.0.0"
     // @endif
