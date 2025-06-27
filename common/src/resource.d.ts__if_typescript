@@ -15,16 +15,7 @@ declare module '*.module.css' {
   const value: Record<string, string>;
   export default value;
 }
-// @if sass
-declare module '*.module.scss' {
-  const value: Record<string, string>;
-  export default value;
-}
-// @endif
 // @endif
 // @if !css-module
 declare module '*.css';
-// @if sass
-declare module '*.scss';
-// @endif
 // @endif

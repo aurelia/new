@@ -35,14 +35,7 @@ module.exports = [
       {title: 'No'},
       {if: 'app', value: 'shadow-dom', title: 'Use Shadow DOM', hint: 'Shadow DOM in open mode, shadowRoot is accessible through DOM API.'},
       {if: 'plugin', value: 'shadow-dom', title: 'Use Shadow DOM (Recommended for plugin project)', hint: 'Shadow DOM in open mode, shadowRoot is accessible through DOM API.'},
-      {value: 'css-module', title: 'Use CSS Module', hint: 'CSS Module is an alternative way to locally scope CSS class names. We use .module.css/scss file name convention.'},
-    ]
-  },
-  {
-    message: 'What CSS preprocessor to use?',
-    choices: [
-      {value: 'css', title: 'Plain CSS'},
-      {value: 'sass', title: 'Sass (.scss)'}
+      {value: 'css-module', title: 'Use CSS Module', hint: 'CSS Module is an alternative way to locally scope CSS class names. We use .module.css file name convention.'},
     ]
   },
   {

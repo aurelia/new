@@ -16,10 +16,6 @@ const devServer = require('./dev-server');
 // @if css-module
 const cssModule = require('gulp-dumber-css-module');
 // @endif
-// @if sass
-const sass = require('gulp-dart-sass');
-const sassPackageImporter = require('node-sass-package-importer');
-// @endif
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const postcssUrl = require('postcss-url');
@@ -107,11 +103,12 @@ function buildJs(src) {
     .pipe(gulpif(!isProduction, plumber()))
     .pipe(au2())
     // @if babel
-    .pipe(babel());
+    .pipe(babel())
     // @endif
     // @if typescript
-    .pipe(ts());
-  // @endif
+    .pipe(ts())
+    // @endif
+    ;
 }
 
 function buildHtml(src) {
@@ -122,25 +119,16 @@ function buildHtml(src) {
     // If you turn on "closed" mode, there will be difficulty to perform e2e
     // tests (such as Playwright). Because shadowRoot is not accessible through
     // standard DOM APIs in "closed" mode.
-    .pipe(au2({ defaultShadowOptions: { mode: 'open' }, hmr: false }));
+    .pipe(au2({ defaultShadowOptions: { mode: 'open' }, hmr: false }))
     // @endif
     // @if !shadow-dom
-    .pipe(au2({ hmr: false }));
-  // @endif
+    .pipe(au2({ hmr: false }))
+    // @endif
+    ;
 }
 
 function buildCss(src) {
   return gulp.src(src, { sourcemaps: !isProduction })
-    // @if sass
-    .pipe(gulpif(
-      f => f.extname === '.scss',
-      // sassPackageImporter handles @import "~bootstrap"
-      // https://github.com/maoberlehner/node-sass-magic-importer/tree/master/packages/node-sass-package-importer
-      isProduction ?
-        sass.sync({ quietDeps: true, importer: sassPackageImporter() }) :
-        sass.sync({ quietDeps: true, importer: sassPackageImporter() }).on('error', sass.logError)
-    ))
-    // @endif
     .pipe(postcss([
       // @if tailwindcss
       require('@tailwindcss/postcss'),
@@ -160,7 +148,7 @@ function buildCss(src) {
 
 function build() {
   // Merge all js/css/html file streams to feed dumber.
-  // dumber knows nothing about .ts/.scss/.md files,
+  // dumber knows nothing about .ts/.md files,
   // gulp-* plugins transpiled them into js/css/html before
   // sending to dumber.
   return merge2(
@@ -172,12 +160,7 @@ function build() {
     buildJs('src/**/*.ts'),
     // @endif
     buildHtml('src/**/*.html'),
-    // @if css
     buildCss('src/**/*.css')
-    // @endif
-    // @if sass
-    buildCss('src/**/*.{scss,css}')
-    // @endif
   )
     // Note we did extra call `dr()` here, this is designed to cater watch mode.
     // dumber here consumes (swallows) all incoming Vinyl files,

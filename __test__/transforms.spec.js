@@ -88,7 +88,7 @@ test.cb('ext-transform translates css files to .module.css files when css-module
     t.is(files.length, 2);
     t.is(files[0].path.replace(/\\/g, '/'), 'test/a.module.css');
     t.is(files[0].contents.toString(), '.p { color: green; }');
-    t.is(files[1].path.replace(/\\/g, '/'), 'test/b.module.scss');
+    t.is(files[1].path.replace(/\\/g, '/'), 'test/b.module.css');
     t.is(files[1].contents.toString(), '.p { color: red; }');
     t.end();
   })
@@ -99,7 +99,7 @@ test.cb('ext-transform translates css files to .module.css files when css-module
   }));
 
   jsExt.end(new Vinyl({
-    path: 'test/b.scss',
+    path: 'test/b.css',
     contents: Buffer.from('.p { color: red; }')
   }));
 });
@@ -120,7 +120,7 @@ test.cb('ext-transform leaves css files untouched files when css-module is not s
     t.is(files.length, 2);
     t.is(files[0].path.replace(/\\/g, '/'), 'test/a.css');
     t.is(files[0].contents.toString(), '.p { color: green; }');
-    t.is(files[1].path.replace(/\\/g, '/'), 'test/b.scss');
+    t.is(files[1].path.replace(/\\/g, '/'), 'test/b.css');
     t.is(files[1].contents.toString(), '.p { color: red; }');
     t.end();
   })
@@ -131,7 +131,7 @@ test.cb('ext-transform leaves css files untouched files when css-module is not s
   }));
 
   jsExt.end(new Vinyl({
-    path: 'test/b.scss',
+    path: 'test/b.css',
     contents: Buffer.from('.p { color: red; }')
   }));
 });

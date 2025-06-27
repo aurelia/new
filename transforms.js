@@ -9,7 +9,7 @@ exports.append = function(properties, features) {
           // change .ext to .ts or .js file
           file.extname = features.includes('typescript') ? '.ts' : '.js';
         } else if (features.includes('css-module')) {
-          if (['.css', '.scss'].includes(file.extname)) {
+          if (file.extname === '.css') {
             file.extname = `.module${file.extname}`;
           }
         }

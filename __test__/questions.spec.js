@@ -29,17 +29,17 @@ test('TailwindCSS question is properly included', t => {
   t.true(yesChoice.hint.includes('utility-first'));
 });
 
-test('TailwindCSS question comes after CSS preprocessor question', t => {
-  const cssQuestionIndex = questions.findIndex(q => 
-    q.message && q.message.includes('CSS preprocessor')
+test('TailwindCSS question comes after Shadow DOM/CSS Module question', t => {
+  const shadowDomQuestionIndex = questions.findIndex(q => 
+    q.message && q.message.includes('Shadow DOM or CSS Module')
   );
   const tailwindQuestionIndex = questions.findIndex(q => 
     q.message && q.message.includes('TailwindCSS')
   );
   
-  t.true(cssQuestionIndex >= 0, 'CSS preprocessor question should exist');
+  t.true(shadowDomQuestionIndex >= 0, 'Shadow DOM/CSS Module question should exist');
   t.true(tailwindQuestionIndex >= 0, 'TailwindCSS question should exist');
-  t.true(tailwindQuestionIndex > cssQuestionIndex, 'TailwindCSS question should come after CSS preprocessor question');
+  t.true(tailwindQuestionIndex > shadowDomQuestionIndex, 'TailwindCSS question should come after Shadow DOM/CSS Module question');
 });
 
 test('TailwindCSS question comes before unit testing question', t => {
