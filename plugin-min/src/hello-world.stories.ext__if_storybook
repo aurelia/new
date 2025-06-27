@@ -1,0 +1,46 @@
+import { HelloWorld } from './hello-world';
+import { action } from '@storybook/addon-actions';
+import { userEvent, within } from '@storybook/test';
+
+const meta = {
+  title: 'Plugin/HelloWorld',
+  component: HelloWorld,
+  render: () => ({
+    template: `<hello-world message.bind="message"></hello-world>`,
+  }),
+  argTypes: {
+    message: { control: 'text' }
+  }
+};
+
+export default meta;
+
+export const Default = {
+  args: {
+    message: 'Hello from your Aurelia plugin!'
+  }
+};
+
+export const Empty = {
+  args: {
+    message: ''
+  }
+};
+
+export const LongMessage = {
+  args: {
+    message: 'This is a longer message to test how the component handles more text content'
+  }
+};
+
+export const CustomStorybook = {
+  args: {
+    message: 'Testing your Aurelia plugin component in Storybook!'
+  }
+};
+
+export const NoMessage = {
+  render: () => ({
+    template: `<hello-world></hello-world>`
+  })
+}; 
