@@ -12,7 +12,7 @@
     // @endif
     // @if vitest
     "vitest": "^2.1.8",
-    "jsdom": "^25.0.1"
+    "jsdom": "^25.0.1",
     // @endif
     // @if tailwindcss
     "tailwindcss": "^4.1.10",
@@ -23,7 +23,7 @@
     "start": "vite",
     "build": "vite build",
     // @if vitest
-    "test": "vitest"
+    "test": "vitest",
     // @endif
   },
   "overrides": {

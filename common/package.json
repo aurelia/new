@@ -37,7 +37,7 @@
   },
   "scripts": {
     "lint:js": "eslint src/* @if !no-unit-tests */ test/* @endif *//* @if playwright */ e2e/* @endif */",
-    "lint:css": "stylelint \"src/**/*.css\"",
+    "lint:css": "stylelint \"src/**/*.css\" --allow-empty-input",
     "lint": "npm run lint:js && npm run lint:css",
     "pretest": "npm run lint"
   }
