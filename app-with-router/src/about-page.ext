@@ -1,0 +1,3 @@
+export class AboutPage {
+  /* @if typescript */public /* @endif */message = 'About Aurelia 2 Router';
+} 
