@@ -1,7 +1,7 @@
 /* @if vite */
 import { MyApp } from './my-app';
-import { action } from '@storybook/addon-actions';
-import { userEvent, within } from '@storybook/test';
+//import { action } from '@storybook/addon-actions';
+//import { userEvent, within } from '@storybook/test';
 
 const meta = {
   title: 'Example/MyApp',
