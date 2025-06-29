@@ -1,4 +1,5 @@
 /* Shared styles for Shadow DOM components */
+
 /* These styles are loaded as strings and applied to all Shadow DOM components */
 
 .shared-shadow-style {
@@ -8,14 +9,14 @@
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   font-weight: 500;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
 }
 
 .shared-shadow-text {
-  font-family: 'Arial', sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 14px;
   text-align: center;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 1px 2px rgb(0 0 0 / 20%);
 }
 
 /* This demonstrates that shared styles work across all shadow DOM components */
