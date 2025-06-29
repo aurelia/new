@@ -21,12 +21,24 @@
     "tailwindcss": "^4.1.10",
     "@tailwindcss/vite": "^4.1.10",
     // @endif
+    // @if storybook
+    "@aurelia/storybook": "^1.0.2",
+    "storybook": "^9.0.0",
+    "@storybook/builder-vite": "^9.0.0",
+    "@storybook/addon-links": "^9.0.0",
+    "@storybook/addon-actions": "^9.0.0",
+    "@storybook/test": "^9.0.0-alpha.2",
+    // @endif
   },
   "scripts": {
     "start": "vite",
     "build": "vite build",
     // @if vitest
     "test": "vitest",
+    // @endif
+    // @if storybook
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
     // @endif
   },
   "overrides": {

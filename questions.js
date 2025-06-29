@@ -69,6 +69,13 @@ module.exports = [
     ]
   },
   {
+    message: 'Do you want to add Storybook?',
+    choices: [
+      {title: 'No'},
+      {if: '(app && (vite || webpack)) || (plugin && webpack)', value: 'storybook', title: 'Yes', hint: 'Add Storybook for component development and testing (requires Vite or Webpack)'}
+    ]
+  },
+  {
 
     message: 'What kind of sample code do you want in this project?',
     choices: [
