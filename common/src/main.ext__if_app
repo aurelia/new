@@ -13,7 +13,29 @@ import { MyApp } from './my-app';
 // They are for sharedStyles in shadowDOM.
 // However, css files imported in other js/ts files are processed by style-loader.
 // @endif
+// @if vite
+// Css files imported in this main file should be imported with ?inline query
+// to get CSS as string for sharedStyles in shadowDOM.
+// @endif
+// @if parcel
+// Css files imported in this main file should use bundle-text: scheme
+// to get CSS as string for sharedStyles in shadowDOM.
+// @endif
+// @if dumber
+// CSS files are automatically treated as text modules in dumber, no prefix needed.
+// @endif
+// @if webpack
 // import shared from './shared./* @if css */css/* @endif *//* @if sass */scss/* @endif */';
+// @endif
+// @if vite
+// import shared from './shared./* @if css */css/* @endif *//* @if sass */scss/* @endif */?inline';
+// @endif
+// @if parcel
+// import shared from 'bundle-text:./shared./* @if css */css/* @endif *//* @if sass */scss/* @endif */';
+// @endif
+// @if dumber
+// import shared from './shared./* @if css */css/* @endif *//* @if sass */scss/* @endif */';
+// @endif
 // @endif
 
 Aurelia
