@@ -7,8 +7,29 @@ test.beforeEach(async ({ page }) => {
 test.describe('MyApp', () => {
   test('shows message', async ({ page }) => {
     await page.waitForSelector('my-app', { timeout: 10000 });
+    
+    // @if shadow-dom
+    // Check if shadow DOM is rendered
+    const hasShadowRoot = await page.locator('my-app').evaluate(el => !!el.shadowRoot);
+    await expect(hasShadowRoot).toBe(true);
+    
+    // Use Playwright's piercing selector syntax to access shadow DOM content
+    const shadowText = page.locator('my-app').locator(':scope .shared-shadow-text');
+    await expect(shadowText).toBeVisible();
+    
+    // Assert visibility of shared-style elements within shadow DOM
     const messageElement = page.locator('my-app').getByText('Hello World!');
     await expect(messageElement).toBeVisible();
+    
+    // Optional: Take a screenshot to guard against visual regressions
+    await page.screenshot({ path: 'shadow-dom-component.png' });
+    // @endif
+    
+    // @if !shadow-dom
+    const messageElement = page.locator('my-app').getByText('Hello World!');
+    await expect(messageElement).toBeVisible();
+    // @endif
+    
     await expect(page.locator('my-app')).toContainText('Hello World!');
     await expect(page).toHaveTitle(/Aurelia/);
   });
