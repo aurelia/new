@@ -10,6 +10,20 @@ declare module '*.html' {
   export function register(container: IContainer): void;
 }
 
+// @if vite
+// Vite-specific declarations for ?inline imports that return CSS as strings
+declare module '*.css?inline' {
+  const content: string;
+  export default content;
+}
+// @if sass
+declare module '*.scss?inline' {
+  const content: string;
+  export default content;
+}
+// @endif
+// @endif
+
 // @if css-module
 declare module '*.module.css' {
   const value: Record<string, string>;
