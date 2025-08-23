@@ -82,7 +82,7 @@ test('"after" task only prints summary in unattended mode and here mode', async 
 test('"after" task installs deps with npm, and prints summary', async t => {
   const prompts = {
     select(opts) {
-      t.deepEqual(opts.choices.map(c => c.value), [undefined, 'npm', 'yarn', 'pnpm']);
+      t.deepEqual(opts.choices.map(c => c.value), ['npm', 'yarn', 'pnpm', undefined]);
       return 'npm';
     }
   };
@@ -121,7 +121,7 @@ test('"after" task installs deps with npm, and prints summary', async t => {
 test('"after" task installs deps with yarn, and prints summary', async t => {
   const prompts = {
     select(opts) {
-      t.deepEqual(opts.choices.map(c => c.value), [undefined, 'npm', 'yarn', 'pnpm']);
+      t.deepEqual(opts.choices.map(c => c.value), ['npm', 'yarn', 'pnpm', undefined]);
       return 'yarn';
     }
   };
@@ -160,7 +160,7 @@ test('"after" task installs deps with yarn, and prints summary', async t => {
 test('"after" task installs deps with pnpm, and prints summary', async t => {
   const prompts = {
     select(opts) {
-      t.deepEqual(opts.choices.map(c => c.value), [undefined, 'npm', 'yarn', 'pnpm']);
+      t.deepEqual(opts.choices.map(c => c.value), ['npm', 'yarn', 'pnpm', undefined]);
       return 'pnpm';
     }
   };
@@ -199,7 +199,7 @@ test('"after" task installs deps with pnpm, and prints summary', async t => {
 test('"after" task installs deps, and prints summary in here mode', async t => {
   const prompts = {
     select(opts) {
-      t.deepEqual(opts.choices.map(c => c.value), [undefined, 'npm']);
+      t.deepEqual(opts.choices.map(c => c.value), ['npm', undefined]);
       return 'npm';
     }
   };

@@ -25,8 +25,8 @@ module.exports = [
   {
     message: 'What transpiler would you like to use?',
     choices: [
-      {value: 'babel', title: 'Babel', hint: 'An open source, standards-compliant ES2015 and ESNext transpiler.'},
-      {value: 'typescript', title: 'TypeScript', hint: 'An open source, ESNext superset that adds optional strong typing.'}
+      {value: 'typescript', title: 'TypeScript', hint: 'An open source, ESNext superset that adds optional strong typing.'},
+      {value: 'babel', title: 'Babel', hint: 'An open source, standards-compliant ES2015 and ESNext transpiler.'}
     ]
   },
   {
@@ -42,14 +42,8 @@ module.exports = [
     message: 'What CSS preprocessor to use?',
     choices: [
       {value: 'css', title: 'Plain CSS'},
-      {value: 'sass', title: 'Sass (.scss)'}
-    ]
-  },
-  {
-    message: 'Do you want to use TailwindCSS?',
-    choices: [
-      {title: 'No'},
-      {value: 'tailwindcss', title: 'Yes', hint: 'A utility-first CSS framework for rapidly building custom designs.'}
+      {value: 'sass', title: 'Sass (.scss)'},
+      {value: 'tailwindcss', title: 'TailwindCSS', hint: 'A utility-first CSS framework for rapidly building custom designs.'}
     ]
   },
   {

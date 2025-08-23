@@ -172,7 +172,7 @@ function build() {
     buildJs('src/**/*.ts'),
     // @endif
     buildHtml('src/**/*.html'),
-    // @if css
+    // @if css || tailwindcss
     buildCss('src/**/*.css')
     // @endif
     // @if sass

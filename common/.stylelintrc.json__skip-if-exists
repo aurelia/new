@@ -1,6 +1,6 @@
 {
   "extends": [
-    // @if css
+    // @if css || tailwindcss
     "stylelint-config-standard",
     // @endif
     // @if sass
