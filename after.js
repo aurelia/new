@@ -23,12 +23,9 @@ module.exports = async function({
   const c = ansiColors;
   let depsInstalled = false;
   let packageManager = undefined;
-  
+
   if (!unattended) {
-    const choices = [
-      {title: 'No'},
-      {value: 'npm', title: 'Yes, use npm'}
-    ];
+    const choices = [ {value: 'npm', title: 'Yes, use npm'} ];
 
     if (_isAvailable('yarn')) {
       choices.push({value: 'yarn', title: 'Yes, use yarn (node-modules)'});
@@ -37,6 +34,8 @@ module.exports = async function({
     if (_isAvailable('pnpm')) {
       choices.push({value: 'pnpm', title: 'Yes, use pnpm'});
     }
+
+    choices.push({title: 'No'});
 
     packageManager = await prompts.select({
       message: 'Do you want to install npm dependencies now?',
@@ -66,11 +65,11 @@ module.exports = async function({
       // Navigate to project directory if we're not in it already
       const projectDir = here ? '.' : properties.name;
       const originalCwd = process.cwd();
-      
+
       if (!here && fs.existsSync(projectDir)) {
         process.chdir(projectDir);
       }
-      
+
       // Create .storybook directory
       if (!fs.existsSync('.storybook')) {
         fs.mkdirSync('.storybook');
@@ -78,18 +77,18 @@ module.exports = async function({
 
       // Move and rename storybook configuration files
       const extension = features.includes('typescript') ? '.ts' : '.js';
-      
+
       const mainFile = `storybook-main${extension}`;
       const previewFile = `storybook-preview${extension}`;
-      
+
       if (fs.existsSync(mainFile)) {
         fs.renameSync(mainFile, `.storybook/main${extension}`);
       }
-      
+
       if (fs.existsSync(previewFile)) {
         fs.renameSync(previewFile, `.storybook/preview${extension}`);
       }
-      
+
       // Return to original directory
       if (!here && originalCwd !== process.cwd()) {
         process.chdir(originalCwd);
@@ -101,7 +100,7 @@ module.exports = async function({
 
   _log(`\n${c.underline.bold('Get Started')}`);
   if (!here) _log('cd ' + properties.name);
-  
+
   if (!depsInstalled) {
     _log('npm install');
     if (features.includes('playwright')) _log('npx playwright install --with-deps');

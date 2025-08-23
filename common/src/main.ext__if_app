@@ -25,16 +25,16 @@ import { MyApp } from './my-app';
 // CSS files are automatically treated as text modules in dumber, no prefix needed.
 // @endif
 // @if webpack
-// import shared from './shared./* @if css */css/* @endif *//* @if sass */scss/* @endif */';
+// import shared from './shared./* @if css || tailwindcss */css/* @endif *//* @if sass */scss/* @endif */';
 // @endif
 // @if vite
-// import shared from './shared./* @if css */css/* @endif *//* @if sass */scss/* @endif */?inline';
+// import shared from './shared./* @if css || tailwindcss */css/* @endif *//* @if sass */scss/* @endif */?inline';
 // @endif
 // @if parcel
-// import shared from 'bundle-text:./shared./* @if css */css/* @endif *//* @if sass */scss/* @endif */';
+// import shared from 'bundle-text:./shared./* @if css || tailwindcss */css/* @endif *//* @if sass */scss/* @endif */';
 // @endif
 // @if dumber
-// import shared from './shared./* @if css */css/* @endif *//* @if sass */scss/* @endif */';
+// import shared from './shared./* @if css || tailwindcss */css/* @endif *//* @if sass */scss/* @endif */';
 // @endif
 // @endif
 

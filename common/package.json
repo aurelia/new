@@ -30,7 +30,7 @@
     "globals": "^15.14.0",
     "@aurelia/testing": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
     "stylelint": "^16.12.0",
-    // @if css
+    // @if css || tailwindcss
     "stylelint-config-standard": "^36.0.1",
     // @endif
     // @if sass
@@ -42,7 +42,7 @@
   },
   "scripts": {
     "lint:js": "eslint src/* @if !no-unit-tests */ test/* @endif *//* @if playwright */ e2e/* @endif */",
-    // @if css
+    // @if css || tailwindcss
     "lint:css": "stylelint \"src/**/*.css\"",
     // @endif
     // @if sass
