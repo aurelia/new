@@ -73,9 +73,9 @@ module.exports = [
 
     message: 'What kind of sample code do you want in this project?',
     choices: [
-      {if: 'app', value: 'app-min', title: 'Bare minimum'},
-      {if: 'app', value: 'app-with-router', title: 'With direct routing'},
-      {if: 'plugin', value: 'plugin-min', title: 'Bare minimum'},
+      {if: 'app', value: 'app-min', title: 'Bare minimum', hint: 'Hello world entry point only.'},
+      {if: 'app', value: 'app-with-router', title: 'With routing', hint: 'Starter pages configured with @aurelia/router.'},
+      {if: 'plugin', value: 'plugin-min', title: 'Bare minimum plugin', hint: 'Starter plugin project with sample registration.'},
     ]
   },
   // Currently this question is not visible to end user because there is only one option.
