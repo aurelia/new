@@ -6,13 +6,20 @@ The scaffolding repo for Aurelia 2 used by the [makes](https://makes.js.org) too
 
 ## Create an Aurelia 2 project
 
-First, ensure that you have Node.js v14 or above installed on your system. Next, using [npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b), a tool distributed as part of Node.js, we'll create a new Aurelia 2 app. At a command prompt, run the following command:
+First, ensure that you have Node.js v18 or above installed on your system. Next, using [npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b), a tool distributed as part of Node.js, we'll create a new Aurelia 2 app. At a command prompt, run the following command:
 
 ```bash
 npx makes aurelia
 ```
 
 This will cause `npx` to download the `makes` tool, along with the `aurelia` scaffold from this repo, which it will use to guide you through creating your project.
+
+## Bundler Options
+
+This scaffold supports two modern bundlers:
+
+- **Vite** (Recommended) - Next-generation frontend tooling with Rolldown support for blazing-fast builds
+- **Dumber** - Lightweight Aurelia-native bundler, successor to the Aurelia CLI built-in bundler
 
 ## Development
 
@@ -40,8 +47,11 @@ npm run test:e2e
 Always target a subset of skeletons, use env variable `TARGET_FEATURES`.
 
 ```bash
-# only test skeletons using webpack and typescript features.
-npx cross-env TARGET_FEATURES=webpack,typescript npm run test:e2e
+# only test skeletons using vite and typescript features.
+npx cross-env TARGET_FEATURES=vite,typescript npm run test:e2e
+
+# or test dumber skeletons
+npx cross-env TARGET_FEATURES=dumber,typescript npm run test:e2e
 ```
 
 ## Local development

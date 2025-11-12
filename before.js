@@ -3,13 +3,8 @@
 const PRESETS = {
   'default-esnext': ['app', 'vite', 'babel', 'vitest'],
   'default-typescript': ['app', 'vite', 'typescript', 'vitest'],
-  // TODO: move plugin to vite+vitest
-  // FIXME: vite compiles plugin with separate css dist file, and removed
-  // import('./style.css') from js code, need to:
-  //   1. hook up a css loader in runtime for normal css and css-module.
-  //   2. hook up a text loader in runtime for shadow-dom css.
-  'default-esnext-plugin': ['plugin', 'webpack', 'babel', 'shadow-dom', 'jest'],
-  'default-typescript-plugin': ['plugin', 'webpack', 'typescript', 'shadow-dom', 'jest'],
+  'default-esnext-dumber': ['app', 'dumber', 'babel'],
+  'default-typescript-dumber': ['app', 'dumber', 'typescript'],
 };
 
 const REQUIRE_NODEJS_VESION = [18, 0, 0];
@@ -38,21 +33,21 @@ module.exports = async function({unattended, prompts, ansiColors}) {
     message: 'Would you like to use the default setup or customize your choices?',
     choices: [
       {
+        value: 'default-typescript',
+        title: 'Default TypeScript Aurelia 2 App (Recommended)',
+        hint: 'Modern Aurelia 2 app with TypeScript, Vite, and Vitest'
+      }, {
         value: 'default-esnext',
         title: 'Default ESNext Aurelia 2 App',
-        hint: 'A basic Aurelia 2 app with Babel and Vite'
+        hint: 'Modern Aurelia 2 app with Babel, Vite, and Vitest'
       }, {
-        value: 'default-typescript',
-        title: 'Default TypeScript Aurelia 2 App',
-        hint: 'A basic Aurelia 2 app with TypeScript and Vite'
+        value: 'default-typescript-dumber',
+        title: 'TypeScript Aurelia 2 App with Dumber',
+        hint: 'Lightweight Aurelia 2 app with TypeScript and Dumber bundler'
       }, {
-        value: 'default-esnext-plugin',
-        title: 'Default ESNext Aurelia 2 Plugin',
-        hint: 'A basic Aurelia 2 plugin project with Babel, Webpack and ShadowDOM'
-      }, {
-        value: 'default-typescript-plugin',
-        title: 'Default TypeScript Aurelia 2 Plugin',
-        hint: 'A basic Aurelia 2 plugin project with TypeScript, Webpack and ShadowDOM'
+        value: 'default-esnext-dumber',
+        title: 'ESNext Aurelia 2 App with Dumber',
+        hint: 'Lightweight Aurelia 2 app with Babel and Dumber bundler'
       }, {
         title: 'Custom Aurelia 2 Project',
         hint: 'Select bundler, transpiler, and more.'

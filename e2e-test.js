@@ -71,8 +71,6 @@ function run(command, cwd, dataCB, errorCB) {
     });
     proc.stderr.on('data', data => {
       process.stderr.write(data);
-      // Skip webpack5 deprecation warning.
-      if (data.toString().toLowerCase().includes('deprecation')) return;
       // Skip BABEL warning (used by dumber bundler) when reading @aurelia/runtime-html
       if (data.toString().includes('The code generator has deoptimised the styling')) return;
       if (errorCB) {
@@ -101,9 +99,8 @@ if (targetFeatures.length) {
 }
 
 function getServerRegex(features) {
-  if (features.includes('webpack')) return /Loopback: (\S+)/;
-  if (features.includes('parcel')) return /Server running at (\S+)/;
   if (features.includes('vite')) return /(http:\/\/\S+\/)/;
+  // Dumber uses custom dev server
   return /Dev server is started at: (\S+)/;
 }
 
@@ -138,8 +135,6 @@ skeletons.forEach((features, i) => {
     console.log('-- npm run build');
     await run('npm run build', appFolder, null,
       (data, kill) => {
-        // Skip parcel warnings.
-        if (features.includes('parcel')) return;
         t.fail('build failed: ' + data.toString());
       }
     );
@@ -158,7 +153,7 @@ skeletons.forEach((features, i) => {
       kill();
     };
 
-    // Webpack5 now prints Loopback: http://localhost:5000 in stderr!
+    // Check both stdout and stderr for server URL
     await run('npm start', appFolder, runE2e, runE2e);
 
     if (features.includes('playwright')) {

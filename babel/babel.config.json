@@ -1,10 +1,8 @@
 {
   "presets": [
-    [/* @if !parcel */"@babel/preset-env"/* @endif *//* @if parcel */"@parcel/babel-preset-env"/* @endif */, {
+    ["@babel/preset-env", {
       "loose": true,
-      // @if !jest
       "modules": false,
-      // @endif
       "exclude": ["@babel/plugin-proposal-dynamic-import"]
     }]
   ],

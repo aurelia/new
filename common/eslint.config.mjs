@@ -24,9 +24,6 @@ export default [
         ...globals.nodeBuiltin,
         ...globals.browser,
         ...globals.node,
-        // @if jest
-        ...globals.jest,
-        // @endif
       },
 
       // @if babel
