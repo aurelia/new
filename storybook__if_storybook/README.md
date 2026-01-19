@@ -47,9 +47,9 @@ export const Default = {
 
 ## Features
 
-- **Interactive Controls**: Use Storybook's Controls addon to dynamically change component properties
-- **Actions**: Track and display component events using the Actions addon
-- **Testing**: Write interaction tests using Storybook's testing utilities
+- **Interactive Controls**: Use Storybook's Controls to dynamically change component properties
+- **Links**: Navigate between stories with the Links addon
+- **Actions & Testing**: Add optional addons if you want event logging or interaction tests
 
 ## Learn More
 

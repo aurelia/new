@@ -1,4 +1,5 @@
 {
+  "sourceMaps": true,
   "presets": [
     [/* @if !parcel */"@babel/preset-env"/* @endif *//* @if parcel */"@parcel/babel-preset-env"/* @endif */, {
       "loose": true,

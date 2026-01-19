@@ -1,6 +1,4 @@
 import { HelloWorld } from './hello-world';
-import { action } from '@storybook/addon-actions';
-import { userEvent, within } from '@storybook/test';
 
 const meta = {
   title: 'Plugin/HelloWorld',
