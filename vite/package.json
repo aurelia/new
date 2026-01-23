@@ -22,7 +22,7 @@
     "@tailwindcss/vite": "^4.1.10",
     // @endif
     // @if storybook
-    "@aurelia/storybook": "^2.1.0",
+    "@aurelia/storybook": "^2.2.1",
     "storybook": "^10.1.11",
     "@storybook/builder-vite": "^10.1.11",
     "@storybook/addon-links": "^10.1.11",

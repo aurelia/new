@@ -44,6 +44,50 @@ test('"before" task can select default-typescript preset', async t => {
   });
 });
 
+test('"before" task can select minimal-esnext preset', async t => {
+  const prompts = {
+    select(opts) {
+      t.truthy(opts.choices.find(c => c.value === 'minimal-esnext'));
+      return 'minimal-esnext';
+    }
+  };
+
+  const result = await before({unattended: false, prompts});
+  t.deepEqual(result, {
+    silentQuestions: true,
+    preselectedFeatures: ['app', 'vite', 'babel', 'no-unit-tests', 'app-blank', 'css']
+  });
+});
+
+test('"before" task can select minimal-typescript preset', async t => {
+  const prompts = {
+    select(opts) {
+      t.truthy(opts.choices.find(c => c.value === 'minimal-typescript'));
+      return 'minimal-typescript';
+    }
+  };
+
+  const result = await before({unattended: false, prompts});
+  t.deepEqual(result, {
+    silentQuestions: true,
+    preselectedFeatures: ['app', 'vite', 'typescript', 'no-unit-tests', 'app-blank', 'css']
+  });
+});
+
+test('"before" task can select lean-modern-frontend preset', async t => {
+  const prompts = {
+    select(opts) {
+      t.truthy(opts.choices.find(c => c.value === 'lean-modern-frontend'));
+      return 'lean-modern-frontend';
+    }
+  };
+
+  const result = await before({unattended: false, prompts});
+  t.deepEqual(result, {
+    silentQuestions: true,
+    preselectedFeatures: ['app', 'vite', 'typescript', 'vitest', 'tailwindcss', 'storybook', 'app-min']
+  });
+});
 test('"before" task can select default-esnext-plugin preset', async t => {
   const prompts = {
     select(opts) {
@@ -55,7 +99,7 @@ test('"before" task can select default-esnext-plugin preset', async t => {
   const result = await before({ unattended: false, prompts });
   t.deepEqual(result, {
     silentQuestions: true,
-    preselectedFeatures: ['plugin', 'webpack', 'babel', 'shadow-dom', 'jest']
+    preselectedFeatures: ['plugin', 'vite', 'babel', 'shadow-dom', 'vitest']
   });
 });
 
@@ -72,7 +116,7 @@ test('"before" task can select default-typescript-plugin preset', async t => {
   const result = await before({ unattended: false, prompts });
   t.deepEqual(result, {
     silentQuestions: true,
-    preselectedFeatures: ['plugin', 'webpack', 'typescript', 'shadow-dom', 'jest']
+    preselectedFeatures: ['plugin', 'vite', 'typescript', 'shadow-dom', 'vitest']
   });
 });
 test('"before" task can select no preset', async t => {
@@ -88,4 +132,3 @@ test('"before" task can select no preset', async t => {
   const result = await before({unattended: false, prompts});
   t.is(result, undefined);
 });
-

@@ -30,7 +30,7 @@
     "webpack-node-externals": "^3.0.0",
     // @endif
     // @if storybook
-    "@aurelia/storybook": "^2.1.0",
+    "@aurelia/storybook": "^2.2.1",
     "storybook": "^10.1.11",
     "@storybook/builder-webpack5": "^10.1.11",
     "@storybook/addon-links": "^10.1.11",

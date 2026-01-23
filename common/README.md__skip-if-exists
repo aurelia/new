@@ -2,6 +2,28 @@
 
 This project is bootstrapped by [aurelia/new](https://github.com/aurelia/new).
 
+## Quick start
+
+    npm install
+    npm start
+
+// @if vitest || jest
+Run unit tests:
+
+    npm test
+// @endif
+// @if storybook
+Run Storybook:
+
+    npm run storybook
+// @endif
+// @if playwright
+Run Playwright e2e:
+
+    npx playwright install --with-deps
+    npx playwright test
+// @endif
+
 // @if tailwindcss
 ## TailwindCSS Integration
 
@@ -92,6 +114,13 @@ Note this plugin project comes with a dev-app. The above command starts the dev 
     npm run build
 
 It builds plugin into `dist/index.js` file.
+
+// @if vite
+When using Vite, the build outputs ESM to `dist/index.js`.
+// @endif
+// @if webpack
+When using Webpack, the build outputs CommonJS to `dist/index.js`.
+// @endif
 
 Note when you do `npm publish` or `npm pack` to prepare the plugin package, it automatically run the above build command by the `prepare` script defined in your package.json `"scripts"` section.
 

@@ -3,13 +3,11 @@
 const PRESETS = {
   'default-esnext': ['app', 'vite', 'babel', 'vitest'],
   'default-typescript': ['app', 'vite', 'typescript', 'vitest'],
-  // TODO: move plugin to vite+vitest
-  // FIXME: vite compiles plugin with separate css dist file, and removed
-  // import('./style.css') from js code, need to:
-  //   1. hook up a css loader in runtime for normal css and css-module.
-  //   2. hook up a text loader in runtime for shadow-dom css.
-  'default-esnext-plugin': ['plugin', 'webpack', 'babel', 'shadow-dom', 'jest'],
-  'default-typescript-plugin': ['plugin', 'webpack', 'typescript', 'shadow-dom', 'jest'],
+  'minimal-esnext': ['app', 'vite', 'babel', 'no-unit-tests', 'app-blank', 'css'],
+  'minimal-typescript': ['app', 'vite', 'typescript', 'no-unit-tests', 'app-blank', 'css'],
+  'lean-modern-frontend': ['app', 'vite', 'typescript', 'vitest', 'tailwindcss', 'storybook', 'app-min'],
+  'default-esnext-plugin': ['plugin', 'vite', 'babel', 'shadow-dom', 'vitest'],
+  'default-typescript-plugin': ['plugin', 'vite', 'typescript', 'shadow-dom', 'vitest'],
 };
 
 const REQUIRE_NODEJS_VESION = [18, 0, 0];
@@ -40,19 +38,31 @@ module.exports = async function({unattended, prompts, ansiColors}) {
       {
         value: 'default-esnext',
         title: 'Default ESNext Aurelia 2 App',
-        hint: 'A basic Aurelia 2 app with Babel and Vite'
+        hint: 'Babel + Vite + Vitest with basic sample'
+      }, {
+        value: 'minimal-esnext',
+        title: 'Minimal ESNext Aurelia 2 App',
+        hint: 'Vite + Babel, no tests, blank sample'
       }, {
         value: 'default-typescript',
         title: 'Default TypeScript Aurelia 2 App',
-        hint: 'A basic Aurelia 2 app with TypeScript and Vite'
+        hint: 'TypeScript + Vite + Vitest with basic sample'
+      }, {
+        value: 'minimal-typescript',
+        title: 'Minimal TypeScript Aurelia 2 App',
+        hint: 'TypeScript + Vite, no tests, blank sample'
+      }, {
+        value: 'lean-modern-frontend',
+        title: 'Lean Modern Frontend',
+        hint: 'TypeScript + Vite + Tailwind + Vitest + Storybook (app-min)'
       }, {
         value: 'default-esnext-plugin',
         title: 'Default ESNext Aurelia 2 Plugin',
-        hint: 'A basic Aurelia 2 plugin project with Babel, Webpack and ShadowDOM'
+        hint: 'A basic Aurelia 2 plugin project with Babel, Vite and ShadowDOM'
       }, {
         value: 'default-typescript-plugin',
         title: 'Default TypeScript Aurelia 2 Plugin',
-        hint: 'A basic Aurelia 2 plugin project with TypeScript, Webpack and ShadowDOM'
+        hint: 'A basic Aurelia 2 plugin project with TypeScript, Vite and ShadowDOM'
       }, {
         title: 'Custom Aurelia 2 Project',
         hint: 'Select bundler, transpiler, and more.'

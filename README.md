@@ -14,6 +14,14 @@ npx makes aurelia
 
 This will cause `npx` to download the `makes` tool, along with the `aurelia` scaffold from this repo, which it will use to guide you through creating your project.
 
+## Presets and samples
+
+Use the preset picker to quickly choose a profile, including **Lean Modern Frontend** (TypeScript + Vite + Tailwind + Vitest + Storybook). When picking sample code, you can select **Blank app** for a clean, empty app shell (no demo markup) or use the minimal/router samples as before.
+
+## Plugin projects (Vite + Webpack)
+
+Plugin templates support Vite or Webpack. The Vite plugin build uses Vite's library mode (Rollup under the hood) and injects component CSS into the JS bundle so consumers don't need to import a separate CSS file. The dev-app still runs on the selected bundler for local testing.
+
 ## Development
 
 There are some tests for this skeleton, setup in package.json. (totally not required by makes)
