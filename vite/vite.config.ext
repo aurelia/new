@@ -14,6 +14,7 @@ import dts from 'vite-plugin-dts';
 // @endif
 // @endif
 // @if plugin
+// TODO: move css injection into @aurelia/vite-plugin once it exposes a helper.
 function cssInjectPlugin() {
   return {
     name: 'aurelia:css-inject',
@@ -41,7 +42,8 @@ function cssInjectPlugin() {
 
       Object.values(bundle).forEach((chunk) => {
         if (chunk.type === 'chunk' && chunk.isEntry) {
-          chunk.code = `${injection}${chunk.code}`;
+          // Append to avoid shifting existing sourcemap line mappings.
+          chunk.code = `${chunk.code}\n${injection}`;
         }
       });
 

@@ -5,8 +5,9 @@
   // @endif
   // @if plugin
   "description": "An Aurelia 2 plugin.",
-  // TODO: turn on after moved plugin to vite steup
-  // "type": "module",
+  // @if vite
+  "type": "module",
+  // @endif
   "main": "dist/index.js",
   "files": [
     "dist"

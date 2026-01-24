@@ -4,12 +4,10 @@ const {execSync} = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-const PNPM_NPMRC = [
-  '# for pnpm, use flat node_modules',
-  'shamefully-hoist=true',
-  'auto-install-peers=true',
-  ''
-].join('\n');
+const PNPM_NPMRC = `# for pnpm, use flat node_modules
+shamefully-hoist=true
+auto-install-peers=true
+`;
 
 function isAvailable(bin) {
   try {

@@ -16,7 +16,7 @@ module.exports = [
   {
     message: 'Which bundler would you like to use?',
     choices: [
-      {if: 'app || plugin', value: 'vite', title: 'Vite', hint: 'Next Generation Frontend Tooling.'},
+      {value: 'vite', title: 'Vite', hint: 'Next Generation Frontend Tooling.'},
       {value: 'webpack', title: 'Webpack', hint: 'A powerful and popular bundler for modern JavaScript apps.'},
       {if: 'app', value: 'dumber', title: 'Dumber', hint: 'A dumb JavasScript bundler, dumber than you and me. The successor of Aurelia CLI built-in bundler.'},
       {if: 'app', value: 'parcel', title: 'Parcel', hint: 'Blazing fast, zero configuration web application bundler.'},
@@ -66,7 +66,7 @@ module.exports = [
     message: 'Do you want to add Storybook?',
     choices: [
       {title: 'No'},
-      {if: '(app || plugin) && (vite || webpack)', value: 'storybook', title: 'Yes', hint: 'Add Storybook for component development and testing (requires Vite or Webpack)'}
+      {if: 'vite || webpack', value: 'storybook', title: 'Yes', hint: 'Add Storybook for component development and testing (requires Vite or Webpack)'}
     ]
   },
   {
