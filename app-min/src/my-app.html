@@ -1,12 +1,10 @@
 <!-- @if tailwindcss -->
-<div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col items-center justify-center p-8">
-  <div class="bg-white rounded-lg shadow-lg p-8 max-w-md w-full text-center">
-    <div class="text-3xl font-bold text-gray-800 mb-4">Welcome to Aurelia 2!</div>
-    <div class="text-gray-600 mb-6">You're now running <span class="font-semibold text-blue-600">${message}</span></div>
-    <div class="text-sm text-gray-500">Experience the power of Aurelia 2 with TailwindCSS</div>
-    <div class="mt-4 px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium inline-block">Aurelia 2</div>
+<div class="min-h-screen flex items-center justify-center p-6 bg-gray-50">
+  <div class="text-center">
+    <h1 class="text-3xl font-bold text-gray-900">${message}</h1>
+    <p class="mt-2 text-gray-600">Aurelia 2 + TailwindCSS</p>
     <!-- @if shadow-dom -->
-    <div class="mt-6 p-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg text-white">
+    <div class="mt-6 p-3 border rounded bg-white">
       <div class="shared-shadow-style">
         <div class="shared-shadow-text">This content uses shared Shadow DOM styles!</div>
       </div>

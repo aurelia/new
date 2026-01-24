@@ -1,4 +1,7 @@
 const test = require('ava');
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
 const after = require('../after');
 
 const ansiColors = (m) => m;
@@ -194,6 +197,48 @@ test('"after" task installs deps with pnpm, and prints summary', async t => {
     'cd my-app\n' +
     'pnpm start\n\n'
   );
+});
+
+test.serial('"after" task writes pnpm .npmrc when pnpm is selected', async t => {
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aurelia-pnpm-'));
+  const cwd = process.cwd();
+  t.teardown(() => {
+    process.chdir(cwd);
+    fs.rmSync(tempDir, {recursive: true, force: true});
+  });
+  process.chdir(tempDir);
+
+  const prompts = {
+    select(opts) {
+      t.deepEqual(opts.choices.map(c => c.value), ['npm', 'yarn', 'pnpm', undefined]);
+      return 'pnpm';
+    }
+  };
+
+  function run(cmd, args) {
+    t.is(cmd, 'pnpm');
+    t.deepEqual(args, ['install']);
+  }
+
+  await after({
+    unattended: false,
+    here: true,
+    prompts,
+    run,
+    properties: {name: 'my-app'},
+    features: [],
+    notDefaultFeatures: [],
+    ansiColors
+  }, {
+    _isAvailable: isAvailable,
+    _log() {}
+  });
+
+  const npmrcPath = path.join(tempDir, '.npmrc');
+  t.true(fs.existsSync(npmrcPath));
+  const content = fs.readFileSync(npmrcPath, 'utf8');
+  t.true(content.includes('shamefully-hoist=true'));
+  t.true(content.includes('auto-install-peers=true'));
 });
 
 test('"after" task installs deps, and prints summary in here mode', async t => {

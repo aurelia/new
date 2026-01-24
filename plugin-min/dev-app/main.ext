@@ -10,6 +10,10 @@ import { MyApp } from './my-app';
 // They are for sharedStyles in shadowDOM.
 // However, css files imported in other js/ts files are processed by style-loader.
 // @endif
+// @if vite
+// Css files imported in this main file should be imported with ?inline query
+// to get CSS as string for sharedStyles in shadowDOM.
+// @endif
 // import shared from './shared./* @if css || tailwindcss */css/* @endif *//* @if sass */scss/* @endif */';
 // @endif
 import * as Plugin from "../src/index";

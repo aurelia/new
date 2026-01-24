@@ -1,3 +1,0 @@
-export class MissingPage {
-  /* @if typescript */public /* @endif */missingComponent/* @if typescript */: string /* @endif */ = 'Unknown page';
-}

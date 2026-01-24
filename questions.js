@@ -16,7 +16,7 @@ module.exports = [
   {
     message: 'Which bundler would you like to use?',
     choices: [
-      {if: 'app', value: 'vite', title: 'Vite', hint: 'Next Generation Frontend Tooling.'},
+      {value: 'vite', title: 'Vite', hint: 'Next Generation Frontend Tooling.'},
       {value: 'webpack', title: 'Webpack', hint: 'A powerful and popular bundler for modern JavaScript apps.'},
       {if: 'app', value: 'dumber', title: 'Dumber', hint: 'A dumb JavasScript bundler, dumber than you and me. The successor of Aurelia CLI built-in bundler.'},
       {if: 'app', value: 'parcel', title: 'Parcel', hint: 'Blazing fast, zero configuration web application bundler.'},
@@ -66,13 +66,14 @@ module.exports = [
     message: 'Do you want to add Storybook?',
     choices: [
       {title: 'No'},
-      {if: '(app && (vite || webpack)) || (plugin && webpack)', value: 'storybook', title: 'Yes', hint: 'Add Storybook for component development and testing (requires Vite or Webpack)'}
+      {if: 'vite || webpack', value: 'storybook', title: 'Yes', hint: 'Add Storybook for component development and testing (requires Vite or Webpack)'}
     ]
   },
   {
 
     message: 'What kind of sample code do you want in this project?',
     choices: [
+      {if: 'app', value: 'app-blank', title: 'Blank app', hint: 'Empty app shell with no sample markup.'},
       {if: 'app', value: 'app-min', title: 'Bare minimum', hint: 'Hello world entry point only.'},
       {if: 'app', value: 'app-with-router', title: 'With routing', hint: 'Starter pages configured with @aurelia/router.'},
       {if: 'plugin', value: 'plugin-min', title: 'Bare minimum plugin', hint: 'Starter plugin project with sample registration.'},

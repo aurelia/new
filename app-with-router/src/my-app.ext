@@ -13,7 +13,6 @@ import { route } from '@aurelia/router';
       title: 'About',
     },
   ],
-  fallback: import('./missing-page'),
 })
 export class MyApp {
 }

@@ -4,6 +4,11 @@ const {execSync} = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
+const PNPM_NPMRC = `# for pnpm, use flat node_modules
+shamefully-hoist=true
+auto-install-peers=true
+`;
+
 function isAvailable(bin) {
   try {
     execSync(bin + ' -v', {stdio: 'ignore'});
@@ -23,6 +28,7 @@ module.exports = async function({
   const c = ansiColors;
   let depsInstalled = false;
   let packageManager = undefined;
+  const projectDir = here ? '.' : properties.name;
 
   if (!unattended) {
     const choices = [ {value: 'npm', title: 'Yes, use npm'} ];
@@ -43,6 +49,9 @@ module.exports = async function({
     });
 
     if (packageManager) {
+      if (packageManager === 'pnpm') {
+        ensurePnpmrc(projectDir);
+      }
       await run(packageManager, ['install']);
 
       if (features.includes('playwright')) {
@@ -107,3 +116,19 @@ module.exports = async function({
   }
   _log((packageManager ?? 'npm') + ' start\n');
 };
+
+function ensurePnpmrc(projectDir) {
+  if (!projectDir || !fs.existsSync(projectDir)) return;
+
+  const npmrcPath = path.join(projectDir, '.npmrc');
+  if (!fs.existsSync(npmrcPath)) {
+    fs.writeFileSync(npmrcPath, PNPM_NPMRC);
+    return;
+  }
+
+  const existing = fs.readFileSync(npmrcPath, 'utf8');
+  if (existing.includes('shamefully-hoist=') && existing.includes('auto-install-peers=')) return;
+
+  const spacer = existing.endsWith('\n') ? '' : '\n';
+  fs.writeFileSync(npmrcPath, existing + spacer + PNPM_NPMRC);
+}

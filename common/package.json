@@ -5,8 +5,9 @@
   // @endif
   // @if plugin
   "description": "An Aurelia 2 plugin.",
-  // TODO: turn on after moved plugin to vite steup
-  // "type": "module",
+  // @if vite
+  "type": "module",
+  // @endif
   "main": "dist/index.js",
   "files": [
     "dist"
@@ -41,7 +42,7 @@
     // @endif
   },
   "scripts": {
-    "lint:js": "eslint src/* @if !no-unit-tests */ test/* @endif *//* @if playwright */ e2e/* @endif */",
+    "lint:js": "eslint \"src/**/*.{js,ts}\"/* @if !no-unit-tests */ \"test/**/*.{js,ts}\"/* @endif *//* @if playwright */ \"e2e/**/*.{js,ts}\"/* @endif */",
     // @if css || tailwindcss
     "lint:css": "stylelint \"src/**/*.css\"",
     // @endif

@@ -1,0 +1,29 @@
+/* @if vite */
+import { MyApp } from './my-app';
+
+const meta = {
+  title: 'Example/MyApp',
+  component: MyApp,
+  render: () => ({
+    template: `<my-app></my-app>`,
+  })
+};
+
+export default meta;
+
+export const Default = {};
+/* @endif */
+/* @if webpack */
+import { MyApp } from './my-app';
+
+export default {
+  title: 'MyApp',
+  component: MyApp,
+};
+
+export const Default = () => ({
+  Component: MyApp,
+  template: '<my-app></my-app>',
+  props: {}
+});
+/* @endif */
