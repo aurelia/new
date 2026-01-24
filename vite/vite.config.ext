@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import { nodePolyfills } from 'vite-plugin-node-polyfills'
-import aurelia from '@aurelia/vite-plugin';
+import aurelia/* @if plugin */, { cssInjectPlugin }/* @endif */ from '@aurelia/vite-plugin';
 // @if babel
 import babel from 'vite-plugin-babel';
 // @endif
@@ -13,7 +13,6 @@ import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
 // @endif
 // @endif
-
 export default defineConfig({
   server: {
     open: !process.env.CI,
