@@ -114,7 +114,9 @@ module.exports = async function({
     _log('npm install');
     if (features.includes('playwright')) _log('npx playwright install --with-deps');
   }
-  _log((packageManager ?? 'npm') + ' start\n');
+  const scriptRunner = packageManager ?? 'npm';
+  const buildCommand = scriptRunner === 'npm' ? 'npm run build' : scriptRunner + ' build';
+  _log(features.includes('no-dev-server') ? buildCommand + '\n' : scriptRunner + ' start\n');
 };
 
 function ensurePnpmrc(projectDir) {

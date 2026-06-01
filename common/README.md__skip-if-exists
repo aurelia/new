@@ -5,7 +5,12 @@ This project is bootstrapped by [aurelia/new](https://github.com/aurelia/new).
 ## Quick start
 
     npm install
+// @if !no-dev-server
     npm start
+// @endif
+// @if no-dev-server
+    npm run build
+// @endif
 
 // @if vitest || jest
 Run unit tests:
@@ -68,9 +73,11 @@ module.exports = {
 - [Tailwind Components](https://tailwindui.com/)
 
 // @endif
+// @if !no-dev-server
 ## Start dev web server
 
     npm start
+// @endif
 
 // @if app
 ## Build the app in production mode
@@ -107,7 +114,9 @@ root_folder/dist/entry.bundle.12345.js
 // @endif
 // @endif
 // @if plugin
+// @if !no-dev-server
 Note this plugin project comes with a dev-app. The above command starts the dev app in `dev-app/` folder. The plugin source code is in `src/` folder.
+// @endif
 
 ## Build the plugin in production modern
 

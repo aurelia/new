@@ -12,7 +12,9 @@ const plumber = require('gulp-plumber');
 const merge2 = require('merge2');
 const terser = require('gulp-terser');
 const gulpif = require('gulp-if');
+// @if !no-dev-server
 const devServer = require('./dev-server');
+// @endif
 // @if css-module
 const cssModule = require('gulp-dumber-css-module');
 // @endif
@@ -198,6 +200,7 @@ function clearCache() {
   return dr.clearCache();
 }
 
+// @if !no-dev-server
 const serve = gulp.series(
   build,
   function startServer(done) {
@@ -222,9 +225,12 @@ function watch() {
 }
 
 const run = gulp.series(clean, serve, watch);
+// @endif
 
 exports.build = build;
 exports.clean = clean;
 exports['clear-cache'] = clearCache;
+// @if !no-dev-server
 exports.run = run;
 exports.default = run;
+// @endif

@@ -29,7 +29,9 @@
     // @endif
   },
   "scripts": {
+    // @if !no-dev-server
     "start": "vite",
+    // @endif
     "build": "vite build",
     // @if vitest
     "test": "vitest",

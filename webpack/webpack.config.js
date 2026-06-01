@@ -102,11 +102,13 @@ module.exports = function(env, { analyze }) {
         // add your development aliases here
       }
     },
+    // @if !no-dev-server
     devServer: {
       historyApiFallback: true,
       open: !process.env.CI,
       port: 9000
     },
+    // @endif
     module: {
       rules: [
         { test: /\.(png|svg|jpg|jpeg|gif)$/i, type: 'asset' },

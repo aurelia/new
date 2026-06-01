@@ -23,6 +23,14 @@ module.exports = [
     ]
   },
   {
+    if: 'app',
+    message: 'Do you want to include a dev server?',
+    choices: [
+      {title: 'Yes', hint: 'Include npm start and local dev server setup.'},
+      {value: 'no-dev-server', title: 'No', hint: 'Skip the local dev server setup for a leaner scaffold.'},
+    ]
+  },
+  {
     message: 'What transpiler would you like to use?',
     choices: [
       {value: 'typescript', title: 'TypeScript', hint: 'An open source, ESNext superset that adds optional strong typing.'},
@@ -59,7 +67,7 @@ module.exports = [
     choices: [
       {title: 'No'},
       // TODO setup e2e for plugin project too.
-      {if: 'app', value: 'playwright', title: 'Yes (Playwright)', hint: 'Playwright enables reliable end-to-end testing for modern web apps.'}
+      {if: 'app && !no-dev-server', value: 'playwright', title: 'Yes (Playwright)', hint: 'Playwright enables reliable end-to-end testing for modern web apps.'}
     ]
   },
   {
