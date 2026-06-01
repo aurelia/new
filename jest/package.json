@@ -4,11 +4,11 @@
     "jest-environment-jsdom": "^29.7.0",
     "jest-transform-stub": "^2.0.0",
     // @if babel
-    "@aurelia/babel-jest": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
+    "@aurelia/babel-jest": "/* @echo aureliaBabelJestVersion */",
     // @endif
     // @if typescript
     "@types/jest": "^29.5.14",
-    "@aurelia/ts-jest": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
+    "@aurelia/ts-jest": "/* @echo aureliaTsJestVersion */",
     // @endif
   },
   "scripts": {

@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "@aurelia/router": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
+    "@aurelia/router": "/* @echo aureliaRouterVersion */",
   }
 }

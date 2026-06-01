@@ -82,6 +82,42 @@ test('"after" task only prints summary in unattended mode and here mode', async 
   );
 });
 
+test('"after" task prints build command when dev server is omitted', async t => {
+  const prompts = {
+    select() {
+      t.fail('should not call me');
+    }
+  };
+
+  function run(cmd, args) {
+    t.fail('should not call me');
+  }
+
+  let printOut = '';
+  await after({
+    unattended: true,
+    here: false,
+    prompts,
+    run,
+    properties: {name: 'my-app'},
+    features: ['a', 'no-dev-server'],
+    notDefaultFeatures: ['a', 'no-dev-server'],
+    ansiColors
+  }, {
+    _isAvailable: isAvailable,
+    _log(m) {
+      printOut += m + '\n';
+    }
+  });
+
+  t.is(printOut,
+    '\nGet Started\n' +
+    'cd my-app\n' +
+    'npm install\n' +
+    'npm run build\n\n'
+  );
+});
+
 test('"after" task installs deps with npm, and prints summary', async t => {
   const prompts = {
     select(opts) {

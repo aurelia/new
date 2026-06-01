@@ -8,7 +8,7 @@
     "style-loader": "^4.0.0",
     "css-loader": "^7.1.2",
     "dotenv-webpack": "^8.1.0",
-    "@aurelia/webpack-loader": /* @if !dev */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
+    "@aurelia/webpack-loader": "/* @echo aureliaWebpackLoaderVersion */",
     // @if babel
     "babel-loader": "^9.2.1",
     // @endif
@@ -30,7 +30,7 @@
     "webpack-node-externals": "^3.0.0",
     // @endif
     // @if storybook
-    "@aurelia/storybook": "^2.2.1",
+    "@aurelia/storybook": "/* @echo aureliaStorybookVersion */",
     "storybook": "^10.1.11",
     "@storybook/builder-webpack5": "^10.1.11",
     "@storybook/addon-links": "^10.1.11",

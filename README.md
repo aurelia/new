@@ -18,6 +18,8 @@ This will cause `npx` to download the `makes` tool, along with the `aurelia` sca
 
 Use the preset picker to quickly choose a profile, including **Lean Modern Frontend** (TypeScript + Vite + Tailwind + Vitest + Storybook). When picking sample code, you can select **Blank app** for a clean, empty app shell (no demo markup) or use the minimal/router samples as before.
 
+Generated projects use pinned Aurelia package versions from `aurelia-versions.js`, rather than npm dist-tags. Before releasing this scaffold, run `npm run update-aurelia-versions` to refresh those pins from npm.
+
 ## Plugin projects (Vite + Webpack)
 
 Plugin templates support Vite or Webpack. The Vite plugin build uses Vite's library mode (Rollup under the hood) and injects component CSS into the JS bundle so consumers don't need to import a separate CSS file. The dev-app still runs on the selected bundler for local testing.

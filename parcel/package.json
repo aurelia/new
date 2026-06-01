@@ -1,7 +1,7 @@
 {
   "source": "index.html",
   "devDependencies": {
-    "@aurelia/parcel-transformer": /* @if !dev */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
+    "@aurelia/parcel-transformer": "/* @echo aureliaParcelTransformerVersion */",
     // @if tailwindcss
     "tailwindcss": "^4.1.10",
     "@tailwindcss/postcss": "^4.1.10",

@@ -1,5 +1,7 @@
 // Use "before" task to ask user to select a preset (to skip questionnaire).
 
+const {TEMPLATE_PROPERTIES} = require('./aurelia-versions');
+
 const PRESETS = {
   'default-esnext': ['app', 'vite', 'babel', 'vitest'],
   'default-typescript': ['app', 'vite', 'typescript', 'vitest'],
@@ -28,9 +30,16 @@ if (isNodejsOutdated()) {
   process.exit(1);
 }
 
-module.exports = async function({unattended, prompts, ansiColors}) {
+module.exports = async function({unattended, prompts, ansiColors, predefinedProperties = {}}) {
+  const versionProperties = {
+    predefinedProperties: {
+      ...predefinedProperties,
+      ...TEMPLATE_PROPERTIES,
+    }
+  };
+
   // don't ask when running in silent mode.
-  if (unattended) return;
+  if (unattended) return versionProperties;
 
   const preset = await prompts.select({
     message: 'Would you like to use the default setup or customize your choices?',
@@ -74,9 +83,12 @@ module.exports = async function({unattended, prompts, ansiColors}) {
     const preselectedFeatures = PRESETS[preset];
     if (preselectedFeatures) {
       return {
+        ...versionProperties,
         silentQuestions: true, // skip following questionnaire
         preselectedFeatures
       };
     }
   }
+
+  return versionProperties;
 };
