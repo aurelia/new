@@ -20,8 +20,8 @@
   },
   "license": "UNLICENSED",
   "dependencies": {
-    "aurelia": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
-    "@aurelia/router": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
+    "aurelia": "/* @echo aureliaVersion */",
+    "@aurelia/router": "/* @echo aureliaRouterVersion */",
     // @if browser-ie11
     "promise-polyfill": "^8.3.0",
     // @endif
@@ -29,7 +29,7 @@
   "devDependencies": {
     "eslint": "^9.17.0",
     "globals": "^15.14.0",
-    "@aurelia/testing": /* @if latest */"latest"/* @endif *//* @if dev */"dev"/* @endif */,
+    "@aurelia/testing": "/* @echo aureliaTestingVersion */",
     "stylelint": "^16.12.0",
     // @if css || tailwindcss
     "stylelint-config-standard": "^36.0.1",

@@ -18,9 +18,11 @@
   },
   "scripts": {
     "check-upgrade": "node check-upgrade.js",
+    "check-aurelia-versions": "node scripts/check-aurelia-versions.js",
+    "update-aurelia-versions": "node scripts/check-aurelia-versions.js --write",
     "test": "ava \"__test__/**/*\"",
     "test:e2e": "ava --fail-fast --timeout 8m -v e2e-test.js",
-    "preversion": "npm test",
+    "preversion": "npm run check-aurelia-versions && npm test",
     "version": "standard-changelog && git add CHANGELOG.md",
     "postversion": "git push && git push --tags"
   },

@@ -1,5 +1,6 @@
 const test = require('ava');
 const before = require('../before');
+const {TEMPLATE_PROPERTIES} = require('../aurelia-versions');
 
 test('"before" task does nothing in unattended mode', async t => {
   const prompts = {
@@ -9,7 +10,9 @@ test('"before" task does nothing in unattended mode', async t => {
   };
 
   const result = await before({unattended: true, prompts});
-  t.is(result, undefined);
+  t.deepEqual(result, {
+    predefinedProperties: TEMPLATE_PROPERTIES
+  });
 });
 
 test('"before" task can select default-esnext preset', async t => {
@@ -22,6 +25,7 @@ test('"before" task can select default-esnext preset', async t => {
 
   const result = await before({unattended: false, prompts});
   t.deepEqual(result, {
+    predefinedProperties: TEMPLATE_PROPERTIES,
     silentQuestions: true,
     preselectedFeatures: ['app', 'vite', 'babel', 'vitest']
   });
@@ -39,6 +43,7 @@ test('"before" task can select default-typescript preset', async t => {
 
   const result = await before({unattended: false, prompts});
   t.deepEqual(result, {
+    predefinedProperties: TEMPLATE_PROPERTIES,
     silentQuestions: true,
     preselectedFeatures: ['app', 'vite', 'typescript', 'vitest']
   });
@@ -54,6 +59,7 @@ test('"before" task can select minimal-esnext preset', async t => {
 
   const result = await before({unattended: false, prompts});
   t.deepEqual(result, {
+    predefinedProperties: TEMPLATE_PROPERTIES,
     silentQuestions: true,
     preselectedFeatures: ['app', 'vite', 'babel', 'no-unit-tests', 'app-blank', 'css']
   });
@@ -69,6 +75,7 @@ test('"before" task can select minimal-typescript preset', async t => {
 
   const result = await before({unattended: false, prompts});
   t.deepEqual(result, {
+    predefinedProperties: TEMPLATE_PROPERTIES,
     silentQuestions: true,
     preselectedFeatures: ['app', 'vite', 'typescript', 'no-unit-tests', 'app-blank', 'css']
   });
@@ -84,6 +91,7 @@ test('"before" task can select lean-modern-frontend preset', async t => {
 
   const result = await before({unattended: false, prompts});
   t.deepEqual(result, {
+    predefinedProperties: TEMPLATE_PROPERTIES,
     silentQuestions: true,
     preselectedFeatures: ['app', 'vite', 'typescript', 'vitest', 'tailwindcss', 'storybook', 'app-min']
   });
@@ -98,6 +106,7 @@ test('"before" task can select default-esnext-plugin preset', async t => {
 
   const result = await before({ unattended: false, prompts });
   t.deepEqual(result, {
+    predefinedProperties: TEMPLATE_PROPERTIES,
     silentQuestions: true,
     preselectedFeatures: ['plugin', 'vite', 'babel', 'shadow-dom', 'vitest']
   });
@@ -115,6 +124,7 @@ test('"before" task can select default-typescript-plugin preset', async t => {
 
   const result = await before({ unattended: false, prompts });
   t.deepEqual(result, {
+    predefinedProperties: TEMPLATE_PROPERTIES,
     silentQuestions: true,
     preselectedFeatures: ['plugin', 'vite', 'typescript', 'shadow-dom', 'vitest']
   });
@@ -130,5 +140,7 @@ test('"before" task can select no preset', async t => {
   };
 
   const result = await before({unattended: false, prompts});
-  t.is(result, undefined);
+  t.deepEqual(result, {
+    predefinedProperties: TEMPLATE_PROPERTIES
+  });
 });
