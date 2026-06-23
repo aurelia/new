@@ -56,10 +56,12 @@ function cssInjectPlugin() {
 // @endif
 
 export default defineConfig({
+  // @if !no-dev-server
   server: {
     open: !process.env.CI,
     port: 9000,
   },
+  // @endif
   esbuild: {
     target: 'es2022'
   },

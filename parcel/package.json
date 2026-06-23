@@ -18,7 +18,9 @@
     "parcel": "^2.13.3"
   },
   "scripts": {
+    // @if !no-dev-server
     "start": "parcel -p 9000",
+    // @endif
     "build": "parcel build --no-scope-hoist --no-source-maps",
   },
   "targets": {

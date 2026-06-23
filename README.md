@@ -18,6 +18,8 @@ This will cause `npx` to download the `makes` tool, along with the `aurelia` sca
 
 Use the preset picker to quickly choose a profile, including **Lean Modern Frontend** (TypeScript + Vite + Tailwind + Vitest + Storybook). When picking sample code, you can select **Blank app** for a clean, empty app shell (no demo markup) or use the minimal/router samples as before.
 
+When customizing an application project, you can also skip the local dev server setup. This keeps the scaffold focused on production builds and omits `npm start` plus bundler-specific dev server configuration where that server is separable.
+
 ## Plugin projects (Vite + Webpack)
 
 Plugin templates support Vite or Webpack. The Vite plugin build uses Vite's library mode (Rollup under the hood) and injects component CSS into the JS bundle so consumers don't need to import a separate CSS file. The dev-app still runs on the selected bundler for local testing.
