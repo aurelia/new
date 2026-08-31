@@ -1,6 +1,6 @@
 // Use "after" task to ask user to install deps.
 
-const {execSync} = require('child_process');
+const {execFileSync} = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
@@ -11,7 +11,7 @@ auto-install-peers=true
 
 function isAvailable(bin) {
   try {
-    execSync(bin + ' -v', {stdio: 'ignore'});
+    execFileSync(bin, ['-v'], {stdio: 'ignore'});
     return true;
   } catch (e) {
     return false;
