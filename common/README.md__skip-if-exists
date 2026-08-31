@@ -153,8 +153,13 @@ In this plugin's folder, do
 
     npm pack
 
-This will pack the plugin into /* @echo name */
-In an application project's main file.
+This will pack the plugin into `/* @echo name */-x.x.x.tgz`.
+
+Then in the application project's folder.
+
+    npm install ../path-to-/* @echo name *///* @echo name */-x.x.x.tgz
+
+Load it in the application project's main file.
 
 ```js
 import * as myPlugin from '/* @echo name */';
